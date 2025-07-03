@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+        }   
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 1rem 0 0.5rem;
+            text-align: center;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .profile i {
+            font-size: 2rem;
+            color: #333;
+        }
+
+
+        .profile-info {
+            font-size: 0.9rem;
+        }
+
+        .profile-info .name {
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .profile-info .meta {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0.2rem;
+            color: #333;
+        }
+
+        select,
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .row>div {
+            flex: 1;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .save-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            float: right;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo"><img src="my-image.png" alt="MSIG Logo" /></div>
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <!-- Title -->
+        <div class="title">Appointment</div>
+
+        <!-- Profile -->
+        <div class="profile">
+            <i class="fas fa-user-circle"></i>
+            <div class="profile-info">
+                <div class="name">Layla</div>
+                <div class="meta">#09090 &nbsp; Created on: 03 Juli 2025<br><i class="fas fa-pen pensil"
+                        style="font-size: 0.6rem;"></i> modify : 5 days</div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form>
+            <label for="type-event">Type event:</label>
+            <select id="type-event">
+                <option>Pilih jenis event</option>
+                <option>Meeting</option>
+                <option>Call</option>
+                <option>Follow Up</option>
+            </select>
+
+            <div class="row">
+                <div>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date">
+                </div>
+                <div>
+                    <label for="reminder">Reminder:</label>
+                    <select id="reminder">
+                        <option>None</option>
+                        <option>1 day before</option>
+                        <option>3 days before</option>
+                        <option>1 week before</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="description">Description:</label>
+            <textarea id="description" placeholder="Isi keterangan..."></textarea>
+            <button class="save-btn" type="submit">SAVE</button>
+        </form>
+
+        <div class="bottom-nav">
+            <div><a href="home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+            <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                <p>Campaign</p>
+            </div>
+            <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                <p>Inbox</p>
+            </div>
+            <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                <p>Prospect</p>
+            </div>
+            <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                <p>Setting</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

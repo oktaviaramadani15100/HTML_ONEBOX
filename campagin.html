@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Call History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+            padding-bottom: 90px;
+            /* for bottom nav space */
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 360px;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 6px 8px;
+            font-size: 0.78rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 1rem;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 16px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 1rem;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .add-btn:hover {
+            background-color: #3b4cc0;
+        }
+
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <img src="my-image.png" alt="MSIG Logo" />
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2>Campaign</h2>
+            <a href="add-campaign.html" class="add-btn">+ Add New Campaign</a>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campaign</th>
+                            <th>Jumlah Prospect</th>
+                            <th>Product</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>julisehat</td>
+                            <td>7</td>
+                            <td>mandiri sehat</td>
+                        </tr>
+                        <tr>
+                            <td>julisehat</td>
+                            <td>7</td>
+                            <td>mandiri sehat</td>
+                        </tr>
+                        <tr>
+                            <td>julisehat</td>
+                            <td>7</td>
+                            <td>mandiri sehat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div><a href="home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+            <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                <p>Campaign</p>
+            </div>
+            <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                <p>Inbox</p>
+            </div>
+            <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                <p>Prospect</p>
+            </div>
+            <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                <p>Setting</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

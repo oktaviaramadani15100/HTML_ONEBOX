@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f3f4f6;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header img {
+      height: 53px;
+    }
+
+    .menu-icon {
+      font-size: 1.4rem;
+      color: #1e3a8a;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 1rem 1rem 0.5rem;
+      color: #1f2937;
+    }
+
+    .settings-list {
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .settings-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: 0.2s ease;
+      background: #f9fafb;
+      cursor: pointer;
+    }
+
+    .settings-item i {
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      margin-right: 12px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .settings-item span {
+      font-size: 1rem;
+      color: #1f2937;
+    }
+
+    .settings-item:hover {
+      background: #e0e7ff;
+    }
+
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    .bottom-nav div {
+      text-align: center;
+      color: #1e3a8a;
+      font-size: 0.85rem;
+      transition: transform 0.2s;
+    }
+
+    .bottom-nav div:hover {
+      transform: scale(1.05);
+    }
+
+    .bottom-nav i {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .bottom-nav a {
+      text-decoration: none;
+      /* Hilangkan garis bawah */
+      color: inherit;
+      /* Warna mengikuti elemen induknya */
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background: #d1d5db;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <img src="my-image.png" alt="MSIG Logo" />
+      <i class="fas fa-ellipsis-v menu-icon"></i>
+    </div>
+
+    <!-- Title -->
+    <div class="title">Settings</div>
+
+    <!-- Settings -->
+    <div class="settings-list">
+      <div class="settings-item" onclick="confirmLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div><a href="home.html"><i class="fas fa-home"></i></a>
+        <p>Home</p>
+      </div>
+      <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+        <p>Campaign</p>
+      </div>
+      <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+        <p>Inbox</p>
+      </div>
+      <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+        <p>Prospect</p>
+      </div>
+      <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+        <p>Setting</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function confirmLogout() {
+      if (confirm("Are you sure you want to logout?")) {
+        window.location.href = "logout.html";
+      }
+    }
+  </script>
+</body>
+
+</html>

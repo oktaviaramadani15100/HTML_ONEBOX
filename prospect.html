@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prospect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header img {
+            width: 100px;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem 1rem 90px;
+        }
+
+        .title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .title-row h2 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .filter-drawer.open {
+            right: 0;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #ef4444;
+        }
+
+        .filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .filter-content input,
+        .filter-content select,
+        .filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-content button:hover {
+            background-color: #374ba1;
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        .prospect-table {
+            width: 100%;
+            min-width: 360px;
+            border-collapse: collapse;
+        }
+
+        .prospect-table thead {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        .prospect-table th,
+        .prospect-table td {
+            text-align: left;
+            padding: 6px 8px;
+            font-size: 0.78rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        .prospect-table a {
+            color: #1e3a8a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <img src="my-image.png" alt="MSIG Logo" />
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="title-row">
+                <h2>Prospect</h2>
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+            </div>
+
+            <!-- Filter Drawer -->
+            <div class="filter-drawer" id="filterDrawer">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Filter</h3>
+                    <i class="fas fa-times" onclick="toggleFilter()"></i>
+                </div>
+                <div class="filter-content">
+                    <label>Search Type</label>
+                    <select>
+                        <option>Campaign</option>
+                        <option>Product</option>
+                    </select>
+
+                    <label>Value</label>
+                    <input type="text" placeholder="Enter value" />
+
+                    <label>Month</label>
+                    <select>
+                        <option>January</option>
+                        <option>February</option>
+                        <option>March</option>
+                    </select>
+
+                    <label>Start Date</label>
+                    <input type="date" />
+
+                    <label>End Date</label>
+                    <input type="date" />
+
+                    <label>Status</label>
+                    <select>
+                        <option>All</option>
+                        <option>New</option>
+                        <option>Closed</option>
+                    </select>
+
+                    <label>Event Type</label>
+                    <select>
+                        <option>Call</option>
+                        <option>Meeting</option>
+                    </select>
+
+                    <label>Call Status</label>
+                    <select>
+                        <option>Connected</option>
+                        <option>Missed</option>
+                    </select>
+
+                    <button onclick="applyFilter()">Apply</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table class="prospect-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Campaign</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Layla</a></td>
+                            <td>Julisehat</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Layla</a></td>
+                            <td>Julisehat</td>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Layla</a></td>
+                            <td>Julisehat</td>
+                            <td>New</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div><i class="fas fa-home"></i>
+                <a href="home.html">
+                    <p>Home</p>
+                </a>
+            </div>
+            <div><i class="fas fa-bullhorn"></i>
+                <a href="campagin.html">
+                    <p>Campaign</p>
+                </a>
+            </div>
+            <div><i class="fas fa-envelope"></i>
+                <a href="inbox.html">
+                    <p>Inbox</p>
+                </a>
+            </div>
+            <div><i class="fas fa-user-check"></i>
+                <a href="prospect.html">
+                    <p>Prospect</p>
+                </a>
+            </div>
+            <div><i class="fas fa-cog"></i>
+                <a href="logout.html">
+                    <p>Setting</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFilter() {
+            const drawer = document.getElementById("filterDrawer");
+            drawer.classList.toggle("open");
+        }
+
+        function applyFilter() {
+            alert("Filter applied!");
+            toggleFilter();
+        }
+    </script>
+</body>
+
+</html>

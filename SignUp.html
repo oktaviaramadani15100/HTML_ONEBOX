@@ -1,0 +1,36 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white flex justify-center items-center min-h-screen px-4">
+
+  <div class="w-full max-w-sm bg-white rounded-lg shadow">
+    <div class="bg-gradient-to-r from-purple-700 to-blue-500 text-white rounded-t-lg p-6">
+      <h2 class="text-lg">Let’s</h2>
+      <h1 class="text-2xl font-bold leading-tight">Create<br>Your Account</h1>
+    </div>
+
+    <form class="p-6 space-y-4">
+      <input type="text" placeholder="Full Name" class="w-full border-2 border-blue-400 rounded-full px-4 py-2 focus:outline-none" />
+      <input type="email" placeholder="Email Address" class="w-full border-2 border-blue-400 rounded-full px-4 py-2" />
+      <input type="password" placeholder="Password" class="w-full border-2 border-blue-400 rounded-full px-4 py-2" />
+      <input type="password" placeholder="Retype Password" class="w-full border-2 border-blue-400 rounded-full px-4 py-2" />
+
+      <div class="flex items-center space-x-2 text-xs">
+        <input type="checkbox" />
+        <label>I agree to the <span class="font-semibold underline">Terms & Privacy</span></label>
+      </div>
+
+      <button class="w-full bg-blue-600 text-white rounded-full py-2">Sign Up</button>
+
+      <p class="text-center text-xs">Have an account? <a href="login.html" class="font-semibold">Sign In</a></p>
+    </form>
+  </div>
+
+</body>
+</html>

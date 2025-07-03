@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSIG Agent Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header img {
+             height: 53px;
+        }
+
+        .header .text-right {
+            margin-left: 8rem;
+        }
+
+        .header .text-right p:first-child {
+            color: red;
+            font-weight: bold;
+        }
+
+        .header .text-right p:last-child {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-top: -4px;
+        }
+
+        .info-box img {
+            width: 17rem;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .menu-grid div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #1e3a8a;
+            font-size: 14px;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-section {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .slider-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-card {
+            flex: 0 0 250px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: start;
+            overflow: hidden;
+        }
+
+        .slider-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .title {
+            font-weight: bold;
+            padding: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .price {
+            padding: 0 10px 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* === DOTS === */
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dots button {
+            height: 8px;
+            width: 8px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dots button.active {
+            background-color: #333;
+        }
+
+        /* === BOTTOM NAV === */
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                background-color: #e5e5e5;
+                padding: 2rem;
+            }
+        }
+
+        .read-more {
+            padding: 0 10px 10px;
+            text-align: right;
+        }
+
+        .read-more a {
+            color: #1e40af;
+            font-size: 0.8rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <img src="my-image.png" alt="MSIG Logo" />
+            <div class="text-right">
+                <p>Welcome</p>
+                <p>Agent 01</p>
+            </div>
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <img src="information.jpg" alt="">
+        </div>
+
+        <!-- Menu -->
+        <div class="menu-grid">
+            <div>
+                <a href="call.html"><i class="fas fa-phone-alt fa-2x"></i></a>
+                <p>Call</p>
+            </div>
+            <div>
+                <i class="fas fa-bullseye fa-2x"></i>
+                <p>Target</p>
+            </div>
+            <div>
+                <i class="fas fa-calendar-check fa-2x"></i>
+                <p>Appointment</p>
+            </div>
+            <div>
+                <i class="fas fa-chart-line fa-2x"></i>
+                <p>Dashboard</p>
+            </div>
+            <div>
+                <i class="fas fa-user-shield fa-2x"></i>
+                <p>Agent Rules</p>
+            </div>
+            <div>
+                <i class="fas fa-hand-holding-usd fa-2x"></i>
+                <p>Commission</p>
+            </div>
+        </div>
+
+        <!-- Cards / Slider -->
+        <div class="slider-container">
+            <div class="slider-section" id="slider">
+
+                <!-- Card 1 -->
+                <div class="slider-card">
+                    <img src="knowlage6.webp" alt="Slider 1" />
+                    <div class="title">RIPLAY Smile Ultima Term Life</div>
+                    <div class="price">Produk perlindungan jiwa berjangka yang membantu keluarga Anda tetap aman secara
+                        finansial.</div>
+                    <div class="read-more"><a
+                            href="https://shamidah17.github.io/riplay-smile-doc/Riplay_Smile%20Ultima%20Term%20Life.pdf">Baca
+                            Selengkapnya</a></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="slider-card">
+                    <img src="knowlage7.jpg" alt="Slider 2" />
+                    <div class="title">Kenali MSIG Life: Solusi Asuransi Jiwa</div>
+                    <div class="price">Kenali manfaat perlindungan jiwa dan investasi yang diberikan oleh MSIG Life
+                        Indonesia.</div>
+                    <div class="read-more"><a href="https://www.msiglife.co.id/produk/kategori/asuransi-jiwa">Baca
+                            Selengkapnya</a></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="slider-card">
+                    <img src="knowlage8.jpg" alt="Slider 3" />
+                    <div class="title">Profil MSIG Life Indonesia</div>
+                    <div class="price">Kenali sejarah, komitmen, dan layanan terbaik dari perusahaan MSIG Life.</div>
+                    <div class="read-more"><a href="https://www.msiglife.co.id/tentang-kami/profil-perusahaan">Baca
+                            Selengkapnya</a></div>
+                </div>
+            </div>
+            <div class="dots" id="dots"></div>
+
+            <div class="bottom-nav">
+                <div><a href="home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+                <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                    <p>Campaign</p>
+                </div>
+                <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                    <p>Inbox</p>
+                </div>
+                <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                    <p>Prospect</p>
+                </div>
+                <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                    <p>Setting</p>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+
+<script>
+
+    const slider = document.getElementById('slider');
+    const dotsContainer = document.getElementById('dots');
+    const cards = slider.querySelectorAll('.slider-card');
+    let currentIndex = 0;
+
+    // Buat tombol dot
+    cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.addEventListener('click', () => scrollToIndex(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    updateDots();
+
+    // Auto-scroll tiap 5 detik
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        scrollToIndex(currentIndex);
+    }, 5000);
+
+    function scrollToIndex(index) {
+        slider.scrollTo({
+            left: cards[index].offsetLeft - slider.offsetLeft,
+            behavior: 'smooth'
+        });
+        currentIndex = index;
+        updateDots();
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+</script>
