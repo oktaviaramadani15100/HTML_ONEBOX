@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Rules</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 1.3rem;
+            color: #1f2937;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .rule-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .rule-box {
+            border: 1.5px solid black;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: #fff;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rule-title {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #b91c1c;
+            margin-bottom: 0.25rem;
+        }
+
+        .rule-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <img src="../img/my-image.png" alt="MSIG Logo" />
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2>Agent Rules</h2>
+            <div class="rule-section">
+                <div class="rule-wrapper">
+                    <div class="rule-title">Kode etik :</div>
+                    <div class="rule-box">Jaga integritas & kerahasiaan data nasabah.</div>
+                </div>
+
+                <div class="rule-wrapper">
+                    <div class="rule-title">Bantuan :</div>
+                    <div class="rule-box">Hubungi tim dukungan via aplikasi.</div>
+                </div>
+
+                <div class="rule-wrapper">
+                    <div class="rule-title">Penjualan :</div>
+                    <div class="rule-box">Tawar produk terdaftar, beri info akurat, ikuti prosedur, pastikan persetujuan
+                        nasabah.</div>
+                </div>
+
+                <div class="rule-wrapper">
+                    <div class="rule-title">Pelanggaran :</div>
+                    <div class="rule-box">Tambahkan sedikit teks isi Sanksi sesuai tingkat keparahan.</div>
+                </div>
+
+                <div class="rule-wrapper">
+                    <div class="rule-title">Pelayanan :</div>
+                    <div class="rule-box">Tambahkan sedikit teks isi Responsif, profesional, selesaikan masalah.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div><a href="home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+            <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                <p>Campaign</p>
+            </div>
+            <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                <p>Inbox</p>
+            </div>
+            <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                <p>Prospect</p>
+            </div>
+            <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                <p>Setting</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

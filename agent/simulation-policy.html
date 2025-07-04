@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulasi Policy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .content {
+            padding: 1rem;
+        }
+
+        .content h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #0047ba;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-top: 1rem;
+            color: #374151;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .ddl-payament {
+            width: 50%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .insured-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .insured-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 130px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .insured-row input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 150px;
+            max-width: 100%;
+        }
+
+        .btn-small {
+            background-color: #0047ba;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .btn-small:hover {
+            background-color: #003a9d;
+        }
+
+        .btn-group-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .btn-group-right-ddl {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .btn-group-right {
+                justify-content: flex-end;
+            }
+
+            .btn-small {
+                font-size: 13px;
+                padding: 8px 12px;
+                min-width: 90px;
+            }
+        }
+
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #0047ba;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        .action-icon {
+            color: red;
+            cursor: pointer;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 1rem;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 1rem;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 16px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
+        }
+
+        @media (max-width: 480px) {
+            .content h2 {
+                font-size: 1.1rem;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            .btn {
+                font-size: 13px;
+            }
+        }
+
+        .row-flex {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group-compare {
+            flex: 1;
+        }
+
+        .row-flex-existing {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group-existing {
+            flex: 1;
+        }
+
+        .existing-section {
+            padding-top: 20px;
+        }
+
+        .existing-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .form-group-ddl {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+
+        .compare-section {
+            padding-top: 5px;
+        }
+
+        .compare-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .row-flex-compare {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .compare-controls {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .compare-controls label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #374151;
+        }
+
+        .select-compare {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .row-compare {
+                flex-direction: column;
+            }
+        }
+
+        .totalPremi-section {
+            padding-top: 18px;
+        }
+
+        .totalPremi-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 360px;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 6px 8px;
+            font-size: 0.78rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <img src="../img/my-image.png" alt="MSIG Logo">
+            <i class="fas fa-ellipsis-v menu-icon"></i>
+        </div>
+
+        <div class="content">
+            <h2>Simulasi Policy</h2>
+
+            <div class="row-flex">
+                <div class="form-group">
+                    <label>Product</label>
+                    <select>
+                        <option>Pilih Product</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Plan</label>
+                    <select>
+                        <option>Pilih Plan</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <label>Insured Section</label>
+
+            <div class="insured-row">
+                <label>
+                    <input type="checkbox" id="main" />
+                    <span>Main Insured</span>
+                </label>
+                <input type="text" placeholder="..." />
+            </div>
+
+            <div class="insured-row">
+                <label>
+                    <input type="checkbox" id="spouse" />
+                    <span>Spouse</span>
+                </label>
+                <input type="text" placeholder="..." />
+            </div>
+
+            <div class="insured-row">
+                <label>
+                    <input type="checkbox" id="dependant" />
+                    <span>Dependant</span>
+                </label>
+                <input type="text" placeholder="..." />
+            </div>
+
+            <div class="insured-row">
+                <label>
+                    <span>Total Insured </span>
+                </label>
+                <input type="text" placeholder="..." />
+            </div>
+
+
+            <div class="btn-group-right">
+                <button class="btn-small">Create Data</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Insured Type</th>
+                        <th>Gender</th>
+                        <th>Usia</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>imal</td>
+                        <td>female</td>
+                        <td>50 th</td>
+                        <td><i class="fas fa-trash action-icon"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn-group-right">
+                <button class="btn-small">Clear Data</button>
+                <button class="btn-small">Calculate</button>
+            </div>
+
+            <div class="existing-section">
+                <h3>Existing</h3>
+                <div class="row-flex-existing">
+                    <div class="form-group-existing">
+                        <label>Product</label>
+                        <select>
+                            <option>Pilih Product</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group-existing">
+                        <label>Plan</label>
+                        <select>
+                            <option>Pilih Plan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group-payment">
+                    <label>Payment mode</label>
+                    <div class="form-group-ddl">
+                        <select class="ddl-payament">
+                            <option>Pilih </option>
+                        </select>
+                        <div class="btn-group-right-dll">
+                            <button class="btn-small">Re-Calculate</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-section">
+                <h3>Compare</h3>
+                <div class="row-flex-compare">
+                    <div class="form-group-compare">
+                        <label>Plan</label>
+                        <div class="compare-controls">
+                            <select class="select-compare">
+                                <option>Pilih</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group-compare">
+                        <label>Payment Mode</label>
+                        <div class="compare-controls">
+                            <select class="select-compare">
+                                <option>Pilih</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group-right">
+                    <button class="btn-small">Compare</button>
+                </div>
+            </div>
+
+            <div class="totalPremi-section">
+                <h3>Total Premium</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Insured Type</th>
+                                <th>Gender/Usia</th>
+                                <th>Yearly</th>
+                                <th>Montly</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Spouse</td>
+                                <td>Female/37th</td>
+                                <td>Rp 700.000</td>
+                                <td>Rp 100.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div><a href="home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+                <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                    <p>Campaign</p>
+                </div>
+                <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                    <p>Inbox</p>
+                </div>
+                <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                    <p>Prospect</p>
+                </div>
+                <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                    <p>Setting</p>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
