@@ -363,6 +363,45 @@
         tr:last-child td {
             border-bottom: none;
         }
+
+        .simulation-nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .simulation-nav button {
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .step-indicator {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        .prev-btn {
+            background-color: #facc15;
+            color: #333;
+        }
+
+        .next-btn {
+            background-color: #1e1b4b;
+            color: #fff;
+        }
+
+        .create-btn {
+            background-color: #22c55e;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -534,20 +573,28 @@
                 </div>
             </div>
 
+            <div class="simulation-nav">
+                <button class="step-indicator">Simulation - 1/9</button>
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                <button class="create-btn">Create SPAJ</button>
+            </div>
+
+
             <div class="bottom-nav">
-                <div><a href="home.html"><i class="fas fa-home"></i></a>
+                <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-                <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
+                <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
                     <p>Campaign</p>
                 </div>
-                <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
+                <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
                     <p>Inbox</p>
                 </div>
-                <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
+                <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
                     <p>Prospect</p>
                 </div>
-                <div><a href="logout.html"><i class="fas fa-cog"></i></a>
+                <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
                     <p>Setting</p>
                 </div>
             </div>

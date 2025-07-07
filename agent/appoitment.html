@@ -15,58 +15,63 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #f3f3f3;
+            background: #f3f4f6;
             display: flex;
             justify-content: center;
-            padding: 1rem;
         }
 
         .container {
             width: 100%;
-            max-width: 400px;
-            background-color: white;
-            border-radius: 10px;
-            padding: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            max-width: 430px;
             min-height: 100vh;
-        }   
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-bottom: 70px;
+            /* space for bottom nav */
+        }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem;
             border-bottom: 1px solid #e5e7eb;
         }
 
         .logo img {
-            height: 53px;
+            height: 48px;
+            object-fit: contain;
         }
 
         .menu-icon {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #444;
+            cursor: pointer;
         }
 
         .title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #1e3a8a;
-            margin: 1rem 0 0.5rem;
             text-align: center;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .profile {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #f1f1f1;
         }
 
         .profile i {
-            font-size: 2rem;
-            color: #333;
+            font-size: 2.2rem;
+            color: #1e3a8a;
         }
-
 
         .profile-info {
             font-size: 0.9rem;
@@ -82,18 +87,24 @@
             font-size: 0.75rem;
         }
 
+        form {
+            padding: 1rem;
+            flex-grow: 1;
+        }
+
         label {
-            display: block;
             font-size: 0.85rem;
-            margin: 0.5rem 0 0.2rem;
+            margin-bottom: 0.2rem;
             color: #333;
+            display: block;
         }
 
         select,
         input[type="date"],
         textarea {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
+            margin-bottom: 1rem;
             border-radius: 6px;
             border: 1px solid #ccc;
             font-size: 0.9rem;
@@ -102,10 +113,11 @@
         .row {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .row>div {
-            flex: 1;
+            flex: 1 1 48%;
         }
 
         textarea {
@@ -116,14 +128,15 @@
         .save-btn {
             background-color: #3b82f6;
             color: white;
-            padding: 10px 16px;
+            padding: 10px;
             border: none;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
-            margin-top: 1rem;
-            float: right;
+            width: 27%;
+            margin-top: 0.5rem;
             cursor: pointer;
+            margin-left: 18rem;
         }
 
         .save-btn:hover {
@@ -139,32 +152,39 @@
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 8px 0;
             z-index: 10;
-        }
-
-        .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        }
-
-        .bottom-nav i {
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 4px;
+            font-size: 12px;
         }
 
         .bottom-nav a {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.75rem;
             text-decoration: none;
-            /* Hilangkan garis bawah */
-            color: inherit;
-            /* Warna mengikuti elemen induknya */
+        }
+
+        .bottom-nav a i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+         .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 1rem;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 16px;
+        }
+
+        @media (max-width: 400px) {
+            .row>div {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
@@ -173,7 +193,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="logo"><img src="my-image.png" alt="MSIG Logo" /></div>
+            <div class="logo"><img src="../img/my-image.png" alt="MSIG Logo" /></div>
             <i class="fas fa-ellipsis-v menu-icon"></i>
         </div>
 
@@ -185,8 +205,9 @@
             <i class="fas fa-user-circle"></i>
             <div class="profile-info">
                 <div class="name">Layla</div>
-                <div class="meta">#09090 &nbsp; Created on: 03 Juli 2025<br><i class="fas fa-pen pensil"
-                        style="font-size: 0.6rem;"></i> modify : 5 days</div>
+                <div class="meta">#09090 • Created on: 03 Juli 2025<br>
+                    <i class="fas fa-pen" style="font-size: 0.6rem;"></i> modify: 5 days
+                </div>
             </div>
         </div>
 
@@ -203,7 +224,7 @@
             <div class="row">
                 <div>
                     <label for="date">Date:</label>
-                    <input type="date" id="date">
+                    <input type="date" id="date" />
                 </div>
                 <div>
                     <label for="reminder">Reminder:</label>
@@ -218,25 +239,32 @@
 
             <label for="description">Description:</label>
             <textarea id="description" placeholder="Isi keterangan..."></textarea>
+
             <button class="save-btn" type="submit">SAVE</button>
         </form>
 
+        <!-- Bottom Nav -->
         <div class="bottom-nav">
-            <div><a href="home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
-            </div>
-            <div><a href="campagin.html"><i class="fas fa-bullhorn"></i></a>
-                <p>Campaign</p>
-            </div>
-            <div><a href="inbox.html"><i class="fas fa-envelope"></i></a>
-                <p>Inbox</p>
-            </div>
-            <div><a href="prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Prospect</p>
-            </div>
-            <div><a href="logout.html"><i class="fas fa-cog"></i></a>
-                <p>Setting</p>
-            </div>
+            <a href="../agent/home.html">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="/campaign.html">
+                <i class="fas fa-bullhorn"></i>
+                <span>Campaign</span>
+            </a>
+            <a href="../agent/inbox.html">
+                <i class="fas fa-envelope"></i>
+                <span>Inbox</span>
+            </a>
+            <a href="../agent/prospect.html">
+                <i class="fas fa-user-check"></i>
+                <span>Prospect</span>
+            </a>
+            <a href="/logout.html">
+                <i class="fas fa-cog"></i>
+                <span>Setting</span>
+            </a>
         </div>
     </div>
 </body>
