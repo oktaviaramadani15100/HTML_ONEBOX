@@ -364,6 +364,96 @@
             border-bottom: none;
         }
 
+        .product-benefit-section {
+            padding-top: 18px;
+            margin-top: 12px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .product-benefit-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .product-benefit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            flex: 1;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .plan-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .plan-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.85rem;
+        }
+
+        .product-benefit-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .product-benefit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .product-benefit-table th,
+        .product-benefit-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .product-benefit-table thead {
+            background-color: #bfdbfe;
+            color: #000;
+        }
+
+        .product-benefit-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .import-btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .btn-import {
+            background-color: #3b82f6;
+            color: #fff;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-import:hover {
+            background-color: #2563eb;
+        }
+
+
         .simulation-nav {
             display: flex;
             justify-content: flex-end;
@@ -572,6 +662,57 @@
                     </table>
                 </div>
             </div>
+
+            <div class="product-benefit-section">
+                <h3>Product Benefit</h3>
+                <div class="product-benefit-header">
+                    <p class="product-name">Product : Mandiri sehat</p>
+                    <div class="plan-select-wrapper">
+                        <label for="plan">Plan:</label>
+                        <select id="plan" class="plan-select">
+                            <option>Pilih</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-benefit-table-wrapper">
+                    <table class="product-benefit-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>free rumah sakit</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>free rumah sakit</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>free rumah sakit</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>free rumah sakit</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>free rumah sakit</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="import-btn-wrapper">
+                    <button class="btn-import">Import data</button>
+                </div>
+            </div>
+
 
             <div class="simulation-nav">
                 <button class="step-indicator">Simulation - 1/9</button>
