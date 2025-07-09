@@ -42,8 +42,69 @@
         }
 
         .menu-icon {
-            font-size: 1.5rem;
-            color: #1f2937;
+            font-size: 20px;
+            color: #1e3a8a;
+            cursor: pointer;
+            transition: color 0.3s;
+
+        }
+
+        .menu-icon:hover {
+            color: #000;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 39px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 999;
+            animation: fadeIn 0.2s ease-in-out;
+            margin-left: 12rem;
+        }
+
+        .dropdown p {
+            margin: 10px 15px 5px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #f6f6f6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .content {
@@ -87,54 +148,195 @@
             border-bottom: none;
         }
 
-        .bottom-nav div {
-            text-align: center;
-            font-size: 12px;
-            color: #444;
-        }
-
-        .bottom-nav span {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
-
         .bottom-nav {
             position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
+            align-items: flex-end;
+            padding: 10px 0;
             font-size: 12px;
             z-index: 10;
+            position: relative;
+            margin-top: 3rem;
         }
 
         .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
-            font-size: 1rem;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
-        .bottom-nav span {
-            display: block;
-            font-size: 16px;
+        .bottom-nav div:hover {
+            transform: scale(1.05);
         }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
 
         .bottom-nav a {
             text-decoration: none;
-            /* Hilangkan garis bawah */
-            color: inherit;
-            /* Warna mengikuti elemen induknya */
+            color: #1e3a8a;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 62px;
+            display: block;
+            margin-bottom: -2px;
+            margin-top: -36px;
+        }
+
+
+        .nav-home,
+        .nav-agen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .plus-btn:focus,
+        .plus-btn:active {
+            outline: none;
+            transform: translateX(-50%);
+        }
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
         }
 
         @media (min-width: 768px) {
             body {
                 background: #d1d5db;
             }
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 16px;
+            /* Biar ada jarak dari tepi */
+        }
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: auto;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .filter-drawer.open {
+            right: 0;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .filter-content input,
+        .filter-content select,
+        .filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-content button:hover {
+            background-color: #374ba1;
         }
     </style>
 </head>
@@ -143,41 +345,73 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <img src="../img/my-image.png" alt="MSIG Logo" />
-            <i class="fas fa-ellipsis-v menu-icon"></i>
+            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Activity Call</a>
+            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+
+            <div class="dropdown" id="dropdownMenu">
+                <p>Welcome</p>
+                <p>Agent 01</p>
+                <hr />
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <hr>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </div>
 
         <!-- Content -->
         <div class="content">
-            <h2>Call History</h2>
+            <div class="filter-container">
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+            </div>
+
+            <div class="filter-drawer" id="filterDrawer">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Filter</h3>
+                    <i class="fas fa-times" id="closeFilter"></i>
+                </div>
+                <div class="filter-content">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" />
+
+                    <label for="activity">Activity</label>
+                    <input type="text" id="activity" placeholder="Enter value" />
+
+                    <label for="result">Result</label>
+                    <input type="text" id="result" placeholder="Enter result" />
+
+                    <button onclick="applyFilter()">Apply</button>
+                </div>
+
+            </div>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Agent</th>
-                            <th>Duration</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>Tanggal</th>
+                            <th>Jam</th>
+                            <th>Activity</th>
+                            <th>Result</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Agent 01</td>
-                            <td>5 minutes</td>
-                            <td>15:30</td>
-                            <td>16:00</td>
+                            <td>07/07/25</td>
+                            <td>15.00</td>
+                            <td>Simulasi Policy</td>
+                            <td>Thinking</td>
                         </tr>
                         <tr>
-                            <td>Agent 01</td>
-                            <td>5 minutes</td>
-                            <td>15:30</td>
-                            <td>16:00</td>
+                            <td>07/07/25</td>
+                            <td>15.00</td>
+                            <td>Simulasi Policy</td>
+                            <td>Thinking</td>
                         </tr>
                         <tr>
-                            <td>Agent 01</td>
-                            <td>5 minutes</td>
-                            <td>15:30</td>
-                            <td>16:00</td>
+                            <td>07/07/25</td>
+                            <td>15.00</td>
+                            <td>Simulasi Policy</td>
+                            <td>Thinking</td>
                         </tr>
                     </tbody>
                 </table>
@@ -186,23 +420,82 @@
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
                 <p>Home</p>
             </div>
-            <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
-                <p>Campaign</p>
+
+            <div class="nav-new">
+                <a href="../agent/prospect.html" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
             </div>
-            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-                <p>Inbox</p>
-            </div>
-            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Prospect</p>
-            </div>
-            <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-                <p>Setting</p>
+
+            <div class="nav-agen">
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.menu-icon');
+        if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function toggleFilter(forceClose = false) {
+            const drawer = document.getElementById("filterDrawer");
+
+            if (forceClose) {
+                drawer.classList.remove("open");
+            } else {
+                drawer.classList.toggle("open");
+            }
+        }
+
+        function applyFilter() {
+            alert("Filter applied!");
+            toggleFilter(true);
+        }
+
+        window.addEventListener('click', function (e) {
+            const drawer = document.getElementById("filterDrawer");
+            const iconFilter = document.querySelector('.filter-icon');
+
+            if (drawer.classList.contains('open')) {
+                if (!drawer.contains(e.target) && !iconFilter.contains(e.target)) {
+                    toggleFilter(true);
+                }
+            }
+        });
+        const iconFilter = document.querySelector('.filter-icon');
+        if (iconFilter) {
+            iconFilter.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter();
+            });
+        }
+
+        const closeIcon = document.getElementById('closeFilter');
+        if (closeIcon) {
+            closeIcon.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter(true);
+            });
+        }
+
+        window.applyFilter = applyFilter;
+    });
+</script>

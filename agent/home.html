@@ -36,7 +36,7 @@
         }
 
         .header img {
-             height: 53px;
+            height: 53px;
         }
 
         .header .text-right {
@@ -54,6 +54,85 @@
             margin-top: -4px;
         }
 
+        .menu-icon {
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+             position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #1e3a8a;
+        }
+
+        .menu-icon:hover {
+            color: #000;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 31px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .dropdown p {
+            margin: 10px 15px 5px;
+            font-size: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #f6f6f6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .info-box img {
             width: 17rem;
             height: auto;
@@ -68,26 +147,60 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            padding: 1rem;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
             text-align: center;
         }
 
-        .menu-grid div {
+        .menu-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-decoration: none;
             color: #1e3a8a;
-            font-size: 14px;
+            padding: 15px 5px;
+            transition: 0.3s ease;
         }
 
-         .menu-grid a {
-            text-decoration: none;
-            /* Hilangkan garis bawah */
-            color: inherit;
-            /* Warna mengikuti elemen induknya */
+        .menu-item:hover {
+            background-color: #f3f0ff;
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
+        .menu-item i {
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+
+        .menu-item p {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .menu-grid a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media screen and (max-width: 480px) {
+            .menu-item {
+                padding: 10px 4px;
+            }
+
+            .menu-item i {
+                font-size: 22px;
+            }
+
+            .menu-item p {
+                font-size: 12px;
+            }
+        }
+
 
         .slider-container {
             position: relative;
@@ -148,8 +261,9 @@
 
         /* === DOTS === */
         .dots {
+            position: relative;
             text-align: center;
-            margin-top: 10px;
+            z-index: 30;
         }
 
         .dots button {
@@ -174,12 +288,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
+            align-items: flex-end;
             padding: 10px 0;
+            font-size: 12px;
             z-index: 10;
+            position: relative;
+            margin-top: 3rem;
         }
 
         .bottom-nav div {
@@ -187,6 +304,10 @@
             color: #1e3a8a;
             font-size: 0.85rem;
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .bottom-nav div:hover {
@@ -199,11 +320,62 @@
             margin-bottom: 4px;
         }
 
+
         .bottom-nav a {
             text-decoration: none;
-            /* Hilangkan garis bawah */
             color: inherit;
-            /* Warna mengikuti elemen induknya */
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 62px;
+            display: block;
+            margin-bottom: -2px;
+            margin-top: -36px;
+        }
+
+
+        .nav-home,
+        .nav-agen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .plus-btn:focus,
+        .plus-btn:active {
+            outline: none;
+            transform: translateX(-50%);
+        }
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
         }
 
         @media screen and (min-width: 768px) {
@@ -234,16 +406,26 @@
 </head>
 
 <body>
-
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
             <img src="../img/my-image.png" alt="MSIG Logo" />
-            <div class="text-right">
-                <p>Welcome</p>
-                <p>Agent 01</p>
+            <div class="menu-icon-group">
+                <a href="../agent/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <p>Welcome</p>
+                    <p>Agent 01</p>
+                    <hr />
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <hr>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
             </div>
-            <i class="fas fa-ellipsis-v menu-icon"></i>
+
+
         </div>
 
         <!-- Info Box -->
@@ -253,31 +435,40 @@
 
         <!-- Menu -->
         <div class="menu-grid">
-            <div>
-                <a href="../agent/call.html"><i class="fas fa-phone-alt fa-2x"></i></a>
-                <p>Call</p>
-            </div>
-            <div>
-                <a href="../agent/target.html"><i class="fas fa-bullseye fa-2x"></i></a>
+            <!-- Baris 1 -->
+            <a href="../agent/call.html" class="menu-item">
+                <i class="fas fa-phone-alt fa-2x"></i>
+                <p>Activity History</p>
+            </a>
+            <a href="../agent/target.html" class="menu-item">
+                <i class="fas fa-bullseye fa-2x"></i>
                 <p>Target</p>
-            </div>
-            <div>
-                <a href="../agent/appoitment.html"><i class="fas fa-calendar-check fa-2x"></i></a>
+            </a>
+            <a href="../agent/appoitment.html" class="menu-item">
+                <i class="fas fa-calendar-check fa-2x"></i>
                 <p>Appointment</p>
-            </div>
-            <div>
+            </a>
+            <a href="../campagin.html" class="menu-item">
+                <i class="fas fa-bullhorn fa-2x"></i>
+                <p>Campaign</p>
+            </a>
+
+            <!-- Baris 2 -->
+            <a href="#" class="menu-item">
                 <i class="fas fa-chart-line fa-2x"></i>
                 <p>Dashboard</p>
-            </div>
-            <div>
-                <a href="../agent/simulation-policy.html"><i class="fas fa-user-shield fa-2x"></i></a>
+            </a>
+            <a href="../agent/agent-rules.html" class="menu-item">
+                <i class="fas fa-user-shield fa-2x"></i>
                 <p>Agent Rules</p>
-            </div>
-            <div>
-                <i class="fas fa-hand-holding-usd fa-2x"></i>
-                <p>Commission</p>
-            </div>
+            </a>
+            <a href="../agent/prospect.html" class="menu-item">
+                <i class="fas fa-user-plus fa-2x"></i>
+                <p>Prospect</p>
+            </a>
         </div>
+
+
 
         <!-- Cards / Slider -->
         <div class="slider-container">
@@ -312,25 +503,25 @@
                     <div class="read-more"><a href="https://www.msiglife.co.id/tentang-kami/profil-perusahaan">Baca
                             Selengkapnya</a></div>
                 </div>
+
             </div>
             <div class="dots" id="dots"></div>
+        </div>
 
-            <div class="bottom-nav">
-                <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
-                <div><a href="../campagin.html"><i class="fas fa-bullhorn"></i></a>
-                    <p>Campaign</p>
-                </div>
-                <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-                    <p>Inbox</p>
-                </div>
-                <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                    <p>Prospect</p>
-                </div>
-                <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-                    <p>Setting</p>
-                </div>
+        <div class="bottom-nav">
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+
+            <div class="nav-new">
+                <a href="../agent/prospect.html" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
+            </div>
+
+            <div class="nav-agen">
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
             </div>
         </div>
 </body>
@@ -338,7 +529,6 @@
 </html>
 
 <script>
-
     const slider = document.getElementById('slider');
     const dotsContainer = document.getElementById('dots');
     const cards = slider.querySelectorAll('.slider-card');
@@ -374,5 +564,19 @@
             dot.classList.toggle('active', i === currentIndex);
         });
     }
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
 
 </script>
