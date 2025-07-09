@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Call History</title>
+    <title>Campaign</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * {
@@ -42,8 +42,67 @@
         }
 
         .menu-icon {
-            font-size: 1.5rem;
-            color: #1f2937;
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu-icon:hover {
+            color: #000;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 29px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 999;
+            animation: fadeIn 0.2s ease-in-out;
+            margin-left: 10rem;
+        }
+
+        .dropdown p {
+            margin: 10px 15px 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #f6f6f6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .content {
@@ -126,9 +185,12 @@
 
         .bottom-nav a {
             text-decoration: none;
-            /* Hilangkan garis bawah */
             color: inherit;
-            /* Warna mengikuti elemen induknya */
+        }
+
+        .header a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .add-btn {
@@ -160,14 +222,22 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <img src="img/my-image.png"MSIG Logo" />
-            <i class="fas fa-ellipsis-v menu-icon"></i>
+            <a href="agent/home.html"> <i class="fas fa-arrow-left"></i> Campaign</a>
+            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+
+            <div class="dropdown" id="dropdownMenu">
+                <p>Welcome</p>
+                <p>Agent 01</p>
+                <hr />
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <hr>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </div>
- 
+
         <!-- Content -->
         <div class="content">
             <h2>Campaign</h2>
-            <a href="add-campaign.html" class="add-btn">+ Add New Campaign</a>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -203,20 +273,29 @@
             <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
                 <p>Home</p>
             </div>
-            <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
-                <p>Campaign</p>
+            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
+                <p>Call</p>
             </div>
             <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
                 <p>Inbox</p>
-            </div>
-            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Prospect</p>
-            </div>
-            <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-                <p>Setting</p>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.menu-icon');
+        if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+</script>

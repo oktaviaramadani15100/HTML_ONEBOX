@@ -46,9 +46,74 @@
         }
 
         .menu-icon {
-            font-size: 1.3rem;
-            color: #444;
+            font-size: 20px;
+            color: #555;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu-icon:hover {
+            color: #000;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 39px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 999;
+            animation: fadeIn 0.2s ease-in-out;
+            margin-left: 12rem;
+        }
+
+        .dropdown p {
+            margin: 10px 15px 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #f6f6f6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header a {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warna mengikuti elemen induknya */
         }
 
         .title {
@@ -170,7 +235,7 @@
             margin-bottom: 3px;
         }
 
-         .bottom-nav div {
+        .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 1rem;
@@ -193,12 +258,17 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="logo"><img src="../img/my-image.png" alt="MSIG Logo" /></div>
-            <i class="fas fa-ellipsis-v menu-icon"></i>
-        </div>
+            <a href="agent/home.html"> <i class="fas fa-arrow-left"></i> Appointment</a>
+            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
 
-        <!-- Title -->
-        <div class="title">Appointment</div>
+            <div class="dropdown" id="dropdownMenu">
+                <p>Welcome</p>
+                <p>Agent 01</p>
+                <hr />
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
 
         <!-- Profile -->
         <div class="profile">
@@ -229,7 +299,6 @@
                 <div>
                     <label for="reminder">Reminder:</label>
                     <select id="reminder">
-                        <option>None</option>
                         <option>1 day before</option>
                         <option>3 days before</option>
                         <option>1 week before</option>
@@ -245,28 +314,32 @@
 
         <!-- Bottom Nav -->
         <div class="bottom-nav">
-            <a href="../agent/home.html">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="/campaign.html">
-                <i class="fas fa-bullhorn"></i>
-                <span>Campaign</span>
-            </a>
-            <a href="../agent/inbox.html">
-                <i class="fas fa-envelope"></i>
-                <span>Inbox</span>
-            </a>
-            <a href="../agent/prospect.html">
-                <i class="fas fa-user-check"></i>
-                <span>Prospect</span>
-            </a>
-            <a href="/logout.html">
-                <i class="fas fa-cog"></i>
-                <span>Setting</span>
-            </a>
+            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+            <div><a href="../agent/prospect.html"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
+            </div>
+            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
+                <p>Inbox</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.querySelector('.menu-icon');
+            if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
