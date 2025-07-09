@@ -38,15 +38,18 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
-
         .menu-icon-group {
             display: flex;
             justify-content: flex-end;
-            /* ikon ke kanan */
             align-items: center;
             gap: 12px;
-            /* jarak antar ikon */
             padding: 10px 16px;
+            position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #1e3a8a;
         }
 
         .menu-icon {
@@ -63,7 +66,7 @@
         .dropdown {
             display: none;
             position: absolute;
-            top: 39px;
+            top: 55px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -71,7 +74,7 @@
             width: 200px;
             z-index: 999;
             animation: fadeIn 0.2s ease-in-out;
-            margin-left: 12rem;
+            margin-left: 11rem;
         }
 
         .dropdown p {
@@ -220,11 +223,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-end;
             padding: 10px 0;
             font-size: 12px;
             z-index: 10;
@@ -236,6 +238,10 @@
             color: #1e3a8a;
             font-size: 0.85rem;
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .bottom-nav div:hover {
@@ -251,28 +257,45 @@
 
         .bottom-nav a {
             text-decoration: none;
-            color: inherit;
+            color: #1e3a8a;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .nav-new {
-            display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             border: none;
             padding: 0;
             transition: none;
             touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
         }
 
         .nav-new i {
-            font-size: 53px;
+            font-size: 62px;
             display: block;
-            margin-bottom: 4px;
-            margin-top: -58px;
+            margin-bottom: -2px;
+            margin-top: -36px;
         }
 
 
@@ -285,11 +308,12 @@
         }
 
 
-        .plus-btn:focus,
-        .plus-btn:active {
-            outline: none;
-            transform: translateX(-50%);
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
         }
+
 
         @media (max-width: 400px) {
             .row>div {
@@ -337,8 +361,11 @@
             <select id="type-event">
                 <option>Pilih jenis event</option>
                 <option>Meeting</option>
-                <option>Call</option>
+                <option>Appointment</option>
+                <option>Interaction</option>
+                <option>Send Proposal</option>
                 <option>Follow Up</option>
+                <option>Negotiation</option>
             </select>
 
             <div class="row">
@@ -349,9 +376,15 @@
                 <div>
                     <label for="reminder">Reminder:</label>
                     <select id="reminder">
-                        <option>1 day before</option>
-                        <option>3 days before</option>
-                        <option>1 week before</option>
+                        <option>-- Select Type --</option>
+                        <option>1 Menit</option>
+                        <option>5 Menit</option>
+                        <option>10 Menit</option>
+                        <option>15 Menit</option>
+                        <option>30 Menit</option>
+                        <option>1 Menit</option>
+                        <option>2 Menit</option>
+                        <option>3 Menit</option>
                     </select>
                 </div>
             </div>
@@ -369,7 +402,8 @@
             </div>
 
             <div class="nav-new">
-                <a href="../agent/prospect.html" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
             </div>
 
             <div class="nav-agen">
@@ -377,8 +411,6 @@
                 <p>Agenda</p>
             </div>
         </div>
-
-
     </div>
 
     <script>
@@ -389,8 +421,9 @@
 
         window.addEventListener('click', function (e) {
             const dropdown = document.getElementById('dropdownMenu');
-            const icon = document.querySelector('.menu-icon');
-            if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+            const icon = document.querySelector('.fa-ellipsis-v');
+
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
                 dropdown.style.display = 'none';
             }
         });

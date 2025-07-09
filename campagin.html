@@ -55,7 +55,7 @@
         .dropdown {
             display: none;
             position: absolute;
-            top: 29px;
+            top: 37px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -70,6 +70,7 @@
             margin: 10px 15px 5px;
             font-size: 14px;
             color: #333;
+            font-weight: bold;
         }
 
         .dropdown hr {
@@ -146,51 +147,109 @@
             border-bottom: none;
         }
 
-        .bottom-nav div {
-            text-align: center;
-            font-size: 12px;
-            color: #444;
-        }
-
-        .bottom-nav span {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
-
         .bottom-nav {
             position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
+            align-items: flex-end;
+            padding: 10px 0;
             font-size: 12px;
             z-index: 10;
+            position: relative;
+            margin-top: 3rem;
         }
 
         .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
-            font-size: 1rem;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
-        .bottom-nav span {
-            display: block;
-            font-size: 16px;
+        .bottom-nav div:hover {
+            transform: scale(1.05);
         }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
 
         .bottom-nav a {
             text-decoration: none;
-            color: inherit;
+            color: #1e3a8a;
         }
 
-        .header a {
+        .header .header-name {
             text-decoration: none;
-            color: inherit;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 62px;
+            display: block;
+            margin-bottom: -2px;
+            margin-top: -36px;
+        }
+
+
+        .nav-home,
+        .nav-agen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .add-btn {
@@ -215,6 +274,20 @@
                 background: #d1d5db;
             }
         }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #1e3a8a;
+        }
     </style>
 </head>
 
@@ -222,16 +295,20 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="agent/home.html"> <i class="fas fa-arrow-left"></i> Campaign</a>
-            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-
-            <div class="dropdown" id="dropdownMenu">
-                <p>Welcome</p>
-                <p>Agent 01</p>
-                <hr />
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <hr>
-                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Campaign</a>
+            <div class="menu-icon-group">
+                <a href="../agent/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <p>Welcome</p>
+                    <p>Agent 01</p>
+                    <hr />
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <hr>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
             </div>
         </div>
 
@@ -270,14 +347,19 @@
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
                 <p>Home</p>
             </div>
-            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Call</p>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
             </div>
-            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-                <p>Inbox</p>
+
+            <div class="nav-agen">
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
             </div>
         </div>
     </div>
@@ -293,8 +375,9 @@
 
     window.addEventListener('click', function (e) {
         const dropdown = document.getElementById('dropdownMenu');
-        const icon = document.querySelector('.menu-icon');
-        if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
             dropdown.style.display = 'none';
         }
     });

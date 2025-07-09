@@ -238,11 +238,6 @@
             gap: 4px;
         }
 
-        .plus-btn:focus,
-        .plus-btn:active {
-            outline: none;
-            transform: translateX(-50%);
-        }
 
         .nav-new p {
             margin: 6px 0 0;
@@ -338,6 +333,20 @@
         .filter-content button:hover {
             background-color: #374ba1;
         }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+             position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #1e3a8a;
+        }
     </style>
 </head>
 
@@ -346,15 +355,19 @@
         <!-- Header -->
         <div class="header">
             <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Activity Call</a>
-            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-
-            <div class="dropdown" id="dropdownMenu">
-                <p>Welcome</p>
-                <p>Agent 01</p>
-                <hr />
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <hr>
-                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+             <div class="menu-icon-group">
+                <a href="../agent/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <p>Welcome</p>
+                    <p>Agent 01</p>
+                    <hr />
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <hr>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
             </div>
         </div>
 
@@ -426,7 +439,7 @@
             </div>
 
             <div class="nav-new">
-                <a href="../agent/prospect.html" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
                 <p>New</p>
             </div>
 
@@ -448,8 +461,9 @@
 
     window.addEventListener('click', function (e) {
         const dropdown = document.getElementById('dropdownMenu');
-        const icon = document.querySelector('.menu-icon');
-        if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
             dropdown.style.display = 'none';
         }
     });

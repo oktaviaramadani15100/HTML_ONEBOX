@@ -49,20 +49,19 @@
 
         .content {
             flex: 1;
-            padding: 1rem 1rem 90px;
         }
 
         .title-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             margin-bottom: 1rem;
         }
 
-        .title-row h2 {
+        .title-row i {
             font-size: 1.3rem;
-            font-weight: bold;
-            color: #111827;
+            color: #1e3a8a;
+            cursor: pointer;
         }
 
         .filter-icon {
@@ -169,17 +168,19 @@
             text-decoration: none;
         }
 
-        .bottom-nav {
+       .bottom-nav {
             position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
+            align-items: flex-end;
             padding: 10px 0;
+            font-size: 12px;
             z-index: 10;
+            position: relative;
         }
 
         .bottom-nav div {
@@ -187,6 +188,10 @@
             color: #1e3a8a;
             font-size: 0.85rem;
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .bottom-nav div:hover {
@@ -199,16 +204,313 @@
             margin-bottom: 4px;
         }
 
+
         .bottom-nav a {
             text-decoration: none;
-            color: inherit;
+            color: #1e3a8a;
         }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 62px;
+            display: block;
+            margin-bottom: -2px;
+            margin-top: -36px;
+        }
+
+
+        .nav-home,
+        .nav-agen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
 
         @media (min-width: 768px) {
             body {
                 background: #d1d5db;
             }
         }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 999;
+            animation: fadeIn 0.2s ease-in-out;
+            margin-left: 10rem;
+        }
+
+        .dropdown p {
+            margin: 10px 15px 5px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #f6f6f6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #1e3a8a;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header-section {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+            display: block;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+        }
+
+        .ddlList-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .ddlList-row select {
+            flex: 1;
+            /* biar fleksibel */
+            min-width: 0;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #333;
+            height: 38px;
+        }
+
+        .go-btn {
+            height: 38px;
+            padding: 0 16px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .go-btn:hover {
+            background-color: #374ba1;
+        }
+
+        .profile {
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1rem 90px;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+        }
+
+        .profile-icon {
+            font-size: 2.8rem;
+            color: #1e3a8a;
+        }
+
+        .profile-info {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .gender-icon {
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .meta i {
+            color: #1e3a8a;
+            margin-right: 4px;
+        }
+
+        /* @media (max-width: 480px) {
+            .profile {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-icon {
+                font-size: 2.4rem;
+            }
+
+            .top-row {
+                flex-direction: row;
+            }
+        } */
+
+        .biodata {
+            padding: 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        .biodata-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .biodata-item {
+            flex: 1 1 45%;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            min-width: 140px;
+        }
+
+        .biodata-item .icon {
+            font-size: 1rem;
+            color: #1e3a8a;
+            margin-top: 0.2rem;
+        }
+
+        .biodata-item .label {
+            font-weight: bold;
+            color: #1e3a8a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .biodata-item .value {
+            color: #333;
+            font-size: 0.85rem;
+        }
+
+        /* 
+@media (max-width: 480px) {
+    .biodata-row {
+        flex-direction: column;
+    }
+
+    .biodata-item {
+        flex: 1 1 100%;
+    }
+} */
     </style>
 </head>
 
@@ -216,130 +518,157 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <img src="../img/my-image.png" alt="MSIG Logo" />
-            <i class="fas fa-ellipsis-v menu-icon"></i>
+            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Interaction</a>
+            <div class="menu-icon-group">
+                <a href="../agent/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <p>Welcome</p>
+                    <p>Agent 01</p>
+                    <hr />
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <hr>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-section">
+            <div class="ddlList-row">
+                <span class="section-title">Result</span>
+                <select>
+                    <option value="">--Pilih--</option>
+                    <option value="Thinking">Thinking</option>
+                    <option value="Send Browser">Send Browser</option>
+                    <option value="Simulation Policy">Simulation Policy</option>
+                    <option value="Entry Policy">Entry Policy</option>
+                    <option value="Not Interested">Not Interested</option>
+                </select>
+                <button class="go-btn">Go</button>
+            </div>
         </div>
 
         <!-- Content -->
         <div class="content">
-            <div class="title-row">
-                <h2>Prospect</h2>
-                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
-            </div>
-
-            <!-- Filter Drawer -->
-            <div class="filter-drawer" id="filterDrawer">
-                <div class="filter-header">
-                    <h3><i class="fas fa-filter"></i> Filter</h3>
-                    <i class="fas fa-times" onclick="toggleFilter()"></i>
-                </div>
-                <div class="filter-content">
-                    <label>Search Type</label>
-                    <select>
-                        <option>Campaign</option>
-                        <option>Product</option>
-                    </select>
-
-                    <label>Value</label>
-                    <input type="text" placeholder="Enter value" />
-
-                    <label>Month</label>
-                    <select>
-                        <option>January</option>
-                        <option>February</option>
-                        <option>March</option>
-                    </select>
-
-                    <label>Start Date</label>
-                    <input type="date" />
-
-                    <label>End Date</label>
-                    <input type="date" />
-
-                    <label>Status</label>
-                    <select>
-                        <option>All</option>
-                        <option>New</option>
-                        <option>Closed</option>
-                    </select>
-
-                    <label>Event Type</label>
-                    <select>
-                        <option>Call</option>
-                        <option>Meeting</option>
-                    </select>
-
-                    <label>Call Status</label>
-                    <select>
-                        <option>Connected</option>
-                        <option>Missed</option>
-                    </select>
-
-                    <button onclick="applyFilter()">Apply</button>
+            <div class="profile">
+                <i class="fas fa-user-circle profile-icon"></i>
+                <div class="profile-info">
+                    <div class="top-row">
+                        <span class="name">Layla</span>
+                        <i class="fas fa-mars gender-icon" title="Male"></i>
+                    </div>
+                    <div class="meta">
+                        <div>
+                            <span><i class="fas fa-calendar-plus"></i> Created on: 03 Juli 2025</span> •
+                            <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Table -->
-            <div class="table-wrapper">
-                <table class="prospect-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Campaign</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Layla</a></td>
-                            <td>Julisehat</td>
-                            <td>New</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Layla</a></td>
-                            <td>Julisehat</td>
-                            <td>New</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Layla</a></td>
-                            <td>Julisehat</td>
-                            <td>New</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="biodata">
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-birthday-cake icon"></i>
+                        <div>
+                            <span class="label">Birthday</span>
+                            <span class="value">12 Jan 1995</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-heart icon"></i>
+                        <div>
+                            <span class="label">Marital Status</span>
+                            <span class="value">Single</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-wallet icon"></i>
+                        <div>
+                            <span class="label">Income Range</span>
+                            <span class="value">5 - 10 juta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-chart-line icon"></i>
+                        <div>
+                            <span class="label">Avg Transaction</span>
+                            <span class="value">Rp 1.250.000</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-id-badge icon"></i>
+                        <div>
+                            <span class="label">Account Type</span>
+                            <span class="value">Kredit</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-calendar-plus icon"></i>
+                        <div>
+                            <span class="label">Join At</span>
+                            <span class="value">03 Juli 2020</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-clock icon"></i>
+                        <div>
+                            <span class="label">Duration</span>
+                            <span class="value">5 years 2 months</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
                 <p>Home</p>
             </div>
-            <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
-                <p>Campaign</p>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
             </div>
-            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-                <p>Inbox</p>
-            </div>
-            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Prospect</p>
-            </div>
-            <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-                <p>Setting</p>
+
+            <div class="nav-agen">
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleFilter() {
-            const drawer = document.getElementById("filterDrawer");
-            drawer.classList.toggle("open");
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        function applyFilter() {
-            alert("Filter applied!");
-            toggleFilter();
-        }
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.querySelector('.fa-ellipsis-v');
+
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+                dropdown.style.display = 'none';
+            }
+        });
     </script>
 </body>
 
