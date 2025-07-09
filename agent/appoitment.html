@@ -31,11 +31,15 @@
         }
 
         .header {
-            display: flex;
+             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
             border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
         }
 
         .menu-icon-group {
@@ -219,7 +223,7 @@
 
         /* Bottom Navigation */
         .bottom-nav {
-            position: sticky;
+           position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
@@ -230,7 +234,12 @@
             padding: 10px 0;
             font-size: 12px;
             z-index: 10;
-            position: relative;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-agen{
+            margin-left: 6rem;
         }
 
         .bottom-nav div {
