@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insured</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            border-bottom: 1px solid #ccc;
+        }
+        .header .header-name {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+            padding-bottom: 80px;
+            /* Untuk memberi ruang bottom nav */
+            overflow-y: auto;
+        }
+
+        .content h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #0047ba;
+            margin-bottom: 1rem;
+        }
+
+        .btn-small {
+            background-color: #0047ba;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .btn-small:hover {
+            background-color: #003a9d;
+        }
+
+        .btn-group-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .btn-group-right-ddl {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .btn-group-right {
+                justify-content: flex-end;
+            }
+
+            .btn-small {
+                font-size: 13px;
+                padding: 8px 12px;
+                min-width: 90px;
+            }
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        thead {
+            background-color: #0047ba;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .action-icon {
+            color: red;
+            cursor: pointer;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 200;
+        }
+
+        .bottom-nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav a i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 480px) {
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 6px;
+            }
+
+            .header img {
+                height: 45px;
+            }
+
+            .bottom-nav a {
+                font-size: 10px;
+            }
+
+            .bottom-nav a i {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Appointment</a>
+        <div class="menu-icon-group">
+            <a href="../agent/inbox.html" class="menu-icon">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+        </div>
+        <div class="content">
+            <h2>Insured</h2>
+            <div class="btn-group-right">
+                <button class="btn-small">Create Data</button>
+            </div>
+            <div class="table-wrapper">
+                <table class="prospect-table">
+                    <thead>
+                        <tr>
+                            <th>Insured Type</th>
+                            <th>Name</th>
+                            <th>DOB</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Main</a></td>
+                            <td>John</td>
+                            <td>1990-01-01</td>
+                            <td><i class="fas fa-trash action-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Spouse</a></td>
+                            <td>Jane</td>
+                            <td>1992-05-12</td>
+                            <td><i class="fas fa-trash action-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Child</a></td>
+                            <td>Alice</td>
+                            <td>2010-09-20</td>
+                            <td><i class="fas fa-trash action-icon"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+            <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
+                <p>Campaign</p>
+            </div>
+            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
+                <p>Inbox</p>
+            </div>
+            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
+                <p>Prospect</p>
+            </div>
+            <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
+                <p>Setting</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
