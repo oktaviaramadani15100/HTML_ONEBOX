@@ -192,31 +192,101 @@
         }
 
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            max-width: 480px;
-            background-color: #fff;
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-end;
             padding: 10px 0;
-            z-index: 200;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+
         }
 
-        .bottom-nav a {
-            color: #555;
-            text-decoration: none;
-            font-size: 12px;
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 4px;
         }
 
-        .bottom-nav a i {
-            font-size: 18px;
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
             margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .nav-agen {
+            margin-left: 4rem;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
         }
 
         @media (max-width: 480px) {
@@ -261,7 +331,7 @@
         <div class="content">
             <h2>Insured</h2>
             <div class="btn-group-right">
-                <button class="btn-small">Create Data</button>
+                <a class="btn-small"href="../agent/AddNewInsured.html">Add New Insured</a>
             </div>
             <div class="table-wrapper">
                 <table class="prospect-table">
@@ -298,20 +368,17 @@
         </div>
 
         <div class="bottom-nav">
-            <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
+            <div>
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <span>Home</span>
             </div>
-            <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
-                <p>Campaign</p>
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
             </div>
-            <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-                <p>Inbox</p>
-            </div>
-            <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-                <p>Prospect</p>
-            </div>
-            <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-                <p>Setting</p>
+            <div>
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <span>Agenda</span>
             </div>
         </div>
     </div>

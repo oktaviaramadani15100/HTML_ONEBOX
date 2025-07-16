@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form SPAJ - Asuransi Jiwa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form SPAJ Wizard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
@@ -23,56 +23,10 @@
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 400px;
             background-color: white;
             min-height: 100vh;
             position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h2 {
-            text-align: center;
-            background-color: #003366;
-            color: #fff;
-            padding: 15px;
-            margin: 0 -15px 20px -15px;
-        }
-
-        .section {
-            background: #fff;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        h3 {
-            margin-top: 0;
-            color: #003366;
-            font-size: 18px;
-        }
-
-        label {
-            font-weight: 600;
-            margin-top: 12px;
-            display: block;
-            font-size: 14px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        textarea {
-            resize: vertical;
         }
 
         .header {
@@ -84,326 +38,439 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .insured-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .insured-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 130px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .insured-row input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 150px;
+            max-width: 100%;
         }
 
         .header a {
             text-decoration: none;
-            /* Hilangkan garis bawah */
-            color: inherit;
-            /* Warna mengikuti elemen induknya */
+            color: #333;
+            font-weight: bold;
         }
 
-        .dropdown {
+        .section {
             display: none;
-            position: absolute;
-            top: 39px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 200px;
-            z-index: 999;
-            animation: fadeIn 0.2s ease-in-out;
-            margin-left: 12rem;
+            padding: 1rem;
         }
 
-        .dropdown p {
-            margin: 10px 15px 5px;
-            font-size: 14px;
-            color: #333;
+        .section.active {
+            display: block;
         }
 
-        .dropdown hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
-        }
-
-        .dropdown a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            text-decoration: none;
-            font-size: 14px;
-            color: #333;
-            transition: background-color 0.3s;
-        }
-
-        .dropdown a:hover {
-            background-color: #f6f6f6;
-        }
-
-        button {
+        .section {
             width: 100%;
-            background-color: #003366;
-            color: white;
-            padding: 14px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            color: #003366;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        .wizard-buttons button {
+            flex: 1;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 14px;
             cursor: pointer;
-            margin-top: 20px;
+            color: white;
+            background-color: #003366;
+        }
+
+        .wizard-buttons button:hover {
+            background-color: #002244;
         }
 
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            max-width: 480px;
-            background-color: #fff;
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
             border-top: 1px solid #ccc;
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-end;
             padding: 10px 0;
-            z-index: 200;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+
         }
 
-        .bottom-nav a {
-            color: #555;
-            text-decoration: none;
-            font-size: 12px;
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 4px;
         }
 
-        .bottom-nav a i {
-            font-size: 18px;
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-nav i {
+            font-size: 1.2rem;
+            display: block;
             margin-bottom: 4px;
         }
 
-        @media (max-width: 480px) {
-            table {
-                font-size: 13px;
-            }
 
-            th,
-            td {
-                padding: 6px;
-            }
-
-            .header img {
-                height: 45px;
-            }
-
-            .bottom-nav a {
-                font-size: 10px;
-            }
-
-            .bottom-nav a i {
-                font-size: 16px;
-            }
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        button:hover {
-            background-color: #002244;
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .nav-agen {
+            margin-left: 4rem;
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+
+        .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
         }
     </style>
 </head>
 
 <body>
-
     <div class="container">
-        <div class="header">
-            <a href="simulation-policy.html"> <i class="fas fa-arrow-left"></i> Form SPAJ</a>
-            <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-            <div class="dropdown" id="dropdownMenu">
-                <p>Welcome</p>
-                <p>Agent 01</p>
-                <hr />
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <div style="min-height:100vh">
+            <!-- Header -->
+            <div class="header">
+                <a href="#"><i class="fas fa-arrow-left"></i> Form SPAJ</a>
             </div>
+
+            <!-- FORM WIZARD -->
+            <form id="spajForm">
+                <!-- Step 1 -->
+                <div class="section active" id="step-1">
+                    <h3>1. Data Pemegang Polis</h3>
+                    <label>No. KTP / Paspor</label>
+                    <input type="text" required />
+                    <label>Nama Lengkap</label>
+                    <input type="text" required />
+                    <label>Tempat / Tanggal Lahir</label>
+                    <input type="text" required />
+                    <label>Jenis Kelamin</label>
+                    <select required>
+                        <option>Laki-laki</option>
+                        <option>Perempuan</option>
+                    </select>
+                    <label>Status Pernikahan</label>
+                    <select required>
+                        <option>Belum Menikah</option>
+                        <option>Menikah</option>
+                        <option>Cerai</option>
+                    </select>
+                    <label>Alamat Tempat Tinggal</label>
+                    <textarea required></textarea>
+                    <label>Telepon / HP</label>
+                    <input type="text" required />
+
+                    <label>Status Pernikahan</label>
+                    <select required>
+                        <option>Belum Menikah</option>
+                        <option>Menikah</option>
+                        <option>Cerai</option>
+                    </select>
+
+                    <label>Pekerjaan</label>
+                    <input type="text" required />
+                    <label>Nama Perusahaan</label>
+                    <input type="text" required />
+                    <label>Penghasilan per Bulan</label>
+                    <input type="text" required />
+
+                    <label>Tinggi & Berat Badan</label>
+                    <input type="text" placeholder="Contoh: 170 cm / 70 kg" />
+                </div>
+
+                <!-- Step 2 -->
+                <div class="section" id="step-2">
+                    <h3>2. Data Calon Tertanggung</h3>
+                    <div class="insured-row">
+                        <label>
+                            <input type="checkbox" id="main" />
+                            <span>Main Insured</span>
+                        </label>
+                    </div>
+                    <label>Nama Lengkap</label>
+                    <input type="text" />
+                    <label>Hubungan dengan Tertanggung</label>
+                    <input type="text" />
+                    <label>No. KTP</label>
+                    <input type="text" />
+                    <label>Alamat</label>
+                    <textarea></textarea>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="section" id="step-3">
+                    <h3>3. Data Ahli Waris</h3>
+                    <label>Nama Lengkap</label>
+                    <input type="text" required />
+                    <label>Hubungan</label>
+                    <input type="text" required />
+                    <label>Tanggal Lahir</label>
+                    <input type="date" required />
+                    <label>Persentase Manfaat (%)</label>
+                    <input type="number" required />
+                </div>
+
+                <!-- Step 4 -->
+                <div class="section" id="step-4">
+                    <h3>4. Informasi Produk</h3>
+                    <label>Nama Produk</label>
+                    <input type="text" required />
+                    <label>Uang Pertanggungan</label>
+                    <input type="text" required />
+                    <label>Premi per Bulan</label>
+                    <input type="text" required />
+                    <label>Rider Tambahan</label>
+                    <input type="text" />
+                </div>
+
+                <!-- Step 5 -->
+                <div class="section" id="step-5">
+                    <h3>5. Pembayaran & Kesehatan</h3>
+                    <label>Metode Pembayaran</label>
+                    <select required>
+                        <option>Debet</option>
+                        <option>Kredit</option>
+                    </select>
+                    <label>Nama Pemilik Rekening</label>
+                    <input type="text" />
+                    <label>No. Rekening / Kartu</label>
+                    <input type="text" />
+                    <label>Apakah Anda merokok?</label>
+                    <select>
+                        <option>Tidak</option>
+                        <option>Ya</option>
+                    </select>
+                    <label>Riwayat Penyakit</label>
+                    <textarea></textarea>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="section" id="step-6">
+                    <h3>6. Persetujuan & Agen</h3>
+                    <p>Saya menyatakan semua data di atas benar adanya.</p>
+                    <label>Tanggal Pengisian</label>
+                    <input type="date" required />
+                    <label>Nama & Tanda Tangan Tertanggung</label>
+                    <input type="text" required />
+                    <label>Nama Agen</label>
+                    <input type="text" required />
+                    <label>Kode Agen</label>
+                    <input type="text" required />
+                    <label>Unit / Cabang</label>
+                    <input type="text" />
+                </div>
+                <div class="section" id="step-7">
+                    <h3>7. Persetujuan</h3>
+                    <p>Dengan ini saya menyatakan bahwa seluruh informasi yang saya berikan adalah benar dan sesuai
+                        dengan
+                        keadaan sebenarnya.</p>
+
+                    <label>Tanggal Pengisian</label>
+                    <input type="date" required />
+
+                    <label>Nama & Tanda Tangan Calon Tertanggung</label>
+                    <input type="text" required />
+
+                    <label>Nama & Tanda Tangan Pemegang Polis</label>
+                    <input type="text" />
+                </div>
+                <div class="section" id="step-8">
+                    <h3>8. Data Agen</h3>
+                    <label>Nama Agen</label>
+                    <input type="text" required />
+
+                    <label>Kode Agen</label>
+                    <input type="text" required />
+
+                    <label>Unit / Cabang</label>
+                    <input type="text" />
+                </div>
+                <!-- Buttons -->
+                <div class="wizard-buttons">
+                    <button type="button" onclick="prevStep()">Sebelumnya</button>
+                    <button type="button" onclick="nextStep()">Selanjutnya</button>
+                </div>
+            </form>
         </div>
-        <form>
-            <!-- 1. Data Calon Tertanggung -->
-            <div class="section">
-                <h3>1. Data Calon Tertanggung</h3>
-                <label>Nama Lengkap</label>
-                <input type="text" required />
-
-                <label>Tempat / Tanggal Lahir</label>
-                <input type="text" placeholder="Contoh: Jakarta, 01 Januari 1990" required />
-
-                <label>Jenis Kelamin</label>
-                <select required>
-                    <option>Laki-laki</option>
-                    <option>Perempuan</option>
-                </select>
-
-                <label>Status Pernikahan</label>
-                <select required>
-                    <option>Belum Menikah</option>
-                    <option>Menikah</option>
-                    <option>Cerai</option>
-                </select>
-
-                <label>No. KTP / Paspor</label>
-                <input type="text" required />
-
-                <label>Alamat Tempat Tinggal</label>
-                <textarea required></textarea>
-
-                <label>Telepon / HP</label>
-                <input type="text" required />
-
-                <label>Pekerjaan & Nama Perusahaan</label>
-                <input type="text" required />
-
-                <label>Penghasilan per Bulan</label>
-                <input type="text" required />
-
-                <label>Tinggi & Berat Badan</label>
-                <input type="text" placeholder="Contoh: 170 cm / 70 kg" />
+        <div class="bottom-nav">
+            <div>
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <span>Home</span>
             </div>
-
-            <!-- 2. Data Pemegang Polis -->
-            <div class="section">
-                <h3>2. Data Pemegang Polis (jika berbeda)</h3>
-                <label>Nama Lengkap</label>
-                <input type="text" />
-
-                <label>Hubungan dengan Tertanggung</label>
-                <input type="text" />
-
-                <label>No. KTP</label>
-                <input type="text" />
-
-                <label>Alamat</label>
-                <textarea></textarea>
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
             </div>
-
-            <!-- 3. Data Ahli Waris -->
-            <div class="section">
-                <h3>3. Data Ahli Waris</h3>
-                <label>Nama Lengkap</label>
-                <input type="text" required />
-
-                <label>Hubungan</label>
-                <input type="text" required />
-
-                <label>Tanggal Lahir</label>
-                <input type="date" required />
-
-                <label>Persentase Manfaat (%)</label>
-                <input type="number" required />
+            <div>
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <span>Agenda</span>
             </div>
-
-            <!-- 4. Informasi Produk -->
-            <div class="section">
-                <h3>4. Informasi Produk Asuransi</h3>
-                <label>Jenis Produk</label>
-                <input type="text" required />
-
-                <label>Uang Pertanggungan (UP)</label>
-                <input type="text" required />
-
-                <label>Premi per Bulan</label>
-                <input type="text" required />
-
-                <label>Rider Tambahan</label>
-                <input type="text" />
-            </div>
-
-            <!-- 5. Data Pembayaran -->
-            <div class="section">
-                <h3>5. Data Pembayaran</h3>
-                <label>Metode Pembayaran</label>
-                <select required>
-                    <option>Autodebet</option>
-                    <option>Kartu Kredit</option>
-                    <option>Transfer Manual</option>
-                </select>
-
-                <label>Nama Pemilik Rekening</label>
-                <input type="text" />
-
-                <label>No. Rekening / Kartu</label>
-                <input type="text" />
-            </div>
-
-            <!-- 6. Pernyataan Kesehatan -->
-            <div class="section">
-                <h3>6. Pernyataan Kesehatan</h3>
-                <label>Apakah Anda merokok?</label>
-                <select>
-                    <option>Tidak</option>
-                    <option>Ya</option>
-                </select>
-
-                <label>Riwayat Penyakit (jika ada)</label>
-                <textarea></textarea>
-            </div>
-
-            <!-- 7. Persetujuan dan Tanda Tangan -->
-            <div class="section">
-                <h3>7. Persetujuan</h3>
-                <p>Dengan ini saya menyatakan bahwa seluruh informasi yang saya berikan adalah benar dan sesuai dengan
-                    keadaan sebenarnya.</p>
-
-                <label>Tanggal Pengisian</label>
-                <input type="date" required />
-
-                <label>Nama & Tanda Tangan Calon Tertanggung</label>
-                <input type="text" required />
-
-                <label>Nama & Tanda Tangan Pemegang Polis</label>
-                <input type="text" />
-            </div>
-
-            <!-- 8. Data Agen -->
-            <div class="section">
-                <h3>8. Data Agen</h3>
-                <label>Nama Agen</label>
-                <input type="text" required />
-
-                <label>Kode Agen</label>
-                <input type="text" required />
-
-                <label>Unit / Cabang</label>
-                <input type="text" />
-            </div>
-
-            <button type="submit" style="margin-bottom: 75px;">Kirim Formulir</button>
-
-        </form>
-    </div>
-
-    <div class="bottom-nav">
-        <div><a href="../agent/home.html"><i class="fas fa-home"></i></a>
-            <p>Home</p>
-        </div>
-        <div><a href="/campagin.html"><i class="fas fa-bullhorn"></i></a>
-            <p>Campaign</p>
-        </div>
-        <div><a href="../agent/inbox.html"><i class="fas fa-envelope"></i></a>
-            <p>Inbox</p>
-        </div>
-        <div><a href="../agent/prospect.html"><i class="fas fa-user-check"></i></a>
-            <p>Prospect</p>
-        </div>
-        <div><a href="/logout.html"><i class="fas fa-cog"></i></a>
-            <p>Setting</p>
         </div>
     </div>
+
+    </div>
+
+    <!-- Bottom Nav -->
+
 
     <script>
         function toggleDropdown() {
-            const menu = document.getElementById("dropdownMenu");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Menutup dropdown jika klik di luar area dropdown
-        window.addEventListener("click", function (e) {
-            const dropdown = document.getElementById("dropdownMenu");
-            const menuIcon = document.querySelector(".menu-icon");
-            if (!dropdown.contains(e.target) && !menuIcon.contains(e.target)) {
-                dropdown.style.display = "none";
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.querySelector('.menu-icon');
+            if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+                dropdown.style.display = 'none';
             }
         });
+        let currentStep = 1;
+        const totalSteps = 8;
+
+        function showStep(step) {
+            document.querySelectorAll('.section').forEach((section) => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+
+            // Ubah tombol jika di akhir
+            const nextBtn = document.querySelector('.wizard-buttons button:last-child');
+            if (step === totalSteps) {
+                nextBtn.textContent = 'Kirim';
+                nextBtn.setAttribute('type', 'submit');
+            } else {
+                nextBtn.textContent = 'Selanjutnya';
+                nextBtn.setAttribute('type', 'button');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
     </script>
 </body>
 

@@ -50,6 +50,7 @@
         .header img {
             height: 50px;
         }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -92,7 +93,7 @@
         }
 
 
-         .menu-icon {
+        .menu-icon {
             font-size: 20px;
             color: #555;
             cursor: pointer;
@@ -105,7 +106,7 @@
             align-items: center;
             gap: 12px;
             padding: 10px 16px;
-             position: relative;
+            position: relative;
 
         }
 
@@ -255,7 +256,7 @@
             cursor: pointer;
         }
 
-         .bottom-nav {
+        .bottom-nav {
             position: sticky;
             bottom: 0;
             left: 0;
@@ -616,7 +617,7 @@
             color: #fff;
         }
 
-         .dropdown {
+        .dropdown {
             display: none;
             position: absolute;
             right: 20px;
@@ -657,15 +658,13 @@
         .dropdown a:hover {
             background-color: #f6f6f6;
         }
-
-
     </style>
 </head>
 
 <body>
     <div class="wrapper">
         <div class="header">
-             <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Simulasi Policy</a>
+            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Simulasi Policy</a>
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
@@ -903,37 +902,38 @@
 
 
             <div class="bottom-nav">
-            <div class="nav-home">
-                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
-            </div>
+                <div class="nav-home">
+                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
 
-            <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
-                <p>New</p>
-            </div>
+                <div class="nav-new">
+                    <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                    <p>New</p>
+                </div>
 
-            <div class="nav-agen">
-                <a href="#"><i class="fas fa-calendar-alt"></i></a>
-                <p>Agenda</p>
+                <div class="nav-agen">
+                    <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
             </div>
-        </div>
         </div>
 </body>
+
 </html>
 
 <script>
-      function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
         }
-
-        window.addEventListener('click', function (e) {
-            const dropdown = document.getElementById('dropdownMenu');
-            const icon = document.querySelector('.fa-ellipsis-v');
-
-            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-                dropdown.style.display = 'none';
-            }
-        });
+    });
 </script>
