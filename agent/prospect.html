@@ -30,6 +30,27 @@
             flex-direction: column;
         }
 
+        .chat-prospect {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .prospectDetail {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -143,13 +164,15 @@
         }
 
         .table-wrapper {
-            width: 100%;
+            overflow-x: auto;
+            margin: 1rem;
+            flex: 1;
         }
 
         .prospect-table {
             width: 100%;
-            min-width: 360px;
             border-collapse: collapse;
+            overflow: hidden;
         }
 
         .prospect-table thead {
@@ -159,22 +182,39 @@
 
         .prospect-table th,
         .prospect-table td {
+            padding: 12px 14px;
+            font-size: 0.9rem;
             text-align: left;
-            padding: 6px 8px;
-            font-size: 0.78rem;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #f0f0f0;
         }
 
+        /* .prospect-table tr:hover {
+            background-color: #f9f9f9;
+            cursor: pointer;
+        } */
 
-        .prospect-table a {
-            color: #1e3a8a;
-            font-weight: 600;
+        .name-link {
             text-decoration: none;
+            color: black;
         }
 
-       .bottom-nav {
+        .name-link:hover {
+            color: #3b82f6;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .prospect-table th,
+            .prospect-table td {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+
+
+        .bottom-nav {
             position: sticky;
-            bottom: 0;
+            bottom: -1px;
             left: 0;
             right: 0;
             border-top: 1px solid #ccc;
@@ -185,7 +225,8 @@
             font-size: 12px;
             z-index: 10;
             margin-top: 3rem;
-              background: white;
+            background: white;
+
         }
 
         .bottom-nav div {
@@ -212,14 +253,7 @@
 
         .bottom-nav a {
             text-decoration: none;
-            color: #1e3a8a;
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #1e3a8a;
-            font-size: 20px;
-            font-weight: bold;
+            color: inherit;
         }
 
         .nav-new {
@@ -239,6 +273,22 @@
             text-align: center;
         }
 
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .nav-agen {
+            margin-left: 4rem;
+        }
+
         .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
@@ -247,15 +297,10 @@
         }
 
         .nav-new i {
-            font-size: 62px;
+            font-size: 30px;
             display: block;
             margin-bottom: -2px;
-            margin-top: -36px;
-        }
-
-
-        .nav-agen{
-            margin-left: 6rem;
+            color: white;
         }
 
 
@@ -264,7 +309,6 @@
             font-size: 0.85rem;
             color: #1e3a8a;
         }
-
 
         @media (min-width: 768px) {
             body {
@@ -275,43 +319,76 @@
         .dropdown {
             display: none;
             position: absolute;
+            right: 20px;
             top: 40px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
             overflow: hidden;
-            width: 200px;
-            z-index: 999;
+            width: 170px;
+            z-index: 100;
             animation: fadeIn 0.2s ease-in-out;
-            margin-left: 10rem;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .dropdown p {
-            margin: 10px 15px 5px;
-            font-size: 14px;
+        .dropdown-header {
+            text-align: center;
+            padding: 8px 12px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
             color: #333;
-            font-weight: bold;
         }
 
-        .dropdown hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
         }
 
         .dropdown a {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 15px;
             text-decoration: none;
             font-size: 14px;
-            color: #333;
-            transition: background-color 0.3s;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
         }
 
         .dropdown a:hover {
-            background-color: #f6f6f6;
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
         }
 
         @keyframes fadeIn {
@@ -338,6 +415,8 @@
 
         .menu-icon-group i {
             color: #1e3a8a;
+            margin-left: 1rem;
+            font-size: 1.5rem;
         }
 
         .header .header-name {
@@ -431,8 +510,9 @@
         }
 
         .gender-icon {
-            font-size: 0.85rem;
+            font-size: 2rem;
             color: #1e3a8a;
+            margin-top: 1rem;
         }
 
         .meta {
@@ -502,16 +582,154 @@
             font-size: 0.85rem;
         }
 
-        /* 
-@media (max-width: 480px) {
-    .biodata-row {
-        flex-direction: column;
-    }
+        .email-chat-header {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
 
-    .biodata-item {
-        flex: 1 1 100%;
-    }
-} */
+        .email-chat-header strong {
+            font-size: 16px;
+        }
+
+        .status-badge {
+            background: green;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .email-chat-header small {
+            display: block;
+            color: #555;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .email-chat-body {
+            padding: 15px;
+            flex-grow: 1;
+            background: #f5f5f5;
+        }
+
+        .message-box {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .message-box.left {
+            justify-content: flex-start;
+        }
+
+        .message-box.right {
+            justify-content: flex-end;
+        }
+
+        .message-meta {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message-box.right .message-meta {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .avatar.agent-avatar {
+            background: #3f0071;
+        }
+
+        .avatar.user-avatar {
+            background: #999;
+        }
+
+        .sender-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .message-content {
+            background: #eef6ff;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .message-box.right .message-content {
+            background: #e4ddf9;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            text-align: right;
+        }
+
+        .email-reply-wrapper {
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            background: #fff;
+        }
+
+        .reply-input {
+            position: relative;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .reply-send-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 8px;
+            gap: 8px;
+        }
+
+        .attach-icon {
+            font-size: 18px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .reply-action-btn {
+            background: #1e3a8a;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+
+        .chat-icon {
+            font-size: 1rem;
+            margin-left: 1rem;
+        }
     </style>
 </head>
 
@@ -519,123 +737,216 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Interaction</a>
+            <span class="header-name" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> Interaction
+            </span>
+
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
-                    <p>Welcome</p>
-                    <p>Agent 01</p>
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
                     <hr />
-                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
                     <hr>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="../agent/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="header-section">
-            <div class="ddlList-row">
-                <span class="section-title">Result</span>
-                <select>
-                    <option value="">--Pilih--</option>
-                    <option value="Thinking">Thinking</option>
-                    <option value="Send Browser">Send Browser</option>
-                    <option value="Simulation Policy">Simulation Policy</option>
-                    <option value="Entry Policy">Entry Policy</option>
-                    <option value="Not Interested">Not Interested</option>
-                </select>
-                <button class="go-btn">Go</button>
+        <div class="table-wrapper" id="prospectList">
+            <table class="prospect-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Campaign</th>
+                        <th>Product</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="showDetail()">
+                        <td><a href="#" class="name-link">Layla</a></td>
+                        <td>Mandiri Sehat</td>
+                        <td>Mandiri</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prospectDetail" id="prospectDetail" style="display:none">
+            <div class="header-section">
+                <div class="ddlList-row">
+                    <span class="section-title">Result</span>
+                    <select>
+                        <option value="">--Pilih--</option>
+                        <option value="Thinking">Thinking</option>
+                        <option value="Send Browser">Send Browser</option>
+                        <option value="Simulation Policy">Simulation Policy</option>
+                        <option value="Entry Policy">Entry Policy</option>
+                        <option value="Not Interested">Not Interested</option>
+                    </select>
+                    <button class="go-btn">Go</button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <div class="profile">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="biodata">
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-birthday-cake icon"></i>
+                            <div>
+                                <span class="label">Birthday</span>
+                                <span class="value">12 Jan 1995</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <i class="fas fa-heart icon"></i>
+                            <div>
+                                <span class="label">Marital Status</span>
+                                <span class="value">Single</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-wallet icon"></i>
+                            <div>
+                                <span class="label">Income Range</span>
+                                <span class="value">5 - 10 juta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-chart-line icon"></i>
+                            <div>
+                                <span class="label">Avg Transaction</span>
+                                <span class="value">Rp 1.250.000</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <i class="fas fa-id-badge icon"></i>
+                            <div>
+                                <span class="label">Account Type</span>
+                                <span class="value">Kredit</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-calendar-plus icon"></i>
+                            <div>
+                                <span class="label">Join At</span>
+                                <span class="value">03 Juli 2020</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <i class="fas fa-clock icon"></i>
+                            <div>
+                                <span class="label">Duration</span>
+                                <span class="value">5 years 2 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Content -->
-        <div class="content">
-            <div class="profile">
-                <i class="fas fa-user-circle profile-icon"></i>
-                <div class="profile-info">
-                    <div class="top-row">
-                        <span class="name">Layla</span>
-                        <i class="fas fa-mars gender-icon" title="Male"></i>
-                    </div>
-                    <div class="meta">
+        <div class="chat-prospect" id="chat-prospect" style="display: none;">
+            <div class="email-chat-header">
+                <div>
+                    <strong>Layla</strong>
+                    <span class="status-badge">Pending</span>
+                </div>
+                <small>#36311 | Email: agent01@ciptadra.com</small>
+            </div>
+
+            <div class="email-chat-body">
+
+                <div class="message-box left">
+                    <div class="message-meta">
+                        <div class="avatar user-avatar">b</div>
                         <div>
-                            <span><i class="fas fa-calendar-plus"></i> Created on: 03 Juli 2025</span> •
-                            <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                            <div class="sender-name">broonshoot</div>
+                            <div class="message-content">apa keunggulan Onebox?</div>
+                            <div class="message-time">04 Dec 2024, 11:00</div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="message-box right">
+                    <div class="message-meta">
+                        <!-- <div class="avatar agent-avatar">A</div> -->
                         <div>
-                            <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            <div class="sender-name">Agent</div>
+                            <div class="message-content">Onebox memudahkan integrasi semua channel
+                                komunikasi.</div>
+                            <div class="message-time">04 Dec 2024, 11:05</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="biodata">
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-birthday-cake icon"></i>
-                        <div>
-                            <span class="label">Birthday</span>
-                            <span class="value">12 Jan 1995</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-heart icon"></i>
-                        <div>
-                            <span class="label">Marital Status</span>
-                            <span class="value">Single</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-wallet icon"></i>
-                        <div>
-                            <span class="label">Income Range</span>
-                            <span class="value">5 - 10 juta</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-chart-line icon"></i>
-                        <div>
-                            <span class="label">Avg Transaction</span>
-                            <span class="value">Rp 1.250.000</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-id-badge icon"></i>
-                        <div>
-                            <span class="label">Account Type</span>
-                            <span class="value">Kredit</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-calendar-plus icon"></i>
-                        <div>
-                            <span class="label">Join At</span>
-                            <span class="value">03 Juli 2020</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-clock icon"></i>
-                        <div>
-                            <span class="label">Duration</span>
-                            <span class="value">5 years 2 months</span>
-                        </div>
+            <div class="email-reply-wrapper">
+                <div class="reply-input">
+                    <textarea placeholder="Type your reply..."></textarea>
+                    <div class="reply-send-section">
+                        <i class="fas fa-paperclip attach-icon" onclick="triggerFileUpload()"></i>
+                        <input type="file" id="fileInput" style="display: none;" />
+                        <button class="reply-action-btn">Send</button>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
@@ -645,12 +956,12 @@
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
 
             <div class="nav-agen">
-                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                 <p>Agenda</p>
             </div>
         </div>
@@ -670,6 +981,43 @@
                 dropdown.style.display = 'none';
             }
         });
+
+        let currentView = 'list';
+
+        function showDetail() {
+            document.getElementById('prospectList').style.display = 'none';
+            document.getElementById('prospectDetail').style.display = 'block';
+            document.getElementById('chat-prospect').style.display = 'none';
+            currentView = 'detail';
+        }
+
+        function toggleChat() {
+            document.getElementById('prospectDetail').style.display = 'none';
+            document.getElementById('chat-prospect').style.display = 'block';
+            document.getElementById('prospectList').style.display = 'none';
+            currentView = 'chat';
+        }
+
+        function handleBack() {
+            if (currentView === 'chat') {
+                document.getElementById('chat-prospect').style.display = 'none';
+                document.getElementById('prospectDetail').style.display = 'block';
+                document.getElementById('prospectList').style.display = 'none';
+                currentView = 'detail';
+            } else if (currentView === 'detail') {
+                document.getElementById('prospectDetail').style.display = 'none';
+                document.getElementById('prospectList').style.display = 'block';
+                document.getElementById('chat-prospect').style.display = 'none';
+                currentView = 'list';
+            } else {
+                window.location.href = '../agent/home.html';
+            }
+        }
+
+        function triggerFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+
     </script>
 </body>
 

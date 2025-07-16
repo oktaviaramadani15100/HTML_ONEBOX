@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MSIG Agent Dashboard</title>
+    <title>Home SPV</title>
     <style>
         * {
             box-sizing: border-box;
@@ -37,7 +37,6 @@
             top: -1rem;
             background-color: white;
             z-index: 100;
-            background-color: #1e3a8a;
         }
 
         .header img {
@@ -77,11 +76,14 @@
         }
 
         .menu-icon-group i {
-            color: #f9fafb;
+            color: #1e3a8a;
             margin-left: 1rem;
             font-size: 1.5rem;
         }
 
+        .menu-icon:hover {
+            color: #000;
+        }
 
         .dropdown {
             display: none;
@@ -187,7 +189,7 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 20px;
             max-width: 800px;
@@ -327,12 +329,11 @@
 
         .bottom-nav {
             position: sticky;
-            /* position: relative; */
             bottom: -1px;
             left: 0;
             right: 0;
             border-top: 1px solid #ccc;
-            /* display: flex; */
+            display: flex;
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
@@ -340,35 +341,10 @@
             z-index: 10;
             margin-top: 3rem;
             background: white;
+
         }
 
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-wrapper i {
-            color: #1e3a8a;
-        }
-
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-spacer {
-            flex: 0.5;
-        }
-
-
-        /* .bottom-nav div {
+        .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -377,25 +353,14 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-        } */
-
-        .nav-wrapper i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
         }
 
-        /* 
         .bottom-nav div:hover {
             transform: scale(1.05);
-        } */
-
-        .nav-wrapper p {
-            margin-top: 4px;
-            font-size: 0.85rem;
         }
 
-        /* .bottom-nav i {
-            font-size: 1.5rem;
+        .bottom-nav i {
+            font-size: 1.2rem;
             display: block;
             margin-bottom: 4px;
         }
@@ -404,7 +369,7 @@
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        } */
+        }
 
         .nav-new {
             justify-content: center;
@@ -421,9 +386,6 @@
             display: flex;
             flex-direction: column;
             text-align: center;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .plus-btn {
@@ -436,31 +398,13 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-decoration: none;
-            font-size: 30px;
         }
 
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
+        .nav-agen {
+            margin-left: 4rem;
         }
 
-        .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
+        .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -472,30 +416,14 @@
             display: block;
             margin-bottom: -2px;
             color: white;
-        } */
+        }
 
 
-        /* .nav-new p {
+        .nav-new p {
             margin: 6px 0 0;
             font-size: 0.85rem;
             color: #1e3a8a;
         }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
 
         @media screen and (min-width: 768px) {
             body {
@@ -572,6 +500,12 @@
         <!-- Menu -->
         <div class="menu-grid">
             <!-- Baris 1 -->
+
+            <a href="" class="menu-item">
+                <i class="fas fa-bullhorn fa-2x"></i>
+                <p>My Agent</p>
+            </a>
+
             <a href="../agent/campagin.html" class="menu-item">
                 <i class="fas fa-bullhorn fa-2x"></i>
                 <p>Campaign</p>
@@ -583,32 +517,36 @@
             </a>
 
 
-            <!-- <a href="../agent/appoitment.html" class="menu-item">
+            <a href="../agent/appoitment.html" class="menu-item">
                 <i class="fas fa-calendar-check fa-2x"></i>
                 <p>Appointment</p>
             </a>
-             -->
+            
 
             <!-- Baris 2 -->
-            <!-- <a href="#" class="menu-item">
+            <a href="#" class="menu-item">
                 <i class="fas fa-chart-line fa-2x"></i>
                 <p>Dashboard</p>
-            </a> -->
+            </a>
 
-            <a href="../agent/target.html" class="menu-item">
+            <a href="" class="menu-item">
+                <i class="fas fa-phone-alt fa-2x"></i>
+                <p>Knowlage</p>
+            </a>
+
+            <!-- <a href="../agent/target.html" class="menu-item">
                 <i class="fas fa-bullseye fa-2x"></i>
                 <p>Target</p>
-            </a>
+            </a> -->
 
-            <a href="../agent/call.html" class="menu-item">
+            <!-- <a href="../agent/call.html" class="menu-item">
                 <i class="fas fa-phone-alt fa-2x"></i>
                 <p>Activity History</p>
-            </a>
+            </a> -->
             <!-- <a href="../agent/agent-rules.html" class="menu-item">
                 <i class="fas fa-user-shield fa-2x"></i>
                 <p>Agent Rules</p>
             </a> -->
-
         </div>
 
 
@@ -652,36 +590,21 @@
         </div>
 
         <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
-
-                <div class="nav-history">
-                    <a href="#"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
-                <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                    <a href="#"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
-                </div>
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
             </div>
 
             <div class="nav-new">
                 <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
-        </div>
 
+            <div class="nav-agen">
+                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
+            </div>
+        </div>
 </body>
 
 </html>
