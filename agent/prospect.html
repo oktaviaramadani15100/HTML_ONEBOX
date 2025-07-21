@@ -879,42 +879,30 @@
             margin-bottom: 14px;
             box-sizing: border-box;
             background-color: #fff;
-            margin-top: 10px;
         }
 
 
-        .title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: black;
-            margin: 1rem 0 0.5rem;
-            text-align: center;
+        .interaction-form {
+            padding: 1rem;
+
         }
 
         label {
             display: block;
             font-size: 0.85rem;
             margin: 0.5rem 0 0.2rem;
-            color: #333;
+            color: #1f2937;
+            font-weight: 500;
         }
 
-        select,
-        input[type="date"],
-        textarea {
+        .input-field {
             width: 100%;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
             font-size: 0.9rem;
-        }
-
-        .row {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .row>div {
-            flex: 1;
+            background-color: #fff;
+            box-sizing: border-box;
         }
 
         textarea {
@@ -922,27 +910,63 @@
             min-height: 80px;
         }
 
+        .custom-form .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .row>div {
+            flex: 1;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-group label {
+            font-size: 0.9rem;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            accent-color: #2563eb;
+        }
+
         .save-btn {
-            background-color: #3b82f6;
+            background-color: #1e3a8a;
             color: white;
-            padding: 10px 16px;
+            padding: 10px 24px;
             border: none;
-            border-radius: 20px;
+            border-radius: 9999px;
             font-size: 0.9rem;
             font-weight: bold;
             margin-top: 1rem;
             float: right;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .save-btn:hover {
             background-color: #2563eb;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            align-items: center;
         }
     </style>
 </head>
@@ -1184,8 +1208,8 @@
                     </div>
                 </div>
                 <!-- <div class="title">Appointment</div> -->
-                <form>
-                     <label for="type-event">Type event:</label>
+                <form class="interaction-form">
+                    <label for="type-event">Type event:</label>
                     <div class="radio-group">
                         <label>
                             <input type="radio" name="type-event" value="Meeting" checked> Meeting
@@ -1199,47 +1223,60 @@
                     </div>
 
                     <div class="row">
-                        <div>
-                            <label for="date">Date:</label>
-                            <input type="date" id="date">
+                        <div class="custom-form">
+                            <label for="date2">Date:</label>
+                            <input type="date" id="date2" class="form-input">
                         </div>
                         <div>
                             <label for="reminder">Reminder:</label>
-                            <select id="reminder">
-                                <option>None</option>
-                                <option>1 day before</option>
-                                <option>3 days before</option>
-                                <option>1 week before</option>
+                            <select id="reminder" class="input-field">
+                                <option>--Select Type--</option>
+                                <option value="H">On the day (H)</option>
+                                <option value="H-1">One day before (H minus one)</option>
+                                <option value="H-5">Five days before (H minus five)</option>
+                                <option value="H-7">Seven days before (H minus seven)</option>
+                                <option value="H+1">One day after (H plus one)</option>
+                                <option value="H+2">Two days after (H plus two)</option>
                             </select>
                         </div>
                     </div>
 
                     <label for="description">Description:</label>
-                    <textarea id="description" placeholder="Isi keterangan..."></textarea>
+                    <textarea id="description" placeholder="Isi keterangan..." class="input-field"></textarea>
+
                     <button class="save-btn" type="submit">SAVE</button>
                 </form>
+
             </div>
 
             <div id="SendBrowserSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <label>Send Browser Via:</label>
                 <select>
                     <option value="whatsapp">Share to WhatsApp</option>
                     <option value="email">Share to Email</option>
                 </select>
-                <hr>
-                <h2>Opportunity</h2>
-                <div class="info-field"><label>Product:</label><span>Produk Sejahtera</span></div>
-                <div class="info-field"><label>Potential Value:</label><span>Rp 0.00</span></div>
-                <div class="info-field"><label>Close Target:</label><span>30/10/2019</span></div>
-                <div class="info-field"><label>Campaign:</label><span>Promo Akhir Tahun</span></div>
-                <h2>Assignment</h2>
-                <div class="info-field"><label>Handler:</label><span>Budi</span></div>
-                <div class="info-field"><label>Branch:</label><span>Jakarta</span></div>
-                <h2>Prospect Details</h2>
-                <div class="info-field"><label>Contact Source:</label><span>Website</span></div>
-                <div class="info-field"><label>Preference Media:</label><span>WhatsApp</span></div>
-                <div class="info-field"><label>Reference ID:</label><span>ID-10293</span></div>
-                <div class="info-field"><label>Remarks:</label><span>Tindak lanjut minggu depan</span></div>
+               <hr>
+               <iframe src="../agent/riplay_smile.pdf" width="100%" height="400px" style="margin-top: 1rem;"></iframe>
             </div>
 
 
@@ -1260,6 +1297,26 @@
             </div>
 
             <div id="NotInterestedSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <label>Reason:</label>
                 <select>
                     <option value="too-many">Too many insurance</option>
@@ -1411,6 +1468,18 @@
             }
         }
 
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = (`0${date.getMonth() + 1}`).slice(-2);
+            const day = (`0${date.getDate()}`).slice(-2);
+            return `${year}-${month}-${day}`;
+        }
+
+        const today = new Date();
+        const sevenDaysLater = new Date(today);
+        sevenDaysLater.setDate(today.getDate() + 7);
+
+        document.getElementById("date2").value = formatDate(sevenDaysLater);
 
     </script>
 </body>
