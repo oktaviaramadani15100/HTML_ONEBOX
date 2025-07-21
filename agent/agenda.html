@@ -23,7 +23,7 @@
 
     .wrapper {
         width: 100%;
-        max-width: 430px;
+        max-width: 400px;
         min-height: 100vh;
         background: white;
         display: flex;
@@ -38,21 +38,22 @@
         border-bottom: 1px solid #e5e7eb;
         position: sticky;
         top: 0;
-        background-color: white;
+        background-color: #1e3a8a;
         z-index: 100;
     }
 
-
-    .menu-icon {
-        font-size: 20px;
-        color: #555;
-        cursor: pointer;
-        transition: color 0.3s;
+    .header img {
+        width: 100px;
     }
 
+    .menu-icon {
+        color: #f9fafb;
+        margin-left: 1rem;
+        font-size: 1.5rem;
+    }
 
-    .menu-icon:hover {
-        color: #000;
+    .menu-icon i {
+        color: #f9fafb;
     }
 
     .dropdown {
@@ -73,7 +74,7 @@
 
     .dropdown-header {
         text-align: center;
-        padding: 8px 12px;
+        padding: 12px 16px;
     }
 
     .dropdown-header p {
@@ -100,10 +101,16 @@
         align-items: center;
         gap: 10px;
         text-decoration: none;
+        padding: 6px 0;
         font-size: 14px;
         color: #1e3a8a;
         transition: background-color 0.25s, color 0.25s;
         border-left: 4px solid transparent;
+    }
+
+    a+a {
+        margin-top: 4px;
+        /* jarak antar link */
     }
 
     .dropdown a:hover {
@@ -187,7 +194,7 @@
 
     .header .header-name {
         text-decoration: none;
-        color: #1e3a8a;
+        color: #f9fafb;
         font-size: 20px;
         font-weight: bold;
     }
@@ -240,13 +247,6 @@
         color: inherit;
     }
 
-    .header .header-name {
-        text-decoration: none;
-        color: #1e3a8a;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
     @media (min-width: 768px) {
         body {
             background: #d1d5db;
@@ -264,7 +264,7 @@
     }
 
     .menu-icon-group i {
-        color: #1e3a8a;
+       
         margin-left: 1rem;
         font-size: 1.5rem;
     }
@@ -277,10 +277,10 @@
     }
 
     .calendar {
-        background: linear-gradient(135deg, #7dbdff, #5c88ff);
+        background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
         border-radius: 12px;
         padding: 12px;
-        color: white;
+        color: black;
         font-weight: bold;
         margin-bottom: 1.2rem;
     }
@@ -316,8 +316,12 @@
 
     .calendar-row span.active {
         background-color: #fff;
-        color: #5c88ff;
+        color: black;
         font-weight: bold;
+    }
+
+    .calendar-header span {
+        color: black !important;
     }
 
     .agenda-card {
@@ -353,9 +357,10 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Agenda</a>
+            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Agenda</a>
+
             <div class="menu-icon-group">
-                <a href="agent/inbox.html" class="menu-icon">
+                <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -370,15 +375,13 @@
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
                     <a href="../agent/agent-rules.html">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                     <hr>
                     <a href="#">
@@ -386,6 +389,7 @@
                         <span>Logout</span>
                     </a>
                 </div>
+
             </div>
         </div>
 
@@ -394,7 +398,7 @@
 
             <!-- Kalender -->
             <div class="calendar">
-                <div class="calendar-row calendar-header" style="font-weight: bold; color: #fff;">
+                <div class="calendar-row calendar-header" style="font-weight: bold; color: black;">
                     <span>M</span><span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span>
                 </div>
                 <!-- Kalender minggu -->

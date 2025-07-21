@@ -22,7 +22,7 @@
 
         .wrapper {
             width: 100%;
-            max-width: 430px;
+            max-width: 400px;
             background: #ffffff;
             min-height: 100vh;
             position: relative;
@@ -34,7 +34,6 @@
             width: 100%;
             max-width: 430px;
             background: #ffffff;
-            min-height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -45,7 +44,7 @@
             width: 100%;
             max-width: 430px;
             background: #ffffff;
-            min-height: 100vh;
+            height: 70vh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -59,8 +58,9 @@
             border-bottom: 1px solid #e5e7eb;
             position: sticky;
             top: 0;
-            background-color: white;
+            background-color: #1e3a8a;
             z-index: 100;
+            height: 4rem;
         }
 
         .header img {
@@ -68,8 +68,13 @@
         }
 
         .menu-icon {
-            font-size: 1.5rem;
-            color: #1f2937;
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon i {
+            color: #f9fafb;
         }
 
         .content {
@@ -214,11 +219,12 @@
 
         .bottom-nav {
             position: sticky;
+            /* position: relative; */
             bottom: -1px;
             left: 0;
             right: 0;
             border-top: 1px solid #ccc;
-            display: flex;
+            /* display: flex; */
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
@@ -226,10 +232,35 @@
             z-index: 10;
             margin-top: 3rem;
             background: white;
-
         }
 
-        .bottom-nav div {
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -238,14 +269,25 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
         }
 
+        /* 
         .bottom-nav div:hover {
             transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
         }
 
-        .bottom-nav i {
-            font-size: 1.2rem;
+        /* .bottom-nav i {
+            font-size: 1.5rem;
             display: block;
             margin-bottom: 4px;
         }
@@ -254,7 +296,7 @@
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        }
+        } */
 
         .nav-new {
             justify-content: center;
@@ -271,6 +313,9 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .plus-btn {
@@ -283,13 +328,31 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-decoration: none;
+            font-size: 30px;
         }
 
-        .nav-agen {
-            margin-left: 4rem;
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
         }
 
-        .bottom-nav div {
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -301,14 +364,31 @@
             display: block;
             margin-bottom: -2px;
             color: white;
-        }
+        } */
 
 
-        .nav-new p {
+        /* .nav-new p {
             margin: 6px 0 0;
             font-size: 0.85rem;
             color: #1e3a8a;
         }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
 
         @media (min-width: 768px) {
             body {
@@ -334,7 +414,7 @@
 
         .dropdown-header {
             text-align: center;
-            padding: 8px 12px;
+            padding: 12px 16px;
         }
 
         .dropdown-header p {
@@ -361,10 +441,17 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            padding: 6px 8px;
             font-size: 14px;
             color: #1e3a8a;
             transition: background-color 0.25s, color 0.25s;
             border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
         }
 
         .dropdown a:hover {
@@ -410,18 +497,11 @@
             gap: 12px;
             padding: 10px 16px;
             position: relative;
-
-        }
-
-        .menu-icon-group i {
-            color: #1e3a8a;
-            margin-left: 1rem;
-            font-size: 1.5rem;
         }
 
         .header .header-name {
             text-decoration: none;
-            color: #1e3a8a;
+            color: #f9fafb;
             font-size: 20px;
             font-weight: bold;
         }
@@ -484,6 +564,17 @@
             padding: 1rem 1rem 90px;
             border-bottom: 1px solid #ddd;
             padding: 1rem;
+        }
+
+        .profile2 {
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1rem 90px;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+            margin-top: -1rem;
         }
 
         .profile-icon {
@@ -663,7 +754,7 @@
         }
 
         .message-content {
-            background: #eef6ff;
+            background: #e4ddf9;
             padding: 10px 15px;
             border-radius: 10px;
             font-size: 14px;
@@ -672,7 +763,8 @@
         }
 
         .message-box.right .message-content {
-            background: #e4ddf9;
+
+            background: #eef6ff;
         }
 
         .message-time {
@@ -730,6 +822,128 @@
             font-size: 1rem;
             margin-left: 1rem;
         }
+
+        #status-prospect {
+            flex: 1;
+            padding: 18px 18px 9px;
+            box-sizing: border-box;
+        }
+
+        /* ===== Card Box Style ===== */
+        /* .section-box {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        } */
+
+        .section-box h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 6px;
+        }
+
+        /* ===== Info Fields ===== */
+        .info-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .info-field label {
+            font-weight: 600;
+            color: #555;
+            flex: 1;
+            padding-right: 8px;
+        }
+
+        .info-field span {
+            flex: 2;
+            text-align: right;
+            color: #222;
+        }
+
+        .section-box select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: black;
+            margin: 1rem 0 0.5rem;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0.2rem;
+            color: #333;
+        }
+
+        select,
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .row>div {
+            flex: 1;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .save-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            float: right;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -738,7 +952,8 @@
         <!-- Header -->
         <div class="header">
             <span class="header-name" onclick="handleBack()">
-                <i class="fas fa-arrow-left"></i> Interaction
+                <i class="fas fa-arrow-left"></i>
+                <span style="margin-left: 16px;">Interaction</span>
             </span>
 
             <div class="menu-icon-group">
@@ -757,15 +972,13 @@
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
                     <a href="../agent/agent-rules.html">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                     <hr>
                     <a href="#">
@@ -773,6 +986,7 @@
                         <span>Logout</span>
                     </a>
                 </div>
+
             </div>
         </div>
 
@@ -799,7 +1013,7 @@
             <div class="header-section">
                 <div class="ddlList-row">
                     <span class="section-title">Result</span>
-                    <select>
+                    <select id="resultSelect" onchange="handleResultChange()">
                         <option value="">--Pilih--</option>
                         <option value="Thinking">Thinking</option>
                         <option value="Send Browser">Send Browser</option>
@@ -807,12 +1021,12 @@
                         <option value="Entry Policy">Entry Policy</option>
                         <option value="Not Interested">Not Interested</option>
                     </select>
-                    <button class="go-btn">Go</button>
+                    <button class="go-btn" onclick="handleGo()">Go</button>
                 </div>
             </div>
 
             <!-- Content -->
-            <div class="content">
+            <div class="content" id="profileContent">
                 <div class="profile">
                     <i class="fas fa-mars gender-icon" title="Male"></i>
                     <div class="profile-info">
@@ -888,10 +1102,10 @@
                                 <span class="value">03 Juli 2020</span>
                             </div>
                         </div>
-                        <div class="biodata-item">
+                        <div class="biodata-item" style="margin-top: 21px;">
                             <i class="fas fa-clock icon"></i>
                             <div>
-                                <span class="label">Duration</span>
+                                <!-- <span class="label">Duration</span> -->
                                 <span class="value">5 years 2 months</span>
                             </div>
                         </div>
@@ -947,22 +1161,144 @@
             </div>
         </div>
 
+        <div class="status-prospect" id="status-prospect" style="display: none;">
+            <div id="ThinkingSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="title">Appointment</div> -->
+                <form>
+                     <label for="type-event">Type event:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="type-event" value="Meeting" checked> Meeting
+                        </label>
+                        <label>
+                            <input type="radio" name="type-event" value="Call"> Call
+                        </label>
+                        <label>
+                            <input type="radio" name="type-event" value="Follow Up"> Follow Up
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <label for="date">Date:</label>
+                            <input type="date" id="date">
+                        </div>
+                        <div>
+                            <label for="reminder">Reminder:</label>
+                            <select id="reminder">
+                                <option>None</option>
+                                <option>1 day before</option>
+                                <option>3 days before</option>
+                                <option>1 week before</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" placeholder="Isi keterangan..."></textarea>
+                    <button class="save-btn" type="submit">SAVE</button>
+                </form>
+            </div>
+
+            <div id="SendBrowserSection" class="section-box" style="display:none">
+                <label>Send Browser Via:</label>
+                <select>
+                    <option value="whatsapp">Share to WhatsApp</option>
+                    <option value="email">Share to Email</option>
+                </select>
+                <hr>
+                <h2>Opportunity</h2>
+                <div class="info-field"><label>Product:</label><span>Produk Sejahtera</span></div>
+                <div class="info-field"><label>Potential Value:</label><span>Rp 0.00</span></div>
+                <div class="info-field"><label>Close Target:</label><span>30/10/2019</span></div>
+                <div class="info-field"><label>Campaign:</label><span>Promo Akhir Tahun</span></div>
+                <h2>Assignment</h2>
+                <div class="info-field"><label>Handler:</label><span>Budi</span></div>
+                <div class="info-field"><label>Branch:</label><span>Jakarta</span></div>
+                <h2>Prospect Details</h2>
+                <div class="info-field"><label>Contact Source:</label><span>Website</span></div>
+                <div class="info-field"><label>Preference Media:</label><span>WhatsApp</span></div>
+                <div class="info-field"><label>Reference ID:</label><span>ID-10293</span></div>
+                <div class="info-field"><label>Remarks:</label><span>Tindak lanjut minggu depan</span></div>
+            </div>
+
+
+            <div id="SimulationPolicySection" class="section-box" style="display:none">
+                <label>Action:</label>
+                <select disabled>
+                    <option value="form-policy" selected>Form Policy</option>
+                </select>
+                <div id="formPolicyContainer" style="margin-top:10px;"></div>
+            </div>
+
+            <div id="EntryPolicySection" class="section-box" style="display:none">
+                <label>Action:</label>
+                <select disabled>
+                    <option value="form-policy" selected>Form Policy</option>
+                </select>
+                <div id="formPolicyContainer" style="margin-top:10px;"></div>
+            </div>
+
+            <div id="NotInterestedSection" class="section-box" style="display:none">
+                <label>Reason:</label>
+                <select>
+                    <option value="too-many">Too many insurance</option>
+                    <option value="no-need">No need insured</option>
+                    <option value="financial">Financial</option>
+                </select>
+            </div>
+        </div>
+
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div class="nav-home">
-                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="#"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
             </div>
 
             <div class="nav-new">
                 <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
-            </div>
-
-            <div class="nav-agen">
-                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                <p>Agenda</p>
             </div>
         </div>
     </div>
@@ -999,24 +1335,82 @@
         }
 
         function handleBack() {
+            // Jika sedang di tampilan status-prospect (Thinking, etc.)
+            if (document.getElementById('status-prospect').style.display === 'block') {
+                // Sembunyikan semua section status
+                const sectionIds = [
+                    "ThinkingSection",
+                    "SendBrowserSection",
+                    "SimulationPolicySection",
+                    "EntryPolicySection",
+                    "NotInterestedSection"
+                ];
+
+                sectionIds.forEach(id => {
+                    const section = document.getElementById(id);
+                    if (section) section.style.display = "none";
+                });
+
+                // Tampilkan kembali prospectDetail
+                document.getElementById('status-prospect').style.display = 'none';
+                document.getElementById('prospectDetail').style.display = 'block';
+                return;
+            }
+
             if (currentView === 'chat') {
                 document.getElementById('chat-prospect').style.display = 'none';
                 document.getElementById('prospectDetail').style.display = 'block';
                 document.getElementById('prospectList').style.display = 'none';
                 currentView = 'detail';
-            } else if (currentView === 'detail') {
+            }
+            else if (currentView === 'detail') {
                 document.getElementById('prospectDetail').style.display = 'none';
                 document.getElementById('prospectList').style.display = 'block';
                 document.getElementById('chat-prospect').style.display = 'none';
                 currentView = 'list';
-            } else {
+            }
+            else {
                 window.location.href = '../agent/home.html';
             }
         }
 
+
         function triggerFileUpload() {
             document.getElementById('fileInput').click();
         }
+
+
+        let selectedResult = '';
+
+        function handleResultChange() {
+            selectedResult = document.getElementById('resultSelect').value;
+        }
+
+        function handleGo() {
+            const selectedValue = document.getElementById("resultSelect").value;
+
+            const sectionMap = {
+                "Thinking": "ThinkingSection",
+                "Send Browser": "SendBrowserSection",
+                "Simulation Policy": "SimulationPolicySection",
+                "Entry Policy": "EntryPolicySection",
+                "Not Interested": "NotInterestedSection"
+            };
+
+            // Sembunyikan semua section terlebih dahulu
+            Object.values(sectionMap).forEach(id => {
+                const section = document.getElementById(id);
+                if (section) section.style.display = "none";
+            });
+
+            // Tampilkan section sesuai pilihan
+            if (sectionMap[selectedValue]) {
+                document.getElementById("prospectDetail").style.display = "none";
+                document.getElementById("status-prospect").style.display = "block";
+                document.getElementById(sectionMap[selectedValue]).style.display = "block";
+            }
+        }
+
 
     </script>
 </body>
