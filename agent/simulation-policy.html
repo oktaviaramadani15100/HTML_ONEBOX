@@ -153,7 +153,7 @@
             font-size: 14px;
         }
 
-        .insured-row {
+        .insured-row2 {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -161,7 +161,7 @@
             margin-top: 12px;
         }
 
-        .insured-row label {
+        .insured-row2 label {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -170,7 +170,7 @@
             color: #374151;
         }
 
-        .insured-row input[type="text"] {
+        .insured-row2 input[type="text"] {
             flex: 1;
             padding: 8px;
             border: 1px solid #ccc;
@@ -669,111 +669,23 @@
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
-
-
         </div>
         <div class="content">
             <div style="min-height:65vh">
-            <div id="screen1">
-                <div class="row-flex">
-                    <div class="form-group">
-                        <label>Product</label>
-                        <select id="productSelect">
-                            <option value="">Pilih Product</option>
-                            <option value="Mandiri Sehat">Mandiri Sehat</option>
-                            <option value="Mandiri Premier">Mandiri Premier</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Plan</label>
-                        <select id="planSelect">
-                            <option value="">Pilih Plan</option>
-                            <option value="Plan A">Plan A</option>
-                            <option value="Plan B">Plan B</option>
-                        </select>
-                    </div>
-                </div>
-
-                <label>Insured Section</label>
-
-                <div class="insured-row">
-                    <label>
-                        <input type="checkbox" id="main" />
-                        <span>Main Insured</span>
-                    </label>
-                    <input type="text" id="mainName" placeholder="..." />
-                </div>
-
-                <div class="insured-row">
-                    <label>
-                        <input type="checkbox" id="spouse" />
-                        <span>Spouse</span>
-                    </label>
-                    <input type="text" id="spouseName" placeholder="..." />
-                </div>
-
-                <div class="insured-row">
-                    <label>
-                        <input type="checkbox" id="dependant" />
-                        <span>Dependant</span>
-                    </label>
-                    <input type="text" id="dependantName" placeholder="..." />
-                </div>
-
-                <div class="insured-row">
-                    <label><span>Total Insured</span></label>
-                    <input type="text" id="totalInsured" placeholder="..." />
-                </div>
-
-                <div class="btn-group-right">
-                    <button class="btn-small" onclick="validateScreen1AndGo()">Create Data</button>
-                </div>
-            </div>
-
-            <!-- Screen 2 -->
-            <div id="screen2" style="display: none;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Insured Type</th>
-                            <th>Gender</th>
-                            <th>Usia</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>imal</td>
-                            <td>female</td>
-                            <td>50 th</td>
-                            <td><i class="fas fa-trash action-icon"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="btn-group-right">
-                    <button class="btn-small">Clear Data</button>
-                    <button class="btn-small" onclick="calculateAndGoToScreen3()">Calculate</button>
-                </div>
-            </div>
-
-            <!-- Screen 3 -->
-            <div id="screen3" style="display: none;">
-                <div class="existing-section">
-                    <h3>Existing</h3>
-                    <div class="row-flex-existing">
-                        <div class="form-group-existing">
+                <div id="screen1">
+                    <div class="row-flex">
+                        <div class="form-group">
                             <label>Product</label>
-                            <select id="existingProduct">
+                            <select id="productSelect">
                                 <option value="">Pilih Product</option>
                                 <option value="Mandiri Sehat">Mandiri Sehat</option>
                                 <option value="Mandiri Premier">Mandiri Premier</option>
                             </select>
                         </div>
 
-                        <div class="form-group-existing">
+                        <div class="form-group">
                             <label>Plan</label>
-                            <select id="existingPlan">
+                            <select id="planSelect">
                                 <option value="">Pilih Plan</option>
                                 <option value="Plan A">Plan A</option>
                                 <option value="Plan B">Plan B</option>
@@ -781,126 +693,212 @@
                         </div>
                     </div>
 
-                    <div class="form-group-payment">
-                        <label>Payment mode</label>
-                        <div class="form-group-ddl">
-                            <select class="ddl-payament" id="paymentMode">
-                                <option value="">Pilih</option>
-                                <option value="Yearly">Yearly</option>
-                                <option value="Monthly">Monthly</option>
-                            </select>
-                            <div class="btn-group-right-dll">
-                                <button class="btn-small" onclick="toScreen4()">Re-Calculate</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <label>Insured Section</label>
 
-                <div class="compare-section">
-                    <h3>Compare</h3>
-                    <div class="row-flex-compare">
-                        <div class="form-group-compare">
-                            <label>Plan</label>
-                            <div class="compare-controls">
-                                <select class="select-compare">
-                                    <option>Pilih</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group-compare">
-                            <label>Payment Mode</label>
-                            <div class="compare-controls">
-                                <select class="select-compare">
-                                    <option>Pilih</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="insured-row2">
+                        <label>
+                            <input type="checkbox" id="main" />
+                            <span>Main Insured</span>
+                        </label>
+                        <input type="text" id="mainName" placeholder="..." />
                     </div>
+
+                    <div class="insured-row2">
+                        <label>
+                            <input type="checkbox" id="spouse" />
+                            <span>Spouse</span>
+                        </label>
+                        <input type="text" id="spouseName" placeholder="..." />
+                    </div>
+
+                    <div class="insured-row2">
+                        <label>
+                            <input type="checkbox" id="dependant" />
+                            <span>Dependant</span>
+                        </label>
+                        <input type="text" id="dependantName" placeholder="..." />
+                    </div>
+
+                    <div class="insured-row2">
+                        <label><span>Total Insured</span></label>
+                        <input type="text" id="totalInsured" placeholder="..." />
+                    </div>
+
                     <div class="btn-group-right">
-                        <button class="btn-small" onclick="compareAction()">Compare</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Screen 4 -->
-            <div id="screen4" style="display: none;">
-                <div class="totalPremi-section">
-                    <h3>Total Premium</h3>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Insured Type</th>
-                                    <th>Gender/Usia</th>
-                                    <th>Yearly</th>
-                                    <th>Montly</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Spouse</td>
-                                    <td>Female/37th</td>
-                                    <td>Rp 700.000</td>
-                                    <td>Rp 100.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <button class="btn-small" onclick="validateScreen1AndGo()">Create Data</button>
                     </div>
                 </div>
 
-                <div class="product-benefit-section">
-                    <h3>Product Benefit</h3>
-                    <div class="product-benefit-header">
-                        <p class="product-name" id="finalProduct">Product : -</p>
-                        <div class="plan-select-wrapper">
-                            <label for="plan">Plan:</label>
-                            <select id="finalPlan" class="plan-select">
-                                <option>Pilih</option>
-                                <option value="Plan A">Plan A</option>
-                                <option value="Plan B">Plan B</option>
-                            </select>
+                <!-- Screen 2 -->
+                <div id="screen2" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Insured Type</th>
+                                <th>Gender</th>
+                                <th>Usia</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>imal</td>
+                                <td>female</td>
+                                <td>50 th</td>
+                                <td><i class="fas fa-trash action-icon"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-group-right">
+                        <button class="btn-small">Clear Data</button>
+                        <button class="btn-small" onclick="calculateAndGoToScreen3()">Calculate</button>
+                    </div>
+                </div>
+
+                <!-- Screen 3 -->
+                <div id="screen3" style="display: none;">
+                    <div class="existing-section">
+                        <h3>Existing</h3>
+                        <div class="row-flex-existing">
+                            <div class="form-group-existing">
+                                <label>Product</label>
+                                <select id="existingProduct">
+                                    <option value="">Pilih Product</option>
+                                    <option value="Mandiri Sehat">Mandiri Sehat</option>
+                                    <option value="Mandiri Premier">Mandiri Premier</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group-existing">
+                                <label>Plan</label>
+                                <select id="existingPlan">
+                                    <option value="">Pilih Plan</option>
+                                    <option value="Plan A">Plan A</option>
+                                    <option value="Plan B">Plan B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-payment">
+                            <label>Payment mode</label>
+                            <div class="form-group-ddl">
+                                <select class="ddl-payament" id="paymentMode">
+                                    <option value="">Pilih</option>
+                                    <option value="Yearly">Yearly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                                <div class="btn-group-right-dll">
+                                    <button class="btn-small" onclick="toScreen4()">Re-Calculate</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="product-benefit-table-wrapper">
-                        <table class="product-benefit-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>free rumah sakit</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>free rumah sakit</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>free rumah sakit</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>free rumah sakit</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>free rumah sakit</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="compare-section">
+                        <h3>Compare</h3>
+                        <div class="row-flex-compare">
+                            <div class="form-group-compare">
+                                <label>Plan</label>
+                                <div class="compare-controls">
+                                    <select class="select-compare">
+                                        <option>Pilih</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                    <div class="import-btn-wrapper">
-                        <button class="btn-import">Import data</button>
+                            <div class="form-group-compare">
+                                <label>Payment Mode</label>
+                                <div class="compare-controls">
+                                    <select class="select-compare">
+                                        <option>Pilih</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group-right">
+                            <button class="btn-small" onclick="compareAction()">Compare</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Screen 4 -->
+                <div id="screen4" style="display: none;">
+                    <div class="totalPremi-section">
+                        <h3>Total Premium</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Insured Type</th>
+                                        <th>Gender/Usia</th>
+                                        <th>Yearly</th>
+                                        <th>Montly</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Spouse</td>
+                                        <td>Female/37th</td>
+                                        <td>Rp 700.000</td>
+                                        <td>Rp 100.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="product-benefit-section">
+                        <h3>Product Benefit</h3>
+                        <div class="product-benefit-header">
+                            <p class="product-name" id="finalProduct">Product : -</p>
+                            <div class="plan-select-wrapper">
+                                <label for="plan">Plan:</label>
+                                <select id="finalPlan" class="plan-select">
+                                    <option>Pilih</option>
+                                    <option value="Plan A">Plan A</option>
+                                    <option value="Plan B">Plan B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="product-benefit-table-wrapper">
+                            <table class="product-benefit-table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>free rumah sakit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>free rumah sakit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>free rumah sakit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>free rumah sakit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>free rumah sakit</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="import-btn-wrapper">
+                            <button class="btn-import">Import data</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -998,7 +996,7 @@
     function showTotalPremium() {
         document.getElementById('totalPremiSection').style.display = 'block';
         document.getElementById('insuredTable').style.display = 'none';
-    }  
+    }
 
     function clearData() {
         document.getElementById('insuredTable').style.display = 'none';
