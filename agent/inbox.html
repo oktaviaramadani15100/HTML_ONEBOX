@@ -59,43 +59,76 @@
     .dropdown {
       display: none;
       position: absolute;
+      right: 20px;
       top: 40px;
       background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
       overflow: hidden;
-      width: 200px;
-      z-index: 999;
+      width: 170px;
+      z-index: 100;
       animation: fadeIn 0.2s ease-in-out;
-      margin-left: 12rem;
+      padding: 10px 0;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .dropdown p {
-      margin: 10px 15px 5px;
-      font-size: 15px;
+    .dropdown-header {
+      text-align: center;
+      padding: 8px 12px;
+    }
+
+    .dropdown-header p {
+      margin: 2px 0;
+      font-size: 13px;
       color: #333;
-      font-weight: bold;
     }
 
-    .dropdown hr {
-      margin: 10px 0;
-      border: 0;
-      border-top: 1px solid #eee;
+    .dropdown-header .welcome-text {
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    .agent-role {
+      font-style: italic;
+      font-weight: 400;
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 2px;
     }
 
     .dropdown a {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 15px;
       text-decoration: none;
       font-size: 14px;
-      color: #333;
-      transition: background-color 0.3s;
+      color: #1e3a8a;
+      transition: background-color 0.25s, color 0.25s;
+      border-left: 4px solid transparent;
     }
 
     .dropdown a:hover {
-      background-color: #f6f6f6;
+      background-color: #f0f4ff;
+      border-left: 4px solid #1e3a8a;
+    }
+
+    .dropdown i {
+      font-size: 16px;
+      color: #1e3a8a;
+      width: 18px;
+      text-align: center;
+    }
+
+    .dropdown span {
+      flex: 1;
+      font-weight: 500;
+      margin-left: 1rem;
+    }
+
+    .dropdown hr {
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px solid #eee;
     }
 
     @keyframes fadeIn {
@@ -300,6 +333,38 @@
         background: #d1d5db;
       }
     }
+
+    .inbox-header {
+      display: flex;
+      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .inbox-tab {
+      background-color: #ffffff;
+      color: #1e3a8a;
+      border: 1px solid #d1d5db;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .inbox-tab:hover {
+      background-color: #e0e7ff;
+      border-color: #1e3a8a;
+    }
+
+    .inbox-tab.active {
+      background-color: #1e3a8a;
+      color: white;
+      border-color: #1e3a8a;
+    }
   </style>
 </head>
 
@@ -311,16 +376,43 @@
       <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
 
       <div class="dropdown" id="dropdownMenu">
-        <p>Welcome</p>
-        <p>Agent 01</p>
+        <div class="dropdown-header">
+          <h3 class="welcome-text">Welcome</h3>
+          <h4 class="welcome-text">Agent 01</h4>
+          <h5 class="agent-role">Agent</h5>
+        </div>
         <hr />
-        <a href="#"><i class="fas fa-user"></i> Profile</a>
+        <a href="#">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
         <hr>
-        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="#">
+          <i class="fas fa-question-circle"></i>
+          <span>FAQ</span>
+        </a>
+        <hr>
+        <a href="../agent/agent-rules.html">
+          <i class="fas fa-user-shield"></i>
+          <span>Agent Rules</span>
+        </a>
+        <hr>
+        <a href="#">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
       </div>
     </div>
 
     <!-- Inbox List -->
+    <div class="inbox-header">
+      <button class="inbox-tab active">All</button>
+      <button class="inbox-tab">System</button>
+      <button class="inbox-tab">Team</button>
+      <button class="inbox-tab">Customer</button>
+    </div>
+
+
     <div class="inbox-list">
       <div class="inbox-item">
         <div class="inbox-left">
@@ -404,7 +496,7 @@
       </div>
 
       <div class="nav-agen">
-        <a href="#"><i class="fas fa-calendar-alt"></i></a>
+        <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
         <p>Agenda</p>
       </div>
     </div>

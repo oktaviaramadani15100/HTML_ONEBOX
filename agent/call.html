@@ -30,7 +30,7 @@
         }
 
         .header {
-             display: flex;
+            display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
@@ -60,43 +60,76 @@
         .dropdown {
             display: none;
             position: absolute;
-            top: 39px;
+            right: 20px;
+            top: 40px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
             overflow: hidden;
-            width: 200px;
-            z-index: 999;
+            width: 170px;
+            z-index: 100;
             animation: fadeIn 0.2s ease-in-out;
-            margin-left: 12rem;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .dropdown p {
-            margin: 10px 15px 5px;
-            font-size: 14px;
+        .dropdown-header {
+            text-align: center;
+            padding: 8px 12px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
             color: #333;
-            font-weight: bold;
         }
 
-        .dropdown hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
         }
 
         .dropdown a {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 15px;
             text-decoration: none;
             font-size: 14px;
-            color: #333;
-            transition: background-color 0.3s;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
         }
 
         .dropdown a:hover {
-            background-color: #f6f6f6;
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
         }
 
         @keyframes fadeIn {
@@ -115,7 +148,7 @@
             flex: 1;
             padding: 1rem;
             padding-bottom: 90px;
-            /* for bottom nav space */
+            /* position: relative; */
         }
 
         .content h2 {
@@ -165,7 +198,7 @@
             font-size: 12px;
             z-index: 10;
             margin-top: 3rem;
-              background: white;
+            background: white;
         }
 
         .bottom-nav div {
@@ -234,7 +267,7 @@
         }
 
 
-        .nav-agen{
+        .nav-agen {
             margin-left: 6rem;
         }
 
@@ -256,13 +289,36 @@
             justify-content: flex-end;
             align-items: center;
             padding: 10px 16px;
-            /* Biar ada jarak dari tepi */
+            gap: 10px;
+            flex-wrap: wrap;
         }
+
 
         .filter-icon {
             font-size: 1.3rem;
             cursor: pointer;
             color: #1e3a8a;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            border: 1px solid #1e3a8a;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
         }
 
 
@@ -277,7 +333,7 @@
             box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
             padding: 1rem;
             z-index: 999;
-            transition: right 0.3s ease;
+            /* transition: right 0.3s ease; */
             overflow-y: auto;
             border-left: 1px solid #e5e7eb;
             border-radius: 8px 0 0 8px;
@@ -285,6 +341,14 @@
 
         .filter-drawer.open {
             right: 0;
+            top: 8.5rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            .filter-drawer.open {
+                right: 30rem;
+                top: 8.5rem;
+            }
         }
 
         .filter-header {
@@ -340,12 +404,14 @@
             align-items: center;
             gap: 12px;
             padding: 10px 16px;
-             position: relative;
+            position: relative;
 
         }
 
         .menu-icon-group i {
             color: #1e3a8a;
+            margin-left: 1rem;
+            font-size: 1.5rem;
         }
     </style>
 </head>
@@ -354,20 +420,40 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Activity Call</a>
-             <div class="menu-icon-group">
+            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> Activity History</a>
+            <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
-                    <p>Welcome</p>
-                    <p>Agent 01</p>
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
                     <hr />
-                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
                     <hr>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="../agent/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
                 </div>
+
             </div>
         </div>
 
@@ -375,6 +461,10 @@
         <div class="content">
             <div class="filter-container">
                 <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
+                    <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
+                </div>
             </div>
 
             <div class="filter-drawer" id="filterDrawer">
@@ -386,8 +476,8 @@
                     <label for="date">Date</label>
                     <input type="date" id="date" />
 
-                    <label for="activity">Activity</label>
-                    <input type="text" id="activity" placeholder="Enter value" />
+                    <label for="prospect">Prospect</label>
+                    <input type="text" id="prospect" placeholder="Enter value" />
 
                     <label for="result">Result</label>
                     <input type="text" id="result" placeholder="Enter result" />
@@ -396,39 +486,17 @@
                 </div>
 
             </div>
-
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Activity</th>
-                            <th>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>07/07/25</td>
-                            <td>15.00</td>
-                            <td>Simulasi Policy</td>
-                            <td>Thinking</td>
-                        </tr>
-                        <tr>
-                            <td>07/07/25</td>
-                            <td>15.00</td>
-                            <td>Simulasi Policy</td>
-                            <td>Thinking</td>
-                        </tr>
-                        <tr>
-                            <td>07/07/25</td>
-                            <td>15.00</td>
-                            <td>Simulasi Policy</td>
-                            <td>Thinking</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Prospect</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
         </div>
 
         <!-- Bottom Navigation -->
@@ -444,7 +512,7 @@
             </div>
 
             <div class="nav-agen">
-                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                 <p>Agenda</p>
             </div>
         </div>
@@ -512,4 +580,55 @@
 
         window.applyFilter = applyFilter;
     });
+
+    function filterCategory(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.filter-btn[onclick*="${type}"]`).classList.add('active');
+
+        renderTable(type);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable('activity');
+    });
+
+    const data = {
+        activity: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Thinking' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Thinking' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Thinking' }
+        ],
+        sales: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Lose' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Hot' },
+            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Cold' },
+            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Lose' },
+            { tanggal: '07/07/25', prospect: 'Susanto', result: 'Warm' },
+        ]
+    };
+
+    function renderTable(category) {
+        const tableHead = document.querySelector("thead tr");
+        const tableBody = document.getElementById("tableBody");
+
+        tableHead.innerHTML = `
+            <th>Tanggal</th>
+            <th>Prospect</th>
+            <th>${category === 'sales' ? 'Premium' : 'Result'}</th>
+        `;
+
+        tableBody.innerHTML = '';
+        data[category].forEach(row => {
+            tableBody.innerHTML += `
+            <tr>
+                <td>${row.tanggal}</td>
+                <td>${row.prospect}</td>
+                <td>${row.result}</td>
+            </tr>
+            `;
+        });
+    }
+
+
 </script>

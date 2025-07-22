@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Prospect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .email-chat-header {
+      padding: 15px;
+      background: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .email-chat-header strong {
+      font-size: 16px;
+    }
+
+    .status-badge {
+      background: green;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+
+    .email-chat-header small {
+      display: block;
+      color: #555;
+      margin-top: 5px;
+      font-size: 13px;
+    }
+
+    .email-chat-body {
+      padding: 15px;
+      flex-grow: 1;
+      background: #f5f5f5;
+    }
+
+    .message-box {
+      margin-bottom: 15px;
+      display: flex;
+    }
+
+    .message-box.left {
+      justify-content: flex-start;
+    }
+
+    .message-box.right {
+      justify-content: flex-end;
+    }
+
+    .message-meta {
+      display: flex;
+      gap: 10px;
+      max-width: 80%;
+    }
+
+    .message-box.right .message-meta {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .avatar.agent-avatar {
+      background: #3f0071;
+    }
+
+    .avatar.user-avatar {
+      background: #999;
+    }
+
+    .sender-name {
+      font-weight: bold;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .message-content {
+      background: #eef6ff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 5px;
+      word-wrap: break-word;
+    }
+
+    .message-box.right .message-content {
+      background: #e4ddf9;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: #888;
+      text-align: right;
+    }
+
+    .email-reply-wrapper {
+      border-top: 1px solid #ddd;
+      padding: 10px 15px;
+      background: #fff;
+    }
+
+    .reply-input {
+      position: relative;
+    }
+
+    .reply-input textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    .reply-send-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .attach-icon {
+      font-size: 18px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .reply-action-btn {
+      background: #3f0071;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    @media screen and (max-width: 480px) {
+      .email-chat-body {
+        padding: 10px;
+      }
+
+      .reply-action-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .reply-send-section {
+        gap: 10px;
+      }
+
+      .message-meta {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="email-chat-header">
+      <div>
+        <strong>Layla</strong>
+        <span class="status-badge">Pending</span>
+      </div>
+      <small>#36311 | Email: agent01@ciptadra.com</small>
+    </div>
+
+    <!-- Chat Body -->
+    <div class="email-chat-body">
+      <!-- User Message -->
+      <div class="message-box left">
+        <div class="message-meta">
+          <div class="avatar user-avatar">b</div>
+          <div>
+            <div class="sender-name">broonshoot</div>
+            <div class="message-content">apa keunggulan Onebox?</div>
+            <div class="message-time">04 Dec 2024, 11:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Message -->
+      <div class="message-box right">
+        <div class="message-meta">
+          <!-- <div class="avatar agent-avatar">A</div> -->
+          <div>
+            <div class="sender-name">Agent</div>
+            <div class="message-content">Onebox memudahkan integrasi semua channel komunikasi.</div>
+            <div class="message-time">04 Dec 2024, 11:05</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Reply -->
+    <div class="email-reply-wrapper">
+      <div class="reply-input">
+        <textarea placeholder="Type your reply..."></textarea>
+        <div class="reply-send-section">
+          <i class="fas fa-paperclip attach-icon"></i>
+          <button class="reply-action-btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
