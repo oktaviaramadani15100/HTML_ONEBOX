@@ -164,7 +164,7 @@
 
         .content {
             flex: 1;
-            padding: 1rem;
+            /* padding: 1rem; */
             padding-bottom: 90px;
         }
 
@@ -178,16 +178,42 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 1rem;
+            padding-left: 1rem;
         }
 
         .date-picker {
             display: flex;
-            border: 2px solid black;
-            border-radius: 6px;
+            border: 1px solid black;
+            border-radius: 4px;
             overflow: hidden;
             width: 100%;
-            max-width: 171px;
-            margin-bottom: 1.2rem;
+            max-width: 140px;
+            /* ubah ukuran maksimal */
+            height: 34px;
+            /* atur tinggi agar lebih ramping */
+        }
+
+        .date-display {
+            flex: 1;
+            padding: 0.3rem 0.5rem;
+            /* lebih kecil */
+            background: white;
+            font-size: 0.8rem;
+            /* kecilkan font */
+            display: flex;
+            align-items: center;
+        }
+
+        .calendar-btn {
+            width: 34px;
+            /* kecilkan lebar tombol */
+            height: 100%;
+            background: white;
+            border-left: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 
         .date-display {

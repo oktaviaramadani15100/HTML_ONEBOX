@@ -673,30 +673,36 @@
 
         </div>
         <div class="content">
-            <div id="insuredFormSection">
+            <div style="min-height:65vh">
+            <div id="screen1">
                 <div class="row-flex">
                     <div class="form-group">
                         <label>Product</label>
-                        <select>
-                            <option>Pilih Product</option>
+                        <select id="productSelect">
+                            <option value="">Pilih Product</option>
+                            <option value="Mandiri Sehat">Mandiri Sehat</option>
+                            <option value="Mandiri Premier">Mandiri Premier</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Plan</label>
-                        <select>
-                            <option>Pilih Plan</option>
+                        <select id="planSelect">
+                            <option value="">Pilih Plan</option>
+                            <option value="Plan A">Plan A</option>
+                            <option value="Plan B">Plan B</option>
                         </select>
                     </div>
                 </div>
 
                 <label>Insured Section</label>
+
                 <div class="insured-row">
                     <label>
                         <input type="checkbox" id="main" />
                         <span>Main Insured</span>
                     </label>
-                    <input type="text" placeholder="..." />
+                    <input type="text" id="mainName" placeholder="..." />
                 </div>
 
                 <div class="insured-row">
@@ -704,7 +710,7 @@
                         <input type="checkbox" id="spouse" />
                         <span>Spouse</span>
                     </label>
-                    <input type="text" placeholder="..." />
+                    <input type="text" id="spouseName" placeholder="..." />
                 </div>
 
                 <div class="insured-row">
@@ -712,23 +718,21 @@
                         <input type="checkbox" id="dependant" />
                         <span>Dependant</span>
                     </label>
-                    <input type="text" placeholder="..." />
+                    <input type="text" id="dependantName" placeholder="..." />
                 </div>
 
                 <div class="insured-row">
-                    <label>
-                        <span>Total Insured </span>
-                    </label>
-                    <input type="text" placeholder="..." />
+                    <label><span>Total Insured</span></label>
+                    <input type="text" id="totalInsured" placeholder="..." />
                 </div>
 
-
                 <div class="btn-group-right">
-                    <button class="btn-small" onclick="createData()">Create Data</button>
+                    <button class="btn-small" onclick="validateScreen1AndGo()">Create Data</button>
                 </div>
             </div>
 
-            <div id="insuredTable" style="display: none;">
+            <!-- Screen 2 -->
+            <div id="screen2" style="display: none;">
                 <table>
                     <thead>
                         <tr>
@@ -747,181 +751,230 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="btn-group-right" id="insuredButtons" style="display: none;">
-                    <button class="btn-small">Clear Data</button>
-                    <button class="btn-small" onclick="showTotalPremium()">Calculate</button>
-                </div>
-            </div>
-
-
-            <div class="existing-section" style="display: none;">
-                <h3>Existing</h3>
-                <div class="row-flex-existing">
-                    <div class="form-group-existing">
-                        <label>Product</label>
-                        <select>
-                            <option>Pilih Product</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group-existing">
-                        <label>Plan</label>
-                        <select>
-                            <option>Pilih Plan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group-payment">
-                    <label>Payment mode</label>
-                    <div class="form-group-ddl">
-                        <select class="ddl-payament">
-                            <option>Pilih </option>
-                        </select>
-                        <div class="btn-group-right-dll">
-                            <button class="btn-small">Re-Calculate</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="compare-section" id="compareSection" style="display: none;">
-                <h3>Compare</h3>
-                <div class="row-flex-compare">
-                    <div class="form-group-compare">
-                        <label>Plan</label>
-                        <div class="compare-controls">
-                            <select class="select-compare">
-                                <option>Pilih</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group-compare">
-                        <label>Payment Mode</label>
-                        <div class="compare-controls">
-                            <select class="select-compare">
-                                <option>Pilih</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
                 <div class="btn-group-right">
-                    <button class="btn-small" onclick="compareSection()">Compare</button>
+                    <button class="btn-small">Clear Data</button>
+                    <button class="btn-small" onclick="calculateAndGoToScreen3()">Calculate</button>
                 </div>
             </div>
 
-            <div class="totalPremi-section" id="totalPremiSection" style="display: none;">
-                <div class="row">
-                    <h3>Total Premium</h3>
+            <!-- Screen 3 -->
+            <div id="screen3" style="display: none;">
+                <div class="existing-section">
+                    <h3>Existing</h3>
+                    <div class="row-flex-existing">
+                        <div class="form-group-existing">
+                            <label>Product</label>
+                            <select id="existingProduct">
+                                <option value="">Pilih Product</option>
+                                <option value="Mandiri Sehat">Mandiri Sehat</option>
+                                <option value="Mandiri Premier">Mandiri Premier</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-existing">
+                            <label>Plan</label>
+                            <select id="existingPlan">
+                                <option value="">Pilih Plan</option>
+                                <option value="Plan A">Plan A</option>
+                                <option value="Plan B">Plan B</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group-payment">
+                        <label>Payment mode</label>
+                        <div class="form-group-ddl">
+                            <select class="ddl-payament" id="paymentMode">
+                                <option value="">Pilih</option>
+                                <option value="Yearly">Yearly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
+                            <div class="btn-group-right-dll">
+                                <button class="btn-small" onclick="toScreen4()">Re-Calculate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compare-section">
+                    <h3>Compare</h3>
+                    <div class="row-flex-compare">
+                        <div class="form-group-compare">
+                            <label>Plan</label>
+                            <div class="compare-controls">
+                                <select class="select-compare">
+                                    <option>Pilih</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-compare">
+                            <label>Payment Mode</label>
+                            <div class="compare-controls">
+                                <select class="select-compare">
+                                    <option>Pilih</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="btn-group-right">
-                        <button class="btn-small" onclick="showCompare()">Compare</button>
+                        <button class="btn-small" onclick="compareAction()">Compare</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4 -->
+            <div id="screen4" style="display: none;">
+                <div class="totalPremi-section">
+                    <h3>Total Premium</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Insured Type</th>
+                                    <th>Gender/Usia</th>
+                                    <th>Yearly</th>
+                                    <th>Montly</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Spouse</td>
+                                    <td>Female/37th</td>
+                                    <td>Rp 700.000</td>
+                                    <td>Rp 100.000</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Insured Type</th>
-                                <th>Gender/Usia</th>
-                                <th>Yearly</th>
-                                <th>Montly</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Spouse</td>
-                                <td>Female/37th</td>
-                                <td>Rp 700.000</td>
-                                <td>Rp 100.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                <div class="product-benefit-section">
+                    <h3>Product Benefit</h3>
+                    <div class="product-benefit-header">
+                        <p class="product-name" id="finalProduct">Product : -</p>
+                        <div class="plan-select-wrapper">
+                            <label for="plan">Plan:</label>
+                            <select id="finalPlan" class="plan-select">
+                                <option>Pilih</option>
+                                <option value="Plan A">Plan A</option>
+                                <option value="Plan B">Plan B</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="product-benefit-section" id="productBenefit" style="display: none;">
-                <h3>Product Benefit</h3>
-                <div class="product-benefit-header">
-                    <p class="product-name">Product : Mandiri sehat</p>
-                    <div class="plan-select-wrapper">
-                        <label for="plan">Plan:</label>
-                        <select id="plan" class="plan-select">
-                            <option>Pilih</option>
-                        </select>
+                    <div class="product-benefit-table-wrapper">
+                        <table class="product-benefit-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>free rumah sakit</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>free rumah sakit</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>free rumah sakit</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>free rumah sakit</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>free rumah sakit</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="import-btn-wrapper">
+                        <button class="btn-import">Import data</button>
                     </div>
                 </div>
-
-                <div class="product-benefit-table-wrapper">
-                    <table class="product-benefit-table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>free rumah sakit</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>free rumah sakit</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>free rumah sakit</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>free rumah sakit</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>free rumah sakit</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="import-btn-wrapper">
-                    <button class="btn-import">Import data</button>
-                </div>
             </div>
-
-
-            <div class="simulation-nav" style="display: none;">
-                <button class="step-indicator">Simulation - 1/9</button>
-                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
-                <button class="create-btn">Create SPAJ</button>
-            </div>
-
-
-            <div class="bottom-nav">
-                <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
-
-                <div class="nav-new">
-                    <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
-                    <p>New</p>
-                </div>
-
-                <div class="nav-agen">
-                    <a href="#"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
-                </div>
             </div>
         </div>
+
+        <div class="simulation-nav">
+            <button class="step-indicator">Simulation - 1/9</button>
+            <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            <button class="create-btn">Create SPAJ</button>
+        </div>
+
+
+        <div class="bottom-nav">
+            <div class="nav-home">
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
+            </div>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus-circle"></i></a>
+                <p>New</p>
+            </div>
+
+            <div class="nav-agen">
+                <a href="#"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
 
 <script>
+    function showScreen(id) {
+        ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
+            document.getElementById(screen).style.display = "none";
+        });
+        document.getElementById(id).style.display = "block";
+    }
+
+    function validateScreen1AndGo() {
+        const product = document.getElementById("productSelect").value;
+        const plan = document.getElementById("planSelect").value;
+
+        if (product && plan) {
+            // Simpan data ke session
+            sessionStorage.setItem("product", product);
+            sessionStorage.setItem("plan", plan);
+
+            showScreen("screen2");
+        } else {
+            alert("Harap isi Product dan Plan terlebih dahulu.");
+        }
+    }
+
+    function calculateAndGoToScreen3() {
+        showScreen("screen3");
+
+        // Isi kembali dropdown existing di screen3
+        document.getElementById("existingProduct").value = sessionStorage.getItem("product");
+        document.getElementById("existingPlan").value = sessionStorage.getItem("plan");
+    }
+
+    function toScreen4() {
+        showScreen("screen4");
+
+        // Tampilkan product dan plan
+        document.getElementById("finalProduct").innerText = "Product : " + sessionStorage.getItem("product");
+        document.getElementById("finalPlan").value = sessionStorage.getItem("plan");
+    }
+
+    function compareAction() {
+        alert("Perbandingan berhasil dijalankan.");
+    }
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';

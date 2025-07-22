@@ -149,7 +149,6 @@
 
         .content {
             flex: 1;
-            padding: 1rem;
             padding-bottom: 90px;
         }
 
@@ -186,6 +185,16 @@
 
         tr:last-child td {
             border-bottom: none;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+            /* putih */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+            /* abu-abu muda */
         }
 
         .detail-campaign {
@@ -586,9 +595,8 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <span class="header-name" onclick="handleBack()">
-                <i class="fas fa-arrow-left"></i>
-                <span style="margin-left: 16px;">Campagin</span>
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> Campaign
             </span>
 
             <div class="menu-icon-group">
@@ -650,7 +658,26 @@
                         <tr>
                             <td onclick="showCampaignDetail()" style="color: #0056b3;">julipintar</td>
                             <td>5</td>
-                            <td onclick="showProductDetail()" style="color: #0056b3;">onebox</td>
+<td onclick="showProductDetail()">onebox</td>                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">Riplay</td>
+                            <td>4</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td>8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">Riplay</td>
+                            <td>4</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td>8</td>
+                            <td onclick="showProductDetail()">onebox</td>
                         </tr>
                     </tbody>
                 </table>
@@ -658,8 +685,6 @@
 
             <!-- Detail Campaign -->
             <div class="detail-campaign" id="detailCampaign" style="display: none;">
-                <h2 class="section-title-campaign">Detail Campaign</h2>
-
                 <div class="form-group">
                     <label for="campaignName">Campaign Name</label>
                     <input type="text" id="campaignName" value="Juli Sehat" readonly>
@@ -774,6 +799,9 @@
         document.getElementById('campaignList').style.display = 'none';
         document.getElementById('detailCampaign').style.display = 'block';
         currentView = 'detailCampaign';
+
+        // Update judul header
+        document.getElementById('headerTitle').innerHTML = '<i class="fas fa-arrow-left"></i> Detail Campaign';
     }
 
     function showProductDetail() {
