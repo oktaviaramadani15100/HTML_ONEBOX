@@ -30,15 +30,16 @@
         }
 
         .header {
-            position: sticky;
-            top: 0;
-            background-color: white;
-            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
         }
 
         .insured-row {
@@ -70,7 +71,7 @@
 
         .header a {
             text-decoration: none;
-            color: #333;
+            color: #fff;
             font-weight: bold;
         }
 
@@ -137,11 +138,12 @@
 
         .bottom-nav {
             position: sticky;
+            /* position: relative; */
             bottom: -1px;
             left: 0;
             right: 0;
             border-top: 1px solid #ccc;
-            display: flex;
+            /* display: flex; */
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
@@ -149,10 +151,35 @@
             z-index: 10;
             margin-top: 3rem;
             background: white;
-
         }
 
-        .bottom-nav div {
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -161,14 +188,25 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
         }
 
+        /* 
         .bottom-nav div:hover {
             transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
         }
 
-        .bottom-nav i {
-            font-size: 1.2rem;
+        /* .bottom-nav i {
+            font-size: 1.5rem;
             display: block;
             margin-bottom: 4px;
         }
@@ -177,7 +215,7 @@
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        }
+        } */
 
         .nav-new {
             justify-content: center;
@@ -194,6 +232,9 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .plus-btn {
@@ -206,13 +247,31 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-decoration: none;
+            font-size: 30px;
         }
 
-        .nav-agen {
-            margin-left: 4rem;
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
         }
 
-        .bottom-nav div {
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
             text-align: center;
             color: #1e3a8a;
             font-size: 0.85rem;
@@ -224,13 +283,137 @@
             display: block;
             margin-bottom: -2px;
             color: white;
-        }
+        } */
 
 
-        .nav-new p {
+        /* .nav-new p {
             margin: 6px 0 0;
             font-size: 0.85rem;
             color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon i {
+            color: #f9fafb;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
@@ -240,9 +423,42 @@
         <div style="min-height:100vh">
             <!-- Header -->
             <div class="header">
-                <a href="#"><i class="fas fa-arrow-left"></i> Form SPAJ</a>
-            </div>
+                <a href="../agent/home.html"><i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Form
+                        SPAJ</span></a>
 
+                <div class="menu-icon-group">
+                    <a href="../agent/inbox.html" class="menu-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                    <div class="dropdown" id="dropdownMenu">
+                        <div class="dropdown-header">
+                            <h3 class="welcome-text">Welcome</h3>
+                            <h4 class="welcome-text">Agent 01</h4>
+                            <h5 class="agent-role">Agent</h5>
+                        </div>
+                        <hr />
+                        <a href="#">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="../agent/agent-rules.html">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Agent Rules</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            <span>FAQ</span>
+                        </a>
+                        <hr>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
             <!-- FORM WIZARD -->
             <form id="spajForm">
                 <!-- Step 1 -->
@@ -403,17 +619,33 @@
             </form>
         </div>
         <div class="bottom-nav">
-            <div>
-                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <span>Home</span>
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="#"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
             </div>
+
             <div class="nav-new">
                 <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
-            </div>
-            <div>
-                <a href="#"><i class="fas fa-calendar-alt"></i></a>
-                <span>Agenda</span>
             </div>
         </div>
     </div>
@@ -431,8 +663,9 @@
 
         window.addEventListener('click', function (e) {
             const dropdown = document.getElementById('dropdownMenu');
-            const icon = document.querySelector('.menu-icon');
-            if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+            const icon = document.querySelector('.fa-ellipsis-v');
+
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
                 dropdown.style.display = 'none';
             }
         });
@@ -445,7 +678,6 @@
             });
             document.getElementById(`step-${step}`).classList.add('active');
 
-            // Ubah tombol jika di akhir
             const nextBtn = document.querySelector('.wizard-buttons button:last-child');
             if (step === totalSteps) {
                 nextBtn.textContent = 'Kirim';

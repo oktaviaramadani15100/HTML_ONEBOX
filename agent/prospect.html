@@ -38,6 +38,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+             height: 70vh;
         }
 
         .prospectDetail {
@@ -968,6 +969,95 @@
         .save-btn:hover {
             background-color: #2563eb;
         }
+
+         .insured-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .insured-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 130px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .insured-row input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 150px;
+            max-width: 100%;
+        }
+
+        .section {
+            display: none;
+            padding: 1rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section {
+            width: 100%;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            color: #003366;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        .wizard-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #003366;
+        }
+
+        .wizard-buttons button:hover {
+            background-color: #002244;
+        }
+
     </style>
 </head>
 
@@ -1289,11 +1379,168 @@
             </div>
 
             <div id="EntryPolicySection" class="section-box" style="display:none">
-                <label>Action:</label>
-                <select disabled>
-                    <option value="form-policy" selected>Form Policy</option>
-                </select>
-                <div id="formPolicyContainer" style="margin-top:10px;"></div>
+                    <!-- <label>Action:</label>
+                    <select disabled>
+                        <option value="form-policy" selected>Form Policy</option>
+                    </select>
+                    <div id="formPolicyContainer" style="margin-top:10px;"></div> -->
+                    <form id="spajForm">
+                <!-- Step 1 -->
+                <div class="section active" id="step-1">
+                    <h3>1. Data Pemegang Polis</h3>
+                    <label>No. KTP / Paspor</label>
+                    <input type="text" required />
+                    <label>Nama Lengkap</label>
+                    <input type="text" required />
+                    <label>Tempat / Tanggal Lahir</label>
+                    <input type="text" required />
+                    <label>Jenis Kelamin</label>
+                    <select required>
+                        <option>Laki-laki</option>
+                        <option>Perempuan</option>
+                    </select>
+                    <label>Status Pernikahan</label>
+                    <select required>
+                        <option>Belum Menikah</option>
+                        <option>Menikah</option>
+                        <option>Cerai</option>
+                    </select>
+                    <label>Alamat Tempat Tinggal</label>
+                    <textarea required></textarea>
+                    <label>Telepon / HP</label>
+                    <input type="text" required />
+
+                    <label>Status Pernikahan</label>
+                    <select required>
+                        <option>Belum Menikah</option>
+                        <option>Menikah</option>
+                        <option>Cerai</option>
+                    </select>
+
+                    <label>Pekerjaan</label>
+                    <input type="text" required />
+                    <label>Nama Perusahaan</label>
+                    <input type="text" required />
+                    <label>Penghasilan per Bulan</label>
+                    <input type="text" required />
+
+                    <label>Tinggi & Berat Badan</label>
+                    <input type="text" placeholder="Contoh: 170 cm / 70 kg" />
+                </div>
+
+                <!-- Step 2 -->
+                <div class="section" id="step-2">
+                    <h3>2. Data Calon Tertanggung</h3>
+                    <div class="insured-row">
+                        <label>
+                            <input type="checkbox" id="main" />
+                            <span>Main Insured</span>
+                        </label>
+                    </div>
+                    <label>Nama Lengkap</label>
+                    <input type="text" />
+                    <label>Hubungan dengan Tertanggung</label>
+                    <input type="text" />
+                    <label>No. KTP</label>
+                    <input type="text" />
+                    <label>Alamat</label>
+                    <textarea></textarea>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="section" id="step-3">
+                    <h3>3. Data Ahli Waris</h3>
+                    <label>Nama Lengkap</label>
+                    <input type="text" required />
+                    <label>Hubungan</label>
+                    <input type="text" required />
+                    <label>Tanggal Lahir</label>
+                    <input type="date" required />
+                    <label>Persentase Manfaat (%)</label>
+                    <input type="number" required />
+                </div>
+
+                <!-- Step 4 -->
+                <div class="section" id="step-4">
+                    <h3>4. Informasi Produk</h3>
+                    <label>Nama Produk</label>
+                    <input type="text" required />
+                    <label>Uang Pertanggungan</label>
+                    <input type="text" required />
+                    <label>Premi per Bulan</label>
+                    <input type="text" required />
+                    <label>Rider Tambahan</label>
+                    <input type="text" />
+                </div>
+
+                <!-- Step 5 -->
+                <div class="section" id="step-5">
+                    <h3>5. Pembayaran & Kesehatan</h3>
+                    <label>Metode Pembayaran</label>
+                    <select required>
+                        <option>Debet</option>
+                        <option>Kredit</option>
+                    </select>
+                    <label>Nama Pemilik Rekening</label>
+                    <input type="text" />
+                    <label>No. Rekening / Kartu</label>
+                    <input type="text" />
+                    <label>Apakah Anda merokok?</label>
+                    <select>
+                        <option>Tidak</option>
+                        <option>Ya</option>
+                    </select>
+                    <label>Riwayat Penyakit</label>
+                    <textarea></textarea>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="section" id="step-6">
+                    <h3>6. Persetujuan & Agen</h3>
+                    <p>Saya menyatakan semua data di atas benar adanya.</p>
+                    <label>Tanggal Pengisian</label>
+                    <input type="date" required />
+                    <label>Nama & Tanda Tangan Tertanggung</label>
+                    <input type="text" required />
+                    <label>Nama Agen</label>
+                    <input type="text" required />
+                    <label>Kode Agen</label>
+                    <input type="text" required />
+                    <label>Unit / Cabang</label>
+                    <input type="text" />
+                </div>
+                <div class="section" id="step-7">
+                    <h3>7. Persetujuan</h3>
+                    <p>Dengan ini saya menyatakan bahwa seluruh informasi yang saya berikan adalah benar dan sesuai
+                        dengan
+                        keadaan sebenarnya.</p>
+
+                    <label>Tanggal Pengisian</label>
+                    <input type="date" required />
+
+                    <label>Nama & Tanda Tangan Calon Tertanggung</label>
+                    <input type="text" required />
+
+                    <label>Nama & Tanda Tangan Pemegang Polis</label>
+                    <input type="text" />
+                </div>
+                <div class="section" id="step-8">
+                    <h3>8. Data Agen</h3>
+                    <label>Nama Agen</label>
+                    <input type="text" required />
+
+                    <label>Kode Agen</label>
+                    <input type="text" required />
+
+                    <label>Unit / Cabang</label>
+                    <input type="text" />
+                </div>
+                <!-- Buttons -->
+                <div class="wizard-buttons">
+                    <button type="button" onclick="prevStep()">Sebelumnya</button>
+                    <button type="button" onclick="nextStep()">Selanjutnya</button>
+                </div>
+            </form>
             </div>
 
             <div id="NotInterestedSection" class="section-box" style="display:none">
@@ -1481,6 +1728,41 @@
 
         document.getElementById("date2").value = formatDate(sevenDaysLater);
 
+        let currentStep = 1;
+        const totalSteps = 8;
+
+        function showStep(step) {
+            document.querySelectorAll('.section').forEach((section) => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+
+            // Ubah tombol jika di akhir
+            const nextBtn = document.querySelector('.wizard-buttons button:last-child');
+            if (step === totalSteps) {
+                nextBtn.textContent = 'Kirim';
+                nextBtn.setAttribute('type', 'submit');
+            } else {
+                nextBtn.textContent = 'Selanjutnya';
+                nextBtn.setAttribute('type', 'button');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
     </script>
 </body>
 

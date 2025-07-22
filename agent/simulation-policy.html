@@ -227,9 +227,6 @@
             }
         }
 
-
-
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -676,85 +673,88 @@
 
         </div>
         <div class="content">
+            <div id="insuredFormSection">
+                <div class="row-flex">
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select>
+                            <option>Pilih Product</option>
+                        </select>
+                    </div>
 
-            <div class="row-flex">
-                <div class="form-group">
-                    <label>Product</label>
-                    <select>
-                        <option>Pilih Product</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Plan</label>
+                        <select>
+                            <option>Pilih Plan</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Plan</label>
-                    <select>
-                        <option>Pilih Plan</option>
-                    </select>
+                <label>Insured Section</label>
+                <div class="insured-row">
+                    <label>
+                        <input type="checkbox" id="main" />
+                        <span>Main Insured</span>
+                    </label>
+                    <input type="text" placeholder="..." />
+                </div>
+
+                <div class="insured-row">
+                    <label>
+                        <input type="checkbox" id="spouse" />
+                        <span>Spouse</span>
+                    </label>
+                    <input type="text" placeholder="..." />
+                </div>
+
+                <div class="insured-row">
+                    <label>
+                        <input type="checkbox" id="dependant" />
+                        <span>Dependant</span>
+                    </label>
+                    <input type="text" placeholder="..." />
+                </div>
+
+                <div class="insured-row">
+                    <label>
+                        <span>Total Insured </span>
+                    </label>
+                    <input type="text" placeholder="..." />
+                </div>
+
+
+                <div class="btn-group-right">
+                    <button class="btn-small" onclick="createData()">Create Data</button>
+                </div>
+            </div>
+
+            <div id="insuredTable" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Insured Type</th>
+                            <th>Gender</th>
+                            <th>Usia</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>imal</td>
+                            <td>female</td>
+                            <td>50 th</td>
+                            <td><i class="fas fa-trash action-icon"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-group-right" id="insuredButtons" style="display: none;">
+                    <button class="btn-small">Clear Data</button>
+                    <button class="btn-small" onclick="showTotalPremium()">Calculate</button>
                 </div>
             </div>
 
 
-            <label>Insured Section</label>
-
-            <div class="insured-row">
-                <label>
-                    <input type="checkbox" id="main" />
-                    <span>Main Insured</span>
-                </label>
-                <input type="text" placeholder="..." />
-            </div>
-
-            <div class="insured-row">
-                <label>
-                    <input type="checkbox" id="spouse" />
-                    <span>Spouse</span>
-                </label>
-                <input type="text" placeholder="..." />
-            </div>
-
-            <div class="insured-row">
-                <label>
-                    <input type="checkbox" id="dependant" />
-                    <span>Dependant</span>
-                </label>
-                <input type="text" placeholder="..." />
-            </div>
-
-            <div class="insured-row">
-                <label>
-                    <span>Total Insured </span>
-                </label>
-                <input type="text" placeholder="..." />
-            </div>
-
-
-            <div class="btn-group-right">
-                <button class="btn-small">Create Data</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Insured Type</th>
-                        <th>Gender</th>
-                        <th>Usia</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>imal</td>
-                        <td>female</td>
-                        <td>50 th</td>
-                        <td><i class="fas fa-trash action-icon"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="btn-group-right">
-                <button class="btn-small">Clear Data</button>
-                <button class="btn-small">Calculate</button>
-            </div>
-
-            <div class="existing-section">
+            <div class="existing-section" style="display: none;">
                 <h3>Existing</h3>
                 <div class="row-flex-existing">
                     <div class="form-group-existing">
@@ -785,7 +785,7 @@
                 </div>
             </div>
 
-            <div class="compare-section">
+            <div class="compare-section" id="compareSection" style="display: none;">
                 <h3>Compare</h3>
                 <div class="row-flex-compare">
                     <div class="form-group-compare">
@@ -807,12 +807,18 @@
                     </div>
                 </div>
                 <div class="btn-group-right">
-                    <button class="btn-small">Compare</button>
+                    <button class="btn-small" onclick="compareSection()">Compare</button>
                 </div>
             </div>
 
-            <div class="totalPremi-section">
-                <h3>Total Premium</h3>
+            <div class="totalPremi-section" id="totalPremiSection" style="display: none;">
+                <div class="row">
+                    <h3>Total Premium</h3>
+                    <div class="btn-group-right">
+                        <button class="btn-small" onclick="showCompare()">Compare</button>
+                    </div>
+                </div>
+
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -835,7 +841,7 @@
                 </div>
             </div>
 
-            <div class="product-benefit-section">
+            <div class="product-benefit-section" id="productBenefit" style="display: none;">
                 <h3>Product Benefit</h3>
                 <div class="product-benefit-header">
                     <p class="product-name">Product : Mandiri sehat</p>
@@ -886,7 +892,7 @@
             </div>
 
 
-            <div class="simulation-nav">
+            <div class="simulation-nav" style="display: none;">
                 <button class="step-indicator">Simulation - 1/9</button>
                 <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
@@ -929,4 +935,32 @@
             dropdown.style.display = 'none';
         }
     });
+
+    function createData() {
+        document.getElementById('insuredTable').style.display = 'table';
+        document.getElementById('insuredButtons').style.display = 'flex';
+        document.getElementById('insuredFormSection').style.display = 'none';
+    }
+
+    function showTotalPremium() {
+        document.getElementById('totalPremiSection').style.display = 'block';
+        document.getElementById('insuredTable').style.display = 'none';
+    }  
+
+    function clearData() {
+        document.getElementById('insuredTable').style.display = 'none';
+        document.getElementById('insuredButtons').style.display = 'none';
+        document.getElementById('totalPremiSection').style.display = 'none';
+    }
+
+    function showCompare() {
+        document.getElementById('compareSection').style.display = 'block';
+        document.getElementById('totalPremiSection').style.display = 'none';
+    }
+
+    function compareSection() {
+        document.getElementById('productBenefit').style.display = 'block';
+        document.getElementById('compareSection').style.display = 'none';
+    }
+
 </script>
