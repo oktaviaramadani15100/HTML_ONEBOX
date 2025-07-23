@@ -127,7 +127,7 @@
     .dropdown span {
       flex: 1;
       font-weight: 500;
-      margin-left: 1rem;
+      /* margin-left: 1rem; */
     }
 
     .dropdown hr {
@@ -208,18 +208,20 @@
     }
 
     .badge.open {
-      background: #fffbe6;
-      color: #ca8a04;
+      background: #fef9c3;
+      /* kuning lembut */
+      color: #92400e;
     }
 
     .badge.new {
-      background: #fee2e2;
-      color: #dc2626;
+      background: #dbeafe;
+      color: #1d4ed8;
     }
 
     .badge.solved {
-      background: #d1fae5;
-      color: #16a34a;
+      background: #f3f4f6;
+      /* abu-abu muda */
+      color: #4b5563;
     }
 
     .notif-count {
@@ -458,7 +460,8 @@
   <div class="wrapper">
     <!-- Header -->
     <div class="header">
-      <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Inbox</a>
+      <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> <span
+          style="margin-left: 16px;">Inbox</span></a>
       <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
 
       <div class="dropdown" id="dropdownMenu">
@@ -538,7 +541,7 @@
           <div class="inbox-text">
             <b>Hamidah</b>
             <small>Selamat pagi</small><br />
-            <span class="badge">Customer</span>
+            <span class="badge open">Customer</span>
           </div>
         </div>
         <span class="notif-count">1</span>
@@ -550,7 +553,7 @@
           <div class="inbox-text">
             <b>Hamidah</b>
             <small>Selamat pagi</small><br />
-            <span class="badge open">System</span>
+            <span class="badge solved">System</span>
           </div>
         </div>
       </div>
