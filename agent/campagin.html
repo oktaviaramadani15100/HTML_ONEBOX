@@ -161,40 +161,70 @@
 
         .table-wrapper {
             width: 100%;
+            background: white;
+           
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            margin-top: 12px;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
             min-width: 360px;
+             border-spacing: 0;
         }
 
         thead {
             background: #1e3a8a;
             color: white;
+            font-weight: bold;
         }
 
         th,
         td {
-            padding: 6px 8px;
-            font-size: 0.78rem;
+            padding: 10px 12px;
+            font-size: 0.85rem;
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
-            cursor: pointer;
+        }
+        
+        /* thead th:first-child {
+            border-top-left-radius: 12px;
         }
 
-        tr:last-child td {
-            border-bottom: none;
-        }
+        thead th:last-child {
+            border-top-right-radius: 12px;
+        } */
 
         tbody tr:nth-child(odd) {
             background-color: #ffffff;
-            /* putih */
         }
 
         tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-            /* abu-abu muda */
+            background-color: #f9fafb;
+        }
+
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .detail-campaign {
@@ -278,7 +308,7 @@
         }
 
         .section-header h2 {
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
 
         .form-group {
@@ -596,7 +626,7 @@
         <!-- Header -->
         <div class="header">
             <span class="header-name" id="headerTitle" onclick="handleBack()">
-                <i class="fas fa-arrow-left"></i> Campaign
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campagin</span>
             </span>
 
             <div class="menu-icon-group">
@@ -658,7 +688,8 @@
                         <tr>
                             <td onclick="showCampaignDetail()" style="color: #0056b3;">julipintar</td>
                             <td>5</td>
-<td onclick="showProductDetail()">onebox</td>                        </tr>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">Riplay</td>
                             <td>4</td>
@@ -717,7 +748,7 @@
 
             <div class="detail-product" id="detailProduct" style="display: none;">
                 <div class="section-header">
-                    <h2 class="section-title">Detail Product</h2>
+                    <h2 class="section-title">Produt Specification</h2>
                     <button class="download-btn" onclick="handleDownload()">
                         <i class="fas fa-download"></i> Download
                     </button>
@@ -794,35 +825,49 @@
         }
     });
 
-    let currentView = 'list';
-    function showCampaignDetail() {
-        document.getElementById('campaignList').style.display = 'none';
-        document.getElementById('detailCampaign').style.display = 'block';
-        currentView = 'detailCampaign';
+   let currentView = 'list';
 
-        // Update judul header
-        document.getElementById('headerTitle').innerHTML = '<i class="fas fa-arrow-left"></i> Detail Campaign';
+function showCampaignDetail() {
+    document.getElementById('campaignList').style.display = 'none';
+    document.getElementById('detailCampaign').style.display = 'block';
+    currentView = 'detailCampaign';
+
+    document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
+    `;
+}
+
+function showProductDetail() {
+    document.getElementById('campaignList').style.display = 'none';
+    document.getElementById('detailProduct').style.display = 'block';
+    currentView = 'detailProduct';
+
+    document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
+    `;
+}
+
+function handleBack() {
+    if (currentView === 'detailCampaign') {
+        document.getElementById('campaignList').style.display = 'block';
+        document.getElementById('detailCampaign').style.display = 'none';
+        currentView = 'list';
+
+        document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+    } else if (currentView === 'detailProduct') {
+        document.getElementById('campaignList').style.display = 'block';
+        document.getElementById('detailProduct').style.display = 'none';
+        currentView = 'list';
+
+        document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+    } else {
+        window.location.href = '../agent/home.html';
     }
+}
 
-    function showProductDetail() {
-        document.getElementById('campaignList').style.display = 'none';
-        document.getElementById('detailProduct').style.display = 'block';
-        currentView = 'detailProduct';
-    }
-
-    function handleBack() {
-        if (currentView === 'detailCampaign') {
-            document.getElementById('campaignList').style.display = 'block';
-            document.getElementById('detailCampaign').style.display = 'none';
-            currentView = 'list';
-        } else if (currentView === 'detailProduct') {
-            document.getElementById('campaignList').style.display = 'block';
-            document.getElementById('detailProduct').style.display = 'none';
-            currentView = 'list';
-        } else {
-            window.location.href = '../agent/home.html';
-        }
-
-    }
 
 </script>
