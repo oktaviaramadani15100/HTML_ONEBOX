@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda SPV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f3f4f6;
+        display: flex;
+        justify-content: center;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 400px;
+        background: #ffffff;
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        background-color: #1e3a8a;
+        z-index: 100;
+        height: 4rem;
+    }
+
+    .header img {
+        width: 100px;
+    }
+
+    .menu-icon {
+        color: #f9fafb;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .menu-icon i {
+        color: #f9fafb;
+    }
+
+    .dropdown {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        width: 170px;
+        z-index: 100;
+        animation: fadeIn 0.2s ease-in-out;
+        padding: 10px 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .dropdown-header {
+        text-align: center;
+        padding: 12px 16px;
+    }
+
+    .dropdown-header p {
+        margin: 2px 0;
+        font-size: 13px;
+        color: #333;
+    }
+
+    .dropdown-header .welcome-text {
+        font-weight: bold;
+        color: #1e3a8a;
+    }
+
+    .agent-role {
+        font-style: italic;
+        font-weight: 400;
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 2px;
+    }
+
+    .dropdown a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 6px 8px;
+        font-size: 14px;
+        color: #1e3a8a;
+        transition: background-color 0.25s, color 0.25s;
+        border-left: 4px solid transparent;
+        margin-left: 1rem;
+    }
+
+    a+a {
+        margin-top: 4px;
+    }
+
+    .dropdown a:hover {
+        background-color: #f0f4ff;
+        border-left: 4px solid #1e3a8a;
+    }
+
+    .dropdown i {
+        font-size: 16px;
+        color: #1e3a8a;
+        width: 18px;
+        text-align: center;
+    }
+
+    .dropdown span {
+        flex: 1;
+        font-weight: 500;
+        margin-left: 1rem;
+    }
+
+    .dropdown hr {
+        margin: 10px 0;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .bottom-nav {
+        position: sticky;
+        /* position: relative; */
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        border-top: 1px solid #ccc;
+        /* display: flex; */
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 10px 0;
+        font-size: 12px;
+        z-index: 10;
+        background: white;
+    }
+
+    .nav-wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .nav-wrapper i {
+        color: #1e3a8a;
+    }
+
+    .nav-wrapper>div {
+        flex: 1;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #1e3a8a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .nav-spacer {
+        flex: 0.5;
+    }
+
+
+    /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+    .nav-wrapper i {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+    }
+
+    /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+    .nav-wrapper p {
+        margin-top: 4px;
+        font-size: 0.85rem;
+    }
+
+    /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+    .nav-new {
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        text-decoration: none;
+        box-sizing: border-box;
+        border: none;
+        padding: 0;
+        transition: none;
+        touch-action: manipulation;
+        position: absolute;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .plus-btn {
+        background-color: #1e3a8a;
+        border-radius: 50%;
+        width: 53px;
+        height: 53px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        font-size: 30px;
+    }
+
+    .nav-new i {
+        font-size: 30px;
+        display: block;
+        margin-bottom: -2px;
+        color: white;
+    }
+
+    .nav-new p {
+        margin: 15px 0 0;
+        font-size: 0.85rem;
+        color: #1e3a8a;
+    }
+
+    /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+    /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+    /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+    /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+    .header a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    @media (min-width: 768px) {
+        body {
+            background: #d1d5db;
+        }
+    }
+
+    .menu-icon-group {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        position: relative;
+    }
+
+    .header .header-name {
+        text-decoration: none;
+        color: #f9fafb;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+   .calendar-box {
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #fefefe;
+            box-shadow: inset 0 0 0 1px #eee;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .calendar-header h3 {
+            margin: 0;
+            color: #1d0c80;
+        }
+
+        .calendar-header button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #1d0c80;
+        }
+
+        .calendar-table {
+            width: 100%;
+            text-align: center;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .calendar-table td {
+            width: 40px !important;
+            height: 40px !important;
+            padding: 0 !important;
+            margin: 0 auto !important;
+            line-height: 40px !important;
+            border-radius: 50% !important;
+            vertical-align: middle !important;
+            text-align: center;
+        }
+
+        .calendar-table td:hover {
+            background: #bcc2c7;
+            color: white;
+        }
+
+        .calendar-table .active {
+            background: #1d0c80;
+            color: white;
+        }
+
+        .agenda-box {
+            margin-top: 20px;
+        }
+
+        .agenda-item {
+            background: #f3efff;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .agenda-location {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .agenda-title {
+            font-weight: 600;
+            color: #1d0c80;
+        }
+
+        .agenda-note {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .agenda-time {
+            font-weight: 500;
+            font-size: 13px;
+            color: #222;
+        }
+
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
+                    style="margin-left: 16px;">Agenda SPV</span></a>
+
+            <div class="menu-icon-group">
+                <a href="../spv/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Dinni</h5>
+                    </div>
+                    <hr />
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../spv/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+         <div class="calendar-box">
+                <div class="calendar-header">
+                    <h3><span id="month">January</span> <span id="year">2025</span></h3>
+                    <div>
+                        <button id="prev">&#10094;</button>
+                        <button id="next">&#10095;</button>
+                    </div>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body"></tbody>
+                </table>
+
+                <div class="agenda-box" id="agenda-box"></div>
+            </div>
+
+
+        <!-- Bottom Nav -->
+         <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+     const calendarBody = document.getElementById('calendar-body');
+        const monthLabel = document.getElementById('month');
+        const yearLabel = document.getElementById('year');
+        const agendaBox = document.getElementById('agenda-box');
+
+        const today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+
+
+        const months = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+        const agendas = {
+            '2025-07-23': [
+                {
+                    title: "Sharing Produk Banca",
+                    note: "Dengan Pak Anto",
+                    time: "09:00–11:00",
+                    location: "Ruang Rapat Lt.2"
+                },
+                {
+                    title: "Follow-Up Proposal Polis",
+                    note: "Pak Iwan",
+                    time: "13:00–14:00",
+                    location: "Zoom Meeting"
+                },
+                {
+                    title: "Janji Temu Prospect",
+                    note: "Hamidah",
+                    time: "15:00–16:00",
+                    location: "Kafe Bintaro"
+                }
+            ],
+            '2025-07-25': [
+                {
+                    title: "Meeting Internal",
+                    note: "Divisi Marketing",
+                    time: "10:00–12:00",
+                    location: "Ruang Diskusi Lt.3"
+                }
+            ]
+        };
+
+
+        function generateCalendar(month, year) {
+            calendarBody.innerHTML = "";
+            monthLabel.textContent = months[month];
+            yearLabel.textContent = year;
+
+            const firstDay = new Date(year, month).getDay();
+            const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+            let date = 1;
+            let firstActiveCell = null;
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement("td");
+                    if (i === 0 && j < firstDay) {
+                        cell.textContent = "";
+                    } else if (date > daysInMonth) {
+                        break;
+                    } else {
+                        cell.textContent = date;
+                        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                        cell.addEventListener("click", () => selectDate(dateStr, cell));
+
+                        if (agendas[dateStr]) {
+                            cell.classList.add("has-agenda");
+                            if (!firstActiveCell) {
+                                firstActiveCell = { cell, dateStr };
+                            }
+                        }
+
+                        date++;
+                    }
+                    row.appendChild(cell);
+                }
+                calendarBody.appendChild(row);
+            }
+
+            if (firstActiveCell) {
+                firstActiveCell.cell.classList.add("active");
+                selectDate(firstActiveCell.dateStr, firstActiveCell.cell);
+            } else {
+                agendaBox.innerHTML = `<p style="color:#999;">No agenda on this month.</p>`;
+            }
+        }
+
+        function selectDate(dateStr, cell) {
+            document.querySelectorAll(".calendar-table td").forEach(td => td.classList.remove("active"));
+            cell.classList.add("active");
+            showAgenda(dateStr);
+        }
+
+        function showAgenda(dateStr) {
+            agendaBox.innerHTML = "";
+            const items = agendas[dateStr];
+            if (items) {
+                items.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "agenda-item";
+                    div.innerHTML = `
+            <div>
+              <div class="agenda-title">${item.title}</div>
+              <div class="agenda-note">${item.note}</div>
+                  <div class="agenda-location"><i class="fas fa-map-marker-alt"></i> ${item.location || '-'}</div>
+            </div>
+            <div class="agenda-time">${item.time}</div>
+          `;
+                    agendaBox.appendChild(div);
+                });
+            } else {
+                agendaBox.innerHTML = `<p style="color:#999;">No agenda on this date.</p>`;
+            }
+        }
+
+        document.getElementById("prev").onclick = () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar(currentMonth, currentYear);
+        };
+
+        document.getElementById("next").onclick = () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        };
+
+
+        generateCalendar(currentMonth, currentYear);
+</script>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 400px;
+      min-height: 100vh;
+      background: white;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      background-color: #1e3a8a;
+      z-index: 100;
+    }
+
+    .header img {
+      height: 40px;
+    }
+
+    .menu-icon {
+      font-size: 20px;
+      color: #f9fafb;
+      cursor: pointer;
+      transition: color 0.3s;
+      margin-right: 1rem;
+    }
+
+    /* .menu-icon:hover {
+      color: #000;
+    } */
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 35px;
+      top: 40px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      width: 170px;
+      z-index: 100;
+      animation: fadeIn 0.2s ease-in-out;
+      padding: 10px 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .dropdown-header {
+      text-align: center;
+      padding: 12px 16px;
+    }
+
+    .dropdown-header p {
+      margin: 2px 0;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .dropdown-header .welcome-text {
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    .agent-role {
+      font-style: italic;
+      font-weight: 400;
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 6px 8px;
+      font-size: 14px;
+      color: #1e3a8a;
+      transition: background-color 0.25s, color 0.25s;
+      border-left: 4px solid transparent;
+    }
+
+    a+a {
+      margin-top: 4px;
+    }
+
+    .dropdown a:hover {
+      background-color: #f0f4ff;
+      border-left: 4px solid #1e3a8a;
+    }
+
+    .dropdown i {
+      font-size: 16px;
+      color: #1e3a8a;
+      width: 18px;
+      text-align: center;
+    }
+
+    .dropdown span {
+      flex: 1;
+      font-weight: 500;
+      /* margin-left: 1rem; */
+    }
+
+    .dropdown hr {
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1f2937;
+      padding: 0.5rem 1rem;
+      text-align: center;
+    }
+
+    .inbox-list {
+      padding: 0 1rem;
+      flex: 1;
+    }
+
+    .inbox-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .inbox-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .inbox-left i {
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      min-width: 18px;
+    }
+
+    .inbox-text {
+      line-height: 1.2;
+    }
+
+    .inbox-text b {
+      font-size: 0.95rem;
+      color: #111827;
+      display: block;
+    }
+
+    .inbox-text small {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .badge {
+      font-size: 0.65rem;
+      background: #e0e7ff;
+      color: #1e3a8a;
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .badge.open {
+      background: #fef9c3;
+      /* kuning lembut */
+      color: #92400e;
+    }
+
+    .badge.new {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .badge.solved {
+      background: #f3f4f6;
+      /* abu-abu muda */
+      color: #4b5563;
+    }
+
+    .notif-count {
+      font-size: 0.75rem;
+      color: #dc2626;
+      font-weight: bold;
+      padding-right: 5px;
+    }
+
+    .bottom-nav {
+      position: sticky;
+      /* position: relative; */
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #ccc;
+      /* display: flex; */
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 10px 0;
+      font-size: 12px;
+      z-index: 10;
+      margin-top: 3rem;
+      background: white;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-wrapper i {
+      color: #1e3a8a;
+    }
+
+    .nav-wrapper>div {
+      flex: 1;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #1e3a8a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-spacer {
+      flex: 0.5;
+    }
+
+
+    /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+    .nav-wrapper i {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+    .nav-wrapper p {
+      margin-top: 4px;
+      font-size: 0.85rem;
+    }
+
+    /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+    .nav-new {
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      text-decoration: none;
+      box-sizing: border-box;
+      border: none;
+      padding: 0;
+      transition: none;
+      touch-action: manipulation;
+      position: absolute;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .plus-btn {
+      background-color: #1e3a8a;
+      border-radius: 50%;
+      width: 53px;
+      height: 53px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      font-size: 30px;
+    }
+
+    .nav-new i {
+      font-size: 30px;
+      display: block;
+      margin-bottom: -2px;
+      color: white;
+    }
+
+    .nav-new p {
+      margin: 15px 0 0;
+      font-size: 0.85rem;
+      color: #1e3a8a;
+    }
+
+    /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+    /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+    /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+    /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+    .header a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header .header-name {
+      text-decoration: none;
+      color: #f9fafb;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background: #d1d5db;
+      }
+    }
+
+    .inbox-header {
+      display: flex;
+      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .inbox-tab {
+      background-color: #ffffff;
+      color: #1e3a8a;
+      border: 1px solid #d1d5db;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .inbox-tab:hover {
+      background-color: #e0e7ff;
+      border-color: #1e3a8a;
+    }
+
+    .inbox-tab.active {
+      background-color: #1e3a8a;
+      color: white;
+      border-color: #1e3a8a;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <a href="../spv/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> <span
+          style="margin-left: 16px;">Inbox</span></a>
+        
+      
+      <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+
+      <div class="dropdown" id="dropdownMenu">
+        <div class="dropdown-header">
+          <h3 class="welcome-text">Welcome</h3>
+          <h4 class="welcome-text">Dinni/h4>
+          <h5 class="agent-role">SPV</h5>
+        </div>
+        <hr />
+        <a href="#">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+        <a href="">
+          <i class="fas fa-user-shield"></i>
+          <span>Agent Rules</span>
+        </a>
+        <a href="#">
+          <i class="fas fa-question-circle"></i>
+          <span>FAQ</span>
+        </a>
+        <hr>
+        <a href="#">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Inbox List -->
+    <div class="inbox-header">
+      <button class="inbox-tab active">All</button>
+      <button class="inbox-tab">System</button>
+      <button class="inbox-tab">Team</button>
+      <button class="inbox-tab">Customer</button>
+    </div>
+
+
+    <div class="inbox-list">
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-envelope"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge new">Team</span>
+          </div>
+        </div>
+        <span class="notif-count">1</span>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-reply"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge open">Customer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-camera"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge new">Team</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-image"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge open">Customer</span>
+          </div>
+        </div>
+        <span class="notif-count">1</span>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-comment-dots"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge solved">System</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <i class="fas fa-check-circle"></i>
+          <div class="inbox-text">
+            <b>Hamidah</b>
+            <small>Selamat pagi</small><br />
+            <span class="badge solved">System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
+        </div>
+
+        <div class="nav-history">
+          <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <div class="nav-call">
+          <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+
+        <div class="nav-agen">
+          <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+        
+      </div>
+
+      <div class="nav-new">
+        <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  function toggleDropdown() {
+    const dropdown = document.getElementById('dropdownMenu');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+
+  window.addEventListener('click', function (e) {
+    const dropdown = document.getElementById('dropdownMenu');
+    const icon = document.querySelector('.menu-icon');
+    if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>

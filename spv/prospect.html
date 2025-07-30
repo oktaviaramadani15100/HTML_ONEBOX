@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prospect SPV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-prospect {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 70vh;
+        }
+
+        .prospectDetail {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            height: 70vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            width: 100px;
+        }
+
+        .menu-icon {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon i {
+            color: #f9fafb;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .title-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .title-row i {
+            font-size: 1.3rem;
+            color: #1e3a8a;
+            cursor: pointer;
+        }
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .filter-drawer.open {
+            right: 0;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #ef4444;
+        }
+
+        .filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .filter-content input,
+        .filter-content select,
+        .filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-content button:hover {
+            background-color: #374ba1;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            /* margin: 1rem; */
+            flex: 1;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 12px;
+        }
+
+        .prospect-table {
+            width: 100%;
+            border-collapse: separate;
+            min-width: 360px;
+            border-spacing: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .prospect-table thead {
+            background: #1e3a8a;
+            color: white;
+            font-weight: bold;
+        }
+
+        .prospect-table th,
+        .prospect-table td {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* .prospect-table tr:hover {
+            background-color: #f9f9f9;
+            cursor: pointer;
+        } */
+
+        .name-link {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+
+        @media screen and (max-width: 600px) {
+
+            .prospect-table th,
+            .prospect-table td {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+
+        .prospect-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .prospect-table tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .prospect-table td:first-child,
+        .prospect-table td:last-child {
+            text-align: left;
+        }
+
+        .prospect-table tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        .prospect-table td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        .prospect-table td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+
+        .bottom-nav {
+            position: sticky;
+            /* position: relative; */
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+        /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 0;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+            gap: 10px;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            /* margin-left: 1rem; */
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header-section {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+            display: block;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .ddlList-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .ddlList-row select {
+            flex: 1;
+            /* biar fleksibel */
+            min-width: 0;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #333;
+            height: 38px;
+        }
+
+        .go-btn {
+            height: 38px;
+            padding: 0 16px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .go-btn:hover {
+            background-color: #374ba1;
+        }
+
+        .profile {
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1rem 90px;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+        }
+
+        .profile2 {
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1rem 90px;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+            margin-top: -1rem;
+        }
+
+        .profile-icon {
+            font-size: 2.8rem;
+            color: #1e3a8a;
+        }
+
+        .profile-info {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .gender-icon {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-top: 1rem;
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .meta i {
+            color: #1e3a8a;
+            margin-right: 4px;
+        }
+
+        /* @media (max-width: 480px) {
+            .profile {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-icon {
+                font-size: 2.4rem;
+            }
+
+            .top-row {
+                flex-direction: row;
+            }
+        } */
+
+        .biodata {
+            padding: 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        .biodata-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .biodata-item {
+            flex: 1 1 45%;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            min-width: 140px;
+        }
+
+        .biodata-item .icon {
+            font-size: 1rem;
+            color: #1e3a8a;
+            margin-top: 0.2rem;
+        }
+
+        .biodata-item .label {
+            font-weight: bold;
+            color: #1e3a8a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .biodata-item .value {
+            color: #333;
+            font-size: 0.85rem;
+        }
+
+        .email-chat-header {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .email-chat-header strong {
+            font-size: 16px;
+        }
+
+        .status-badge {
+            background: green;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .email-chat-header small {
+            display: block;
+            color: #555;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .email-chat-body {
+            padding: 15px;
+            flex-grow: 1;
+            background: #f5f5f5;
+        }
+
+        .message-box {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .message-box.left {
+            justify-content: flex-start;
+        }
+
+        .message-box.right {
+            justify-content: flex-end;
+        }
+
+        .message-meta {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message-box.right .message-meta {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .avatar.agent-avatar {
+            background: #3f0071;
+        }
+
+        .avatar.user-avatar {
+            background: #999;
+        }
+
+        .sender-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .message-content {
+            background: #e4ddf9;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .message-box.right .message-content {
+
+            background: #eef6ff;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            text-align: right;
+        }
+
+        .email-reply-wrapper {
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            background: #fff;
+        }
+
+        .reply-input {
+            position: relative;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .reply-send-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 8px;
+            gap: 8px;
+        }
+
+        .attach-icon {
+            font-size: 18px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .reply-action-btn {
+            background: #1e3a8a;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+
+        .chat-icon {
+            font-size: 1rem;
+            margin-left: 1rem;
+        }
+
+        #status-prospect {
+            flex: 1;
+            padding: 18px 18px 9px;
+            box-sizing: border-box;
+        }
+
+        /* ===== Card Box Style ===== */
+        /* .section-box {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        } */
+
+        .section-box h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 6px;
+        }
+
+        /* ===== Info Fields ===== */
+        .info-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .info-field label {
+            font-weight: 600;
+            color: #555;
+            flex: 1;
+            padding-right: 8px;
+        }
+
+        .info-field span {
+            flex: 2;
+            text-align: right;
+            color: #222;
+        }
+
+        .section-box select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+
+        .interaction-form {
+            padding: 1rem;
+             border-radius: 12px;
+            background-color: #fefefe;
+            box-shadow: inset 0 0 0 1px #eee;
+            max-width: 600px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            margin-top: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0.2rem;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        .input-field,
+        textarea,
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .row>div {
+            flex: 1;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        input[type="radio"] {
+            accent-color: #2563eb;
+        }
+
+        .save-btn {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 1.7rem;
+            float: right;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-btn:hover {
+            background-color: #2563eb;
+        }
+
+        /* Responsive for Mobile */
+        @media screen and (max-width: 600px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .radio-group {
+                gap: 1rem;
+                flex-direction: column;
+            }
+
+            .save-btn {
+                width: 100%;
+                float: none;
+            }
+        }
+
+
+        .insured-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .insured-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 130px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .insured-row input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 150px;
+            max-width: 100%;
+        }
+
+        .section {
+            display: none;
+            padding: 1rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section {
+            width: 100%;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            color: #003366;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        .wizard-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #003366;
+        }
+
+        .wizard-buttons button:hover {
+            background-color: #002244;
+        }
+
+        .row-flex {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .insured-row2 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .insured-row2 label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 130px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .insured-row2 input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 150px;
+            max-width: 100%;
+        }
+
+        .btn-small {
+            background-color: #0047ba;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .btn-small:hover {
+            background-color: #003a9d;
+        }
+
+        .btn-group-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .btn-group-right-ddl {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .btn-group-right {
+                justify-content: flex-end;
+            }
+
+            .btn-small {
+                font-size: 13px;
+                padding: 8px 12px;
+                min-width: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span style="margin-left: 16px;">Interaction</span>
+            </span>
+
+            <div class="menu-icon-group">
+                <a href="../spv/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">SPV</h5>
+                    </div>
+                    <hr />
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../spv/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="table-wrapper" id="prospectList">
+            <table class="prospect-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Campaign</th>
+                        <th>Product</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
+                        <td>Mandiri Sehat</td>
+                        <td>Mandiri</td>
+                    </tr>
+                    <tr onclick="showDetail()">
+                        <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
+                        <td>MSIG Life Campaign</td>
+                        <td>Mandiri</td>
+                    </tr>
+                    <tr onclick="showDetail()">
+                        <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
+                        <td>Riplay</td>
+                        <td>Mandiri</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prospectDetail" id="prospectDetail" style="display:none">
+            <div class="header-section">
+                <div class="ddlList-row">
+                    <span class="section-title">Result</span>
+                    <select id="resultSelect" onchange="handleResultChange()">
+                        <option value="">--Pilih--</option>
+                        <option value="Thinking">Thinking</option>
+                        <option value="Send Browser">Send Browser</option>
+                        <option value="Simulation Policy">Simulation Policy</option>
+                        <option value="Entry Policy">Entry Policy</option>
+                        <option value="Not Interested">Not Interested</option>
+                    </select>
+                    <button class="go-btn" onclick="handleGo()">Go</button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content" id="profileContent">
+                <div class="profile">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="biodata">
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-birthday-cake icon"></i>
+                            <div>
+                                <span class="label">Birthday</span>
+                                <span class="value">12 Jan 1995</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <i class="fas fa-heart icon"></i>
+                            <div>
+                                <span class="label">Marital Status</span>
+                                <span class="value">Single</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-wallet icon"></i>
+                            <div>
+                                <span class="label">Income Range</span>
+                                <span class="value">5 - 10 juta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-chart-line icon"></i>
+                            <div>
+                                <span class="label">Avg Transaction</span>
+                                <span class="value">Rp 1.250.000</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <i class="fas fa-id-badge icon"></i>
+                            <div>
+                                <span class="label">Account Type</span>
+                                <span class="value">Kredit</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="biodata-item">
+                            <i class="fas fa-calendar-plus icon"></i>
+                            <div>
+                                <span class="label">Join At</span>
+                                <span class="value">03 Juli 2020</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item" style="margin-top: 21px;">
+                            <i class="fas fa-clock icon"></i>
+                            <div>
+                                <!-- <span class="label">Duration</span> -->
+                                <span class="value">5 years 2 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-prospect" id="chat-prospect" style="display: none;">
+            <div class="email-chat-header">
+                <div>
+                    <strong>Layla</strong>
+                    <span class="status-badge">Pending</span>
+                </div>
+                <small>#36311 | Email: agent01@ciptadra.com</small>
+            </div>
+
+            <div class="email-chat-body">
+
+                <div class="message-box left">
+                    <div class="message-meta">
+                        <div class="avatar user-avatar">b</div>
+                        <div>
+                            <div class="sender-name">broonshoot</div>
+                            <div class="message-content">apa keunggulan Onebox?</div>
+                            <div class="message-time">04 Dec 2024, 11:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-box right">
+                    <div class="message-meta">
+                        <!-- <div class="avatar agent-avatar">A</div> -->
+                        <div>
+                            <div class="sender-name">Agent</div>
+                            <div class="message-content">Onebox memudahkan integrasi semua channel
+                                komunikasi.</div>
+                            <div class="message-time">04 Dec 2024, 11:05</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-reply-wrapper">
+                <div class="reply-input">
+                    <textarea placeholder="Type your reply..."></textarea>
+                    <div class="reply-send-section">
+                        <i class="fas fa-paperclip attach-icon" onclick="triggerFileUpload()"></i>
+                        <input type="file" id="fileInput" style="display: none;" />
+                        <button class="reply-action-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-prospect" id="status-prospect" style="display: none;">
+            <div id="ThinkingSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="title">Appointment</div> -->
+                <form class="interaction-form">
+                    <label for="type-event">Type event:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="type-event" value="Meeting" checked> Meeting
+                        </label>
+                        <label>
+                            <input type="radio" name="type-event" value="Call"> Call
+                        </label>
+                        <label>
+                            <input type="radio" name="type-event" value="Follow Up"> Follow Up
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="custom-form">
+                            <label for="date2">Date:</label>
+                            <input type="date" id="date2" class="form-input">
+                        </div>
+                        <div>
+                            <label for="reminder">Reminder:</label>
+                            <select id="reminder" class="input-field">
+                                <option>--Select Type--</option>
+                                <option value="H">On the day (H)</option>
+                                <option value="H-1">One day before (H-1)</option>
+                                <option value="H-5">Five days before (H-5)</option>
+                                <option value="H-7">Seven days before (H-7)</option>
+                                <option value="H+1">One day after (H+1)</option>
+                                <option value="H+2">Two days after (H+2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" placeholder="Isi keterangan..." class="input-field"></textarea>
+
+                    <button class="save-btn" type="submit">SAVE</button>
+                </form>
+
+            </div>
+
+            <div id="SendBrowserSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label>Send Browser Via:</label>
+                <select>
+                    <option value="whatsapp">Share to WhatsApp</option>
+                    <option value="email">Share to Email</option>
+                </select>
+                <hr>
+                <iframe src="../spv/riplay_smile.pdf" width="100%" height="400px" style="margin-top: 1rem;"></iframe>
+            </div>
+
+
+            <div id="SimulationPolicySection" class="section-box" style="display:none">
+                <!-- <label>Action:</label>
+                <select disabled>
+                    <option value="form-policy" selected>Form Policy</option>
+                </select>
+                <div id="formPolicyContainer" style="margin-top:10px;"></div> -->
+
+                <div style="min-height:65vh">
+                    <div id="screen1">
+                        <div class="row-flex">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <select id="productSelect">
+                                    <option value="">Pilih Product</option>
+                                    <option value="Mandiri Sehat">Mandiri Sehat</option>
+                                    <option value="Mandiri Premier">Mandiri Premier</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Plan</label>
+                                <select id="planSelect">
+                                    <option value="">Pilih Plan</option>
+                                    <option value="Plan A">Plan A</option>
+                                    <option value="Plan B">Plan B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <label>Insured Section</label>
+
+                        <div class="insured-row2">
+                            <label>
+                                <input type="checkbox" id="main" />
+                                <span>Main Insured</span>
+                            </label>
+                            <input type="text" id="mainName" placeholder="..." />
+                        </div>
+
+                        <div class="insured-row2">
+                            <label>
+                                <input type="checkbox" id="spouse" />
+                                <span>Spouse</span>
+                            </label>
+                            <input type="text" id="spouseName" placeholder="..." />
+                        </div>
+
+                        <div class="insured-row2">
+                            <label>
+                                <input type="checkbox" id="dependant" />
+                                <span>Dependant</span>
+                            </label>
+                            <input type="text" id="dependantName" placeholder="..." />
+                        </div>
+
+                        <div class="insured-row2">
+                            <label><span>Total Insured</span></label>
+                            <input type="text" id="totalInsured" placeholder="..." />
+                        </div>
+
+                        <div class="btn-group-right">
+                            <button class="btn-small" onclick="validateScreen1AndGo()">Create Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="EntryPolicySection" class="section-box" style="display:none">
+                <!-- <label>Action:</label>
+                    <select disabled>
+                        <option value="form-policy" selected>Form Policy</option>
+                    </select>
+                    <div id="formPolicyContainer" style="margin-top:10px;"></div> -->
+                <form id="spajForm">
+                    <!-- Step 1 -->
+                    <div class="section active" id="step-1">
+                        <h3>1. Data Pemegang Polis</h3>
+                        <label>No. KTP / Paspor</label>
+                        <input type="text" required />
+                        <label>Nama Lengkap</label>
+                        <input type="text" required />
+                        <label>Tempat / Tanggal Lahir</label>
+                        <input type="text" required />
+                        <label>Jenis Kelamin</label>
+                        <select required>
+                            <option>Laki-laki</option>
+                            <option>Perempuan</option>
+                        </select>
+                        <label>Status Pernikahan</label>
+                        <select required>
+                            <option>Belum Menikah</option>
+                            <option>Menikah</option>
+                            <option>Cerai</option>
+                        </select>
+                        <label>Alamat Tempat Tinggal</label>
+                        <textarea required></textarea>
+                        <label>Telepon / HP</label>
+                        <input type="text" required />
+
+                        <label>Status Pernikahan</label>
+                        <select required>
+                            <option>Belum Menikah</option>
+                            <option>Menikah</option>
+                            <option>Cerai</option>
+                        </select>
+
+                        <label>Pekerjaan</label>
+                        <input type="text" required />
+                        <label>Nama Perusahaan</label>
+                        <input type="text" required />
+                        <label>Penghasilan per Bulan</label>
+                        <input type="text" required />
+
+                        <label>Tinggi & Berat Badan</label>
+                        <input type="text" placeholder="Contoh: 170 cm / 70 kg" />
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="section" id="step-2">
+                        <h3>2. Data Calon Tertanggung</h3>
+                        <div class="insured-row">
+                            <label>
+                                <input type="checkbox" id="main" />
+                                <span>Main Insured</span>
+                            </label>
+                        </div>
+                        <label>Nama Lengkap</label>
+                        <input type="text" />
+                        <label>Hubungan dengan Tertanggung</label>
+                        <input type="text" />
+                        <label>No. KTP</label>
+                        <input type="text" />
+                        <label>Alamat</label>
+                        <textarea></textarea>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="section" id="step-3">
+                        <h3>3. Data Ahli Waris</h3>
+                        <label>Nama Lengkap</label>
+                        <input type="text" required />
+                        <label>Hubungan</label>
+                        <input type="text" required />
+                        <label>Tanggal Lahir</label>
+                        <input type="date" required />
+                        <label>Persentase Manfaat (%)</label>
+                        <input type="number" required />
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="section" id="step-4">
+                        <h3>4. Informasi Produk</h3>
+                        <label>Nama Produk</label>
+                        <input type="text" required />
+                        <label>Uang Pertanggungan</label>
+                        <input type="text" required />
+                        <label>Premi per Bulan</label>
+                        <input type="text" required />
+                        <label>Rider Tambahan</label>
+                        <input type="text" />
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="section" id="step-5">
+                        <h3>5. Pembayaran & Kesehatan</h3>
+                        <label>Metode Pembayaran</label>
+                        <select required>
+                            <option>Debet</option>
+                            <option>Kredit</option>
+                        </select>
+                        <label>Nama Pemilik Rekening</label>
+                        <input type="text" />
+                        <label>No. Rekening / Kartu</label>
+                        <input type="text" />
+                        <label>Apakah Anda merokok?</label>
+                        <select>
+                            <option>Tidak</option>
+                            <option>Ya</option>
+                        </select>
+                        <label>Riwayat Penyakit</label>
+                        <textarea></textarea>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="section" id="step-6">
+                        <h3>6. Persetujuan & Agen</h3>
+                        <p>Saya menyatakan semua data di atas benar adanya.</p>
+                        <label>Tanggal Pengisian</label>
+                        <input type="date" required />
+                        <label>Nama & Tanda Tangan Tertanggung</label>
+                        <input type="text" required />
+                        <label>Nama Agen</label>
+                        <input type="text" required />
+                        <label>Kode Agen</label>
+                        <input type="text" required />
+                        <label>Unit / Cabang</label>
+                        <input type="text" />
+                    </div>
+                    <div class="section" id="step-7">
+                        <h3>7. Persetujuan</h3>
+                        <p>Dengan ini saya menyatakan bahwa seluruh informasi yang saya berikan adalah benar dan sesuai
+                            dengan
+                            keadaan sebenarnya.</p>
+
+                        <label>Tanggal Pengisian</label>
+                        <input type="date" required />
+
+                        <label>Nama & Tanda Tangan Calon Tertanggung</label>
+                        <input type="text" required />
+
+                        <label>Nama & Tanda Tangan Pemegang Polis</label>
+                        <input type="text" />
+                    </div>
+                    <div class="section" id="step-8">
+                        <h3>8. Data Agen</h3>
+                        <label>Nama Agen</label>
+                        <input type="text" required />
+
+                        <label>Kode Agen</label>
+                        <input type="text" required />
+
+                        <label>Unit / Cabang</label>
+                        <input type="text" />
+                    </div>
+                    <!-- Buttons -->
+                    <div class="wizard-buttons">
+                        <button type="button" onclick="prevStep()">Sebelumnya</button>
+                        <button type="button" onclick="nextStep()">Selanjutnya</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="NotInterestedSection" class="section-box" style="display:none">
+                <div class="profile2">
+                    <i class="fas fa-mars gender-icon" title="Male"></i>
+                    <div class="profile-info">
+                        <div class="top-row">
+                            <span class="name">Layla</span>
+                        </div>
+                        <div class="meta">
+                            <div>
+                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span class="chat-icon" onclick="toggleChat()">
+                                    <i class="fas fa-comment"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label>Reason:</label>
+                <select>
+                    <option value="too-many">Too many insurance</option>
+                    <option value="no-need">No need insured</option>
+                    <option value="financial">Financial</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.querySelector('.fa-ellipsis-v');
+
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        let currentView = 'list';
+
+        function showDetail() {
+            document.getElementById('prospectList').style.display = 'none';
+            document.getElementById('prospectDetail').style.display = 'block';
+            document.getElementById('chat-prospect').style.display = 'none';
+            currentView = 'detail';
+            document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Prospect Detail</span>
+    `;
+        }
+
+        function toggleChat() {
+            document.getElementById('prospectDetail').style.display = 'none';
+            document.getElementById('chat-prospect').style.display = 'block';
+            document.getElementById('prospectList').style.display = 'none';
+            currentView = 'chat';
+            document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Message</span>
+    `;
+        }
+
+        function handleBack() {
+            if (document.getElementById('status-prospect').style.display === 'block') {
+                const sectionIds = [
+                    "ThinkingSection",
+                    "SendBrowserSection",
+                    "SimulationPolicySection",
+                    "EntryPolicySection",
+                    "NotInterestedSection"
+                ];
+
+                sectionIds.forEach(id => {
+                    const section = document.getElementById(id);
+                    if (section) section.style.display = "none";
+                });
+
+                document.getElementById('status-prospect').style.display = 'none';
+                document.getElementById('prospectDetail').style.display = 'block';
+                return;
+            }
+
+            if (currentView === 'chat') {
+                document.getElementById('chat-prospect').style.display = 'none';
+                document.getElementById('prospectDetail').style.display = 'block';
+                document.getElementById('prospectList').style.display = 'none';
+                currentView = 'detail';
+                document.getElementById('headerTitle').innerHTML = `
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Prospect Detail</span>
+        `;
+            }
+            else if (currentView === 'detail') {
+                document.getElementById('prospectDetail').style.display = 'none';
+                document.getElementById('prospectList').style.display = 'block';
+                document.getElementById('chat-prospect').style.display = 'none';
+                currentView = 'list';
+
+                document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Interaction</span>
+    `;
+            }
+            else {
+                window.location.href = '../spv/home.html';
+            }
+        }
+
+
+        function triggerFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+
+
+        let selectedResult = '';
+
+        function handleResultChange() {
+            selectedResult = document.getElementById('resultSelect').value;
+        }
+
+        function handleGo() {
+            const selectedValue = document.getElementById("resultSelect").value;
+
+            const sectionMap = {
+                "Thinking": "ThinkingSection",
+                "Send Browser": "SendBrowserSection",
+                "Simulation Policy": "SimulationPolicySection",
+                "Entry Policy": "EntryPolicySection",
+                "Not Interested": "NotInterestedSection"
+            };
+
+            // Sembunyikan semua section terlebih dahulu
+            Object.values(sectionMap).forEach(id => {
+                const section = document.getElementById(id);
+                if (section) section.style.display = "none";
+            });
+
+            // Tampilkan section sesuai pilihan
+            if (sectionMap[selectedValue]) {
+                document.getElementById("prospectDetail").style.display = "none";
+                document.getElementById("status-prospect").style.display = "block";
+                document.getElementById(sectionMap[selectedValue]).style.display = "block";
+            }
+        }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = (`0${date.getMonth() + 1}`).slice(-2);
+            const day = (`0${date.getDate()}`).slice(-2);
+            return `${year}-${month}-${day}`;
+        }
+
+        const today = new Date();
+        const sevenDaysLater = new Date(today);
+        sevenDaysLater.setDate(today.getDate() + 7);
+
+        document.getElementById("date2").value = formatDate(sevenDaysLater);
+
+        let currentStep = 1;
+        const totalSteps = 8;
+
+        function showStep(step) {
+            document.querySelectorAll('.section').forEach((section) => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+
+            // Ubah tombol jika di akhir
+            const nextBtn = document.querySelector('.wizard-buttons button:last-child');
+            if (step === totalSteps) {
+                nextBtn.textContent = 'Kirim';
+                nextBtn.setAttribute('type', 'submit');
+            } else {
+                nextBtn.textContent = 'Selanjutnya';
+                nextBtn.setAttribute('type', 'button');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
+    </script>
+</body>
+
+</html>
