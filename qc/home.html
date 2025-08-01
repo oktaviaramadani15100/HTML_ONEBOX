@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSIG Agent Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: -1rem;
+            background-color: white;
+            z-index: 100;
+            background-color: #1e3a8a;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .header .text-right {
+            margin-left: 8rem;
+        }
+
+        .header .text-right p:first-child {
+            color: red;
+            font-weight: bold;
+        }
+
+        .header .text-right p:last-child {
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-top: -4px;
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+
+        }
+
+        .menu-icon-group i {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            /* margin-left: 1rem; */
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .info-box img {
+            width: 13rem;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .menu-grid {
+            display: grid;
+             grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 12px;
+            padding: 12px 16px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #1e3a8a;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+            max-width: 90px;
+        }
+
+        .menu-item:hover {
+            background-color: #f3f0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .menu-item i {
+            font-size: 27px;
+            margin-bottom: 6px;
+            color: #1e3a8a;
+        }
+
+        .menu-item p {
+            margin: 0;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .menu-grid a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media screen and (max-width: 480px) {
+            .menu-item {
+                padding: 10px 4px;
+            }
+
+            .menu-item i {
+                font-size: 22px;
+            }
+
+            .menu-item p {
+                font-size: 12px;
+            }
+        }
+
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-section {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .slider-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-card {
+            flex: 0 0 250px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: start;
+            overflow: hidden;
+        }
+
+        .slider-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .title {
+            font-weight: bold;
+            padding: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .price {
+            padding: 0 10px 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* === DOTS === */
+        .dots {
+            text-align: center;
+            z-index: 30;
+        }
+
+        .dots button {
+            height: 8px;
+            width: 8px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dots button.active {
+            background-color: #333;
+        }
+
+        /* === BOTTOM NAV === */
+
+        .bottom-nav {
+            position: sticky;
+            /* position: relative; */
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+        /* .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        } */
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+/* 
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        } */
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+        /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+        @media screen and (min-width: 768px) {
+            body {
+                background-color: #e5e5e5;
+            }
+        }
+
+        .read-more {
+            padding: 0 10px 10px;
+            text-align: right;
+        }
+
+        .read-more a {
+            color: #1e40af;
+            font-size: 0.8rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <img src="../img/my-image.png" alt="MSIG Logo" />
+            <div class="menu-icon-group">
+                <a href="../agent/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
+                    <hr />
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../agent/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <img src="../img/information.jpg" alt="">
+        </div>
+
+        <!-- Cards / Slider -->
+        <div class="slider-container">
+            <div class="slider-section" id="slider">
+
+                <!-- Card 1 -->
+                <div class="slider-card">
+                    <img src="../img/knowlage6.webp" alt="Slider 1" />
+                    <div class="title">RIPLAY Smile Ultima Term Life</div>
+                    <div class="price">Produk perlindungan jiwa berjangka yang membantu keluarga Anda tetap aman secara
+                        finansial.</div>
+                    <div class="read-more"><a
+                            href="https://shamidah17.github.io/riplay-smile-doc/Riplay_Smile%20Ultima%20Term%20Life.pdf">Baca
+                            Selengkapnya</a></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="slider-card">
+                    <img src="../img/knowlage7.jpg" alt="Slider 2" />
+                    <div class="title">Kenali MSIG Life: Solusi Asuransi Jiwa</div>
+                    <div class="price">Kenali manfaat perlindungan jiwa dan investasi yang diberikan oleh MSIG Life
+                        Indonesia.</div>
+                    <div class="read-more"><a href="https://www.msiglife.co.id/produk/kategori/asuransi-jiwa">Baca
+                            Selengkapnya</a></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="slider-card">
+                    <img src="../img/knowlage8.jpg" alt="Slider 3" />
+                    <div class="title">Profil MSIG Life Indonesia</div>
+                    <div class="price">Kenali sejarah, komitmen, dan layanan terbaik dari perusahaan MSIG Life.</div>
+                    <div class="read-more"><a href="https://www.msiglife.co.id/tentang-kami/profil-perusahaan">Baca
+                            Selengkapnya</a></div>
+                </div>
+
+            </div>
+            <div class="dots" id="dots"></div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-call">
+                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../qc/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <!-- <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div> -->
+        </div>
+
+</body>
+
+</html>
+
+<script>
+    const slider = document.getElementById('slider');
+    const dotsContainer = document.getElementById('dots');
+    const cards = slider.querySelectorAll('.slider-card');
+    let currentIndex = 0;
+
+    cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.addEventListener('click', () => scrollToIndex(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    updateDots();
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        scrollToIndex(currentIndex);
+    }, 4000);
+
+    function scrollToIndex(index) {
+        slider.scrollTo({
+            left: cards[index].offsetLeft - slider.offsetLeft,
+            behavior: 'smooth'
+        });
+        currentIndex = index;
+        updateDots();
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+</script>

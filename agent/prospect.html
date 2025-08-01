@@ -1070,6 +1070,132 @@
             font-weight: 600;
         }
 
+        .checkboxfix {
+            width: auto !important;
+        }
+
+        .insuredlist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .insuredlist-table thead {
+            background: #0047ba;
+            color: white;
+        }
+
+        .insuredlist-table th,
+        .insuredlist-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        .totalPremi-section {
+            padding-top: 18px;
+        }
+
+        .totalPremi-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        .product-benefit-section {
+            padding-top: 18px;
+            margin-top: 12px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .product-benefit-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #0047ba;
+        }
+
+        .product-benefit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            flex: 1;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .plan-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .plan-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.85rem;
+        }
+
+        .product-benefit-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .product-benefit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .product-benefit-table th,
+        .product-benefit-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .product-benefit-table thead {
+            background-color: #bfdbfe;
+            color: #000;
+        }
+
+        .product-benefit-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .import-btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .btn-import {
+            background-color: #3b82f6;
+            color: #fff;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-import:hover {
+            background-color: #2563eb;
+        }
+
         input,
         select,
         textarea {
@@ -1272,7 +1398,7 @@
                     <select id="resultSelect" onchange="handleResultChange()">
                         <option value="">--Pilih--</option>
                         <option value="Thinking">Thinking</option>
-                        <option value="Send Browser">Send Browser</option>
+                        <option value="Send Brosure">Send Brosure</option>
                         <option value="Simulation Policy">Simulation Policy</option>
                         <option value="Entry Policy">Entry Policy</option>
                         <option value="Not Interested">Not Interested</option>
@@ -1481,7 +1607,7 @@
 
             </div>
 
-            <div id="SendBrowserSection" class="section-box" style="display:none">
+            <div id="SendBrosureSection" class="section-box" style="display:none">
                 <div class="profile2">
                     <i class="fas fa-mars gender-icon" title="Male"></i>
                     <div class="profile-info">
@@ -1502,7 +1628,7 @@
                         </div>
                     </div>
                 </div>
-                <label>Send Browser Via:</label>
+                <label>Send Brosure Via:</label>
                 <select>
                     <option value="whatsapp">Share to WhatsApp</option>
                     <option value="email">Share to Email</option>
@@ -1545,7 +1671,7 @@
 
                         <div class="insured-row2">
                             <label>
-                                <input type="checkbox" id="main" />
+                                <input class="checkboxfix" type="checkbox" id="main" />
                                 <span>Main Insured</span>
                             </label>
                             <input type="text" id="mainName" placeholder="..." />
@@ -1553,7 +1679,7 @@
 
                         <div class="insured-row2">
                             <label>
-                                <input type="checkbox" id="spouse" />
+                                <input class="checkboxfix" type="checkbox" id="spouse" />
                                 <span>Spouse</span>
                             </label>
                             <input type="text" id="spouseName" placeholder="..." />
@@ -1561,7 +1687,7 @@
 
                         <div class="insured-row2">
                             <label>
-                                <input type="checkbox" id="dependant" />
+                                <input class="checkboxfix" type="checkbox" id="dependant" />
                                 <span>Dependant</span>
                             </label>
                             <input type="text" id="dependantName" placeholder="..." />
@@ -1569,11 +1695,176 @@
 
                         <div class="insured-row2">
                             <label><span>Total Insured</span></label>
-                            <input type="text" id="totalInsured" placeholder="..." />
+                            <input class="checkboxfix" type="text" id="totalInsured" placeholder="..." />
                         </div>
 
                         <div class="btn-group-right">
                             <button class="btn-small" onclick="validateScreen1AndGo()">Create Data</button>
+                        </div>
+                    </div>
+                    <div id="screen2" style="display: none;">
+                        <table class="insuredlist-table">
+                            <thead>
+                                <tr>
+                                    <th>Insured Type</th>
+                                    <th>Gender</th>
+                                    <th>Usia</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>imal</td>
+                                    <td>female</td>
+                                    <td>50 th</td>
+                                    <td><i class="fas fa-trash action-icon"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-group-right">
+                            <button class="btn-small">Clear Data</button>
+                            <button class="btn-small" onclick="calculateAndGoToScreen3()">Calculate</button>
+                        </div>
+                    </div>
+                    <div id="screen3" style="display: none;">
+                        <div class="existing-section">
+                            <h3>Existing</h3>
+                            <div class="row-flex-existing">
+                                <div class="form-group-existing">
+                                    <label>Product</label>
+                                    <select id="existingProduct">
+                                        <option value="">Pilih Product</option>
+                                        <option value="Mandiri Sehat">Mandiri Sehat</option>
+                                        <option value="Mandiri Premier">Mandiri Premier</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group-existing">
+                                    <label>Plan</label>
+                                    <select id="existingPlan">
+                                        <option value="">Pilih Plan</option>
+                                        <option value="Plan A">Plan A</option>
+                                        <option value="Plan B">Plan B</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group-payment">
+                                <label>Payment mode</label>
+                                <div class="form-group-ddl">
+                                    <select class="ddl-payament" id="paymentMode">
+                                        <option value="">Pilih</option>
+                                        <option value="Yearly">Yearly</option>
+                                        <option value="Monthly">Monthly</option>
+                                    </select>
+                                    <div class="btn-group-right-dll">
+                                        <button class="btn-small" onclick="toScreen4()">Re-Calculate</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="compare-section">
+                            <h3>Compare</h3>
+                            <div class="row-flex-compare">
+                                <div class="form-group-compare">
+                                    <label>Plan</label>
+                                    <div class="compare-controls">
+                                        <select class="select-compare">
+                                            <option>Pilih</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-compare">
+                                    <label>Payment Mode</label>
+                                    <div class="compare-controls">
+                                        <select class="select-compare">
+                                            <option>Pilih</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group-right">
+                                <button class="btn-small" onclick="compareAction()">Compare</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="screen4" style="display: none;">
+                        <div class="totalPremi-section">
+                            <h3>Total Premium</h3>
+                            <div class="table-wrapper-totalpremium">
+                                <table class="insuredlist-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Insured Type</th>
+                                            <th>Gender/Usia</th>
+                                            <th>Yearly</th>
+                                            <th>Montly</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Spouse</td>
+                                            <td>Female/37th</td>
+                                            <td>Rp 700.000</td>
+                                            <td>Rp 100.000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="product-benefit-section">
+                            <h3>Product Benefit</h3>
+                            <div class="product-benefit-header">
+                                <p class="product-name" id="finalProduct">Product : -</p>
+                                <div class="plan-select-wrapper">
+                                    <label for="plan">Plan:</label>
+                                    <select id="finalPlan" class="plan-select">
+                                        <option>Pilih</option>
+                                        <option value="Plan A">Plan A</option>
+                                        <option value="Plan B">Plan B</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="product-benefit-table-wrapper">
+                                <table class="product-benefit-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>free rumah sakit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>free rumah sakit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>free rumah sakit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>free rumah sakit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>free rumah sakit</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="import-btn-wrapper">
+                                <button class="btn-import">Import data</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1809,6 +2100,47 @@
     </div>
 
     <script>
+        function showScreen(id) {
+            ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
+                document.getElementById(screen).style.display = "none";
+            });
+            document.getElementById(id).style.display = "block";
+        }
+
+        function validateScreen1AndGo() {
+            const product = document.getElementById("productSelect").value;
+            const plan = document.getElementById("planSelect").value;
+
+            if (product && plan) {
+                // Simpan data ke session
+                sessionStorage.setItem("product", product);
+                sessionStorage.setItem("plan", plan);
+
+                showScreen("screen2");
+            } else {
+                alert("Harap isi Product dan Plan terlebih dahulu.");
+            }
+        }
+
+        function calculateAndGoToScreen3() {
+            showScreen("screen3");
+
+            // Isi kembali dropdown existing di screen3
+            document.getElementById("existingProduct").value = sessionStorage.getItem("product");
+            document.getElementById("existingPlan").value = sessionStorage.getItem("plan");
+        }
+
+        function toScreen4() {
+            showScreen("screen4");
+
+            // Tampilkan product dan plan
+            document.getElementById("finalProduct").innerText = "Product : " + sessionStorage.getItem("product");
+            document.getElementById("finalPlan").value = sessionStorage.getItem("plan");
+        }
+
+        function compareAction() {
+            alert("Perbandingan berhasil dijalankan.");
+        }
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -1849,7 +2181,7 @@
             if (document.getElementById('status-prospect').style.display === 'block') {
                 const sectionIds = [
                     "ThinkingSection",
-                    "SendBrowserSection",
+                    "SendBrosureSection",
                     "SimulationPolicySection",
                     "EntryPolicySection",
                     "NotInterestedSection"
@@ -1862,6 +2194,13 @@
 
                 document.getElementById('status-prospect').style.display = 'none';
                 document.getElementById('prospectDetail').style.display = 'block';
+
+                // ✅ Tambahkan baris ini untuk reset judul
+                document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">Prospect Detail</span>
+        `;
+
                 return;
             }
 
@@ -1870,8 +2209,10 @@
                 document.getElementById('prospectDetail').style.display = 'block';
                 document.getElementById('prospectList').style.display = 'none';
                 currentView = 'detail';
+
                 document.getElementById('headerTitle').innerHTML = `
-                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Prospect Detail</span>
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">Prospect Detail</span>
         `;
             }
             else if (currentView === 'detail') {
@@ -1881,8 +2222,9 @@
                 currentView = 'list';
 
                 document.getElementById('headerTitle').innerHTML = `
-        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Interaction</span>
-    `;
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">Interaction</span>
+        `;
             }
             else {
                 window.location.href = '../agent/home.html';
@@ -1906,7 +2248,7 @@
 
             const sectionMap = {
                 "Thinking": "ThinkingSection",
-                "Send Browser": "SendBrowserSection",
+                "Send Brosure": "SendBrowserSection",
                 "Simulation Policy": "SimulationPolicySection",
                 "Entry Policy": "EntryPolicySection",
                 "Not Interested": "NotInterestedSection"
@@ -1923,6 +2265,19 @@
                 document.getElementById("prospectDetail").style.display = "none";
                 document.getElementById("status-prospect").style.display = "block";
                 document.getElementById(sectionMap[selectedValue]).style.display = "block";
+                // ✅ Header title map dan update
+                const headerTitleMap = {
+                    "Thinking": "Thinking Section",
+                    "Send Browser": "Send via Browser",
+                    "Simulation Policy": "Simulation Policy",
+                    "Entry Policy": "Entry Policy Form",
+                    "Not Interested": "Not Interested Reason"
+                };
+
+                document.getElementById("headerTitle").innerHTML = `
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">${headerTitleMap[selectedValue]}</span>
+        `;
             }
         }
 

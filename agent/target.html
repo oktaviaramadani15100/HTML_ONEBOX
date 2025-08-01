@@ -155,6 +155,34 @@
             }
         }
 
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #1e3a8a;
+            background-color: white;
+            color: #1e3a8a;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
         .header .header-name {
             text-decoration: none;
             color: #1e3a8a;
@@ -169,8 +197,9 @@
         }
 
         .content h2 {
-            font-size: 21px;
+            font-size: 15px;
             margin-bottom: 1rem;
+            margin-top: 1rem;
         }
 
         .row-content {
@@ -187,9 +216,10 @@
             border-radius: 4px;
             overflow: hidden;
             width: 100%;
-            max-width: 140px;
+            max-width: inherit;
+            margin-right: 11rem;
             /* ubah ukuran maksimal */
-            height: 34px;
+            height: 27px;
             /* atur tinggi agar lebih ramping */
         }
 
@@ -245,25 +275,70 @@
         }
 
         .table-wrapper {
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             overflow-x: auto;
+            margin-top: 12px;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            min-width: 360px;
+            border-spacing: 0;
         }
 
         thead {
             background: #1e3a8a;
             color: white;
+            font-weight: bold;
         }
 
         th,
         td {
-            padding: 8px;
+            padding: 10px 12px;
             font-size: 0.85rem;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* thead th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        thead th:last-child {
+            border-top-right-radius: 12px;
+        } */
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .bottom-nav {
@@ -522,7 +597,11 @@
                         style="opacity:0; position:absolute; left:0; top:0;">
                 </div>
             </div>
-
+            <div class="filter-buttons" style="display: flex; gap: 8px; padding: 1rem;">
+                <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+                <button class="filter-btn" onclick="filterCategory('mandiri')">Mandiri Sehat</button>
+                <button class="filter-btn" onclick="filterCategory('asuransi')">Asuransi Hebat</button>
+            </div>
             <!-- Table -->
             <div class="table-wrapper">
                 <table>
@@ -533,7 +612,7 @@
                             <th>Target</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <tr>
                             <td>July 2025</td>
                             <td>Mandiri Sehat</td>
@@ -541,15 +620,16 @@
                         </tr>
                         <tr>
                             <td>July 2025</td>
-                            <td>Mandiri Sehat</td>
-                            <td>Rp 700.000</td>
+                            <td>Asuransi Hebat</td>
+                            <td>Rp 500.000</td>
                         </tr>
                         <tr>
-                            <td>July 2025</td>
-                            <td>Mandiri Sehat</td>
-                            <td>Rp 700.000</td>
+                            <td>July 2024</td>
+                            <td>Asuransi Hebat</td>
+                            <td>Rp 500.000</td>
                         </tr>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -588,6 +668,27 @@
     </div>
 
     <script>
+        function filterCategory(category) {
+            // update active class
+            const buttons = document.querySelectorAll(".filter-btn");
+            buttons.forEach(btn => btn.classList.remove("active"));
+            const activeBtn = [...buttons].find(btn => btn.innerText.toLowerCase().includes(category));
+            if (activeBtn) activeBtn.classList.add("active");
+
+            const rows = document.querySelectorAll("#tableBody tr");
+
+            rows.forEach(row => {
+                const campaign = row.cells[1].innerText.toLowerCase();
+
+                if (category === 'all') {
+                    row.style.display = '';
+                } else if (campaign.includes(category)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
         function openCalendar() {
             const input = document.getElementById("hiddenDateInput");
             input.showPicker?.(); // support modern browser

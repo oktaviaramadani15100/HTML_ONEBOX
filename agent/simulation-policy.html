@@ -654,7 +654,9 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> Simulasi Policy</a>
+            <a href="#" class="header-name" id="back-button"> 
+  <i class="fas fa-arrow-left"></i> Simulasi Policy
+</a>
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
@@ -932,6 +934,40 @@
 </html>
 
 <script>
+     let currentScreen = 1;
+
+    function showScreen(id) {
+        currentScreen = id;
+        document.querySelectorAll('.screen').forEach(el => el.style.display = 'none');
+        document.getElementById('screen' + id).style.display = 'block';
+    }
+
+    function validateScreen1AndGo() {
+        // validasi sesuai kebutuhan
+        showScreen(2);
+    }
+
+    function calculateAndGoToScreen3() {
+        showScreen(3);
+    }
+
+    function toScreen4() {
+        showScreen(4);
+    }
+
+    function compareAction() {
+        alert('Compare action triggered');
+    }
+
+    document.getElementById('back-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (currentScreen > 1) {
+            showScreen(currentScreen - 1);
+        } else {
+            // Jika di screen 1, redirect ke home.html
+            window.location.href = "../agent/home.html";
+        }
+    });
     function showScreen(id) {
         ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
             document.getElementById(screen).style.display = "none";
