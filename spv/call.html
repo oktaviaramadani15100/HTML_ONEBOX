@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Target</title>
+    <title>Call SPV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * {
@@ -45,9 +45,6 @@
 
         .header img {
             height: 53px;
-            max-width: 100%;
-            object-fit: contain;
-            display: block;
         }
 
         .menu-icon {
@@ -114,7 +111,7 @@
         }
 
         a+a {
-            margin-top: 4px; 
+            margin-top: 4px;
             /* jarak antar link */
         }
 
@@ -133,7 +130,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            /* margin-left: 1rem; */
         }
 
         .dropdown hr {
@@ -155,190 +151,11 @@
             }
         }
 
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
-            padding-left: 1rem;
-        }
-
-        .filter-btn {
-            padding: 6px 12px;
-            border: 1px solid #1e3a8a;
-            background-color: white;
-            color: #1e3a8a;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .filter-btn:hover {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-        .filter-btn.active {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #1e3a8a;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
         .content {
             flex: 1;
-            /* padding: 1rem; */
-            padding-bottom: 90px;
-        }
-
-        .content h2 {
-            font-size: 15px;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        .row-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-            padding-left: 1rem;
-        }
-
-        .date-picker {
-            display: flex;
-            border: 1px solid black;
-            border-radius: 4px;
-            overflow: hidden;
-            width: 100%;
-            max-width: inherit;
-            margin-right: 11rem;
-            /* ubah ukuran maksimal */
-            height: 27px;
-            /* atur tinggi agar lebih ramping */
-        }
-
-        .date-display {
-            flex: 1;
-            padding: 0.3rem 0.5rem;
-            /* lebih kecil */
-            background: white;
-            font-size: 0.8rem;
-            /* kecilkan font */
-            display: flex;
-            align-items: center;
-        }
-
-        .calendar-btn {
-            width: 34px;
-            /* kecilkan lebar tombol */
-            height: 100%;
-            background: white;
-            border-left: 1px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .date-display {
-            flex: 1;
-            padding: 0.6rem;
-            background: white;
-            font-size: 0.95rem;
-        }
-
-        .calendar-btn {
-            width: 40px;
-            background: white;
-            border-left: 2px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        #hiddenDateInput {
-            position: absolute;
-            opacity: 0;
-            pointer-events: auto;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            z-index: 2;
-        }
-
-        .table-wrapper {
-            width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow-x: auto;
-            margin-top: 12px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
-        }
-
-        thead {
-            background: #1e3a8a;
-            color: white;
-            font-weight: bold;
-        }
-
-        th,
-        td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
-            text-align: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        /* thead th:first-child {
-            border-top-left-radius: 12px;
-        }
-
-        thead th:last-child {
-            border-top-right-radius: 12px;
-        } */
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        td:first-child,
-        td:last-child {
-            text-align: left;
-        }
-
-        tbody tr:hover {
-            background-color: #e0f2fe;
-            transition: background-color 0.3s ease;
-        }
-
-        td[onclick] {
-            color: #1d4ed8;
-            font-weight: 500;
-        }
-
-        td[onclick]:hover {
-            text-decoration: underline;
-            color: #1e40af;
-            cursor: pointer;
-            text-decoration: none;
+            /* padding: 1rem;
+            padding-bottom: 90px; */
+            /* position: relative; */
         }
 
         .bottom-nav {
@@ -536,11 +353,83 @@
             font-weight: bold;
         }
 
-        /* .menu-icon-group i {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        } */
+        .dial-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .number-display {
+            height: 50px;
+            font-size: 22px;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            color: #111827;
+            display: flex;
+            justify-content: space-between;
+            /* border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); */
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            justify-items: center;
+            margin-bottom: 30px;
+            margin-top: 1rem;
+        }
+
+        .key {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #111827;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .key small {
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        .call-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .call-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #10b981;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+       
     </style>
 </head>
 
@@ -548,25 +437,25 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">Target</span></a>
+            <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
+                    style="margin-left: 16px;">Activity Call</span></a>
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../spv/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
                     <div class="dropdown-header">
                         <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">SPV</h5>
                     </div>
                     <hr />
                     <a href="#">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
                     </a>
@@ -586,76 +475,60 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="row-content">
-                <h2>Period</h2>
-                <div class="date-picker" style="position: relative;">
-                    <div id="dateValue" class="date-display">Select Month</div>
-                    <div class="calendar-btn" onclick="openCalendar()">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <input type="month" id="hiddenDateInput" onchange="setMonth(this.value)"
-                        style="opacity:0; position:absolute; left:0; top:0;">
+            <div class="dial-container">
+                <div class="number-display" id="numberDisplay">
+                    <span id="numberText">+62</span>
+                    <span id="clearIcon" style="display:none; cursor:pointer; margin-left: auto;"
+                        onclick="clearNumber()">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+
+                <div class="keypad">
+                    <div class="key" onclick="appendNumber('1')">1</div>
+                    <div class="key" onclick="appendNumber('2')">2<br><small>ABC</small></div>
+                    <div class="key" onclick="appendNumber('3')">3<br><small>DEF</small></div>
+                    <div class="key" onclick="appendNumber('4')">4<br><small>GHI</small></div>
+                    <div class="key" onclick="appendNumber('5')">5<br><small>JKL</small></div>
+                    <div class="key" onclick="appendNumber('6')">6<br><small>MNO</small></div>
+                    <div class="key" onclick="appendNumber('7')">7<br><small>PQRS</small></div>
+                    <div class="key" onclick="appendNumber('8')">8<br><small>TUV</small></div>
+                    <div class="key" onclick="appendNumber('9')">9<br><small>WXYZ</small></div>
+                    <div class="key" onclick="appendNumber('*')">*</div>
+                    <div class="key" onclick="appendNumber('0')">0</div>
+                    <div class="key" onclick="appendNumber('#')">#</div>
+                </div>
+
+                <div class="call-buttons">
+                    <!-- <div class="call-btn red" onclick="clearNumber()"><i class="fas fa-times"></i></div> -->
+                    <div class="call-btn" onclick="callNumber()"><i class="fas fa-phone"></i></div>
                 </div>
             </div>
-            <div class="filter-buttons" style="display: flex; gap: 8px; padding: 1rem;">
-                <button class="filter-btn active" onclick="filterCategory('all')">All</button>
-                <button class="filter-btn" onclick="filterCategory('mandiri')">Mandiri Sehat</button>
-                <button class="filter-btn" onclick="filterCategory('asuransi')">Asuransi Hebat</button>
-            </div>
-            <!-- Table -->
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Period</th>
-                            <th>Campaign</th>
-                            <th>Target</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr>
-                            <td>July 2025</td>
-                            <td>Mandiri Sehat</td>
-                            <td>Rp 700.000</td>
-                        </tr>
-                        <tr>
-                            <td>July 2025</td>
-                            <td>Asuransi Hebat</td>
-                            <td>Rp 500.000</td>
-                        </tr>
-                        <tr>
-                            <td>July 2024</td>
-                            <td>Asuransi Hebat</td>
-                            <td>Rp 500.000</td>
-                        </tr>
-                    </tbody>
 
-                </table>
-            </div>
         </div>
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
 
                 <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
                     <p>History</p>
                 </div>
 
                 <div class="nav-spacer"></div>
 
                 <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
                     <p>Call</p>
                 </div>
 
-                <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                 <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
@@ -666,61 +539,50 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function filterCategory(category) {
-            // update active class
-            const buttons = document.querySelectorAll(".filter-btn");
-            buttons.forEach(btn => btn.classList.remove("active"));
-            const activeBtn = [...buttons].find(btn => btn.innerText.toLowerCase().includes(category));
-            if (activeBtn) activeBtn.classList.add("active");
-
-            const rows = document.querySelectorAll("#tableBody tr");
-
-            rows.forEach(row => {
-                const campaign = row.cells[1].innerText.toLowerCase();
-
-                if (category === 'all') {
-                    row.style.display = '';
-                } else if (campaign.includes(category)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-        function openCalendar() {
-            const input = document.getElementById("hiddenDateInput");
-            input.showPicker?.(); // support modern browser
-            input.focus();
-        }
-
-        function setMonth(value) {
-            const [year, month] = value.split("-");
-            const date = new Date(`${year}-${month}-01`);
-
-            const formatted = date.toLocaleDateString('en-GB', {
-                month: 'long',
-                year: 'numeric'
-            });
-
-            document.getElementById("dateValue").innerText = formatted;
-        }
-
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        window.addEventListener('click', function (e) {
-            const dropdown = document.getElementById('dropdownMenu');
-            const icon = document.querySelector('.fa-ellipsis-v');
-
-            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-                dropdown.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 
 </html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    const numberDisplay = document.getElementById('numberDisplay');
+
+    function appendNumber(num) {
+        const numberText = document.getElementById('numberText');
+        if (numberText.innerText === '+62') {
+            numberText.innerText = '+62' + num;
+        } else {
+            numberText.innerText += num;
+        }
+
+        // Tampilkan ikon clear jika ada lebih dari +62
+        const clearIcon = document.getElementById('clearIcon');
+        clearIcon.style.display = numberText.innerText.length > 3 ? 'inline' : 'none';
+    }
+
+    function clearNumber() {
+        const numberText = document.getElementById('numberText');
+        numberText.innerText = '+62';
+        document.getElementById('clearIcon').style.display = 'none';
+    }
+
+    function callNumber() {
+        const number = document.getElementById('numberText').innerText;
+        alert('Calling ' + number);
+    }
+
+
+</script>

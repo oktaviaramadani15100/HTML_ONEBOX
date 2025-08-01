@@ -156,7 +156,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            margin-left: 1rem;
         }
 
         .dropdown hr {
@@ -194,13 +193,11 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 800px;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 10px;
+            max-width: 100%;
             margin: auto;
             text-align: center;
-            padding: 1rem;
             border-bottom: 1px solid #e5e7eb;
         }
 
@@ -208,45 +205,48 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: #1e3a8a;
-            padding: 15px 5px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
             transition: 0.3s ease;
         }
 
         .menu-item:hover {
             background-color: #f3f0ff;
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
         .menu-item i {
-            margin-bottom: 8px;
+            font-size: 20px;
+            margin-bottom: 6px;
             color: #1e3a8a;
         }
 
         .menu-item p {
             margin: 0;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
         }
 
-        .menu-grid a {
-            text-decoration: none;
-            color: inherit;
-        }
-
         @media screen and (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
             .menu-item {
-                padding: 10px 4px;
+                padding: 8px 4px;
             }
 
             .menu-item i {
-                font-size: 22px;
+                font-size: 18px;
             }
 
             .menu-item p {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
 
@@ -308,9 +308,7 @@
             color: #666;
         }
 
-        /* === DOTS === */
         .dots {
-            position: relative;
             text-align: center;
             z-index: 30;
         }
@@ -329,8 +327,6 @@
         .dots button.active {
             background-color: #333;
         }
-
-        /* === BOTTOM NAV === */
 
         .bottom-nav {
             position: sticky;
@@ -538,7 +534,7 @@
         <div class="header">
             <img src="../img/my-image.png" alt="MSIG Logo" />
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../spv/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -553,7 +549,7 @@
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="../spv/agent-rules.html">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
                     </a>
@@ -571,29 +567,31 @@
             </div>
         </div>
 
-        <!-- Info Box -->
         <div class="info-box">
             <img src="../img/information.jpg" alt="">
         </div>
 
-        <!-- Menu -->
         <div class="menu-grid">
             <!-- Baris 1 -->
-            <a href="" class="menu-item">
+            <a href="../spv/myAgent.html" class="menu-item">
                 <i class="fas fa-headset fa-2x"></i>
                 <p>My Agent</p>
             </a>
 
-            <a href="../agent/campagin.html" class="menu-item">
+            <a href="../spv/campagin.html" class="menu-item">
                 <i class="fas fa-bullhorn fa-2x"></i>
                 <p>Campaign</p>
             </a>
 
-            <a href="../agent/prospect.html" class="menu-item">
+            <a href="../spv/prospect.html" class="menu-item">
                 <i class="fas fa-user-plus fa-2x"></i>
                 <p>Prospect</p>
             </a>
 
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-line fa-2x"></i>
+                <p>Dashboard</p>
+            </a>
 
             <!-- <a href="../agent/appoitment.html" class="menu-item">
                 <i class="fas fa-calendar-check fa-2x"></i>
@@ -602,29 +600,23 @@
              -->
 
             <!-- Baris 2 -->
-            <a href="" class="menu-item">
+            <!-- <a href="" class="menu-item">
                 <i class="fas fa-bullseye fa-2x"></i>
                 <p>Appointment</p>
             </a>
 
-            <a href="../agent/agent-rules.html" class="menu-item">
+            <a href="" class="menu-item">
                 <i class="fas fa-calendar-alt fa-2x"></i>
                 <p>Knowlage</p>
-            </a>
+            </a> -->
 
-            <a href="#" class="menu-item">
-                <i class="fas fa-chart-line fa-2x"></i>
-                <p>Dashboard</p>
-            </a>
+            
         </div>
-
 
 
         <!-- Cards / Slider -->
         <div class="slider-container">
             <div class="slider-section" id="slider">
-
-                <!-- Card 1 -->
                 <div class="slider-card">
                     <img src="../img/knowlage6.webp" alt="Slider 1" />
                     <div class="title">RIPLAY Smile Ultima Term Life</div>
@@ -661,24 +653,24 @@
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
 
                 <div class="nav-history">
-                    <a href="#"><i class="fas fa-file-alt"></i></a>
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
                     <p>History</p>
                 </div>
 
                 <div class="nav-spacer"></div>
-
+                
                 <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
                     <p>Call</p>
                 </div>
 
                 <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
@@ -688,7 +680,7 @@
                 <p>New</p>
             </div>
         </div>
-
+    </div>
 </body>
 
 </html>

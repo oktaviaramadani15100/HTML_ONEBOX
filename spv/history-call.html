@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Target</title>
+    <title>Call History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * {
@@ -45,9 +45,6 @@
 
         .header img {
             height: 53px;
-            max-width: 100%;
-            object-fit: contain;
-            display: block;
         }
 
         .menu-icon {
@@ -114,7 +111,7 @@
         }
 
         a+a {
-            margin-top: 4px; 
+            margin-top: 4px;
             /* jarak antar link */
         }
 
@@ -155,191 +152,77 @@
             }
         }
 
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
-            padding-left: 1rem;
-        }
-
-        .filter-btn {
-            padding: 6px 12px;
-            border: 1px solid #1e3a8a;
-            background-color: white;
-            color: #1e3a8a;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .filter-btn:hover {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-        .filter-btn.active {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #1e3a8a;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
         .content {
             flex: 1;
-            /* padding: 1rem; */
+
             padding-bottom: 90px;
+            /* position: relative; */
         }
 
         .content h2 {
-            font-size: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f2937;
             margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        .row-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-            padding-left: 1rem;
-        }
-
-        .date-picker {
-            display: flex;
-            border: 1px solid black;
-            border-radius: 4px;
-            overflow: hidden;
-            width: 100%;
-            max-width: inherit;
-            margin-right: 11rem;
-            /* ubah ukuran maksimal */
-            height: 27px;
-            /* atur tinggi agar lebih ramping */
-        }
-
-        .date-display {
-            flex: 1;
-            padding: 0.3rem 0.5rem;
-            /* lebih kecil */
-            background: white;
-            font-size: 0.8rem;
-            /* kecilkan font */
-            display: flex;
-            align-items: center;
-        }
-
-        .calendar-btn {
-            width: 34px;
-            /* kecilkan lebar tombol */
-            height: 100%;
-            background: white;
-            border-left: 1px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .date-display {
-            flex: 1;
-            padding: 0.6rem;
-            background: white;
-            font-size: 0.95rem;
-        }
-
-        .calendar-btn {
-            width: 40px;
-            background: white;
-            border-left: 2px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        #hiddenDateInput {
-            position: absolute;
-            opacity: 0;
-            pointer-events: auto;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            z-index: 2;
         }
 
         .table-wrapper {
-            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            /* overflow-x: auto; */
             background: white;
+            border: 1px solid #e5e7eb;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow-x: auto;
-            margin-top: 12px;
+            margin-top: 15px;
         }
 
-        table {
+        .historycall-table {
             width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
+            /* min-width: 500px; */
+            border-collapse: collapse;
+            table-layout: auto;
         }
 
-        thead {
-            background: #1e3a8a;
+        .historycall-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
             color: white;
             font-weight: bold;
+            z-index: 1;
         }
 
-        th,
-        td {
+        .historycall-table th,
+        .historycall-table td {
             padding: 10px 12px;
             font-size: 0.85rem;
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
         }
 
-        /* thead th:first-child {
-            border-top-left-radius: 12px;
-        }
-
-        thead th:last-child {
-            border-top-right-radius: 12px;
-        } */
-
-        tbody tr:nth-child(odd) {
+        .historycall-table tbody tr:nth-child(odd) {
             background-color: #ffffff;
         }
 
-        tbody tr:nth-child(even) {
+        .historycall-table tbody tr:nth-child(even) {
             background-color: #f9fafb;
         }
 
-        td:first-child,
-        td:last-child {
-            text-align: left;
-        }
-
-        tbody tr:hover {
+        .historycall-table tbody tr:hover {
             background-color: #e0f2fe;
             transition: background-color 0.3s ease;
         }
 
-        td[onclick] {
-            color: #1d4ed8;
-            font-weight: 500;
+        @media screen and (max-width: 600px) {
+
+            .historycall-table th,
+            .historycall-table td {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
         }
 
-        td[onclick]:hover {
-            text-decoration: underline;
-            color: #1e40af;
-            cursor: pointer;
-            text-decoration: none;
-        }
+
 
         .bottom-nav {
             position: sticky;
@@ -520,6 +403,121 @@
             }
         }
 
+        .filter-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            border: 1px solid #1e3a8a;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: auto;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            /* transition: right 0.3s ease; */
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .filter-drawer.open {
+            right: 0;
+            top: 8.5rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            .filter-drawer.open {
+                right: 30rem;
+                top: 8.5rem;
+            }
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .filter-content input,
+        .filter-content select,
+        .filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-content button:hover {
+            background-color: #374ba1;
+        }
+
         .menu-icon-group {
             display: flex;
             justify-content: flex-end;
@@ -535,38 +533,31 @@
             font-size: 20px;
             font-weight: bold;
         }
-
-        /* .menu-icon-group i {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        } */
     </style>
 </head>
-
 <body>
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">Target</span></a>
+            <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
+                    style="margin-left: 16px;">Activity Call</span></a>
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../spv/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
                     <div class="dropdown-header">
                         <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">SPV</h5>
                     </div>
                     <hr />
                     <a href="#">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
                     </a>
@@ -586,76 +577,73 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="row-content">
-                <h2>Period</h2>
-                <div class="date-picker" style="position: relative;">
-                    <div id="dateValue" class="date-display">Select Month</div>
-                    <div class="calendar-btn" onclick="openCalendar()">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <input type="month" id="hiddenDateInput" onchange="setMonth(this.value)"
-                        style="opacity:0; position:absolute; left:0; top:0;">
+            <div class="filter-container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
+                    <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
                 </div>
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
             </div>
-            <div class="filter-buttons" style="display: flex; gap: 8px; padding: 1rem;">
-                <button class="filter-btn active" onclick="filterCategory('all')">All</button>
-                <button class="filter-btn" onclick="filterCategory('mandiri')">Mandiri Sehat</button>
-                <button class="filter-btn" onclick="filterCategory('asuransi')">Asuransi Hebat</button>
+
+            <div class="filter-drawer" id="filterDrawer">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Filter</h3>
+                    <i class="fas fa-times" id="closeFilter"></i>
+                </div>
+                <div class="filter-content">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" />
+
+                    <label for="prospect">Prospect</label>
+                    <input type="text" id="prospect" placeholder="Enter value" />
+
+                    <label for="result">Result</label>
+                    <input type="text" id="result" placeholder="Enter result" />
+
+                    <button onclick="applyFilter()">Apply</button>
+                </div>
+
             </div>
-            <!-- Table -->
             <div class="table-wrapper">
-                <table>
+                <table class="historycall-table">
                     <thead>
                         <tr>
-                            <th>Period</th>
-                            <th>Campaign</th>
-                            <th>Target</th>
+                            <th>Tanggal</th>
+                            <th>Prospect</th>
+                            <th>Result</th>
+                            <th>Handler</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <tr>
-                            <td>July 2025</td>
-                            <td>Mandiri Sehat</td>
-                            <td>Rp 700.000</td>
-                        </tr>
-                        <tr>
-                            <td>July 2025</td>
-                            <td>Asuransi Hebat</td>
-                            <td>Rp 500.000</td>
-                        </tr>
-                        <tr>
-                            <td>July 2024</td>
-                            <td>Asuransi Hebat</td>
-                            <td>Rp 500.000</td>
-                        </tr>
                     </tbody>
-
                 </table>
             </div>
+
+
         </div>
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
 
                 <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
                     <p>History</p>
                 </div>
 
                 <div class="nav-spacer"></div>
 
                 <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
                     <p>Call</p>
                 </div>
 
                 <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
@@ -666,61 +654,127 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function filterCategory(category) {
-            // update active class
-            const buttons = document.querySelectorAll(".filter-btn");
-            buttons.forEach(btn => btn.classList.remove("active"));
-            const activeBtn = [...buttons].find(btn => btn.innerText.toLowerCase().includes(category));
-            if (activeBtn) activeBtn.classList.add("active");
-
-            const rows = document.querySelectorAll("#tableBody tr");
-
-            rows.forEach(row => {
-                const campaign = row.cells[1].innerText.toLowerCase();
-
-                if (category === 'all') {
-                    row.style.display = '';
-                } else if (campaign.includes(category)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-        function openCalendar() {
-            const input = document.getElementById("hiddenDateInput");
-            input.showPicker?.(); // support modern browser
-            input.focus();
-        }
-
-        function setMonth(value) {
-            const [year, month] = value.split("-");
-            const date = new Date(`${year}-${month}-01`);
-
-            const formatted = date.toLocaleDateString('en-GB', {
-                month: 'long',
-                year: 'numeric'
-            });
-
-            document.getElementById("dateValue").innerText = formatted;
-        }
-
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        window.addEventListener('click', function (e) {
-            const dropdown = document.getElementById('dropdownMenu');
-            const icon = document.querySelector('.fa-ellipsis-v');
-
-            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-                dropdown.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 
 </html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function toggleFilter(forceClose = false) {
+            const drawer = document.getElementById("filterDrawer");
+
+            if (forceClose) {
+                drawer.classList.remove("open");
+            } else {
+                drawer.classList.toggle("open");
+            }
+        }
+
+        function applyFilter() {
+            alert("Filter applied!");
+            toggleFilter(true);
+        }
+
+        window.addEventListener('click', function (e) {
+            const drawer = document.getElementById("filterDrawer");
+            const iconFilter = document.querySelector('.filter-icon');
+
+            if (drawer.classList.contains('open')) {
+                if (!drawer.contains(e.target) && !iconFilter.contains(e.target)) {
+                    toggleFilter(true);
+                }
+            }
+        });
+        const iconFilter = document.querySelector('.filter-icon');
+        if (iconFilter) {
+            iconFilter.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter();
+            });
+        }
+
+        const closeIcon = document.getElementById('closeFilter');
+        if (closeIcon) {
+            closeIcon.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter(true);
+            });
+        }
+
+        window.applyFilter = applyFilter;
+    });
+
+    function filterCategory(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.filter-btn[onclick*="${type}"]`).classList.add('active');
+
+        renderTable(type);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable('activity');
+    });
+
+    const data = {
+        activity: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Thinking', handler: 'agent01' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Call', handler: 'agent01' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Follow Up', handler: 'agent03' },
+            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Call', handler: 'agent03' },
+            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Thinking', handler: 'agent03' },
+            { tanggal: '07/07/25', prospect: 'Budi Raharjo', result: 'Meeting', handler: 'agent03' },
+            { tanggal: '07/07/25', prospect: 'Sari Widya', result: 'Follow Up', handler: 'agent05' },
+            { tanggal: '07/07/25', prospect: 'Hendra Gunawan', result: 'Call', handler: 'agent05' },
+            { tanggal: '07/07/25', prospect: 'Nina Oktaviani', result: 'Thinking', handler: 'agent05' },
+            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting', handler: 'agent05' }
+        ],
+        sales: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win', handler: 'Dinni' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Lose', handler: 'Dinni' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Hot', handler: 'Dinni' },
+            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Cold', handler: 'Doni' },
+            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Lose', handler: 'Doni' },
+            { tanggal: '07/07/25', prospect: 'Susanto', result: 'Warm', handler: 'Doni' },
+        ]
+    };
+
+    function renderTable(category) {
+        const tableHead = document.querySelector("thead tr");
+        const tableBody = document.getElementById("tableBody");
+
+        tableHead.innerHTML = `
+            <th>Tanggal</th>
+            <th>Prospect</th>
+            <th>${category === 'sales' ? 'Premium' : 'Result'}</th>
+            <th>Handler</th>
+        `;
+
+        tableBody.innerHTML = '';
+        data[category].forEach(row => {
+            tableBody.innerHTML += `
+            <tr>
+                <td>${row.tanggal}</td>
+                <td>${row.prospect}</td>
+                <td>${row.result}</td>
+                <td>${row.handler}</td>
+            </tr>
+            `;
+        });
+    }
+
+
+</script>

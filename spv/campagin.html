@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campaign SPV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            /* margin-left: 1rem; */
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 90px;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            min-width: 360px;
+            border-spacing: 0;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* thead th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        thead th:last-child {
+            border-top-right-radius: 12px;
+        } */
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .detail-campaign {
+            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #1e3a8a;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group.full {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Remove focus outline for readonly */
+        input[readonly]:focus,
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #d1d5db;
+        }
+
+        /* Two column layout on medium+ screens */
+        @media (min-width: 480px) {
+            .form-group {
+                flex: 1 1 48%;
+            }
+
+            .form-group.full {
+                flex: 1 1 100%;
+            }
+        }
+
+        .detail-product {
+            padding: 16px;
+
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .section-title-campaign {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .section-header h2 {
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fdfdfd;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        /* Responsive: 2 columns jika layar cukup lebar */
+        @media (min-width: 480px) {
+            .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
+
+
+        .bottom-nav {
+            position: sticky;
+            /* position: relative; */
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+        /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 1rem;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .add-btn:hover {
+            background-color: #3b4cc0;
+        }
+
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* .menu-icon-group i {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        } */
+
+        input[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        textarea[readonly] {
+            resize: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: -1rem;
+        }
+
+        .download-btn i {
+            font-size: 1rem;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campagin</span>
+            </span>
+
+            <div class="menu-icon-group">
+                <a href="../spv/inbox.html" class="menu-icon" style=" color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" style=" color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">SPV</h5>
+                    </div>
+                    <hr />
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../spv/agent-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="table-wrapper" id="campaignList">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campaign</th>
+                            <th>Jumlah Prospect</th>
+                            <th>Product</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td onclick="showCampaignDetail()">julisehat</td>
+                            <td>7</td>
+                            <td onclick="showProductDetail()">mandiri sehat</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">julipintar</td>
+                            <td>5</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">Riplay</td>
+                            <td>4</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td>8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">Riplay</td>
+                            <td>4</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td>8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Detail Campaign -->
+            <div class="detail-campaign" id="detailCampaign" style="display: none;">
+                <div class="form-group">
+                    <label for="campaignName">Campaign Name</label>
+                    <input type="text" id="campaignName" value="Juli Sehat" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="mediaCampaign">Media</label>
+                    <input type="text" id="mediaCampaign" value="Call" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="product">Product</label>
+                    <input type="text" id="product" value="Orbeets" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="campaignType">Type</label>
+                    <input type="text" id="campaignType" value="Health" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="periode">Periode</label>
+                    <input type="text" id="periode" value="31 Juni - 31 Juli 2025" readonly>
+                </div>
+                <div class="form-group full">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
+                </div>
+
+            </div>
+
+
+            <div class="detail-product" id="detailProduct" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Produt Specification</h2>
+                    <button class="download-btn" onclick="handleDownload()">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="product">Product Name</label>
+                    <input type="text" id="product" value="Orbeets" readonly>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productAlternat">Alternative Product</label>
+                        <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    let currentView = 'list';
+
+    function showCampaignDetail() {
+        document.getElementById('campaignList').style.display = 'none';
+        document.getElementById('detailCampaign').style.display = 'block';
+        currentView = 'detailCampaign';
+
+        document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
+    `;
+    }
+
+    function showProductDetail() {
+        document.getElementById('campaignList').style.display = 'none';
+        document.getElementById('detailProduct').style.display = 'block';
+        currentView = 'detailProduct';
+
+        document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
+    `;
+    }
+
+    function handleBack() {
+        if (currentView === 'detailCampaign') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('detailCampaign').style.display = 'none';
+            currentView = 'list';
+
+            document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+        } else if (currentView === 'detailProduct') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('detailProduct').style.display = 'none';
+            currentView = 'list';
+
+            document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+        } else {
+            window.location.href = '../spv/home.html';
+        }
+    }
+
+
+</script>
