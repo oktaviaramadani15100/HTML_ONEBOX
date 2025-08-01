@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Call History</title>
+    <title>Call SPV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * {
@@ -153,43 +153,9 @@
 
         .content {
             flex: 1;
-            padding: 1rem;
-            padding-bottom: 90px;
+            /* padding: 1rem;
+            padding-bottom: 90px; */
             /* position: relative; */
-        }
-
-        .content h2 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 1rem;
-        }
-
-        .table-wrapper {
-            width: 100%;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 360px;
-        }
-
-        thead {
-            background: #1e3a8a;
-            color: white;
-        }
-
-        th,
-        td {
-            padding: 6px 8px;
-            font-size: 0.78rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
         }
 
         .bottom-nav {
@@ -371,120 +337,6 @@
             }
         }
 
-        .filter-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 10px 16px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-
-        .filter-icon {
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #1e3a8a;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .filter-btn {
-            background-color: #e0e7ff;
-            color: #1e3a8a;
-            border: 1px solid #1e3a8a;
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .filter-btn.active {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-
-        .filter-drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 360px;
-            height: auto;
-            background: #ffffff;
-            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-            padding: 1rem;
-            z-index: 999;
-            /* transition: right 0.3s ease; */
-            overflow-y: auto;
-            border-left: 1px solid #e5e7eb;
-            border-radius: 8px 0 0 8px;
-        }
-
-        .filter-drawer.open {
-            right: 0;
-            top: 8.5rem;
-        }
-
-        @media screen and (min-width: 768px) {
-            .filter-drawer.open {
-                right: 30rem;
-                top: 8.5rem;
-            }
-        }
-
-        .filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .filter-header h3 {
-            font-size: 1rem;
-            color: #1e3a8a;
-        }
-
-        .filter-header i {
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #1e3a8a;
-        }
-
-        .filter-content label {
-            font-size: 0.85rem;
-            margin: 10px 0 4px;
-            display: block;
-        }
-
-        .filter-content input,
-        .filter-content select,
-        .filter-content button {
-            width: 100%;
-            padding: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-
-        .filter-content button {
-            background-color: #1e3a8a;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .filter-content button:hover {
-            background-color: #374ba1;
-        }
-
         .menu-icon-group {
             display: flex;
             justify-content: flex-end;
@@ -500,6 +352,82 @@
             font-size: 20px;
             font-weight: bold;
         }
+
+        .dial-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .number-display {
+            height: 50px;
+            font-size: 22px;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            color: #111827;
+            display: flex;
+            justify-content: space-between;
+            /* border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); */
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            justify-items: center;
+            margin-bottom: 30px;
+            margin-top: 1rem;
+        }
+
+        .key {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #111827;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .key small {
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        .call-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .call-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #10b981;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -507,25 +435,25 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
+            <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
                     style="margin-left: 16px;">Activity Call</span></a>
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../spv/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
                     <div class="dropdown-header">
                         <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">SPV</h5>
                     </div>
                     <hr />
                     <a href="#">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="../spv/agent-rules.html">
                         <i class="fas fa-user-shield"></i>
                         <span>Agent Rules</span>
                     </a>
@@ -545,74 +473,66 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="filter-container">
-                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
-                    <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
+            <div class="dial-container">
+                <div class="number-display" id="numberDisplay">
+                    <span id="numberText">+62</span>
+                    <span id="clearIcon" style="display:none; cursor:pointer; margin-left: auto;"
+                        onclick="clearNumber()">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+
+                <div class="keypad">
+                    <div class="key" onclick="appendNumber('1')">1</div>
+                    <div class="key" onclick="appendNumber('2')">2<br><small>ABC</small></div>
+                    <div class="key" onclick="appendNumber('3')">3<br><small>DEF</small></div>
+                    <div class="key" onclick="appendNumber('4')">4<br><small>GHI</small></div>
+                    <div class="key" onclick="appendNumber('5')">5<br><small>JKL</small></div>
+                    <div class="key" onclick="appendNumber('6')">6<br><small>MNO</small></div>
+                    <div class="key" onclick="appendNumber('7')">7<br><small>PQRS</small></div>
+                    <div class="key" onclick="appendNumber('8')">8<br><small>TUV</small></div>
+                    <div class="key" onclick="appendNumber('9')">9<br><small>WXYZ</small></div>
+                    <div class="key" onclick="appendNumber('*')">*</div>
+                    <div class="key" onclick="appendNumber('0')">0</div>
+                    <div class="key" onclick="appendNumber('#')">#</div>
+                </div>
+
+                <div class="call-buttons">
+                    <!-- <div class="call-btn red" onclick="clearNumber()"><i class="fas fa-times"></i></div> -->
+                    <div class="call-btn" onclick="callNumber()"><i class="fas fa-phone"></i></div>
                 </div>
             </div>
 
-            <div class="filter-drawer" id="filterDrawer">
-                <div class="filter-header">
-                    <h3><i class="fas fa-filter"></i> Filter</h3>
-                    <i class="fas fa-times" id="closeFilter"></i>
-                </div>
-                <div class="filter-content">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" />
-
-                    <label for="prospect">Prospect</label>
-                    <input type="text" id="prospect" placeholder="Enter value" />
-
-                    <label for="result">Result</label>
-                    <input type="text" id="result" placeholder="Enter result" />
-
-                    <button onclick="applyFilter()">Apply</button>
-                </div>
-
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>Prospect</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
         </div>
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
 
                 <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
                     <p>History</p>
                 </div>
 
                 <div class="nav-spacer"></div>
 
                 <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
                     <p>Call</p>
                 </div>
 
-                <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                 <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -636,105 +556,30 @@
         }
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        function toggleFilter(forceClose = false) {
-            const drawer = document.getElementById("filterDrawer");
+    const numberDisplay = document.getElementById('numberDisplay');
 
-            if (forceClose) {
-                drawer.classList.remove("open");
-            } else {
-                drawer.classList.toggle("open");
-            }
+    function appendNumber(num) {
+        const numberText = document.getElementById('numberText');
+        if (numberText.innerText === '+62') {
+            numberText.innerText = '+62' + num;
+        } else {
+            numberText.innerText += num;
         }
 
-        function applyFilter() {
-            alert("Filter applied!");
-            toggleFilter(true);
-        }
-
-        window.addEventListener('click', function (e) {
-            const drawer = document.getElementById("filterDrawer");
-            const iconFilter = document.querySelector('.filter-icon');
-
-            if (drawer.classList.contains('open')) {
-                if (!drawer.contains(e.target) && !iconFilter.contains(e.target)) {
-                    toggleFilter(true);
-                }
-            }
-        });
-        const iconFilter = document.querySelector('.filter-icon');
-        if (iconFilter) {
-            iconFilter.addEventListener('click', function (e) {
-                e.stopPropagation();
-                toggleFilter();
-            });
-        }
-
-        const closeIcon = document.getElementById('closeFilter');
-        if (closeIcon) {
-            closeIcon.addEventListener('click', function (e) {
-                e.stopPropagation();
-                toggleFilter(true);
-            });
-        }
-
-        window.applyFilter = applyFilter;
-    });
-
-    function filterCategory(type) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.filter-btn[onclick*="${type}"]`).classList.add('active');
-
-        renderTable(type);
+        // Tampilkan ikon clear jika ada lebih dari +62
+        const clearIcon = document.getElementById('clearIcon');
+        clearIcon.style.display = numberText.innerText.length > 3 ? 'inline' : 'none';
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        renderTable('activity');
-    });
+    function clearNumber() {
+        const numberText = document.getElementById('numberText');
+        numberText.innerText = '+62';
+        document.getElementById('clearIcon').style.display = 'none';
+    }
 
-    const data = {
-        activity: [
-            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Thinking' },
-            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Call' },
-            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Follow Up' },
-            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Call' },
-            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Thinking' },
-            { tanggal: '07/07/25', prospect: 'Budi Raharjo', result: 'Meeting' },
-            { tanggal: '07/07/25', prospect: 'Sari Widya', result: 'Follow Up' },
-            { tanggal: '07/07/25', prospect: 'Hendra Gunawan', result: 'Call' },
-            { tanggal: '07/07/25', prospect: 'Nina Oktaviani', result: 'Thinking' },
-            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' }
-        ],
-        sales: [
-            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win' },
-            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Lose' },
-            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Hot' },
-            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Cold' },
-            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Lose' },
-            { tanggal: '07/07/25', prospect: 'Susanto', result: 'Warm' },
-        ]
-    };
-
-    function renderTable(category) {
-        const tableHead = document.querySelector("thead tr");
-        const tableBody = document.getElementById("tableBody");
-
-        tableHead.innerHTML = `
-            <th>Tanggal</th>
-            <th>Prospect</th>
-            <th>${category === 'sales' ? 'Premium' : 'Result'}</th>
-        `;
-
-        tableBody.innerHTML = '';
-        data[category].forEach(row => {
-            tableBody.innerHTML += `
-            <tr>
-                <td>${row.tanggal}</td>
-                <td>${row.prospect}</td>
-                <td>${row.result}</td>
-            </tr>
-            `;
-        });
+    function callNumber() {
+        const number = document.getElementById('numberText').innerText;
+        alert('Calling ' + number);
     }
 
 
