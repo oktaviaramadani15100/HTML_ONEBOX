@@ -164,6 +164,7 @@
         padding: 10px 0;
         font-size: 12px;
         z-index: 10;
+        margin-top: 7rem;
         background: white;
     }
 
@@ -350,97 +351,95 @@
         font-weight: bold;
     }
 
-   .calendar-box {
-            padding: 20px;
-            border-radius: 12px;
-            background-color: #fefefe;
-            box-shadow: inset 0 0 0 1px #eee;
-        }
+    .calendar-box {
+        padding: 20px;
+        background-color: #fefefe;
+        box-shadow: inset 0 0 0 1px #eee;
+    }
 
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
 
-        .calendar-header h3 {
-            margin: 0;
-            color: #1d0c80;
-        }
+    .calendar-header h3 {
+        margin: 0;
+        color: #1d0c80;
+    }
 
-        .calendar-header button {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #1d0c80;
-        }
+    .calendar-header button {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #1d0c80;
+    }
 
-        .calendar-table {
-            width: 100%;
-            text-align: center;
-            table-layout: fixed;
-            border-collapse: collapse;
-        }
+    .calendar-table {
+        width: 100%;
+        text-align: center;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
 
-        .calendar-table td {
-            width: 40px !important;
-            height: 40px !important;
-            padding: 0 !important;
-            margin: 0 auto !important;
-            line-height: 40px !important;
-            border-radius: 50% !important;
-            vertical-align: middle !important;
-            text-align: center;
-        }
+    .calendar-table td {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        line-height: 40px !important;
+        border-radius: 50% !important;
+        vertical-align: middle !important;
+        text-align: center;
+    }
 
-        .calendar-table td:hover {
-            background: #bcc2c7;
-            color: white;
-        }
+    .calendar-table td:hover {
+        background: #bcc2c7;
+        color: white;
+    }
 
-        .calendar-table .active {
-            background: #1d0c80;
-            color: white;
-        }
+    .calendar-table .active {
+        background: #1d0c80;
+        color: white;
+    }
 
-        .agenda-box {
-            margin-top: 20px;
-        }
+    .agenda-box {
+        margin-top: 20px;
+    }
 
-        .agenda-item {
-            background: #f3efff;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .agenda-item {
+        background: #f3efff;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .agenda-location {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 2px;
-        }
+    .agenda-location {
+        font-size: 0.85em;
+        color: #666;
+        margin-top: 2px;
+    }
 
-        .agenda-title {
-            font-weight: 600;
-            color: #1d0c80;
-        }
+    .agenda-title {
+        font-weight: 600;
+        color: #1d0c80;
+    }
 
-        .agenda-note {
-            font-size: 13px;
-            color: #555;
-        }
+    .agenda-note {
+        font-size: 13px;
+        color: #555;
+    }
 
-        .agenda-time {
-            font-weight: 500;
-            font-size: 13px;
-            color: #222;
-        }
-
+    .agenda-time {
+        font-weight: 500;
+        font-size: 13px;
+        color: #222;
+    }
 </style>
 
 <body>
@@ -483,35 +482,35 @@
             </div>
         </div>
 
-         <div class="calendar-box">
-                <div class="calendar-header">
-                    <h3><span id="month">January</span> <span id="year">2025</span></h3>
-                    <div>
-                        <button id="prev">&#10094;</button>
-                        <button id="next">&#10095;</button>
-                    </div>
+        <div class="calendar-box">
+            <div class="calendar-header">
+                <h3><span id="month">January</span> <span id="year">2025</span></h3>
+                <div>
+                    <button id="prev">&#10094;</button>
+                    <button id="next">&#10095;</button>
                 </div>
-                <table class="calendar-table">
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendar-body"></tbody>
-                </table>
-
-                <div class="agenda-box" id="agenda-box"></div>
             </div>
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body"></tbody>
+            </table>
+
+            <div class="agenda-box" id="agenda-box"></div>
+        </div>
 
 
         <!-- Bottom Nav -->
-         <div class="bottom-nav">
+        <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
                     <a href="../spv/home.html"><i class="fas fa-home"></i></a>
@@ -537,7 +536,7 @@
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -562,110 +561,110 @@
         }
     });
 
-     const calendarBody = document.getElementById('calendar-body');
-        const monthLabel = document.getElementById('month');
-        const yearLabel = document.getElementById('year');
-        const agendaBox = document.getElementById('agenda-box');
+    const calendarBody = document.getElementById('calendar-body');
+    const monthLabel = document.getElementById('month');
+    const yearLabel = document.getElementById('year');
+    const agendaBox = document.getElementById('agenda-box');
 
-        const today = new Date();
-        let currentMonth = today.getMonth();
-        let currentYear = today.getFullYear();
-
-
-        const months = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
-
-        const agendas = {
-            '2025-07-23': [
-                {
-                    title: "Sharing Produk Banca",
-                    note: "Dengan Pak Anto",
-                    time: "09:00–11:00",
-                    location: "Ruang Rapat Lt.2"
-                },
-                {
-                    title: "Follow-Up Proposal Polis",
-                    note: "Pak Iwan",
-                    time: "13:00–14:00",
-                    location: "Zoom Meeting"
-                },
-                {
-                    title: "Janji Temu Prospect",
-                    note: "Hamidah",
-                    time: "15:00–16:00",
-                    location: "Kafe Bintaro"
-                }
-            ],
-            '2025-07-25': [
-                {
-                    title: "Meeting Internal",
-                    note: "Divisi Marketing",
-                    time: "10:00–12:00",
-                    location: "Ruang Diskusi Lt.3"
-                }
-            ]
-        };
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
 
 
-        function generateCalendar(month, year) {
-            calendarBody.innerHTML = "";
-            monthLabel.textContent = months[month];
-            yearLabel.textContent = year;
+    const months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
 
-            const firstDay = new Date(year, month).getDay();
-            const daysInMonth = 32 - new Date(year, month, 32).getDate();
+    const agendas = {
+        '2025-07-23': [
+            {
+                title: "Sharing Produk Banca",
+                note: "Dengan Pak Anto",
+                time: "09:00–11:00",
+                location: "Ruang Rapat Lt.2"
+            },
+            {
+                title: "Follow-Up Proposal Polis",
+                note: "Pak Iwan",
+                time: "13:00–14:00",
+                location: "Zoom Meeting"
+            },
+            {
+                title: "Janji Temu Prospect",
+                note: "Hamidah",
+                time: "15:00–16:00",
+                location: "Kafe Bintaro"
+            }
+        ],
+        '2025-07-25': [
+            {
+                title: "Meeting Internal",
+                note: "Divisi Marketing",
+                time: "10:00–12:00",
+                location: "Ruang Diskusi Lt.3"
+            }
+        ]
+    };
 
-            let date = 1;
-            let firstActiveCell = null;
-            for (let i = 0; i < 6; i++) {
-                const row = document.createElement("tr");
-                for (let j = 0; j < 7; j++) {
-                    const cell = document.createElement("td");
-                    if (i === 0 && j < firstDay) {
-                        cell.textContent = "";
-                    } else if (date > daysInMonth) {
-                        break;
-                    } else {
-                        cell.textContent = date;
-                        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
-                        cell.addEventListener("click", () => selectDate(dateStr, cell));
 
-                        if (agendas[dateStr]) {
-                            cell.classList.add("has-agenda");
-                            if (!firstActiveCell) {
-                                firstActiveCell = { cell, dateStr };
-                            }
+    function generateCalendar(month, year) {
+        calendarBody.innerHTML = "";
+        monthLabel.textContent = months[month];
+        yearLabel.textContent = year;
+
+        const firstDay = new Date(year, month).getDay();
+        const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+        let date = 1;
+        let firstActiveCell = null;
+        for (let i = 0; i < 6; i++) {
+            const row = document.createElement("tr");
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("td");
+                if (i === 0 && j < firstDay) {
+                    cell.textContent = "";
+                } else if (date > daysInMonth) {
+                    break;
+                } else {
+                    cell.textContent = date;
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                    cell.addEventListener("click", () => selectDate(dateStr, cell));
+
+                    if (agendas[dateStr]) {
+                        cell.classList.add("has-agenda");
+                        if (!firstActiveCell) {
+                            firstActiveCell = { cell, dateStr };
                         }
-
-                        date++;
                     }
-                    row.appendChild(cell);
+
+                    date++;
                 }
-                calendarBody.appendChild(row);
+                row.appendChild(cell);
             }
-
-            if (firstActiveCell) {
-                firstActiveCell.cell.classList.add("active");
-                selectDate(firstActiveCell.dateStr, firstActiveCell.cell);
-            } else {
-                agendaBox.innerHTML = `<p style="color:#999;">No agenda on this month.</p>`;
-            }
+            calendarBody.appendChild(row);
         }
 
-        function selectDate(dateStr, cell) {
-            document.querySelectorAll(".calendar-table td").forEach(td => td.classList.remove("active"));
-            cell.classList.add("active");
-            showAgenda(dateStr);
+        if (firstActiveCell) {
+            firstActiveCell.cell.classList.add("active");
+            selectDate(firstActiveCell.dateStr, firstActiveCell.cell);
+        } else {
+            agendaBox.innerHTML = `<p style="color:#999;">No agenda on this month.</p>`;
         }
+    }
 
-        function showAgenda(dateStr) {
-            agendaBox.innerHTML = "";
-            const items = agendas[dateStr];
-            if (items) {
-                items.forEach(item => {
-                    const div = document.createElement("div");
-                    div.className = "agenda-item";
-                    div.innerHTML = `
+    function selectDate(dateStr, cell) {
+        document.querySelectorAll(".calendar-table td").forEach(td => td.classList.remove("active"));
+        cell.classList.add("active");
+        showAgenda(dateStr);
+    }
+
+    function showAgenda(dateStr) {
+        agendaBox.innerHTML = "";
+        const items = agendas[dateStr];
+        if (items) {
+            items.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "agenda-item";
+                div.innerHTML = `
             <div>
               <div class="agenda-title">${item.title}</div>
               <div class="agenda-note">${item.note}</div>
@@ -673,31 +672,31 @@
             </div>
             <div class="agenda-time">${item.time}</div>
           `;
-                    agendaBox.appendChild(div);
-                });
-            } else {
-                agendaBox.innerHTML = `<p style="color:#999;">No agenda on this date.</p>`;
-            }
+                agendaBox.appendChild(div);
+            });
+        } else {
+            agendaBox.innerHTML = `<p style="color:#999;">No agenda on this date.</p>`;
         }
+    }
 
-        document.getElementById("prev").onclick = () => {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar(currentMonth, currentYear);
-        };
-
-        document.getElementById("next").onclick = () => {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar(currentMonth, currentYear);
-        };
-
-
+    document.getElementById("prev").onclick = () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
         generateCalendar(currentMonth, currentYear);
+    };
+
+    document.getElementById("next").onclick = () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        generateCalendar(currentMonth, currentYear);
+    };
+
+
+    generateCalendar(currentMonth, currentYear);
 </script>

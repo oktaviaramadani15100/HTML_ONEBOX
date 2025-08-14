@@ -59,7 +59,7 @@
 
         .content {
             flex: 1;
-           
+
         }
 
         h2 {
@@ -378,7 +378,7 @@
             align-items: center;
             margin-bottom: 20px;
             gap: 12px;
-             border-bottom: 1px solid #9a9ea5;
+            border-bottom: 1px solid #9a9ea5;
             padding-bottom: 10px;
         }
 
@@ -401,6 +401,7 @@
         .rule-item {
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 10px;
+
         }
 
         .rule-title {
@@ -414,6 +415,42 @@
             color: #6b7280;
             margin: 4px 0 0 0;
         }
+
+        /* .rule-wrapper {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .rule-box {
+            border: 1.5px solid black;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: #fff;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            flex: 0 0 calc(50% - 5px);
+            max-width: calc(50% - 5px);
+            box-sizing: border-box;
+        } */
+        .rule-wrapper {
+            margin-top: 12px;
+        }
+
+        .rule-paragraph {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -421,8 +458,11 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../spv/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">SPV Rules</span></a>
+            <div class="header-name" style="cursor: pointer;" onclick="resetRules()">
+                <i class="fas fa-arrow-left"></i>
+                <span style="margin-left: 16px;">SPV Rules</span>
+            </div>
+
             <div class="menu-icon-group">
                 <a href="../spv/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
@@ -468,30 +508,39 @@
                     <i class="fas fa-graduation-cap"></i>
                 </div>
 
-                <div class="rules-list">
-                    <div class="rule-item">
+                <div class="rules-list" id="rulesList">
+                    <div class="rule-item"
+                        onclick="showDetails('Kode Etik Supervisor', '22 Jul 2025', 
+                        `Sebagai Supervisor, Anda diharapkan menjadi panutan dalam integritas, profesionalisme, dan etika kerja. Dalam menjalankan tugas, setiap keputusan dan tindakan harus didasari prinsip keadilan, objektivitas, serta menghormati privasi dan martabat setiap agent. Dilarang keras melakukan diskriminasi, penyalahgunaan wewenang, atau tindakan yang merugikan tim dan perusahaan.`)">
                         <p class="rule-title">Kode Etik Supervisor</p>
                         <p class="rule-date">22 Jul 2025</p>
                     </div>
-                    <div class="rule-item">
+
+                    <div class="rule-item" onclick="showDetails('Aturan Penanganan Nasabah', '20 Jul 2025', 
+                        `Setiap Supervisor wajib memastikan bahwa seluruh keluhan dan pertanyaan nasabah ditangani secara cepat, sopan, dan solutif. Penanganan kasus harus dicatat, ditindaklanjuti dalam waktu maksimal 3 hari kerja, dan hasil penyelesaiannya diinformasikan kepada nasabah secara transparan. Etika komunikasi yang baik dan empati menjadi kunci utama dalam menjaga kepercayaan nasabah.`)">
                         <p class="rule-title">Aturan Penanganan Nasabah</p>
                         <p class="rule-date">20 Jul 2025</p>
                     </div>
-                    <div class="rule-item">
+
+                    <div class="rule-item" onclick="showDetails('Panduan Komunikasi Tim', '18 Jul 2025', 
+                        `Supervisor bertanggung jawab menjaga komunikasi yang terbuka, jelas, dan membangun antar anggota tim. Gunakan bahasa yang profesional, hindari asumsi negatif, dan berikan ruang bagi agent untuk menyampaikan ide maupun kendala. Setiap rapat tim harus diarahkan pada solusi dan pencapaian target bersama, bukan sekadar evaluasi personal.`)">
                         <p class="rule-title">Panduan Komunikasi Tim</p>
                         <p class="rule-date">18 Jul 2025</p>
                     </div>
-                    <div class="rule-item">
+
+                    <div class="rule-item" onclick="showDetails('Kebijakan Laporan Harian Agen', '17 Jul 2025', 
+                        `Setiap agent wajib mengisi laporan harian yang berisi data aktivitas, jumlah prospek, closing, dan kendala yang dihadapi. Supervisor harus memverifikasi laporan ini setiap hari, memberikan catatan jika diperlukan, dan menyusun rekap mingguan untuk keperluan evaluasi. Ketepatan dan kejujuran dalam laporan menjadi dasar utama pengambilan keputusan.`)">
                         <p class="rule-title">Kebijakan Laporan Harian Agen</p>
                         <p class="rule-date">17 Jul 2025</p>
                     </div>
-                    <div class="rule-item">
+
+                    <div class="rule-item" onclick="showDetails('Standar Training Agen Baru', '15 Jul 2025',
+                    `Supervisor wajib memastikan bahwa setiap agent baru mengikuti training dasar sebelum mulai operasional. Materi training mencakup pemahaman produk, cara komunikasi dengan nasabah, penggunaan sistem, dan etika kerja. Evaluasi akhir training harus dilakukan untuk memastikan kesiapan kerja, serta diberikan pendampingan minimal 1 minggu pertama.`)">
                         <p class="rule-title">Standar Training Agen Baru</p>
                         <p class="rule-date">15 Jul 2025</p>
                     </div>
                 </div>
-            </div>
-
+            </div>  
         </div>
 
         <!-- Bottom Navigation -->
@@ -521,7 +570,7 @@
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -544,4 +593,39 @@
             dropdown.style.display = 'none';
         }
     });
+
+    const rulesBackup = document.getElementById('rulesList').innerHTML;
+
+    function showDetails(title, date, contents) {
+        const container = document.getElementById('rulesList');
+        container.innerHTML = '';
+
+        const selectedItem = document.createElement('div');
+        selectedItem.className = 'rule-item';
+        selectedItem.innerHTML = `
+        <p class="rule-title">${title}</p>
+        <p class="rule-date">${date}</p>
+    `;
+        container.appendChild(selectedItem);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'rule-wrapper';
+
+        const contentArray = Array.isArray(contents) ? contents : [contents];
+
+        contentArray.forEach(content => {
+            const paragraph = document.createElement('div');
+            paragraph.className = 'rule-paragraph';
+            paragraph.innerText = content;
+            wrapper.appendChild(paragraph);
+        });
+
+        container.appendChild(wrapper);
+    }
+
+
+    function resetRules() {
+        document.getElementById('rulesList').innerHTML = rulesBackup;
+        window.location.href = '../spv/home.html';
+    }
 </script>

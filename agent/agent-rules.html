@@ -59,7 +59,7 @@
 
         .content {
             flex: 1;
-            padding: 1rem;
+
         }
 
         h2 {
@@ -69,34 +69,77 @@
             margin-bottom: 1rem;
         }
 
-        .rule-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+        .agent-rules {
+            font-family: 'Inter', sans-serif;
+            padding: 16px;
         }
 
-        .rule-box {
-            border: 1.5px solid black;
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            background: #fff;
-            min-height: 90px;
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .icon-tabs {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            border-bottom: 1px solid #9a9ea5;
+            padding-bottom: 10px;
+        }
+
+        .icon-tabs i {
+            font-size: 20px;
+            color: #1e3a8a;
+            padding: 8px;
+            /* border-radius: 50%;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out; */
+        }
+
+
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .rule-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+
         }
 
         .rule-title {
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .rule-date {
             font-size: 0.85rem;
-            color: #b91c1c;
-            margin-bottom: 0.25rem;
+            color: #6b7280;
+            margin: 4px 0 0 0;
         }
 
         .rule-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+            margin-top: 12px;
+        }
+
+        .rule-paragraph {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
         }
 
         .bottom-nav {
@@ -396,8 +439,11 @@
     <div class="wrapper">
         <!-- Header -->
         <div class="header">
-            <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">Agent Rules</span></a>
+            <div class="header-name" style="cursor: pointer;" onclick="resetRules()">
+                <i class="fas fa-arrow-left"></i>
+                <span style="margin-left: 16px;">Agent Rules</span>
+            </div>
+
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
@@ -434,31 +480,50 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="rule-section">
-                <div class="rule-wrapper">
-                    <div class="rule-title">Kode etik :</div>
-                    <div class="rule-box">Jaga integritas & kerahasiaan data nasabah.</div>
+            <div class="agent-rules">
+                <div class="icon-tabs">
+                    <i class="fas fa-file-alt active"></i>
+                    <i class="fas fa-phone"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
 
-                <div class="rule-wrapper">
-                    <div class="rule-title">Bantuan :</div>
-                    <div class="rule-box">Hubungi tim dukungan via aplikasi.</div>
-                </div>
+                <div class="rules-list" id="rulesList">
+                    <div class="rule-item" onclick="showDetails('Kode Etik Agent', '22 Jul 2025', 
+                        `Sebagai Agent, Anda wajib menjaga integritas, bersikap profesional, dan menjaga kerahasiaan seluruh data nasabah. Hindari penyalahgunaan informasi, serta jaga reputasi perusahaan dalam setiap interaksi.`)
+                        ">
+                        <p class="rule-title">Kode Etik Agent</p>
+                        <p class="rule-date">22 Jul 2025</p>
+                    </div>
 
-                <div class="rule-wrapper">
-                    <div class="rule-title">Penjualan :</div>
-                    <div class="rule-box">Tawar produk terdaftar, beri info akurat, ikuti prosedur, pastikan persetujuan
-                        nasabah.</div>
-                </div>
+                    <div class="rule-item" onclick="showDetails('Aturan Penanganan Nasabah', '20 Jul 2025', 
+                        `Jika menghadapi kendala dengan nasabah atau terjadi kasus khusus, segera hubungi tim pendukung melalui aplikasi resmi. Jangan mengambil keputusan sendiri yang berpotensi menyalahi prosedur.`)
+                        ">
+                        <p class="rule-title">Aturan Penanganan Nasabah</p>
+                        <p class="rule-date">20 Jul 2025</p>
+                    </div>
 
-                <div class="rule-wrapper">
-                    <div class="rule-title">Pelanggaran :</div>
-                    <div class="rule-box">Tambahkan sedikit teks isi Sanksi sesuai tingkat keparahan.</div>
-                </div>
+                    <div class="rule-item" onclick="showDetails('Panduan Komunikasi Tim', '18 Jul 2025', 
+                        `Hanya tawarkan produk yang terdaftar dan aktif. Sampaikan informasi secara akurat dan transparan. Ikuti alur komunikasi sesuai SOP, dan pastikan nasabah memberikan persetujuan dengan jelas sebelum melanjutkan proses.`)
+                        ">
+                        <p class="rule-title">Panduan Komunikasi Tim</p>
+                        <p class="rule-date">18 Jul 2025</p>
+                    </div>
 
-                <div class="rule-wrapper">
-                    <div class="rule-title">Pelayanan :</div>
-                    <div class="rule-box">Tambahkan sedikit teks isi Responsif, profesional, selesaikan masalah.</div>
+                    <div class="rule-item" onclick="showDetails('Kebijakan Laporan Harian Agen', '17 Jul 2025', 
+                        `Setiap agent wajib mengisi laporan harian yang mencakup aktivitas kerja, jumlah prospek, hasil closing, dan hambatan yang ditemui. Laporan harus dikirim tepat waktu setiap hari. Supervisor akan melakukan pengecekan dan menyusun evaluasi mingguan berdasarkan data tersebut.`)
+                        ">
+                        <p class="rule-title">Kebijakan Laporan Harian Agen</p>
+                        <p class="rule-date">17 Jul 2025</p>
+                    </div>
+
+                    <div class="rule-item" onclick="showDetails('Standar Training Agen Baru', '15 Jul 2025', 
+                        `Sebelum mulai bekerja, agent baru wajib mengikuti pelatihan dasar yang mencakup pemahaman produk, teknik komunikasi, penggunaan sistem, dan etika kerja. Setelah pelatihan, dilakukan evaluasi untuk memastikan kesiapan kerja, serta pendampingan minimal selama 1 minggu pertama.`)
+                        ">
+                        <p class="rule-title">Standar Training Agen Baru</p>
+                        <p class="rule-date">15 Jul 2025</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -490,7 +555,7 @@
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -513,4 +578,38 @@
             dropdown.style.display = 'none';
         }
     });
+
+    const rulesBackup = document.getElementById('rulesList').innerHTML;
+
+    function showDetails(title, date, contents) {
+        const container = document.getElementById('rulesList');
+        container.innerHTML = '';
+
+        const selectedItem = document.createElement('div');
+        selectedItem.className = 'rule-item';
+        selectedItem.innerHTML = `
+        <p class="rule-title">${title}</p>
+        <p class="rule-date">${date}</p>
+    `;
+        container.appendChild(selectedItem);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'rule-wrapper';
+
+        const contentArray = Array.isArray(contents) ? contents : [contents];
+
+        contentArray.forEach(content => {
+            const paragraph = document.createElement('div');
+            paragraph.className = 'rule-paragraph';
+            paragraph.innerText = content;
+            wrapper.appendChild(paragraph);
+        });
+
+        container.appendChild(wrapper);
+    }
+
+
+    function resetRules() {
+        document.getElementById('rulesList').innerHTML = rulesBackup;
+    }
 </script>

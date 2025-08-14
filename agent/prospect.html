@@ -316,10 +316,6 @@
             background-color: #f9fafb;
         }
 
-        .prospect-table td:first-child,
-        .prospect-table td:last-child {
-            text-align: left;
-        }
 
         .prospect-table tbody tr:hover {
             background-color: #e0f2fe;
@@ -1402,6 +1398,149 @@
                 min-width: 90px;
             }
         }
+
+        .detail-campaign {
+            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group.full {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Remove focus outline for readonly */
+        input[readonly]:focus,
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #d1d5db;
+        }
+
+        @media (min-width: 480px) {
+            .form-group {
+                flex: 1 1 48%;
+            }
+
+            .form-group.full {
+                flex: 1 1 100%;
+            }
+        }
+
+        .detail-product {
+            padding: 20px 16px;
+            border-radius: 12px;
+            background-color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 18px;
+        }
+
+        .section-title-product {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #143c6a;
+        }
+
+        .download-btn i {
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            color: #111;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        /* 2 kolom jika cukup lebar */
+        @media (min-width: 480px) {
+            .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
     </style>
 </head>
 
@@ -1517,6 +1656,82 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="detail-campaign" id="detailCampaign" style="display: none;">
+            <div class="form-group">
+                <label for="campaignName">Campaign Name</label>
+                <input type="text" id="campaignName" value="Juli Sehat" readonly>
+            </div>
+            <div class="form-group">
+                <label for="mediaCampaign">Media</label>
+                <input type="text" id="mediaCampaign" value="Call" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="product">Product</label>
+                <input type="text" id="product" value="Orbeets" readonly>
+            </div>
+            <div class="form-group">
+                <label for="campaignType">Type</label>
+                <input type="text" id="campaignType" value="Health" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="periode">Periode</label>
+                <input type="text" id="periode" value="31 Juni - 31 Juli 2025" readonly>
+            </div>
+            <div class="form-group full">
+                <label for="description">Description</label>
+                <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
+            </div>
+
+        </div>
+
+        <div class="detail-product" id="detailProduct" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title-product">Product Specification</h2>
+                <button class="download-btn" onclick="handleDownload()">
+                    <i class="fas fa-download"></i> Download
+                </button>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="product">Product Name</label>
+                    <input type="text" id="product" value="Orbeets" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="productAlternat">Alternative Product</label>
+                    <input type="text" id="productAlternat" value="Orbeets Plus" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="premium">Premium</label>
+                    <input type="text" id="premium" value="Rp 250.000 / bulan" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="benefit">Benefit</label>
+                    <input type="text" id="benefit" value="Meningkatkan daya tahan tubuh" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                 <div class="form-group">
+                    <label for="plan">Plan</label>
+                    <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Product Description</label>
+                    <textarea id="productDescription" rows="3" readonly>Suplemen kesehatan berbahan alami</textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+
 
         <div class="prospectDetail" id="prospectDetail" style="display:none">
             <div class="header-section">
@@ -2221,7 +2436,7 @@
             </div>
 
             <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -2361,7 +2576,6 @@
                 document.getElementById('status-prospect').style.display = 'none';
                 document.getElementById('prospectDetail').style.display = 'block';
 
-                // ✅ Tambahkan baris ini untuk reset judul
                 document.getElementById('headerTitle').innerHTML = `
             <i class="fas fa-arrow-left"></i> 
             <span style="margin-left: 16px;">Prospect Detail</span>
@@ -2392,11 +2606,49 @@
             <span style="margin-left: 16px;">Interaction</span>
         `;
             }
+            else if (currentView === 'detailCampaign') {
+                document.getElementById('detailCampaign').style.display = 'none';
+                document.getElementById('prospectList').style.display = 'block';
+                currentView = 'list';
+                document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">Interaction</span>
+        `;
+            }
+            else if (currentView === 'detailProduct') {
+                document.getElementById('detailProduct').style.display = 'none';
+                document.getElementById('prospectList').style.display = 'block';
+
+                currentView = 'list';
+                document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> 
+            <span style="margin-left: 16px;">Interaction</span>
+        `;
+            }
             else {
                 window.location.href = '../agent/home.html';
             }
         }
 
+        function showCampaignDetail() {
+            document.getElementById('prospectList').style.display = 'none';
+            document.getElementById('detailCampaign').style.display = 'block';
+            currentView = 'detailCampaign';
+
+            document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
+    `;
+        }
+
+        function showProductDetail() {
+            document.getElementById('prospectList').style.display = 'none';
+            document.getElementById('detailProduct').style.display = 'block';
+            currentView = 'detailProduct';
+
+            document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
+    `;
+        }
 
         function triggerFileUpload() {
             document.getElementById('fileInput').click();
@@ -2420,18 +2672,15 @@
                 "Not Interested": "NotInterestedSection"
             };
 
-            // Sembunyikan semua section terlebih dahulu
             Object.values(sectionMap).forEach(id => {
                 const section = document.getElementById(id);
                 if (section) section.style.display = "none";
             });
 
-            // Tampilkan section sesuai pilihan
             if (sectionMap[selectedValue]) {
                 document.getElementById("prospectDetail").style.display = "none";
                 document.getElementById("status-prospect").style.display = "block";
                 document.getElementById(sectionMap[selectedValue]).style.display = "block";
-                // ✅ Header title map dan update
                 const headerTitleMap = {
                     "Thinking": "Thinking Section",
                     "Send Browser": "Send via Browser",
