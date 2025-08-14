@@ -147,6 +147,46 @@
             }
         }
 
+        .dropdown-download {
+            position: relative;
+            display: inline-block;
+        }
+
+        .download-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 140px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Class untuk menampilkan dropdown */
+        .dropdown-content.show {
+            display: block;
+        }
+
         .content {
             flex: 1;
             padding-bottom: 90px;
@@ -747,12 +787,19 @@
 
             <div class="detail-product" id="detailProduct" style="display: none;">
                 <div class="section-header">
-                    <h2 class="section-title">Produt Specification</h2>
-                    <button class="download-btn" onclick="handleDownload()">
-                        <i class="fas fa-download"></i> Download
-                    </button>
-                </div>
+                    <h2 class="section-title">Product Specification</h2>
 
+                    <div class="dropdown-download">
+                        <button class="download-btn" id="downloadToggle">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <div class="dropdown-content" id="downloadMenu">
+                            <a href="#" onclick="handleDownload('excel')">Excel</a>
+                            <a href="#" onclick="handleDownload('pdf')">PDF</a>
+                            <a href="#" onclick="handleShare()">Share</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="product">Product Name</label>
@@ -771,6 +818,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Bottom Navigation -->
@@ -810,6 +858,33 @@
 </html>
 
 <script>
+    const toggleBtn = document.getElementById("downloadToggle");
+    const menu = document.getElementById("downloadMenu");
+
+    toggleBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        menu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            menu.classList.remove("show");
+        }
+    });
+    function handleDownload(type) {
+        if (type === 'excel') {
+            alert("Downloading Excel file...");
+            // logika download Excel
+        } else if (type === 'pdf') {
+            alert("Downloading PDF file...");
+            // logika download PDF
+        }
+    }
+
+    function handleShare() {
+        alert("Sharing product details...");
+        // logika share
+    }
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';

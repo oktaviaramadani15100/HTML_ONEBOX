@@ -7,6 +7,8 @@
     <title>My Agent</title>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 <style>
     * {
         box-sizing: border-box;
@@ -367,6 +369,27 @@
         margin-bottom: 10px;
     }
 
+    .agent-info {
+        flex: 1;
+        margin-left: 10px;
+    }
+
+    .agent-status {
+        font-size: 0.85rem;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .agent-status.active {
+        color: #16a34a;
+        /* hijau */
+    }
+
+    .agent-status.inactive {
+        color: #dc2626;
+        /* merah */
+    }
+
     .avatar {
         width: 40px;
         height: 40px;
@@ -390,7 +413,10 @@
         font-size: 13px;
         color: #6b7280;
     }
-
+    .agent-info .location {
+        font-size: 13px;
+        color: #6b7280;
+    }
     .icon-btn {
         font-size: 24px;
         cursor: pointer;
@@ -650,48 +676,96 @@
 
             </div>
             <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male">
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Ahmad Yani 1" data-gender="male"
+                data-status="active">
+
                 <div class="avatar"><i class="fas fa-user"></i></div>
                 <div class="agent-info">
                     <div class="name">Falah</div>
-                    <div class="sales">3 of 5 Sales|Rp500.000</div>
+                    <div class="sales">3 of 5 Sales | Rp500.000</div>
+                    <div class="location">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jl. Ahmad Yani 1</span>
+                    </div>
                 </div>
+
+                <!-- Label Status -->
+                <div class="agent-status">Status: Active</div>
             </div>
 
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Budi" data-id="B321"
-                data-email="budi@mail.com" data-phone="08198765432" data-address="Jl. Mawar 2" data-gender="male">
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male"
+                data-status="active">
+
                 <div class="avatar"><i class="fas fa-user"></i></div>
                 <div class="agent-info">
-                    <div class="name">Budi</div>
-                    <div class="sales">2 of 5 Sales|Rp500.000</div>
+                    <div class="name">Falah</div>
+                    <div class="sales">3 of 5 Sales | Rp500.000</div>
+                    <div class="location">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jl. Merdeka 1</span>
+                    </div>
                 </div>
+
+                <!-- Label Status -->
+                <div class="agent-status">Status: Active</div>
             </div>
 
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Dewi" data-id="D567"
-                data-email="dewi@mail.com" data-phone="0822334455" data-address="Jl. Anggrek 3" data-gender="female">
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Mc Tavis" data-id="F123"
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. TB Simatupang" data-gender="male"
+                data-status="active">
+
                 <div class="avatar"><i class="fas fa-user"></i></div>
                 <div class="agent-info">
-                    <div class="name">Dewi</div>
-                    <div class="sales">5 of 5 Sales|Rp500.000</div>
+                    <div class="name">Mc Tavis</div>
+                    <div class="sales">3 of 5 Sales | Rp500.000</div>
+                    <div class="location">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jl. TB Simatupang</span>
+                    </div>
                 </div>
+
+                <!-- Label Status -->
+                <div class="agent-status">Status: Active</div>
             </div>
 
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Sari" data-id="S777"
-                data-email="sari@mail.com" data-phone="0855556677" data-address="Jl. Melati 4" data-gender="female">
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Imam Bonjol 1"
+                data-gender="male" data-status="active">
+
                 <div class="avatar"><i class="fas fa-user"></i></div>
                 <div class="agent-info">
-                    <div class="name">Sari</div>
-                    <div class="sales">1 of 5 Sales|Rp500.000</div>
+                    <div class="name">Rough</div>
+                    <div class="sales">3 of 5 Sales | Rp500.000</div>
+                    <div class="location">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jl. Imam Bonjol 1</span>
+                    </div>
                 </div>
+
+                <!-- Label Status -->
+                <div class="agent-status">Status: Active</div>
             </div>
 
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Agus" data-id="A888"
-                data-email="agus@mail.com" data-phone="0812333444" data-address="Jl. Kenanga 5" data-gender="male">
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Kuala Lumpur 1"
+                data-gender="male" data-status="inactive">
+
                 <div class="avatar"><i class="fas fa-user"></i></div>
+
                 <div class="agent-info">
-                    <div class="name">Agus</div>
-                    <div class="sales">3 of 5 Sales|Rp500.000</div>
+                    <div class="name">Trevor</div>
+                    <div class="sales">1 of 5 Sales | Rp500.000</div>
+
+                    <!-- Label Lokasi -->
+                    <div class="location">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Jl. Kuala Lumpur 1</span>
+                    </div>
                 </div>
+
+                <!-- Label Status -->
+                <div class="agent-status">Status: Inactive</div>
             </div>
         </div>
 
@@ -704,18 +778,18 @@
                     </div>
                     <div class="meta">
                         <div class="contact-line">
-                            <i class="fas fa-phone-alt"></i>
+                            <i class="bi bi-telephone"></i>
                             <span id="profilePhone"></span>
                             <span class="chat-icon" onclick="toggleChat()">
-                                <i class="fas fa-comment"></i>
+                                <i class="bi bi-chat"></i>
                             </span>
                         </div>
                         <div>
-                            <i class="fas fa-envelope"></i>
+                            <i class="bi bi-envelope"></i>
                             <span id="profileEmail"></span>
                         </div>
                         <div>
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="bi bi-geo-alt"></i>
                             <span id="profileAddress"></span>
                         </div>
 
@@ -726,14 +800,14 @@
             <div class="biodata">
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="fas fa-birthday-cake icon"></i>
+                        <i class="bi bi-cake icon"></i>
                         <div>
                             <span class="label">Birthday</span>
                             <span class="value">12 Jan 1995</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="fas fa-heart icon"></i>
+                        <i class="bi bi-heart icon"></i>
                         <div>
                             <span class="label">Marital Status</span>
                             <span class="value">Single</span>
@@ -743,7 +817,7 @@
 
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="fas fa-wallet icon"></i>
+                        <i class="bi bi-wallet2 icon"></i>
                         <div>
                             <span class="label">Income Range</span>
                             <span class="value">5 - 10 juta</span>
@@ -753,14 +827,14 @@
 
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="fas fa-chart-line icon"></i>
+                        <i class="bi bi-graph-down icon"></i>
                         <div>
                             <span class="label">Avg Transaction</span>
                             <span class="value">Rp 1.250.000</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="fas fa-id-badge icon"></i>
+                        <i class="bi bi-person-badge icon"></i>
                         <div>
                             <span class="label">Account Type</span>
                             <span class="value">Kredit</span>
@@ -770,14 +844,14 @@
 
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="fas fa-calendar-plus icon"></i>
+                        <i class="bi bi-calendar-plus icon"></i>
                         <div>
                             <span class="label">Join At</span>
                             <span class="value">03 Juli 2020</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="fas fa-clock icon"></i>
+                        <i class="bi bi-clock icon"></i>
                         <div>
                             <span class="label">Duration</span>
                             <span class="value">5 years 2 months</span>
@@ -892,10 +966,10 @@
 
             const genderIcon = document.getElementById('genderIcon');
             if (gender === 'male') {
-                genderIcon.className = 'fas fa-mars gender-icon';
+                genderIcon.className = 'bi bi-gender-male gender-icon';
                 genderIcon.title = 'Male';
             } else if (gender === 'female') {
-                genderIcon.className = 'fas fa-venus gender-icon';
+                genderIcon.className = 'bi bi-gender-female gender-icon';
                 genderIcon.title = 'Female';
             } else {
                 genderIcon.className = 'gender-icon';
@@ -919,8 +993,18 @@
                 window.location.href = "../spv/home.html";
             }
         }
+        document.querySelectorAll('.agent-card').forEach(card => {
+            const status = card.getAttribute('data-status');
+            const statusLabel = card.querySelector('.agent-status');
 
-
+            if (status === 'active') {
+                statusLabel.textContent = 'Status: Active';
+                statusLabel.classList.add('active');
+            } else {
+                statusLabel.textContent = 'Status: Inactive';
+                statusLabel.classList.add('inactive');
+            }
+        });
 
     </script>
 </body>

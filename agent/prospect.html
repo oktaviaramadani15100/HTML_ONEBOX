@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Prospect</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <style>
         * {
             box-sizing: border-box;
@@ -93,6 +95,92 @@
             font-size: 1.3rem;
             color: #1e3a8a;
             cursor: pointer;
+        }
+
+        .prospect-filter-container {
+            display: flex;
+            justify-content: flex-end;
+            /* posisi kanan */
+            align-items: center;
+            padding: 10px 16px;
+        }
+
+        /* Icon Filter */
+        .prospect-filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        /* Drawer Filter */
+        .prospect-filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .prospect-filter-drawer.open {
+            right: 0;
+        }
+
+        /* Header */
+        .prospect-filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .prospect-filter-header h3 {
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .prospect-filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #ef4444;
+        }
+
+        /* Content */
+        .prospect-filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .prospect-filter-content input,
+        .prospect-filter-content select,
+        .prospect-filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .prospect-filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .prospect-filter-content button:hover {
+            background-color: #374ba1;
         }
 
         .filter-icon {
@@ -194,9 +282,9 @@
 
         .prospect-table th,
         .prospect-table td {
-            padding: 10px 12px;
+            padding: 10px 6px;
             font-size: 0.85rem;
-            text-align: center;
+            text-align: left;
             border-bottom: 1px solid #e5e7eb;
         }
 
@@ -208,7 +296,6 @@
         .name-link {
             text-decoration: none;
             color: #1e3a8a;
-            font-weight: bold;
         }
 
 
@@ -539,7 +626,6 @@
             text-decoration: none;
             color: #f9fafb;
             font-size: 20px;
-            font-weight: bold;
         }
 
         .header-section {
@@ -630,7 +716,7 @@
         }
 
         .name {
-            font-weight: bold;
+            /* font-weight: bold; */
             font-size: 1rem;
             color: #1e3a8a;
         }
@@ -697,7 +783,7 @@
         }
 
         .biodata-item .label {
-            font-weight: bold;
+            /* font-weight: bold; */
             color: #1e3a8a;
             display: block;
             margin-bottom: 2px;
@@ -1362,30 +1448,71 @@
             </div>
         </div>
 
+        <!-- Filter Drawer -->
+        <div class="filter-drawer" id="prospectFilterDrawer">
+            <div class="filter-header">
+                <h3><i class="fas fa-filter"></i> Filter Prospect</h3>
+                <i class="fas fa-times" onclick="toggleProspectFilter()"></i>
+            </div>
+            <div class="filter-content">
+                <label for="prospect-date">Date</label>
+                <input type="date" id="prospect-date" />
+
+                <label for="prospect-name">Prospect</label>
+                <input type="text" id="prospect-name" placeholder="Enter name" />
+
+                <label for="prospect-status">Status</label>
+                <input type="text" id="prospect-status" placeholder="Enter status" />
+
+                <button onclick="applyProspectFilter()">Apply</button>
+                <button onclick="resetProspectFilter()" style="margin-top:5px;background-color:#6b7280;">Reset</button>
+            </div>
+        </div>
+
+        <!-- Table -->
         <div class="table-wrapper" id="prospectList">
-            <table class="prospect-table">
+        <div class="prospect-filter-container">
+            <i class="fas fa-filter filter-icon" onclick="toggleProspectFilter()"></i>
+        </div>
+            <table class="prospect-table" id="prospectTable">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Campaign</th>
-                        <th>Product</th>
+                        <th>Status</th>
+                        <th>Last Update</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
                         <td>Mandiri Sehat</td>
-                        <td>Mandiri</td>
+                        <td>New</td>
+                        <td>6 May,08:30 AM</td>
                     </tr>
                     <tr onclick="showDetail()">
-                        <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
+                        <td><a href="#" class="name-link " onclick="showDetail()">Jhon</a></td>
                         <td>MSIG Life Campaign</td>
-                        <td>Mandiri</td>
+                        <td>Open</td>
+                        <td>7 May,09:30 AM</td>
                     </tr>
                     <tr onclick="showDetail()">
                         <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
                         <td>Riplay</td>
-                        <td>Mandiri</td>
+                        <td>Contacted</td>
+                        <td>8 May,10:14 AM</td>
+                    </tr>
+                    <tr onclick="showDetail()">
+                        <td><a href="#" class="name-link" onclick="showDetail()">Brown</a></td>
+                        <td>Riplay</td>
+                        <td>Uncontacted</td>
+                        <td>9 May,11:21 AM</td>
+                    </tr>
+                    <tr onclick="showDetail()">
+                        <td><a href="#" class="name-link" onclick="showDetail()">Adolf</a></td>
+                        <td>Riplay</td>
+                        <td>Win</td>
+                        <td>4 May,07:55 AM</td>
                     </tr>
                 </tbody>
             </table>
@@ -1410,21 +1537,22 @@
             <!-- Content -->
             <div class="content" id="profileContent">
                 <div class="profile">
-                    <i class="fas fa-mars gender-icon" title="Male"></i>
+
+                    <i class="bi bi-gender-male gender-icon" title="Male"></i>
                     <div class="profile-info">
                         <div class="top-row">
                             <span class="name">Layla</span>
                         </div>
                         <div class="meta">
                             <div>
-                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span><i class="bi bi-telephone"></i> 0895xxxxxxx</span>
                                 <span class="chat-icon" onclick="toggleChat()">
-                                    <i class="fas fa-comment"></i>
+                                    <i class="bi bi-chat"></i>
                                 </span>
                             </div>
 
                             <div>
-                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                                <i class="bi bi-envelope"></i> agent01@ciptadra.com
                             </div>
                         </div>
                     </div>
@@ -1433,14 +1561,14 @@
                 <div class="biodata">
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-birthday-cake icon"></i>
+                            <i class="bi bi-cake icon"></i>
                             <div>
                                 <span class="label">Birthday</span>
                                 <span class="value">12 Jan 1995</span>
                             </div>
                         </div>
                         <div class="biodata-item">
-                            <i class="fas fa-heart icon"></i>
+                            <i class="bi bi-heart icon"></i>
                             <div>
                                 <span class="label">Marital Status</span>
                                 <span class="value">Single</span>
@@ -1450,7 +1578,7 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-wallet icon"></i>
+                            <i class="bi bi-wallet2 icon"></i>
                             <div>
                                 <span class="label">Income Range</span>
                                 <span class="value">5 - 10 juta</span>
@@ -1460,14 +1588,14 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-chart-line icon"></i>
+                            <i class="bi bi-graph-down icon"></i>
                             <div>
                                 <span class="label">Avg Transaction</span>
                                 <span class="value">Rp 1.250.000</span>
                             </div>
                         </div>
                         <div class="biodata-item">
-                            <i class="fas fa-id-badge icon"></i>
+                            <i class="bi bi-person-badge icon"></i>
                             <div>
                                 <span class="label">Account Type</span>
                                 <span class="value">Kredit</span>
@@ -1478,14 +1606,14 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-calendar-plus icon"></i>
+                            <i class="bi bi-calendar-plus icon"></i>
                             <div>
                                 <span class="label">Join At</span>
                                 <span class="value">03 Juli 2020</span>
                             </div>
                         </div>
                         <div class="biodata-item" style="margin-top: 21px;">
-                            <i class="fas fa-clock icon"></i>
+                            <i class="bi bi-clock icon"></i>
                             <div>
                                 <!-- <span class="label">Duration</span> -->
                                 <span class="value">5 years 2 months</span>
@@ -2100,6 +2228,44 @@
     </div>
 
     <script>
+        function toggleProspectFilter() {
+            document.getElementById('prospectFilterDrawer').classList.toggle('open');
+        }
+
+        function applyProspectFilter() {
+            const dateVal = document.getElementById('prospect-date').value.trim();
+            const nameVal = document.getElementById('prospect-name').value.trim().toLowerCase();
+            const statusVal = document.getElementById('prospect-status').value.trim().toLowerCase();
+
+            const rows = document.querySelectorAll('#prospectTable tbody tr');
+
+            rows.forEach(row => {
+                const name = row.cells[0].innerText.toLowerCase();
+                const status = row.cells[2].innerText.toLowerCase();
+                const date = row.cells[3].innerText.trim(); // format YYYY-MM-DD
+
+                let match = true;
+
+                if (nameVal && !name.includes(nameVal)) match = false;
+                if (statusVal && !status.includes(statusVal)) match = false;
+                if (dateVal && date !== dateVal) match = false;
+
+                row.style.display = match ? '' : 'none';
+            });
+
+            toggleProspectFilter();
+        }
+
+        function resetProspectFilter() {
+            document.getElementById('prospect-date').value = '';
+            document.getElementById('prospect-name').value = '';
+            document.getElementById('prospect-status').value = '';
+
+            const rows = document.querySelectorAll('#prospectTable tbody tr');
+            rows.forEach(row => row.style.display = '');
+
+            toggleProspectFilter();
+        }
         function showScreen(id) {
             ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
                 document.getElementById(screen).style.display = "none";
