@@ -1091,7 +1091,7 @@
 
             .radio-group {
                 gap: 1rem;
-                flex-direction: column;
+                /* flex-direction: column; */
             }
 
             .save-btn {
@@ -1610,9 +1610,9 @@
 
         <!-- Table -->
         <div class="table-wrapper" id="prospectList">
-        <div class="prospect-filter-container">
-            <i class="fas fa-filter filter-icon" onclick="toggleProspectFilter()"></i>
-        </div>
+            <div class="prospect-filter-container">
+                <i class="fas fa-filter filter-icon" onclick="toggleProspectFilter()"></i>
+            </div>
             <table class="prospect-table" id="prospectTable">
                 <thead>
                     <tr>
@@ -1718,7 +1718,7 @@
             </div>
 
             <div class="form-row">
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="plan">Plan</label>
                     <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly />
                 </div>
@@ -1741,7 +1741,7 @@
                         <option value="">--Pilih--</option>
                         <option value="Thinking">Thinking</option>
                         <option value="Send Brosure">Send Brosure</option>
-                        <option value="Simulation Policy">Simulation Policy</option>
+                        <option value="Policy Simulation">Policy Simulation</option>
                         <option value="Entry Policy">Entry Policy</option>
                         <option value="Not Interested">Not Interested</option>
                     </select>
@@ -2667,7 +2667,7 @@
             const sectionMap = {
                 "Thinking": "ThinkingSection",
                 "Send Brosure": "SendBrowserSection",
-                "Simulation Policy": "SimulationPolicySection",
+                "Policy Simulation": "SimulationPolicySection",
                 "Entry Policy": "EntryPolicySection",
                 "Not Interested": "NotInterestedSection"
             };
@@ -2684,7 +2684,7 @@
                 const headerTitleMap = {
                     "Thinking": "Thinking Section",
                     "Send Browser": "Send via Browser",
-                    "Simulation Policy": "Simulation Policy",
+                    "Policy Simulation": "Policy Simulation",
                     "Entry Policy": "Entry Policy Form",
                     "Not Interested": "Not Interested Reason"
                 };
