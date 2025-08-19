@@ -161,7 +161,7 @@
         display: flex;
         align-items: center;
     }
-    
+
     /* BOTTOM NAVIGATION - Modified to match home.html */
     .bottom-nav {
         position: fixed;
@@ -179,18 +179,18 @@
         background: white;
         display: flex;
     }
-    
+
     .nav-wrapper {
         display: flex;
         justify-content: space-around;
         align-items: center;
         width: 100%;
     }
-    
+
     .nav-wrapper i {
         color: #1e3a8a;
     }
-    
+
     .nav-wrapper>div {
         flex: 1;
         text-align: center;
@@ -202,20 +202,34 @@
         gap: 4px;
     }
 
+    .nav-wrapper a {
+        color: #1e3a8a;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-wrapper a.active,
+    .nav-wrapper a.active i {
+        color: #3f51b5;
+        /* Warna untuk navigasi yang aktif */
+    }
+
     .nav-spacer {
         flex: 0.5;
     }
-    
+
     .nav-wrapper i {
         font-size: 1.5rem;
         margin-bottom: 4px;
     }
-    
+
     .nav-wrapper p {
         margin-top: 4px;
         font-size: 0.85rem;
     }
-    
+
     .nav-new {
         justify-content: center;
         align-items: center;
@@ -235,7 +249,7 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     .plus-btn {
         background-color: #1e3a8a;
         border-radius: 50%;
@@ -248,14 +262,14 @@
         text-decoration: none;
         font-size: 30px;
     }
-    
+
     .nav-new i {
         font-size: 30px;
         display: block;
         margin-bottom: -2px;
         color: white;
     }
-    
+
     .nav-new p {
         margin: 15px 0 0;
         font-size: 0.85rem;
@@ -318,46 +332,41 @@
         color: #6b7280;
     }
 
-    .icon-btn {
-        font-size: 24px;
+    /* Updated CSS for the filter icon */
+    .filter-icon {
+        font-size: 1.2rem;
         cursor: pointer;
-        color: #1d0c80;
+        color: #1e3a8a;
         padding: 6px;
         border-radius: 6px;
         transition: background 0.2s;
     }
 
-    .icon-btn:hover {
+    .filter-icon:hover {
         background: #f0f0f0;
     }
 
     .filter-sidebar {
-        position: fixed;
-        top: 0;
-        right: -300px;
+        position: absolute;
+        top: 100%;
+        right: 0;
         width: 280px;
         height: auto;
         background: white;
-        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 16px;
-        transition: right 0.3s ease;
+        transition: all 0.3s ease;
         z-index: 1000;
-        display: none;
+        opacity: 0;
+        visibility: hidden;
+        border-radius: 8px;
+        transform: translateY(-10px);
     }
 
     .filter-sidebar.show {
-        right: 31rem;
-        top: 4rem;
-        display: block;
-    }
-
-    @media (max-width: 768px) {
-        .filter-sidebar.show {
-            right: 1rem;
-            top: 4rem;
-            width: 90%;
-            z-index: 999;
-        }
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
 
     .filter-header {
@@ -560,7 +569,7 @@
                 <span style="margin-left: 16px;">list SPV</span>
             </span>
             <div class="menu-icon-group">
-                <a href="../Atm/homeeeee.html" class="menu-icon">
+                <a href="../Atm/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -594,7 +603,7 @@
 
         <div class="agent-list" id="agentList" style="padding: 1rem;">
             <div class="agent-header">
-                <i class="fas fa-filter icon-btn" title="Filter" onclick="toggleFilter()"></i>
+                <i class="fas fa-filter filter-icon" title="Filter" onclick="toggleFilter()"></i>
                 <div id="filterSidebar" class="filter-sidebar">
                     <div class="filter-header">
                         <div class="filter-label">
@@ -604,82 +613,12 @@
                         <span class="close-btn" onclick="toggleFilter()">&times;</span>
                     </div>
                     <div class="filter-content">
-                        <label for="nama">nama SPV</label>
-                        <input type="nama" id="nama" name="nama" placeholder="nama" />
+                        <label for="filter-nama">nama SPV</label>
+                        <input type="text" id="filter-nama" name="nama" placeholder="nama" oninput="filterSPVs()" />
                     </div>
                 </div>
             </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Falah</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('F123')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteSPV('F123')"></i>
-                </div>
             </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Budi" data-id="B321"
-                data-email="budi@mail.com" data-phone="08198765432" data-address="Jl. Mawar 2" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Budi</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('B321')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteSPV('B321')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Dewi" data-id="D567"
-                data-email="dewi@mail.com" data-phone="0822334455" data-address="Jl. Anggrek 3" data-gender="female">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Dewi</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('D567')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteSPV('D567')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Sari" data-id="S777"
-                data-email="sari@mail.com" data-phone="0855556677" data-address="Jl. Melati 4" data-gender="female">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Sari</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('S777')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteSPV('S777')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Agus" data-id="A888"
-                data-email="agus@mail.com" data-phone="0812333444" data-address="Jl. Kenanga 5" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Agus</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('A888')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteSPV('A888')"></i>
-                </div>
-            </div>
-        </div>
 
         <div class="agent-profile" id="agentProfile" style="display: none;">
             <div class="profile">
@@ -774,15 +713,7 @@
                     <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-                <div>
-                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
                 <div class="nav-spacer"></div>
-                <div>
-                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
                 <div>
                     <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
@@ -797,6 +728,50 @@
 
 
     <script>
+        const spvData = [
+            { name: 'Falah', id: 'F123', email: 'falah@example.com', phone: '08123456789', address: 'Jl. Merdeka 1', gender: 'male' },
+            { name: 'Budi', id: 'B321', email: 'budi@mail.com', phone: '08198765432', address: 'Jl. Mawar 2', gender: 'male' },
+            { name: 'Dewi', id: 'D567', email: 'dewi@mail.com', phone: '0822334455', address: 'Jl. Anggrek 3', gender: 'female' },
+            { name: 'Sari', id: 'S777', email: 'sari@mail.com', phone: '0855556677', address: 'Jl. Melati 4', gender: 'female' },
+            { name: 'Agus', id: 'A888', email: 'agus@mail.com', phone: '0812333444', address: 'Jl. Kenanga 5', gender: 'male' }
+        ];
+
+        function renderSPVs(spvs) {
+            const spvListContainer = document.getElementById('agentList');
+            const spvHeader = spvListContainer.querySelector('.agent-header');
+            spvListContainer.innerHTML = ''; // Clear existing content
+            spvListContainer.appendChild(spvHeader); // Add the header back
+            
+            const cardsContainer = document.createElement('div');
+            cardsContainer.className = 'spv-cards-container';
+            
+            spvs.forEach(spv => {
+                const spvCard = document.createElement('div');
+                spvCard.className = 'agent-card';
+                spvCard.onclick = () => showAgentProfile(spv);
+                spvCard.innerHTML = `
+                    <div class="agent-card-content">
+                        <div class="avatar"><i class="fas fa-user"></i></div>
+                        <div class="agent-info">
+                            <div class="name">${spv.name}</div>
+                        </div>
+                    </div>
+                    <div class="action-icons">
+                        <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editSPV('${spv.id}')"></i>
+                        <i class="fas fa-trash-alt" title="Delete" onclick="event.stopPropagation(); deleteSPV('${spv.id}')"></i>
+                    </div>
+                `;
+                cardsContainer.appendChild(spvCard);
+            });
+            spvListContainer.appendChild(cardsContainer);
+        }
+        
+        function filterSPVs() {
+            const nameFilter = document.getElementById('filter-nama').value.toLowerCase();
+            let filteredSPVs = spvData.filter(spv => spv.name.toLowerCase().includes(nameFilter));
+            renderSPVs(filteredSPVs);
+        }
+
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -819,7 +794,7 @@
         document.addEventListener("click", function (e) {
             const sidebar = document.getElementById("filterSidebar");
             const isClickInside = sidebar.contains(e.target);
-            const isFilterButton = e.target.closest(".icon-btn");
+            const isFilterButton = e.target.closest(".filter-icon");
 
             if (!isClickInside && !isFilterButton) {
                 sidebar.classList.remove("show");
@@ -837,33 +812,25 @@
                 document.getElementById('agentList').style.display = 'block';
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My SPV</span>`;
+                renderSPVs(spvData);
             }
         });
 
-        function showAgentProfile(card) {
+        function showAgentProfile(spv) {
             sessionStorage.setItem('currentView', 'detail');
-
             document.getElementById('agentList').style.display = 'none';
             document.getElementById('agentProfile').style.display = 'block';
 
-
-            const name = card.getAttribute('data-name');
-            const id = card.getAttribute('data-id');
-            const email = card.getAttribute('data-email');
-            const phone = card.getAttribute('data-phone');
-            const address = card.getAttribute('data-address');
-            const gender = card.getAttribute('data-gender');
-
-            document.getElementById('profileName').innerText = name;
-            document.getElementById('profileEmail').innerText = email;
-            document.getElementById('profilePhone').innerText = phone;
-            document.getElementById('profileAddress').innerText = address;
+            document.getElementById('profileName').innerText = spv.name;
+            document.getElementById('profileEmail').innerText = spv.email;
+            document.getElementById('profilePhone').innerText = spv.phone;
+            document.getElementById('profileAddress').innerText = spv.address;
 
             const genderIcon = document.getElementById('genderIcon');
-            if (gender === 'male') {
+            if (spv.gender === 'male') {
                 genderIcon.className = 'fas fa-mars gender-icon';
                 genderIcon.title = 'Male';
-            } else if (gender === 'female') {
+            } else if (spv.gender === 'female') {
                 genderIcon.className = 'fas fa-venus gender-icon';
                 genderIcon.title = 'Female';
             } else {
@@ -871,10 +838,8 @@
                 genderIcon.title = '';
             }
 
-
             document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">SPV Detail</span>`;
         }
-
 
         function handleBack() {
             const current = sessionStorage.getItem('currentView') || 'list';
@@ -884,21 +849,19 @@
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My SPV</span>`;
                 sessionStorage.setItem('currentView', 'list');
+                filterSPVs(); // Re-render the list to apply any existing filters
             } else {
                 window.location.href = "../Atm/manajemenPengguna.html";
             }
         }
 
-        // New JavaScript functions for edit and delete actions
         function editSPV(spvId) {
-            alert('Mengedit agen dengan ID: ' + spvId);
-            // Tambahkan logika untuk mengedit agen di sini
+            alert('Mengedit SPV dengan ID: ' + spvId);
         }
 
         function deleteSPV(spvId) {
-            if (confirm('Apakah Anda yakin ingin menghapus agen ini?')) {
-                alert('Menghapus agen dengan ID: ' + spvId);
-                // Tambahkan logika untuk menghapus agen di sini
+            if (confirm('Apakah Anda yakin ingin menghapus SPV ini?')) {
+                alert('Menghapus SPV dengan ID: ' + spvId);
             }
         }
     </script>

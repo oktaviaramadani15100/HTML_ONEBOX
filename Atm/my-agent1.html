@@ -191,7 +191,7 @@
         color: #1e3a8a;
     }
     
-    .nav-wrapper>div {
+    .nav-wrapper > div {
         flex: 1;
         text-align: center;
         font-size: 0.85rem;
@@ -200,6 +200,19 @@
         flex-direction: column;
         align-items: center;
         gap: 4px;
+    }
+
+    .nav-wrapper a {
+        color: #1e3a8a;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-wrapper a.active,
+    .nav-wrapper a.active i {
+        color: #3f51b5; /* Warna untuk navigasi yang aktif */
     }
 
     .nav-spacer {
@@ -321,7 +334,7 @@
     .icon-btn {
         font-size: 24px;
         cursor: pointer;
-        color: #1d0c80;
+        color: #f9fafb;
         padding: 6px;
         border-radius: 6px;
         transition: background 0.2s;
@@ -604,87 +617,26 @@
                         <span class="close-btn" onclick="toggleFilter()">&times;</span>
                     </div>
                     <div class="filter-content">
-                        <label for="nama">nama agent</label>
-                        <input type="nama" id="nama" name="nama" placeholder="nama" />
+                        <label for="filter-nama">nama agent</label>
+                        <input type="text" id="filter-nama" name="nama" placeholder="nama" oninput="filterAgents()" />
+
+                        <label for="filter-sales">Penjualan</label>
+                        <select id="filter-sales" onchange="filterAgents()">
+                            <option value="">None</option>
+                            <option value="asc">Terendah</option>
+                            <option value="desc">Tertinggi</option>
+                        </select>
+
+                        <label for="filter-successful-sales">Penjualan Berhasil</label>
+                        <select id="filter-successful-sales" onchange="filterAgents()">
+                            <option value="">None</option>
+                            <option value="asc">Terendah</option>
+                            <option value="desc">Tertinggi</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Falah</div>
-                        <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('F123')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteAgent('F123')"></i>
-                </div>
             </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Budi" data-id="B321"
-                data-email="budi@mail.com" data-phone="08198765432" data-address="Jl. Mawar 2" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Budi</div>
-                        <div class="sales">2 of 5 Sales | Rp500.000</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('B321')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteAgent('B321')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Dewi" data-id="D567"
-                data-email="dewi@mail.com" data-phone="0822334455" data-address="Jl. Anggrek 3" data-gender="female">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Dewi</div>
-                        <div class="sales">5 of 5 Sales | Rp500.000</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('D567')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteAgent('D567')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Sari" data-id="S777"
-                data-email="sari@mail.com" data-phone="0855556677" data-address="Jl. Melati 4" data-gender="female">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Sari</div>
-                        <div class="sales">1 of 5 Sales | Rp500.000</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('S777')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteAgent('S777')"></i>
-                </div>
-            </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Agus" data-id="A888"
-                data-email="agus@mail.com" data-phone="0812333444" data-address="Jl. Kenanga 5" data-gender="male">
-                <div class="agent-card-content">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <div class="agent-info">
-                        <div class="name">Agus</div>
-                        <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    </div>
-                </div>
-                <div class="action-icons">
-                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('A888')"></i>
-                    <i class="fas fa-trash-alt" title="Delete"
-                        onclick="event.stopPropagation(); deleteAgent('A888')"></i>
-                </div>
-            </div>
-        </div>
 
         <div class="agent-profile" id="agentProfile" style="display: none;">
             <div class="profile">
@@ -779,15 +731,7 @@
                     <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-                <div>
-                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
                 <div class="nav-spacer"></div>
-                <div>
-                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
                 <div>
                     <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
@@ -802,6 +746,77 @@
 
 
     <script>
+        const agentsData = [
+            { name: 'Falah', id: 'F123', email: 'falah@example.com', phone: '08123456789', address: 'Jl. Merdeka 1', gender: 'male', totalSales: 500000, successfulSales: 3, totalTargets: 5 },
+            { name: 'Budi', id: 'B321', email: 'budi@mail.com', phone: '08198765432', address: 'Jl. Mawar 2', gender: 'male', totalSales: 500000, successfulSales: 2, totalTargets: 5 },
+            { name: 'Dewi', id: 'D567', email: 'dewi@mail.com', phone: '0822334455', address: 'Jl. Anggrek 3', gender: 'female', totalSales: 500000, successfulSales: 5, totalTargets: 5 },
+            { name: 'Sari', id: 'S777', email: 'sari@mail.com', phone: '0855556677', address: 'Jl. Melati 4', gender: 'female', totalSales: 500000, successfulSales: 1, totalTargets: 5 },
+            { name: 'Agus', id: 'A888', email: 'agus@mail.com', phone: '0812333444', address: 'Jl. Kenanga 5', gender: 'male', totalSales: 500000, successfulSales: 3, totalTargets: 5 }
+        ];
+
+        function renderAgents(agents) {
+            const agentListContainer = document.getElementById('agentList');
+            // Clear existing content except for the header
+            const agentHeader = agentListContainer.querySelector('.agent-header');
+            agentListContainer.innerHTML = '';
+            agentListContainer.appendChild(agentHeader);
+
+            agents.forEach(agent => {
+                const agentCard = document.createElement('div');
+                agentCard.className = 'agent-card';
+                agentCard.onclick = () => showAgentProfile(agent);
+                agentCard.setAttribute('data-name', agent.name);
+                agentCard.setAttribute('data-id', agent.id);
+                agentCard.setAttribute('data-email', agent.email);
+                agentCard.setAttribute('data-phone', agent.phone);
+                agentCard.setAttribute('data-address', agent.address);
+                agentCard.setAttribute('data-gender', agent.gender);
+                agentCard.innerHTML = `
+                    <div class="agent-card-content">
+                        <div class="avatar"><i class="fas fa-user"></i></div>
+                        <div class="agent-info">
+                            <div class="name">${agent.name}</div>
+                            <div class="sales">${agent.successfulSales} of ${agent.totalTargets} Sales | Rp${agent.totalSales.toLocaleString('id-ID')}</div>
+                        </div>
+                    </div>
+                    <div class="action-icons">
+                        <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('${agent.id}')"></i>
+                        <i class="fas fa-trash-alt" title="Delete" onclick="event.stopPropagation(); deleteAgent('${agent.id}')"></i>
+                    </div>
+                `;
+                agentListContainer.appendChild(agentCard);
+            });
+        }
+
+        function filterAgents() {
+            const nameFilter = document.getElementById('filter-nama').value.toLowerCase();
+            const salesSort = document.getElementById('filter-sales').value;
+            const successfulSalesSort = document.getElementById('filter-successful-sales').value;
+
+            let filteredAgents = [...agentsData];
+
+            // Filter by name
+            if (nameFilter) {
+                filteredAgents = filteredAgents.filter(agent => agent.name.toLowerCase().includes(nameFilter));
+            }
+
+            // Sort by total sales
+            if (salesSort === 'asc') {
+                filteredAgents.sort((a, b) => a.totalSales - b.totalSales);
+            } else if (salesSort === 'desc') {
+                filteredAgents.sort((a, b) => b.totalSales - a.totalSales);
+            }
+
+            // Sort by successful sales
+            if (successfulSalesSort === 'asc') {
+                filteredAgents.sort((a, b) => a.successfulSales - b.successfulSales);
+            } else if (successfulSalesSort === 'desc') {
+                filteredAgents.sort((a, b) => b.successfulSales - a.successfulSales);
+            }
+
+            renderAgents(filteredAgents);
+        }
+
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -842,33 +857,26 @@
                 document.getElementById('agentList').style.display = 'block';
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My Agent</span>`;
+                renderAgents(agentsData);
             }
         });
 
-        function showAgentProfile(card) {
+        function showAgentProfile(agent) {
             sessionStorage.setItem('currentView', 'detail');
 
             document.getElementById('agentList').style.display = 'none';
             document.getElementById('agentProfile').style.display = 'block';
 
-
-            const name = card.getAttribute('data-name');
-            const id = card.getAttribute('data-id');
-            const email = card.getAttribute('data-email');
-            const phone = card.getAttribute('data-phone');
-            const address = card.getAttribute('data-address');
-            const gender = card.getAttribute('data-gender');
-
-            document.getElementById('profileName').innerText = name;
-            document.getElementById('profileEmail').innerText = email;
-            document.getElementById('profilePhone').innerText = phone;
-            document.getElementById('profileAddress').innerText = address;
+            document.getElementById('profileName').innerText = agent.name;
+            document.getElementById('profileEmail').innerText = agent.email;
+            document.getElementById('profilePhone').innerText = agent.phone;
+            document.getElementById('profileAddress').innerText = agent.address;
 
             const genderIcon = document.getElementById('genderIcon');
-            if (gender === 'male') {
+            if (agent.gender === 'male') {
                 genderIcon.className = 'fas fa-mars gender-icon';
                 genderIcon.title = 'Male';
-            } else if (gender === 'female') {
+            } else if (agent.gender === 'female') {
                 genderIcon.className = 'fas fa-venus gender-icon';
                 genderIcon.title = 'Female';
             } else {
@@ -876,10 +884,8 @@
                 genderIcon.title = '';
             }
 
-
             document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Agent Detail</span>`;
         }
-
 
         function handleBack() {
             const current = sessionStorage.getItem('currentView') || 'list';
@@ -889,12 +895,12 @@
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My Agent</span>`;
                 sessionStorage.setItem('currentView', 'list');
+                filterAgents(); // Re-render the list to apply any existing filters
             } else {
                 window.location.href = "../Atm/manajemenPengguna.html";
             }
         }
 
-        // New JavaScript functions for edit and delete actions
         function editAgent(agentId) {
             alert('Mengedit agen dengan ID: ' + agentId);
             // Tambahkan logika untuk mengedit agen di sini
@@ -906,6 +912,12 @@
                 // Tambahkan logika untuk menghapus agen di sini
             }
         }
+
+        // Initial render of agents on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAgents(agentsData);
+        });
+
     </script>
 </body>
 
