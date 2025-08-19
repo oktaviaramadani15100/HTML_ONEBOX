@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campaign</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+            color: #ffffff;
+        }
+
+        .header .header-name {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .header .header-name i {
+            margin-right: 12px;
+        }
+
+        .menu-icon-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        .menu-icon {
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .menu-icon a {
+            color: #ffffff;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 200px;
+            z-index: 100;
+            padding: 10px 0;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-header h3,
+        .dropdown-header h4 {
+            font-weight: 600;
+            color: #1e3a8a;
+            margin: 0;
+        }
+
+        .agent-role {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            color: #333;
+            transition: background-color 0.25s;
+        }
+
+        .dropdown a:hover {
+            background-color: #e8eaf6;
+            color: #1e3a8a;
+        }
+
+        .dropdown a i {
+            margin-right: 12px;
+            font-size: 1rem;
+        }
+
+        .dropdown a span {
+            font-weight: 500;
+        }
+
+        .dropdown hr {
+            margin: 8px 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+            padding-bottom: 90px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            table-layout: fixed;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 50%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 25%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 25%;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tbody tr:hover {
+            background-color: #e8eaf6;
+        }
+
+        .name-link {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-weight: 600;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .name-link:hover {
+            color: #3f51b5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1e3a8a;
+            font-size: 0.9rem;
+            padding: 4px;
+        }
+
+        .action-buttons button:hover {
+            color: #3f51b5;
+        }
+
+        .status-active {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .status-inactive {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .detail-campaign,
+        .detail-product {
+            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 18px;
+        }
+
+        .section-header button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1e3a8a;
+            font-size: 1rem;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .section-header button:hover {
+            color: #3f51b5;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            color: #111;
+            box-sizing: border-box;
+        }
+
+        .form-group input[readonly],
+        .form-group textarea[readonly] {
+            background-color: #e5e7eb;
+            cursor: not-allowed;
+        }
+
+        .form-group textarea[readonly] {
+            resize: none;
+        }
+
+        .form-group .product-link {
+            text-decoration: none;
+            color: #1e3a8a;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 12px;
+            display: block;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .form-group .product-link:hover {
+            background-color: #e8eaf6;
+        }
+
+        .form-group.full {
+            flex: 1 1 100%;
+        }
+
+        .download-dropdown {
+            position: relative;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #3f51b5;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-width: 150px;
+            z-index: 10;
+            margin-top: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f2f5;
+        }
+
+        @media (min-width: 480px) {
+            .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
+
+        /* Navigasi Bawah yang Diperbaiki */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            padding: 12px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-wrapper>div:hover,
+        .nav-wrapper>div.active {
+            color: #3f51b5;
+        }
+
+        .nav-wrapper a {
+            color: inherit;
+            text-decoration: none;
+            display: contents;
+        }
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            transition: color 0.2s;
+        }
+
+        .nav-wrapper>div.active i {
+            color: #3f51b5;
+        }
+
+        .nav-new {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s;
+            text-decoration: none;
+        }
+
+        .plus-btn:hover {
+            background-color: #3f51b5;
+        }
+
+        .nav-new i {
+            font-size: 2rem;
+            color: white;
+            margin: 0;
+        }
+
+        .nav-new p {
+            font-size: 0.8rem;
+            color: #1e3a8a;
+            margin-top: 8px;
+        }
+
+        .add-campaign-btn-container {
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .add-campaign-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .add-campaign-btn:hover {
+            background-color: #3f51b5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+            </span>
+
+            <div class="menu-icon-group">
+                <a href="../Atm/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
+                    <hr />
+                    <a href="../Atm/atmprofile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../Atm/atm-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="../Atm/faq.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="add-campaign-btn-container">
+                <a href="../Atm/add-campaign.html" class="add-campaign-btn"><i class="fas fa-plus"></i> Add
+                    Campaign</a>
+            </div>
+
+            <div class="table-wrapper" id="campaignList">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campaign</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaign-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="detail-campaign" id="detailCampaign">
+                <div class="section-header">
+                    <h2 class="section-title">Detail Campaign</h2>
+                    <div class="action-buttons">
+                        <a href="#" class="btn" id="editCampaignLink"><i class="fas fa-edit"></i></a>
+                        <button onclick="deleteCampaign(currentCampaignName)"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="campaignName">Campaign Name</label>
+                    <input type="text" id="campaignName" value="" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mediaCampaign">Media</label>
+                        <input type="text" id="mediaCampaign" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCampaign">Product</label>
+                        <span id="productCampaign" class="product-link" onclick="showProductDetailFromCampaign()"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="campaignType">Type</label>
+                        <input type="text" id="campaignType" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="periode">Periode</label>
+                        <input type="text" id="periode" value="" readonly>
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <label for="descriptionCampaign">Description</label>
+                    <textarea id="descriptionCampaign" rows="3" readonly></textarea>
+                </div>
+            </div>
+
+
+            <div class="detail-product" id="detailProduct">
+                <div class="section-header">
+                    <h2 class="section-title">Product Specification</h2>
+                    <div class="download-dropdown">
+                        <button class="download-btn" onclick="toggleDownloadDropdown()">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <div class="dropdown-menu" id="downloadDropdown">
+                            <a href="#" onclick="downloadFile('excel')">Download as Excel</a>
+                            <a href="#" onclick="downloadFile('pdf')">Download as PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" value="" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <input type="text" id="productDescription" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="productAlternat">Alternative Product</label>
+                        <input type="text" id="productAlternat" value="" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="premium">Premium</label>
+                        <input type="text" id="premium" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="benefit">Benefit</label>
+                        <input type="text" id="benefit" value="" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="plan">Plan</label>
+                    <input type="text" id="plan" value="" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+                <div class="nav-history">
+                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+                <div class="nav-spacer"></div>
+                <div class="nav-call">
+                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+                <div class="nav-agen">
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const campaignData = [
+        {
+            campaignName: 'Juli Sehat',
+            jumlahProspect: 7,
+            productName: 'mandiri sehat',
+            status: 'Active',
+            detail: {
+                name: 'Juli Sehat',
+                media: 'Call',
+                product: 'Orbeets',
+                type: 'Health',
+                periode: '31 Juni - 31 Juli 2025',
+                description: 'Campaign untuk bulan Juli'
+            }
+        },
+        {
+            campaignName: 'Juli Pintar',
+            jumlahProspect: 5,
+            productName: 'onebox',
+            status: 'Inactive',
+            detail: {
+                name: 'Juli Pintar',
+                media: 'Email',
+                product: 'Onebox Pro',
+                type: 'Education',
+                periode: '01 Juli - 31 Juli 2025',
+                description: 'Campaign untuk produk edukasi anak'
+            }
+        },
+        {
+            campaignName: 'Riplay',
+            jumlahProspect: 4,
+            productName: 'onebox',
+            status: 'Active',
+            detail: {
+                name: 'Riplay',
+                media: 'Social Media',
+                product: 'Riplay Fund',
+                type: 'Investment',
+                periode: '15 September - 15 Oktober 2025',
+                description: 'Campaign untuk produk investasi'
+            }
+        },
+        {
+            campaignName: 'MSIG Life Campaign',
+            jumlahProspect: 8,
+            productName: 'onebox',
+            status: 'Active',
+            detail: {
+                name: 'MSIG Life Campaign',
+                media: 'Email',
+                product: 'MSIG Pro',
+                type: 'Life Insurance',
+                periode: '01 Agustus - 31 Agustus 2025',
+                description: 'Campaign asuransi jiwa'
+            }
+        }
+    ];
+
+    const productData = {
+        'mandiri sehat': {
+            name: 'mandiri sehat',
+            description: 'Suplemen kesehatan berbahan alami',
+            alternative: 'Orbeets Plus',
+            premium: 'Rp 250.000 / bulan',
+            benefit: 'Meningkatkan daya tahan tubuh',
+            plan: 'Orbeets Basic / Orbeets Plus'
+        },
+        'onebox': {
+            name: 'onebox',
+            description: 'Produk edukasi interaktif untuk anak',
+            alternative: 'Onebox Gold',
+            premium: 'Rp 150.000 / bulan',
+            benefit: 'Meningkatkan kreativitas dan logika',
+            plan: 'Basic / Premium'
+        }
+    };
+    let currentView = 'list';
+    let currentCampaignName = null;
+    let currentProductName = null;
+
+    function renderTable() {
+        const tableBody = document.getElementById('campaign-table-body');
+        tableBody.innerHTML = '';
+
+        campaignData.forEach(campaign => {
+            const row = document.createElement('tr');
+            const statusClass = campaign.status === 'Active' ? 'status-active' : 'status-inactive';
+            const statusText = campaign.status;
+
+            row.innerHTML = `
+                <td><a href="#" class="name-link" onclick="showCampaignDetail('${campaign.campaignName}')">${campaign.campaignName}</a></td>
+                <td class="${statusClass}">${statusText}</td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="../Atm/editcampaign.html?campaignName=${encodeURIComponent(campaign.campaignName)}" class="btn"><i class="fas fa-edit"></i></a>
+                        <button onclick="deleteCampaign('${campaign.campaignName}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleDownloadDropdown() {
+        const dropdown = document.getElementById('downloadDropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function downloadFile(type) {
+        document.getElementById('downloadDropdown').style.display = 'none';
+        alert('Downloading file as ' + type.toUpperCase() + '...');
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+
+        const downloadDropdowns = document.getElementsByClassName('dropdown-menu');
+        if (!e.target.closest('.download-dropdown')) {
+            for (let i = 0; i < downloadDropdowns.length; i++) {
+                const openDropdown = downloadDropdowns[i];
+                if (openDropdown.style.display === 'block') {
+                    openDropdown.style.display = 'none';
+                }
+            }
+        }
+    });
+
+    function hideAllDetails() {
+        document.getElementById('campaignList').style.display = 'none';
+        document.getElementById('detailCampaign').style.display = 'none';
+        document.getElementById('detailProduct').style.display = 'none';
+    }
+
+    function findCampaign(campaignName) {
+        return campaignData.find(c => c.campaignName === campaignName);
+    }
+
+    function findProduct(productName) {
+        return productData[productName];
+    }
+
+    function showCampaignDetail(campaignName) {
+        hideAllDetails();
+        currentCampaignName = campaignName;
+        const campaign = findCampaign(campaignName);
+        const detailDiv = document.getElementById('detailCampaign');
+        detailDiv.style.display = 'block';
+        currentView = 'detailCampaign';
+
+        if (campaign) {
+            document.getElementById('campaignName').value = campaign.detail.name;
+            document.getElementById('mediaCampaign').value = campaign.detail.media;
+            document.getElementById('productCampaign').innerText = campaign.productName;
+            currentProductName = campaign.productName; // Simpan nama produk saat ini
+            document.getElementById('campaignType').value = campaign.detail.type;
+            document.getElementById('periode').value = campaign.detail.periode;
+            document.getElementById('descriptionCampaign').value = campaign.detail.description;
+
+            // Set dynamic href for edit button on detail page
+            const editLink = document.getElementById('editCampaignLink');
+            if (editLink) {
+                editLink.href = `../Atm/editcampaign.html?campaignName=${encodeURIComponent(campaign.campaignName)}`;
+            }
+        }
+
+        document.getElementById('headerTitle').innerHTML = `
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
+            `;
+        
+        document.querySelector('.add-campaign-btn-container').style.display = 'none';
+    }
+
+    function showProductDetailFromCampaign() {
+        if (currentProductName) {
+            showProductDetail(currentProductName);
+        }
+    }
+
+    function showProductDetail(productName) {
+        hideAllDetails();
+        const product = findProduct(productName);
+        const detailDiv = document.getElementById('detailProduct');
+        detailDiv.style.display = 'block';
+        currentView = 'detailProduct';
+
+        if (product) {
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productAlternat').value = product.alternative;
+            document.getElementById('premium').value = product.premium;
+            document.getElementById('benefit').value = product.benefit;
+            document.getElementById('plan').value = product.plan;
+        }
+
+        document.getElementById('headerTitle').innerHTML = `
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
+            `;
+    }
+
+    function handleBack() {
+        if (currentView === 'detailCampaign' || currentView === 'detailProduct') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('detailCampaign').style.display = 'none';
+            document.getElementById('detailProduct').style.display = 'none';
+            currentView = 'list';
+
+            document.getElementById('headerTitle').innerHTML = `
+                    <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+                `;
+            
+            document.querySelector('.add-campaign-btn-container').style.display = 'flex';
+        } else {
+            window.location.href = '../Atm/homeeeee.html';
+        }
+    }
+    
+    function deleteCampaign(campaignName) {
+        if (confirm('Are you sure you want to delete campaign ' + campaignName + '?')) {
+            const index = campaignData.findIndex(c => c.campaignName === campaignName);
+            if (index !== -1) {
+                campaignData.splice(index, 1);
+                renderTable();
+                hideAllDetails();
+                document.getElementById('campaignList').style.display = 'block';
+                document.getElementById('headerTitle').innerHTML = `
+                        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+                    `;
+                alert('Campaign ' + campaignName + ' deleted.');
+            }
+        }
+    }
+
+    window.addEventListener('load', () => {
+        hideAllDetails();
+        document.getElementById('campaignList').style.display = 'block';
+        renderTable();
+    });
+</script>
+
+</html>

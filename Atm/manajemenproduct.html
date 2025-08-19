@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-download {
+            position: relative;
+            display: inline-block;
+        }
+
+        .download-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 140px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 90px;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            min-width: 360px;
+            border-spacing: 0;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+        }
+
+        .action-icons i {
+            cursor: pointer;
+            font-size: 1rem;
+            color: #1e3a8a;
+            transition: color 0.2s ease;
+        }
+
+        .action-icons i:hover {
+            color: #0056b3;
+        }
+
+        .detail-campaign {
+            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group.full {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        input[readonly]:focus,
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #d1d5db;
+        }
+
+        @media (min-width: 480px) {
+            .form-group {
+                flex: 1 1 48%;
+            }
+
+            .form-group.full {
+                flex: 1 1 100%;
+            }
+        }
+
+        .detail-product {
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .section-title-campaign {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .section-header h2 {
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fdfdfd;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        @media (min-width: 480px) {
+            .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .add-btn:hover {
+            background-color: #3b4cc0;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        input[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        textarea[readonly] {
+            resize: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: -1rem;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .edit-product-form {
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .edit-product-form h2 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .edit-product-form .form-group {
+            margin-bottom: 16px;
+        }
+
+        .edit-product-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .edit-product-form input,
+        .edit-product-form textarea {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+
+        .edit-product-form .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .edit-product-form .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        @media (min-width: 480px) {
+            .edit-product-form .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .cancel-btn {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #dc2626;
+        }
+
+        .save-btn {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background-color: #1c529a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Product</span>
+            </span>
+            <div class="menu-icon-group">
+                <a href="../Atm/inbox.html" class="menu-icon" style="color: #f9fafb; margin-left: 1rem; font-size: 1.2rem;">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" style="color: #f9fafb; margin-left: 1rem; font-size: 1.2rem;" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
+                    <hr />
+                    <a href="../Atm/atmprofile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../Atm/atm-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="../Atm/faq.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header" id="contentHeader">
+                <button class="add-btn" onclick="handleAddProduct()">
+                    <i class="fas fa-plus"></i>Product
+                </button>
+            </div>
+            <div class="table-wrapper" id="productList">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Status Product</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td onclick="showProductDetail('Mandiri Sehat')">Mandiri Sehat</td>
+                            <td>Active</td>
+                            <td class="action-icons">
+                                <i class="fas fa-edit" onclick="handleEdit('Mandiri Sehat')"></i>
+                                <i class="fas fa-trash-alt" onclick="handleDelete('Mandiri Sehat')"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td onclick="showProductDetail('Onebox')">Onebox</td>
+                            <td>Active</td>
+                            <td class="action-icons">
+                                <i class="fas fa-edit" onclick="handleEdit('Onebox')"></i>
+                                <i class="fas fa-trash-alt" onclick="handleDelete('Onebox')"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td onclick="showProductDetail('MSIG Life')">MSIG Life</td>
+                            <td>Active</td>
+                            <td class="action-icons">
+                                <i class="fas fa-edit" onclick="handleEdit('MSIG Life')"></i>
+                                <i class="fas fa-trash-alt" onclick="handleDelete('MSIG Life')"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="detail-product" id="detailProduct" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Product Specification</h2>
+                    <div class="dropdown-download">
+                        <button class="download-btn" id="downloadToggle">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <div class="dropdown-content" id="downloadMenu">
+                            <a href="#" onclick="handleDownload('excel')">Excel</a>
+                            <a href="#" onclick="handleDownload('pdf')">PDF</a>
+                            <a href="#" onclick="handleShare()">Share</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <input type="text" id="productDescription" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="productAlternat">Alternative Product</label>
+                        <input type="text" id="productAlternat" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="premium">Premium</label>
+                        <input type="text" id="premium" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="benefit">Benefit</label>
+                        <input type="text" id="benefit" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="plan">Plan</label>
+                    <input type="text" id="plan" readonly>
+                </div>
+            </div>
+
+            <div class="edit-product-form" id="editProductForm" style="display: none;">
+                <form id="editForm">
+                    <h2 class="section-title">Edit Product</h2>
+                    <div class="form-group">
+                        <label for="editProductName">Product Name</label>
+                        <input type="text" id="editProductName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editProductDescription">Product Description</label>
+                            <input type="text" id="editProductDescription" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductAlternative">Alternative Product</label>
+                            <input type="text" id="editProductAlternative" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editPremium">Premium</label>
+                            <input type="text" id="editPremium" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editBenefit">Benefit</label>
+                            <input type="text" id="editBenefit" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPlan">Plan</label>
+                        <input type="text" id="editPlan" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+                <div class="nav-history">
+                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+                <div class="nav-spacer"></div>
+                <div class="nav-call">
+                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+                <div class="nav-agen">
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const productData = [{
+        name: 'Mandiri Sehat',
+        detail: {
+            description: 'Suplemen kesehatan berbahan alami',
+            alternative: 'Orbeets Plus',
+            premium: 'Rp 250.000 / bulan',
+            benefit: 'Meningkatkan daya tahan tubuh',
+            plan: 'Orbeets Basic / Orbeets Plus'
+        }
+    }, {
+        name: 'Onebox',
+        detail: {
+            description: 'Produk edukasi interaktif untuk anak',
+            alternative: 'Onebox Gold',
+            premium: 'Rp 150.000 / bulan',
+            benefit: 'Meningkatkan kreativitas dan logika',
+            plan: 'Basic / Premium'
+        }
+    }, {
+        name: 'MSIG Life',
+        detail: {
+            description: 'Asuransi jiwa berjangka dengan perlindungan penyakit kritis',
+            alternative: 'MSIG Health Protection',
+            premium: 'Rp 300.000 / bulan',
+            benefit: 'Perlindungan finansial terhadap risiko penyakit kritis',
+            plan: 'Silver / Gold / Platinum'
+        }
+    }];
+
+    let currentView = 'list';
+    let currentProduct = null;
+
+    function findProduct(productName) {
+        return productData.find(p => p.name.toLowerCase() === productName.toLowerCase());
+    }
+
+    // Fungsi untuk menampilkan Product List
+    function showProductList() {
+        document.getElementById('productList').style.display = 'block';
+        document.getElementById('detailProduct').style.display = 'none';
+        document.getElementById('editProductForm').style.display = 'none';
+        document.getElementById('contentHeader').style.display = 'flex';
+        currentView = 'list';
+        document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Product</span>`;
+    }
+
+    // Fungsi untuk menampilkan Detail Produk
+    function showProductDetail(productName) {
+        const product = findProduct(productName);
+        if (product) {
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productDescription').value = product.detail.description;
+            document.getElementById('productAlternat').value = product.detail.alternative;
+            document.getElementById('premium').value = product.detail.premium;
+            document.getElementById('benefit').value = product.detail.benefit;
+            document.getElementById('plan').value = product.detail.plan;
+
+            document.getElementById('productList').style.display = 'none';
+            document.getElementById('detailProduct').style.display = 'block';
+            document.getElementById('editProductForm').style.display = 'none';
+            document.getElementById('contentHeader').style.display = 'none';
+            currentView = 'detailProduct';
+            document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>`;
+        } else {
+            alert('Product detail not found!');
+        }
+    }
+
+    // Fungsi untuk menampilkan Form Edit Produk
+    function handleEdit(productName) {
+        const product = findProduct(productName);
+        if (product) {
+            currentProduct = product;
+            document.getElementById('editProductName').value = product.name;
+            document.getElementById('editProductDescription').value = product.detail.description;
+            document.getElementById('editProductAlternative').value = product.detail.alternative;
+            document.getElementById('editPremium').value = product.detail.premium;
+            document.getElementById('editBenefit').value = product.detail.benefit;
+            document.getElementById('editPlan').value = product.detail.plan;
+
+            document.getElementById('productList').style.display = 'none';
+            document.getElementById('detailProduct').style.display = 'none';
+            document.getElementById('editProductForm').style.display = 'block';
+            document.getElementById('contentHeader').style.display = 'none';
+            currentView = 'editProduct';
+            document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Edit Product</span>`;
+        } else {
+            alert('Product not found!');
+        }
+    }
+
+    // Fungsi untuk menyimpan perubahan
+    document.getElementById('editForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const updatedName = document.getElementById('editProductName').value;
+        const updatedDescription = document.getElementById('editProductDescription').value;
+        const updatedAlternative = document.getElementById('editProductAlternative').value;
+        const updatedPremium = document.getElementById('editPremium').value;
+        const updatedBenefit = document.getElementById('editBenefit').value;
+        const updatedPlan = document.getElementById('editPlan').value;
+
+        if (currentProduct) {
+            currentProduct.name = updatedName;
+            currentProduct.detail.description = updatedDescription;
+            currentProduct.detail.alternative = updatedAlternative;
+            currentProduct.detail.premium = updatedPremium;
+            currentProduct.detail.benefit = updatedBenefit;
+            currentProduct.detail.plan = updatedPlan;
+        }
+
+        alert('Product changes saved successfully!');
+        showProductList();
+        
+        // Perbarui data di tabel setelah mengedit
+        updateTableData();
+    });
+
+    function updateTableData() {
+        const tbody = document.querySelector('#productList tbody');
+        tbody.innerHTML = '';
+        productData.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td onclick="showProductDetail('${product.name}')">${product.name}</td>
+                <td>Active</td>
+                <td class="action-icons">
+                    <i class="fas fa-edit" onclick="handleEdit('${product.name}')"></i>
+                    <i class="fas fa-trash-alt" onclick="handleDelete('${product.name}')"></i>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Fungsi untuk membatalkan edit
+    function cancelEdit() {
+        showProductList();
+    }
+
+    function handleDelete(productName) {
+        if (confirm("Apakah Anda yakin ingin menghapus produk " + productName + "?")) {
+            const index = productData.findIndex(p => p.name === productName);
+            if (index > -1) {
+                productData.splice(index, 1);
+                updateTableData();
+                alert("Produk " + productName + " telah dihapus.");
+            }
+        }
+    }
+
+    function handleAddProduct() {
+        alert("Menambahkan produk baru...");
+    }
+
+    function handleBack() {
+        if (currentView === 'detailProduct' || currentView === 'editProduct') {
+            showProductList();
+        } else {
+            window.location.href = '../Atm/homeeeee.html';
+        }
+    }
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    const toggleBtn = document.getElementById("downloadToggle");
+    const menu = document.getElementById("downloadMenu");
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            menu.classList.toggle("show");
+        });
+    }
+
+    document.addEventListener("click", function(e) {
+        if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            menu.classList.remove("show");
+        }
+    });
+
+    function handleDownload(type) {
+        if (type === 'excel') {
+            alert("Downloading Excel file...");
+        } else if (type === 'pdf') {
+            alert("Downloading PDF file...");
+        }
+    }
+
+    function handleShare() {
+        alert("Sharing product details...");
+    }
+    
+</script>

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list QC</title>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f3f4f6;
+        display: flex;
+        justify-content: center;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 400px;
+        background: #ffffff;
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        background-color: #1e3a8a;
+        z-index: 100;
+        height: 4rem;
+    }
+
+    .header img {
+        height: 53px;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    .menu-icon {
+        color: #f9fafb;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .menu-icon i {
+        color: #f9fafb;
+    }
+
+    .dropdown {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        width: 170px;
+        z-index: 100;
+        animation: fadeIn 0.2s ease-in-out;
+        padding: 10px 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .dropdown-header {
+        text-align: center;
+        padding: 12px 16px;
+    }
+
+    .dropdown-header p {
+        margin: 2px 0;
+        font-size: 13px;
+        color: #333;
+    }
+
+    .dropdown-header .welcome-text {
+        font-weight: bold;
+        color: #1e3a8a;
+    }
+
+    .agent-role {
+        font-style: italic;
+        font-weight: 400;
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 2px;
+    }
+
+    .dropdown a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        padding: 6px 8px;
+        font-size: 14px;
+        color: #1e3a8a;
+        transition: background-color 0.25s, color 0.25s;
+        border-left: 4px solid transparent;
+        margin-left: 1rem;
+    }
+
+    a+a {
+        margin-top: 4px;
+    }
+
+    .dropdown a:hover {
+        background-color: #f0f4ff;
+        border-left: 4px solid #1e3a8a;
+    }
+
+    .dropdown i {
+        font-size: 16px;
+        color: #1e3a8a;
+        width: 18px;
+        text-align: center;
+    }
+
+    .dropdown span {
+        flex: 1;
+        font-weight: 500;
+    }
+
+    .dropdown hr {
+        margin: 10px 0;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .header .header-name {
+        text-decoration: none;
+        color: #f9fafb;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* BOTTOM NAVIGATION - Modified to match home.html */
+    .bottom-nav {
+        position: fixed;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;
+        border-top: 1px solid #ccc;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 10px 0;
+        font-size: 12px;
+        z-index: 10;
+        background: white;
+        display: flex;
+    }
+    
+    .nav-wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .nav-wrapper i {
+        color: #1e3a8a;
+    }
+    
+    .nav-wrapper>div {
+        flex: 1;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #1e3a8a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .nav-spacer {
+        flex: 0.5;
+    }
+    
+    .nav-wrapper i {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+    }
+    
+    .nav-wrapper p {
+        margin-top: 4px;
+        font-size: 0.85rem;
+    }
+    
+    .nav-new {
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        text-decoration: none;
+        box-sizing: border-box;
+        border: none;
+        padding: 0;
+        transition: none;
+        touch-action: manipulation;
+        position: absolute;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .plus-btn {
+        background-color: #1e3a8a;
+        border-radius: 50%;
+        width: 53px;
+        height: 53px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        font-size: 30px;
+    }
+    
+    .nav-new i {
+        font-size: 30px;
+        display: block;
+        margin-bottom: -2px;
+        color: white;
+    }
+    
+    .nav-new p {
+        margin: 15px 0 0;
+        font-size: 0.85rem;
+        color: #1e3a8a;
+    }
+
+    @media (min-width: 768px) {
+        body {
+            background: #d1d5db;
+        }
+    }
+
+    .menu-icon-group {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        position: relative;
+    }
+
+    .agent-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 10px 12px;
+        border-radius: 10px;
+        box-shadow: 0 7px 11px rgba(0, 0, 0, 0.09);
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .agent-card-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #6b7280;
+        margin-right: 12px;
+    }
+
+    .agent-info .name {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .agent-info .sales {
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    .icon-btn {
+        font-size: 24px;
+        cursor: pointer;
+        color: #1d0c80;
+        padding: 6px;
+        border-radius: 6px;
+        transition: background 0.2s;
+    }
+
+    .icon-btn:hover {
+        background: #f0f0f0;
+    }
+
+    .filter-sidebar {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: auto;
+        background: white;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        display: none;
+    }
+
+    .filter-sidebar.show {
+        right: 31rem;
+        top: 4rem;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .filter-sidebar.show {
+            right: 1rem;
+            top: 4rem;
+            width: 90%;
+            z-index: 999;
+        }
+    }
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        margin-bottom: 16px;
+        font-size: 18px;
+    }
+
+    .filter-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1d0c80;
+    }
+
+    .close-btn {
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 12px;
+    }
+
+    .filter-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-content select,
+    .filter-content input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .filter-content label {
+        font-weight: 500;
+        margin-top: 5px;
+        color: #374151;
+        font-size: 14px;
+    }
+
+    .agent-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px;
+        max-width: 420px;
+    }
+
+    .profile {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .gender-icon {
+        font-size: 2.2rem;
+        color: #1e3a8a;
+        margin-top: 0.3rem;
+    }
+
+    .profile-info {
+        flex: 1;
+        font-size: 0.9rem;
+    }
+
+    .top-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #1e3a8a;
+    }
+
+    .meta {
+        font-size: 0.85rem;
+        color: #444;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .contact-line {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta i {
+        color: #1e3a8a;
+        margin-right: 6px;
+    }
+
+    .chat-icon {
+        font-size: 1rem;
+        cursor: pointer;
+        color: #1e3a8a;
+    }
+
+    .biodata {
+        width: 100%;
+        padding-top: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .biodata-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .biodata-item {
+        flex: 1 1 45%;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        min-width: 140px;
+    }
+
+    .biodata-item .icon {
+        font-size: 1.1rem;
+        color: #1e3a8a;
+        margin-top: 0.2rem;
+    }
+
+    .biodata-item .label {
+        font-weight: 600;
+        color: #1e3a8a;
+        font-size: 0.85rem;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .biodata-item .value {
+        color: #333;
+        font-size: 0.85rem;
+    }
+
+    /* New/Filter button styles */
+    .agent-header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+        gap: 10px;
+        position: relative;
+    }
+
+    .new-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background-color: #1e3a8a;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+
+    .new-btn:hover {
+        background-color: #15295c;
+    }
+
+    /* New CSS for action icons */
+    .action-icons {
+        display: flex;
+        gap: 12px;
+    }
+
+    .action-icons i {
+        font-size: 1.2rem;
+        color: #6b7280;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span style="margin-left: 16px;">list QC</span>
+            </span>
+            <div class="menu-icon-group">
+                <a href="../Atm/homeeeee.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Dinni</h4>
+                        <h5 class="agent-role">ATM</h5>
+                    </div>
+                    <hr />
+                    <a href="../Atm/atmprofile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../Atm/atm-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Atm Rules</span>
+                    </a>
+                    <a href="../Atm/faq.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-list" id="agentList" style="padding: 1rem;">
+            <div class="agent-header">
+                <i class="fas fa-filter icon-btn" title="Filter" onclick="toggleFilter()"></i>
+                <div id="filterSidebar" class="filter-sidebar">
+                    <div class="filter-header">
+                        <div class="filter-label">
+                            <i class="fas fa-filter"></i>
+                            <span>Filter</span>
+                        </div>
+                        <span class="close-btn" onclick="toggleFilter()">&times;</span>
+                    </div>
+                    <div class="filter-content">
+                        <label for="nama">nama QC</label>
+                        <input type="nama" id="nama" name="nama" placeholder="nama" />
+                    </div>
+                </div>
+            </div>
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
+                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male">
+                <div class="agent-card-content">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="agent-info">
+                        <div class="name">Falah</div>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editQC('F123')"></i>
+                    <i class="fas fa-trash-alt" title="Delete"
+                        onclick="event.stopPropagation(); deleteQC('F123')"></i>
+                </div>
+            </div>
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Budi" data-id="B321"
+                data-email="budi@mail.com" data-phone="08198765432" data-address="Jl. Mawar 2" data-gender="male">
+                <div class="agent-card-content">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="agent-info">
+                        <div class="name">Budi</div>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editQC('B321')"></i>
+                    <i class="fas fa-trash-alt" title="Delete"
+                        onclick="event.stopPropagation(); deleteQC('B321')"></i>
+                </div>
+            </div>
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Dewi" data-id="D567"
+                data-email="dewi@mail.com" data-phone="0822334455" data-address="Jl. Anggrek 3" data-gender="female">
+                <div class="agent-card-content">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="agent-info">
+                        <div class="name">Dewi</div>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editQC('D567')"></i>
+                    <i class="fas fa-trash-alt" title="Delete"
+                        onclick="event.stopPropagation(); deleteQC('D567')"></i>
+                </div>
+            </div>
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Sari" data-id="S777"
+                data-email="sari@mail.com" data-phone="0855556677" data-address="Jl. Melati 4" data-gender="female">
+                <div class="agent-card-content">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="agent-info">
+                        <div class="name">Sari</div>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editQC('S777')"></i>
+                    <i class="fas fa-trash-alt" title="Delete"
+                        onclick="event.stopPropagation(); deleteQC('S777')"></i>
+                </div>
+            </div>
+            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Agus" data-id="A888"
+                data-email="agus@mail.com" data-phone="0812333444" data-address="Jl. Kenanga 5" data-gender="male">
+                <div class="agent-card-content">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="agent-info">
+                        <div class="name">Agus</div>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editQC('A888')"></i>
+                    <i class="fas fa-trash-alt" title="Delete"
+                        onclick="event.stopPropagation(); deleteQC('A888')"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-profile" id="agentProfile" style="display: none;">
+            <div class="profile">
+                <i id="genderIcon" class="gender-icon"></i>
+                <div class="profile-info">
+                    <div class="top-row">
+                        <span class="name" id="profileName"></span>
+                    </div>
+                    <div class="meta">
+                        <div class="contact-line">
+                            <i class="fas fa-phone-alt"></i>
+                            <span id="profilePhone"></span>
+                            <span class="chat-icon" onclick="toggleChat()">
+                                <i class="fas fa-comment"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <span id="profileEmail"></span>
+                        </div>
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="profileAddress"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="biodata">
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-birthday-cake icon"></i>
+                        <div>
+                            <span class="label">Birthday</span>
+                            <span class="value">12 Jan 1995</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-heart icon"></i>
+                        <div>
+                            <span class="label">Marital Status</span>
+                            <span class="value">Single</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-wallet icon"></i>
+                        <div>
+                            <span class="label">Income Range</span>
+                            <span class="value">5 - 10 juta</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-chart-line icon"></i>
+                        <div>
+                            <span class="label">Avg Transaction</span>
+                            <span class="value">Rp 1.250.000</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-id-badge icon"></i>
+                        <div>
+                            <span class="label">Account Type</span>
+                            <span class="value">Kredit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="biodata-row">
+                    <div class="biodata-item">
+                        <i class="fas fa-calendar-plus icon"></i>
+                        <div>
+                            <span class="label">Join At</span>
+                            <span class="value">03 Juli 2020</span>
+                        </div>
+                    </div>
+                    <div class="biodata-item">
+                        <i class="fas fa-clock icon"></i>
+                        <div>
+                            <span class="label">Duration</span>
+                            <span class="value">5 years 2 months</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div>
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+                <div>
+                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+                <div class="nav-spacer"></div>
+                <div>
+                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+                <div>
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.querySelector('.fa-ellipsis-v');
+
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        function toggleFilter() {
+            const sidebar = document.getElementById('filterSidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        document.addEventListener("click", function (e) {
+            const sidebar = document.getElementById("filterSidebar");
+            const isClickInside = sidebar.contains(e.target);
+            const isFilterButton = e.target.closest(".icon-btn");
+
+            if (!isClickInside && !isFilterButton) {
+                sidebar.classList.remove("show");
+            }
+        });
+
+        let currentView = sessionStorage.getItem('currentView') || 'list';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (currentView === 'detail') {
+                document.getElementById('agentList').style.display = 'none';
+                document.getElementById('agentProfile').style.display = 'block';
+                document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">QC Detail</span>`;
+            } else {
+                document.getElementById('agentList').style.display = 'block';
+                document.getElementById('agentProfile').style.display = 'none';
+                document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My QC</span>`;
+            }
+        });
+
+        function showAgentProfile(card) {
+            sessionStorage.setItem('currentView', 'detail');
+
+            document.getElementById('agentList').style.display = 'none';
+            document.getElementById('agentProfile').style.display = 'block';
+
+
+            const name = card.getAttribute('data-name');
+            const id = card.getAttribute('data-id');
+            const email = card.getAttribute('data-email');
+            const phone = card.getAttribute('data-phone');
+            const address = card.getAttribute('data-address');
+            const gender = card.getAttribute('data-gender');
+
+            document.getElementById('profileName').innerText = name;
+            document.getElementById('profileEmail').innerText = email;
+            document.getElementById('profilePhone').innerText = phone;
+            document.getElementById('profileAddress').innerText = address;
+
+            const genderIcon = document.getElementById('genderIcon');
+            if (gender === 'male') {
+                genderIcon.className = 'fas fa-mars gender-icon';
+                genderIcon.title = 'Male';
+            } else if (gender === 'female') {
+                genderIcon.className = 'fas fa-venus gender-icon';
+                genderIcon.title = 'Female';
+            } else {
+                genderIcon.className = 'gender-icon';
+                genderIcon.title = '';
+            }
+
+
+            document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">QC Detail</span>`;
+        }
+
+
+        function handleBack() {
+            const current = sessionStorage.getItem('currentView') || 'list';
+
+            if (current === 'detail') {
+                document.getElementById('agentList').style.display = 'block';
+                document.getElementById('agentProfile').style.display = 'none';
+                document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My QC</span>`;
+                sessionStorage.setItem('currentView', 'list');
+            } else {
+                window.location.href = "../admin yeah/manajemenPengguna.html";
+            }
+        }
+
+        // New JavaScript functions for edit and delete actions
+        function editQC(qcId) {
+            alert('Mengedit QC dengan ID: ' + qcId);
+            // Tambahkan logika untuk mengedit agen di sini
+        }
+
+        function deleteQC(qcId) {
+            if (confirm('Apakah Anda yakin ingin menghapus QC ini?')) {
+                alert('Menghapus QC dengan ID: ' + qcId);
+                // Tambahkan logika untuk menghapus agen di sini
+            }
+        }
+    </script>
+</body>
+
+</html>

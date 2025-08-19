@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Rules ATM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon i {
+            color: #f9fafb;
+        }
+
+        .content {
+            flex: 1;
+
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .header-name i {
+            margin-right: 16px;
+        }
+
+        .spv-rules {
+            font-family: 'Inter', sans-serif;
+            padding: 16px;
+        }
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .icon-tabs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            border-bottom: 1px solid #9a9ea5;
+            padding-bottom: 10px;
+        }
+
+        .icon-tabs i {
+            font-size: 20px;
+            color: #1e3a8a;
+            padding: 8px;
+        }
+
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .rule-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .rule-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .rule-date {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin: 4px 0 0 0;
+        }
+
+        .rule-wrapper {
+            margin-top: 12px;
+        }
+
+        .rule-paragraph {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <a href="../Atm/homeeeee.html" class="header-name">
+                <i class="fas fa-arrow-left"></i>
+                <span>ATM Rules</span>
+            </a>
+
+            <div class="menu-icon-group">
+                <a href="../Atm/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">ATM Agent</h4>
+                        <h5 class="agent-role">ATM</h5>
+                    </div>
+                    <hr />
+                    <a href="../Atm/atmprofile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../Atm/atm-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Atm Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="spv-rules">
+                <div class="icon-tabs">
+                    <i class="fas fa-file-alt active"></i>
+                    <i class="fas fa-phone"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+
+                <div class="rules-list" id="rulesList">
+                    <div class="rule-item"
+                        onclick="showDetails('Prosedur Penarikan Tunai', '22 Jul 2025', 
+                        `Pastikan semua penarikan tunai diverifikasi dengan benar, mencakup identitas pelanggan, ketersediaan dana, dan batas penarikan. Setiap transaksi harus dicatat secara akurat, termasuk nomor referensi dan jumlah. Jangan pernah memproses penarikan tanpa identifikasi yang valid.`)">
+                        <p class="rule-title">Prosedur Penarikan Tunai</p>
+                        <p class="rule-date">22 Jul 2025</p>
+                    </div>
+
+                    <div class="rule-item" onclick="showDetails('Aturan Penyetoran Dana', '20 Jul 2025', 
+                        `Setiap setoran tunai atau cek harus dihitung ulang di depan nasabah. Pastikan formulir setoran diisi lengkap dan tanda tangan diverifikasi. Simpan salinan bukti setoran dan serahkan salinan asli kepada nasabah. Laporkan setiap ketidaksesuaian jumlah dana segera kepada supervisor.`)">
+                        <p class="rule-title">Aturan Penyetoran Dana</p>
+                        <p class="rule-date">20 Jul 2025</p>
+                    </div>
+
+                    <div class="rule-item" onclick="showDetails('Panduan Verifikasi Identitas', '18 Jul 2025', 
+                        `Untuk transaksi sensitif seperti penarikan besar atau pembukaan rekening, verifikasi identitas nasabah secara ketat. Minta KTP asli atau dokumen identifikasi lain yang sah. Gunakan alat verifikasi identitas yang disediakan dan laporkan segera jika ada dokumen yang mencurigakan.`)">
+                        <p class="rule-title">Panduan Verifikasi Identitas</p>
+                        <p class="rule-date">18 Jul 2025</p>
+                    </div>
+
+                    <div class="rule-item" onclick="showDetails('Protokol Keamanan ATM', '17 Jul 2025', 
+                        `Jaga kerahasiaan PIN dan informasi pribadi nasabah. Jangan pernah membagikan password atau akses sistem kepada orang lain. Pastikan area kerja Anda aman dan terlindungi dari orang yang tidak berkepentingan. Ikuti protokol keamanan untuk penanganan uang tunai, termasuk saat mengisi ulang mesin.`)">
+                        <p class="rule-title">Protokol Keamanan ATM</p>
+                        <p class="rule-date">17 Jul 2025</p>
+                    </div>
+
+                    <div class="rule-item" onclick="showDetails('Penanganan Keluhan Nasabah', '15 Jul 2025',
+                        `Tangani setiap keluhan nasabah dengan sabar dan profesional. Dengarkan keluhan mereka dengan seksama, catat semua detail, dan berikan solusi yang jelas. Jika masalah tidak dapat diselesaikan secara langsung, eskalasikan ke petugas yang berwenang dan pastikan nasabah mendapatkan tindak lanjut.`)">
+                        <p class="rule-title">Penanganan Keluhan Nasabah</p>
+                        <p class="rule-date">15 Jul 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    const rulesBackup = document.getElementById('rulesList').innerHTML;
+
+    function showDetails(title, date, contents) {
+        const container = document.getElementById('rulesList');
+        container.innerHTML = '';
+
+        const selectedItem = document.createElement('div');
+        selectedItem.className = 'rule-item';
+        selectedItem.innerHTML = `
+        <p class="rule-title">${title}</p>
+        <p class="rule-date">${date}</p>
+    `;
+        container.appendChild(selectedItem);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'rule-wrapper';
+
+        const contentArray = Array.isArray(contents) ? contents : [contents];
+
+        contentArray.forEach(content => {
+            const paragraph = document.createElement('div');
+            paragraph.className = 'rule-paragraph';
+            paragraph.innerText = content;
+            wrapper.appendChild(paragraph);
+        });
+
+        container.appendChild(wrapper);
+    }
+</script>
+
+</html>

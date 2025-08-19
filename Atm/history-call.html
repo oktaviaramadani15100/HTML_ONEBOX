@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Call History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-icon i {
+            color: #f9fafb;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            /* margin-left: 1rem; */
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+            padding-bottom: 90px;
+            /* position: relative; */
+        }
+
+        .content h2 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 360px;
+        }
+
+        thead {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 6px 8px;
+            font-size: 0.78rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            /* position: relative; */
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+        /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            border: 1px solid #1e3a8a;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: auto;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            /* transition: right 0.3s ease; */
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .filter-drawer.open {
+            right: 0;
+            top: 8.5rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            .filter-drawer.open {
+                right: 30rem;
+                top: 8.5rem;
+            }
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1rem;
+            color: #1e3a8a;
+        }
+
+        .filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        .filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .filter-content input,
+        .filter-content select,
+        .filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-content button:hover {
+            background-color: #374ba1;
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <a href="../Atm/homeeeee.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
+                    style="margin-left: 16px;">Activity Call</span></a>
+            <div class="menu-icon-group">
+                <a href="../Atm/inbox.html" class="menu-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">Agent 01</h4>
+                        <h5 class="agent-role">Agent</h5>
+                    </div>
+                    <hr />
+                    <a href="../Atm/atmprofile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="../Atm/atm-rules.html">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Atm Rules</span>
+                    </a>
+                    <a href="../Atm/faq.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="filter-container">
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
+                    <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
+                </div>
+            </div>
+
+            <div class="filter-drawer" id="filterDrawer">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Filter</h3>
+                    <i class="fas fa-times" id="closeFilter"></i>
+                </div>
+                <div class="filter-content">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" />
+
+                    <label for="prospect">Prospect</label>
+                    <input type="text" id="prospect" placeholder="Enter value" />
+
+                    <label for="result">Result</label>
+                    <input type="text" id="result" placeholder="Enter result" />
+
+                    <button onclick="applyFilter()">Apply</button>
+                </div>
+
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Prospect</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../Atm/history-call.html"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../Atm/call.html"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function toggleFilter(forceClose = false) {
+            const drawer = document.getElementById("filterDrawer");
+
+            if (forceClose) {
+                drawer.classList.remove("open");
+            } else {
+                drawer.classList.toggle("open");
+            }
+        }
+
+        function applyFilter() {
+            alert("Filter applied!");
+            toggleFilter(true);
+        }
+
+        window.addEventListener('click', function (e) {
+            const drawer = document.getElementById("filterDrawer");
+            const iconFilter = document.querySelector('.filter-icon');
+
+            if (drawer.classList.contains('open')) {
+                if (!drawer.contains(e.target) && !iconFilter.contains(e.target)) {
+                    toggleFilter(true);
+                }
+            }
+        });
+        const iconFilter = document.querySelector('.filter-icon');
+        if (iconFilter) {
+            iconFilter.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter();
+            });
+        }
+
+        const closeIcon = document.getElementById('closeFilter');
+        if (closeIcon) {
+            closeIcon.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggleFilter(true);
+            });
+        }
+
+        window.applyFilter = applyFilter;
+    });
+
+    function filterCategory(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.filter-btn[onclick*="${type}"]`).classList.add('active');
+
+        renderTable(type);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable('activity');
+    });
+
+    const data = {
+        activity: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Thinking' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Call' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Follow Up' },
+            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Call' },
+            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Thinking' },
+            { tanggal: '07/07/25', prospect: 'Budi Raharjo', result: 'Meeting' },
+            { tanggal: '07/07/25', prospect: 'Sari Widya', result: 'Follow Up' },
+            { tanggal: '07/07/25', prospect: 'Hendra Gunawan', result: 'Call' },
+            { tanggal: '07/07/25', prospect: 'Nina Oktaviani', result: 'Thinking' },
+            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' }
+        ],
+        sales: [
+            { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win' },
+            { tanggal: '07/07/25', prospect: 'Rina Marlina', result: 'Lose' },
+            { tanggal: '07/07/25', prospect: 'Joko Susanto', result: 'Hot' },
+            { tanggal: '07/07/25', prospect: 'Intan Permata', result: 'Cold' },
+            { tanggal: '07/07/25', prospect: 'Doni Saputra', result: 'Lose' },
+            { tanggal: '07/07/25', prospect: 'Susanto', result: 'Warm' },
+        ]
+    };
+
+    function renderTable(category) {
+        const tableHead = document.querySelector("thead tr");
+        const tableBody = document.getElementById("tableBody");
+
+        tableHead.innerHTML = `
+            <th>Tanggal</th>
+            <th>Prospect</th>
+            <th>${category === 'sales' ? 'Premium' : 'Result'}</th>
+        `;
+
+        tableBody.innerHTML = '';
+        data[category].forEach(row => {
+            tableBody.innerHTML += `
+            <tr>
+                <td>${row.tanggal}</td>
+                <td>${row.prospect}</td>
+                <td>${row.result}</td>
+            </tr>
+            `;
+        });
+    }
+
+
+</script>
