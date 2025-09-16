@@ -184,15 +184,15 @@
             flex: 1;
             width: 100%;
             background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
             margin-top: 12px;
             border-radius: 12px;
-            transition: box-shadow 0.3s ease;
+            /* transition: box-shadow 0.3s ease; */
         }
-
+/* 
         .table-wrapper:hover {
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        }
+        } */
 
         /* Prospect Table */
         .prospect-table {
@@ -1057,125 +1057,125 @@
 
 
         .interaction-form {
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    max-width: 600px;
-    margin: 1rem auto;
-    box-sizing: border-box;
-    border: 1px solid #e5e7eb;
-    transition: box-shadow 0.3s ease;
-    padding-bottom: 5px;
-}
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            max-width: 600px;
+            margin: 1rem auto;
+            box-sizing: border-box;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.3s ease;
+            padding-bottom: 5px;
+        }
 
-.interaction-form:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
+        .interaction-form:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
 
-/* Label */
-label {
-    display: block;
-    font-size: 0.9rem;
-    margin: 0.6rem 0 0.3rem;
-    color: #374151;
-    font-weight: 600;
-}
+        /* Label */
+        label {
+            display: block;
+            font-size: 0.9rem;
+            margin: 0.6rem 0 0.3rem;
+            color: #374151;
+            font-weight: 600;
+        }
 
-/* Input & Textarea */
-.input-field,
-textarea,
-.form-input,
-select {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-    font-size: 0.9rem;
-    background-color: #fafafa;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    padding-top: 5px;
-}
+        /* Input & Textarea */
+        .input-field,
+        textarea,
+        .form-input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            background-color: #fafafa;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            padding-top: 5px;
+        }
 
-/* Saat focus */
-.input-field:focus,
-textarea:focus,
-.form-input:focus,
-select:focus {
-    border-color: #2563eb;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    outline: none;
-}
+        /* Saat focus */
+        .input-field:focus,
+        textarea:focus,
+        .form-input:focus,
+        select:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
 
-/* Textarea khusus */
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
+        /* Textarea khusus */
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
 
-/* Row untuk dua kolom */
-.row {
-    display: flex;
-    gap: 1.2rem;
-    margin-bottom: 1rem;
-}
+        /* Row untuk dua kolom */
+        .row {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1rem;
+        }
 
-.row > div {
-    flex: 1;
-}
+        .row>div {
+            flex: 1;
+        }
 
-/* Radio group */
-.radio-group {
-    display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
-    flex-wrap: wrap;
-}
+        /* Radio group */
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
 
-.radio-group label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-.radio-group label:hover {
-    background-color: #f3f4f6;
-}
+        .radio-group label:hover {
+            background-color: #f3f4f6;
+        }
 
-input[type="radio"] {
-    accent-color: #2563eb;
-    cursor: pointer;
-}
+        input[type="radio"] {
+            accent-color: #2563eb;
+            cursor: pointer;
+        }
 
-/* Button */
-.save-btn {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
-    padding: 12px 28px;
-    border: none;
-    border-radius: 9999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    float: right;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-}
+        /* Button */
+        .save-btn {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            float: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
 
-.save-btn:hover {
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
-    transform: translateY(-2px);
-}
+        .save-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
 
         /* Responsive for Mobile */
         @media screen and (max-width: 600px) {
@@ -1195,31 +1195,31 @@ input[type="radio"] {
         }
 
         .time-input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 0.9rem;
-    background-color: #fafafa;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            background-color: #fafafa;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-/* Saat focus */
-.time-input:focus {
-    border-color: #2563eb;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    outline: none;
-}
+        /* Saat focus */
+        .time-input:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
 
-/* Supaya ikon jam bawaan browser tetap ada */
-.time-input::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.6;
-    filter: invert(0.4);
-}
+        /* Supaya ikon jam bawaan browser tetap ada */
+        .time-input::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            filter: invert(0.4);
+        }
 
 
 
@@ -2055,25 +2055,21 @@ input[type="radio"] {
                     </div>
 
                     <div class="row">
-  <div>
-    <label for="start-time">Start Time:</label>
-    <input type="time" id="start-time" name="start-time" class="time-input">
-  </div>
-  <div>
-    <label for="end-time">End Time:</label>
-    <input type="time" id="end-time" name="end-time" class="time-input">
-  </div>
-</div>
+                        <div>
+                            <label for="start-time">Start Time:</label>
+                            <input type="time" id="start-time" name="start-time" class="time-input">
+                        </div>
+                        <div>
+                            <label for="end-time">End Time:</label>
+                            <input type="time" id="end-time" name="end-time" class="time-input">
+                        </div>
+                    </div>
 
-<div class="form-group">
-  <label for="location">Location:</label>
-  <input 
-    type="text" 
-    id="location" 
-    name="location" 
-    placeholder="Contoh: Ruang Rapat Lt.2" 
-    class="input-field">
-</div>
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" placeholder="Contoh: Ruang Rapat Lt.2"
+                            class="input-field">
+                    </div>
 
 
 
