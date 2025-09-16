@@ -41,6 +41,164 @@
             height: 70vh;
         }
 
+         .email-chat-header {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .email-chat-header strong {
+            font-size: 16px;
+        }
+
+        .status-badge {
+            background: green;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .email-chat-header small {
+            display: block;
+            color: #555;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .email-chat-body {
+            padding: 15px;
+            flex-grow: 1;
+            background: #f5f5f5;
+            overflow-y: auto;   /* biar isi chat bisa scroll */
+
+        }
+
+        .message-box {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .message-box.left {
+            justify-content: flex-start;
+        }
+
+        .message-box.right {
+            justify-content: flex-end;
+        }
+
+        .message-meta {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message-box.right .message-meta {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .avatar.agent-avatar {
+            background: #3f0071;
+        }
+
+        .avatar.user-avatar {
+            background: #999;
+        }
+
+        .sender-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .message-content {
+            background: #e4ddf9;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .message-box.right .message-content {
+
+            background: #eef6ff;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            text-align: right;
+        }
+
+        /* .email-reply-wrapper {
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            background: #fff;
+        } */
+
+        .email-reply-wrapper {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background: #fff;
+    position: sticky;
+    bottom: 0; /* selalu nempel bawah */
+    z-index: 10;
+}
+
+@supports (height: 100dvh) {
+  .chat-prospect {
+      height: 100dvh; /* dynamic viewport biar naik kalau keyboard muncul */
+  }
+}
+
+.reply-input {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.reply-input textarea {
+    flex: 1;
+    min-height: 45px;
+    max-height: 120px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    resize: none;
+    outline: none;
+}
+
+/* tombol send */
+.reply-action-btn {
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+
+.reply-action-btn:hover {
+    background: #2b4db3;
+}
+
         .prospectDetail {
             width: 100%;
             max-width: 430px;
@@ -847,149 +1005,7 @@
             font-size: 0.85rem;
         }
 
-        .email-chat-header {
-            padding: 15px;
-            background: #f9f9f9;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .email-chat-header strong {
-            font-size: 16px;
-        }
-
-        .status-badge {
-            background: green;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
-
-        .email-chat-header small {
-            display: block;
-            color: #555;
-            margin-top: 5px;
-            font-size: 13px;
-        }
-
-        .email-chat-body {
-            padding: 15px;
-            flex-grow: 1;
-            background: #f5f5f5;
-        }
-
-        .message-box {
-            margin-bottom: 15px;
-            display: flex;
-        }
-
-        .message-box.left {
-            justify-content: flex-start;
-        }
-
-        .message-box.right {
-            justify-content: flex-end;
-        }
-
-        .message-meta {
-            display: flex;
-            gap: 10px;
-            max-width: 80%;
-        }
-
-        .message-box.right .message-meta {
-            flex-direction: row-reverse;
-        }
-
-        .avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            font-weight: bold;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .avatar.agent-avatar {
-            background: #3f0071;
-        }
-
-        .avatar.user-avatar {
-            background: #999;
-        }
-
-        .sender-name {
-            font-weight: bold;
-            margin-bottom: 4px;
-            font-size: 13px;
-        }
-
-        .message-content {
-            background: #e4ddf9;
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 5px;
-            word-wrap: break-word;
-        }
-
-        .message-box.right .message-content {
-
-            background: #eef6ff;
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: #888;
-            text-align: right;
-        }
-
-        .email-reply-wrapper {
-            border-top: 1px solid #ddd;
-            padding: 10px 15px;
-            background: #fff;
-        }
-
-        .reply-input {
-            position: relative;
-        }
-
-        .reply-input textarea {
-            width: 100%;
-            height: 80px;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-        }
-
-        .reply-send-section {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 8px;
-            gap: 8px;
-        }
-
-        .attach-icon {
-            font-size: 18px;
-            color: #555;
-            cursor: pointer;
-        }
-
-        .reply-action-btn {
-            background: #1e3a8a;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-        }
+       
 
 
         .chat-icon {
