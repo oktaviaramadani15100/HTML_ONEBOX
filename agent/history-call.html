@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Call History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -14,7 +15,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: #f3f4f6;
             display: flex;
             justify-content: center;
@@ -41,6 +42,7 @@
             background-color: #1e3a8a;
             z-index: 100;
             height: 4rem;
+            background: linear-gradient(70deg, #1E3A8A 0%, #2563EB 20%, #1E40AF 100%);
         }
 
         .header img {
@@ -48,6 +50,7 @@
         }
 
         .menu-icon {
+            cursor: pointer;
             color: #f9fafb;
             margin-left: 1rem;
             font-size: 1.2rem;
@@ -60,7 +63,7 @@
         .dropdown {
             display: none;
             position: absolute;
-            right: 20px;
+            right: 10px;
             top: 40px;
             background-color: #fff;
             border-radius: 12px;
@@ -70,23 +73,19 @@
             z-index: 100;
             animation: fadeIn 0.2s ease-in-out;
             padding: 10px 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .dropdown-header {
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            padding: 12px 16px;
+            padding: 7px 16px;
         }
 
         .dropdown-header p {
             margin: 2px 0;
             font-size: 13px;
             color: #333;
-        }
-
-        .dropdown-header .welcome-text {
-            font-weight: bold;
-            color: #1e3a8a;
         }
 
         .agent-role {
@@ -98,21 +97,21 @@
         }
 
         .dropdown a {
+            font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            padding: 6px 8px;
-            font-size: 14px;
+            padding: 8px 16px;
+            font-size: 13px;
             color: #1e3a8a;
             transition: background-color 0.25s, color 0.25s;
             border-left: 4px solid transparent;
-            margin-left: 1rem;
+            margin-left: 0;
         }
 
         a+a {
             margin-top: 4px;
-            /* jarak antar link */
         }
 
         .dropdown a:hover {
@@ -130,7 +129,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            /* margin-left: 1rem; */
         }
 
         .dropdown hr {
@@ -154,9 +152,8 @@
 
         .content {
             flex: 1;
-            padding: 1rem;
-            padding-bottom: 90px;
-            /* position: relative; */
+            padding-bottom: 100px;
+            overflow-y: auto;
         }
 
         .content h2 {
@@ -168,45 +165,100 @@
 
         .table-wrapper {
             width: 100%;
+            margin-top: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
             min-width: 360px;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fafc, #ffffff);
+            font-size: 0.9rem;
+            table-layout: fixed;
         }
 
         thead {
-            background: #1e3a8a;
-            color: white;
+            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        th,
-        td {
-            padding: 6px 8px;
-            font-size: 0.78rem;
-            text-align: left;
+        thead th {
+            padding: 14px 16px;
+            font-size: 0.80rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: start;
+            border-right: none;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #111827;
             border-bottom: 1px solid #e5e7eb;
+            text-align: start;
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        tbody td.no-data {
+            text-align: center;
+            font-weight: 500;
+            color: #6b7280;
+            padding: 20px 0;
+        }
+
+        thead th,
+        tbody td {
+            padding: 14px 25px; 
+            text-align: start;
+            word-wrap: break-word;
+        }
+
+        thead th:nth-child(1),
+        tbody td:nth-child(1) {
+            width: 30%;
+        }
+
+        thead th:nth-child(2),
+        tbody td:nth-child(2) {
+            width: 40%;
+        }
+
+        thead th:nth-child(3),
+        tbody td:nth-child(3) {
+            width: 30%;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
         }
 
         .bottom-nav {
-            position: sticky;
-            /* position: relative; */
-            bottom: -1px;
-            left: 0;
-            right: 0;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
             border-top: 1px solid #ccc;
-            /* display: flex; */
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
-            font-size: 12px;
-            z-index: 10;
-            margin-top: 3rem;
+            font-size: 11px;
+            z-index: 100;
             background: white;
         }
 
@@ -235,44 +287,21 @@
             flex: 0.5;
         }
 
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
         .nav-wrapper i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
         }
-
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
 
         .nav-wrapper p {
-            margin-top: 4px;
-            font-size: 0.85rem;
+            margin-top: 2px;
+            font-weight: 600;
+            font-size: 0.60rem;
         }
-
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
 
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        } */
+        }
 
         .nav-new {
             justify-content: center;
@@ -290,7 +319,7 @@
             flex-direction: column;
             text-align: center;
             top: -22px;
-            left: 50%;
+            left: 51%;
             transform: translateX(-50%);
         }
 
@@ -315,56 +344,11 @@
         }
 
         .nav-new p {
-            margin: 15px 0 0;
-            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0 0;
+            font-size: 0.60rem;
             color: #1e3a8a;
         }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
 
         @media (min-width: 768px) {
             body {
@@ -374,57 +358,108 @@
 
         .filter-container {
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 10px 16px;
-            gap: 10px;
-            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0 25px;
         }
 
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 16px;
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 270px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box i {
+            font-size: 15px;
+            color: #1e3a8a;
+            cursor: pointer;
+        }
 
         .filter-icon {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             color: #1e3a8a;
         }
 
         .filter-buttons {
+            margin-top: 10px;
             display: flex;
-            gap: 8px;
+            gap: 13px;
         }
 
         .filter-btn {
             background-color: #e0e7ff;
+            font-family: 'Poppins', sans-serif;
             color: #1e3a8a;
             border: 1px solid #1e3a8a;
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 13px;
+            border-radius: 5px;
+            padding: 10px 17px;
+            font-size: 12px;
             cursor: pointer;
             transition: 0.2s ease;
         }
 
         .filter-btn.active {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             background-color: #1e3a8a;
             color: white;
         }
 
-
-        .filter-drawer {
+        .filter-overlay {
             position: fixed;
             top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 360px;
-            height: auto;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+        }
+
+        .filter-drawer {
             background: #ffffff;
-            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-            padding: 1rem;
-            z-index: 999;
-            /* transition: right 0.3s ease; */
-            overflow-y: auto;
-            border-left: 1px solid #e5e7eb;
-            border-radius: 8px 0 0 8px;
+            width: 90%;
+            max-width: 320px;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.25s ease;
+        }
+
+        .filter-overlay.open {
+            display: flex;
+        }
+
+        .filter-overlay.open .filter-drawer {
+            transform: scale(1);
+            opacity: 1;
         }
 
         .filter-drawer.open {
@@ -447,6 +482,7 @@
         }
 
         .filter-header h3 {
+            font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             color: #1e3a8a;
         }
@@ -459,6 +495,7 @@
 
         .filter-content label {
             font-size: 0.85rem;
+            font-family: 'Poppins', sans-serif;
             margin: 10px 0 4px;
             display: block;
         }
@@ -485,6 +522,32 @@
         .filter-content button:hover {
             background-color: #374ba1;
         }
+        
+        .filter-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .filter-actions button {
+            flex: 1;
+            border-radius: 6px;
+            padding: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .filter-actions .reset-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #374151;
+        }
+
+        .filter-actions .reset-btn:hover {
+            background-color: #1e3a8a;
+            color: white;
+        }
 
         .menu-icon-group {
             display: flex;
@@ -498,7 +561,7 @@
         .header .header-name {
             text-decoration: none;
             color: #f9fafb;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
         }
     </style>
@@ -509,19 +572,13 @@
         <!-- Header -->
         <div class="header">
             <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">Activity Call</span></a>
+                    style="margin-left: 16px;">History Call</span></a>
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
-                    <div class="dropdown-header">
-                        <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
-                    </div>
-                    <hr />
                     <a href="#">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
@@ -547,68 +604,84 @@
         <!-- Content -->
         <div class="content">
             <div class="filter-container">
-                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
-                    <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
-                </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
+                <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
+            </div>
             </div>
 
+            <!-- Search & Filter -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Cari Sesuatu...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+            </div>
+
+            <div class="filter-overlay" id="filterOverlay">
             <div class="filter-drawer" id="filterDrawer">
                 <div class="filter-header">
-                    <h3><i class="fas fa-filter"></i> Filter</h3>
-                    <i class="fas fa-times" id="closeFilter"></i>
+                <h3>Filter</h3>
+                <i class="fas fa-times" id="closeFilter"></i>
                 </div>
                 <div class="filter-content">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" />
+                <label for="date">Date</label>
+                <input type="date" id="date" />
 
-                    <label for="prospect">Prospect</label>
-                    <input type="text" id="prospect" placeholder="Enter value" />
+                <label for="prospect">Prospect</label>
+                <input type="text" id="prospect" placeholder="Enter value" />
 
-                    <label for="result">Result</label>
-                    <input type="text" id="result" placeholder="Enter result" />
+                <label id="resultLabel" for="result">Result</label>
+                <select id="result">
+                    <option value="">-- Pilih Result --</option>
+                </select>
 
+                <div class="filter-actions">
+                    <button onclick="resetFilter()" class="reset-btn">Reset</button>
                     <button onclick="applyFilter()">Apply</button>
                 </div>
-
+                </div>
             </div>
+            </div>
+
+            <div class="table-wrapper">
             <table>
                 <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>Prospect</th>
-                        <th>Result</th>
-                    </tr>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Prospect</th>
+                    <th>Result</th>
+                </tr>
                 </thead>
                 <tbody id="tableBody">
                 </tbody>
             </table>
-        </div>
+            </div>
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
+                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                <p>Home</p>
                 </div>
 
                 <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
+                <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+                <p>History</p>
                 </div>
 
                 <div class="nav-spacer"></div>
 
                 <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
+                <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+                <p>Call</p>
                 </div>
 
                 <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
+                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                <p>Agenda</p>
                 </div>
             </div>
 
@@ -623,6 +696,28 @@
 </html>
 
 <script>
+    function updateResultOptions() {
+      const resultSelect = document.getElementById("result");
+      const resultLabel = document.getElementById("resultLabel");
+      resultSelect.innerHTML = '<option value="">-- Pilih --</option>';
+
+      let options = [];
+      if (currentCategory === "activity") {
+        resultLabel.textContent = "Result";
+        options = ["Thinking", "Call", "Follow Up", "Meeting"];
+      } else {
+        resultLabel.textContent = "Premium";
+        options = ["Hot", "Cold", "Win", "Lose", "Warm"];
+      }
+
+      options.forEach(opt => {
+        const optionEl = document.createElement("option");
+        optionEl.value = opt;
+        optionEl.textContent = opt;
+        resultSelect.appendChild(optionEl);
+      });
+    }
+
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -639,30 +734,23 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         function toggleFilter(forceClose = false) {
-            const drawer = document.getElementById("filterDrawer");
-
+            const overlay = document.getElementById("filterOverlay");
             if (forceClose) {
-                drawer.classList.remove("open");
+                overlay.classList.remove("open");
             } else {
-                drawer.classList.toggle("open");
+                overlay.classList.toggle("open");
             }
         }
 
         function applyFilter() {
-            alert("Filter applied!");
-            toggleFilter(true);
+        activeFilters.date = document.getElementById("date").value;
+        activeFilters.prospect = document.getElementById("prospect").value.toLowerCase();
+        activeFilters.result = document.getElementById("result").value;
+
+        renderTable();
+        document.getElementById("filterOverlay").classList.remove("open");
         }
 
-        window.addEventListener('click', function (e) {
-            const drawer = document.getElementById("filterDrawer");
-            const iconFilter = document.querySelector('.filter-icon');
-
-            if (drawer.classList.contains('open')) {
-                if (!drawer.contains(e.target) && !iconFilter.contains(e.target)) {
-                    toggleFilter(true);
-                }
-            }
-        });
         const iconFilter = document.querySelector('.filter-icon');
         if (iconFilter) {
             iconFilter.addEventListener('click', function (e) {
@@ -679,6 +767,13 @@
             });
         }
 
+        const overlay = document.getElementById("filterOverlay");
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) {
+                toggleFilter(true);
+            }
+        });
+
         window.applyFilter = applyFilter;
     });
 
@@ -691,6 +786,34 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         renderTable('activity');
+    });
+
+    let currentCategory = 'activity';
+    let searchQuery = '';
+
+    let activeFilters = {
+        date: '',
+        prospect: '',
+        result: ''
+    };
+
+    function filterCategory(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.filter-btn[onclick*="${type}"]`).classList.add('active');
+        currentCategory = type;
+        updateResultOptions();
+        renderTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderTable();
+        });
+
+        updateResultOptions();
+        renderTable();
     });
 
     const data = {
@@ -716,27 +839,73 @@
         ]
     };
 
-    function renderTable(category) {
-        const tableHead = document.querySelector("thead tr");
-        const tableBody = document.getElementById("tableBody");
-
-        tableHead.innerHTML = `
-            <th>Tanggal</th>
-            <th>Prospect</th>
-            <th>${category === 'sales' ? 'Premium' : 'Result'}</th>
-        `;
-
-        tableBody.innerHTML = '';
-        data[category].forEach(row => {
-            tableBody.innerHTML += `
-            <tr>
-                <td>${row.tanggal}</td>
-                <td>${row.prospect}</td>
-                <td>${row.result}</td>
-            </tr>
-            `;
-        });
+    function applyFilter() {
+      activeFilters.date = document.getElementById("date").value;
+      activeFilters.prospect = document.getElementById("prospect").value.toLowerCase();
+      activeFilters.result = document.getElementById("result").value;
+      renderTable();
+      document.getElementById("filterOverlay").classList.remove("open");
     }
 
+    function resetFilter() {
+      activeFilters = { date: '', prospect: '', result: '' };
+      document.getElementById("date").value = '';
+      document.getElementById("prospect").value = '';
+      document.getElementById("result").value = '';
+      renderTable();
+      document.getElementById("filterOverlay").classList.remove("open");
+    }
 
-</script>
+    function renderTable() {
+      const tableBody = document.getElementById("tableBody");
+      const tableHead = document.querySelector("thead tr");
+
+      tableHead.innerHTML = `
+        <th>Tanggal</th>
+        <th>Prospect</th>
+        <th>${currentCategory === 'sales' ? 'Premium' : 'Result'}</th>
+      `;
+
+      let filteredData = data[currentCategory].filter(row =>
+        row.tanggal.toLowerCase().includes(searchQuery) ||
+        row.prospect.toLowerCase().includes(searchQuery) ||
+        row.result.toLowerCase().includes(searchQuery)
+      );
+
+      if (activeFilters.date) {
+        filteredData = filteredData.filter(row => row.tanggal === activeFilters.date);
+      }
+      if (activeFilters.prospect) {
+        filteredData = filteredData.filter(row => row.prospect.toLowerCase().includes(activeFilters.prospect));
+      }
+      if (activeFilters.result) {
+        filteredData = filteredData.filter(row => row.result === activeFilters.result);
+      }
+
+      tableBody.innerHTML = '';
+      if (filteredData.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="3" class="no-data">Tidak ada data</td></tr>`;
+      } else {
+        filteredData.forEach(row => {
+          tableBody.innerHTML += `
+            <tr>
+              <td>${row.tanggal}</td>
+              <td>${row.prospect}</td>
+              <td>${row.result}</td>
+            </tr>
+          `;
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.querySelector('.search-box input');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        renderTable();
+      });
+
+      updateResultOptions();
+      renderTable();
+    });
+  </script>
