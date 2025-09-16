@@ -45,11 +45,19 @@
             width: 100%;
             max-width: 430px;
             background: #ffffff;
-            height: 70vh;
+            max-height: 70vh;
+            /* bukan height fix, tapi max */
             position: relative;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            /* biar bisa scroll kalau penuh */
+            border-radius: 10px;
+            /* opsional, biar modern */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            /* opsional */
         }
+
 
         .header {
             display: flex;
@@ -167,37 +175,78 @@
 
         .filter-content button:hover {
             background-color: #374ba1;
+            transform: translateY(-2px);
         }
 
+        /* General Table Wrapper */
         .table-wrapper {
             overflow-x: auto;
-            /* margin: 1rem; */
             flex: 1;
             width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             margin-top: 12px;
+            border-radius: 12px;
+            transition: box-shadow 0.3s ease;
         }
 
+        .table-wrapper:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Prospect Table */
         .prospect-table {
             width: 100%;
             border-collapse: separate;
             min-width: 360px;
             border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fafc, #ffffff);
+            font-size: 0.9rem;
         }
 
         .prospect-table thead {
-            background: #1e3a8a;
-            color: white;
-            font-weight: bold;
+            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .prospect-table th,
         .prospect-table td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
+            padding: 12px 16px;
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
+            border-right: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            text-align: start;
+        }
+
+        .prospect-table th {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+
+        /* .prospect-table tbody tr {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .prospect-table tbody tr:hover {
+                background-color: #e0f2fe !important;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            } */
+
+        .th-with-filter {
+            text-align: right;
+            padding-right: 20px;
+            color: #1e3a8a;
+            padding-bottom: 10px;
         }
 
         /* .prospect-table tr:hover {
@@ -209,6 +258,16 @@
             text-decoration: none;
             color: #1e3a8a;
             font-weight: bold;
+            cursor: pointer;
+            /* biar cursor jadi tangan saat di-hover */
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        .name-link:hover {
+            color: #2563eb;
+            /* warna berubah pas di-hover */
+            text-decoration: underline;
+            /* underline muncul pas hover */
         }
 
 
@@ -546,34 +605,60 @@
         .section-title {
             display: block;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            /* kasih jarak ke bawah */
+            letter-spacing: 0.5px;
+            /* sedikit spasi antar huruf */
         }
 
         .ddlList-row {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            /* jarak antar elemen lebih lega */
             align-items: center;
             flex-wrap: wrap;
+            margin-bottom: 1rem;
+            /* jarak antar baris */
         }
 
         .ddlList-row select {
             flex: 1;
-            /* biar fleksibel */
-            min-width: 0;
-            padding: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            min-width: 180px;
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            border: 1px solid #d1d5db;
+            /* abu tipis */
+            border-radius: 8px;
             background-color: #fff;
-            color: #333;
-            height: 38px;
+            color: #374151;
+            /* abu gelap */
+            height: 40px;
+
+            /* efek modern */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        /* saat hover */
+        .ddlList-row select:hover {
+            border-color: #2563eb;
+            /* biru */
+        }
+
+        /* saat focus (klik) */
+        .ddlList-row select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            /* efek glow biru */
         }
 
         .go-btn {
             height: 38px;
             padding: 0 16px;
-            background-color: #1e3a8a;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
             border: none;
             border-radius: 6px;
@@ -584,7 +669,9 @@
         }
 
         .go-btn:hover {
-            background-color: #374ba1;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .profile {
@@ -607,6 +694,43 @@
             padding: 1rem;
             margin-top: -1rem;
         }
+
+        .send-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .send-row select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: #fff;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            margin-bottom: 7.5px;
+        }
+
+        .send-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
 
         .profile-icon {
             font-size: 2.8rem;
@@ -668,7 +792,7 @@
         .biodata {
             padding: 1rem;
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
+            border-top: none;
         }
 
         .biodata-row {
@@ -684,7 +808,26 @@
             align-items: flex-start;
             gap: 0.6rem;
             min-width: 140px;
+
+            border: 1px solid #d1d5db;
+            /* garis abu-abu tipis */
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: #f9fafb;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            /* cursor jadi tangan */
         }
+
+        .biodata-item:hover {
+            background: #e0e7ff;
+            /* warna berubah saat hover */
+            transform: translateY(-3px);
+            /* sedikit naik */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* bayangan halus */
+        }
+
 
         .biodata-item .icon {
             font-size: 1rem;
@@ -914,88 +1057,125 @@
 
 
         .interaction-form {
-            padding: 1rem;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            max-width: 600px;
-            margin: 0 auto;
-            box-sizing: border-box;
-            margin-top: 1rem;
-        }
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    max-width: 600px;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.3s ease;
+    padding-bottom: 5px;
+}
 
-        label {
-            display: block;
-            font-size: 0.85rem;
-            margin: 0.5rem 0 0.2rem;
-            color: #1f2937;
-            font-weight: 500;
-        }
+.interaction-form:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
 
-        .input-field,
-        textarea,
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db;
-            font-size: 0.9rem;
-            background-color: #fff;
-            box-sizing: border-box;
-        }
+/* Label */
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin: 0.6rem 0 0.3rem;
+    color: #374151;
+    font-weight: 600;
+}
 
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
+/* Input & Textarea */
+.input-field,
+textarea,
+.form-input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    padding-top: 5px;
+}
 
-        .row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+/* Saat focus */
+.input-field:focus,
+textarea:focus,
+.form-input:focus,
+select:focus {
+    border-color: #2563eb;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
 
-        .row>div {
-            flex: 1;
-        }
+/* Textarea khusus */
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
 
-        .radio-group {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
+/* Row untuk dua kolom */
+.row {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+}
 
-        .radio-group label {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-            padding: 6px 10px;
-            border-radius: 6px;
-        }
+.row > div {
+    flex: 1;
+}
 
-        input[type="radio"] {
-            accent-color: #2563eb;
-        }
+/* Radio group */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
 
-        .save-btn {
-            background-color: #1e3a8a;
-            color: white;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            float: right;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
-        .save-btn:hover {
-            background-color: #2563eb;
-        }
+.radio-group label:hover {
+    background-color: #f3f4f6;
+}
+
+input[type="radio"] {
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+/* Button */
+.save-btn {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    float: right;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.save-btn:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px);
+}
 
         /* Responsive for Mobile */
         @media screen and (max-width: 600px) {
@@ -1013,6 +1193,34 @@
                 float: none;
             }
         }
+
+        .time-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Saat focus */
+.time-input:focus {
+    border-color: #2563eb;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+/* Supaya ikon jam bawaan browser tetap ada */
+.time-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    filter: invert(0.4);
+}
+
 
 
         .insured-row {
@@ -1274,13 +1482,16 @@
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
             min-width: 100px;
             white-space: nowrap;
+            padding-left: end;
         }
 
         .btn-small:hover {
             background-color: #003a9d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .btn-group-right {
@@ -1293,7 +1504,7 @@
             border-bottom: 2px solid #e5e7eb;
         }
 
-        .btn-group-right-ddl {
+        .btn-group-right-dll {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
@@ -1315,45 +1526,71 @@
 
         .detail-campaign {
             display: none;
-            padding: 16px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 12px;
             font-size: 0.9rem;
+            background: #f9fafb;
+            /* abu muda biar beda dengan background */
         }
 
+        /* Form layout */
         .form-row {
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
         }
 
+        /* Card look */
         .form-group {
             flex: 1 1 100%;
+            background: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        /* .form-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        } */
 
         .form-group.full {
             flex: 1 1 100%;
         }
 
+        /* Label */
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 0.85rem;
-            color: #374151;
+            color: #1e3a8a;
+            /* biru elegan */
         }
 
+        /* Input & Textarea */
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
-            font-size: 0.85rem;
+            padding: 12px;
+            font-size: 0.9rem;
             border: 1px solid #d1d5db;
-            border-radius: 6px;
+            border-radius: 8px;
             background-color: #fff;
-            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /* Remove focus outline for readonly */
+        /* Fokus effect */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            /* biru */
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            outline: none;
+        }
+
+        /* Readonly tanpa highlight */
         input[readonly]:focus,
         textarea[readonly]:focus {
             outline: none;
@@ -1501,7 +1738,12 @@
             </div>
         </div>
 
+
+
         <div class="table-wrapper" id="prospectList">
+            <div class="th-with-filter">
+                <i class="fas fa-filter"></i>
+            </div>
             <table class="prospect-table">
                 <thead>
                     <tr>
@@ -1518,7 +1760,7 @@
                     </tr>
                     <tr onclick="showDetail()">
                         <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
-                        <td><a href="" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
+                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
                         <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
 
                     </tr>
@@ -1592,7 +1834,7 @@
             </div>
 
             <div class="form-row">
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="plan">Plan</label>
                     <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly />
                 </div>
@@ -1700,10 +1942,10 @@
                                 <span class="value">03 Juli 2020</span>
                             </div>
                         </div>
-                        <div class="biodata-item" style="margin-top: 21px;">
+                        <div class="biodata-item">
                             <i class="fas fa-clock icon"></i>
                             <div>
-                                <!-- <span class="label">Duration</span> -->
+                                <span class="label">Duration</span>
                                 <span class="value">5 years 2 months</span>
                             </div>
                         </div>
@@ -1784,17 +2026,14 @@
                 <!-- <div class="title">Appointment</div> -->
                 <form class="interaction-form">
                     <label for="type-event">Type event:</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="type-event" value="Meeting" checked> Meeting
-                        </label>
-                        <label>
-                            <input type="radio" name="type-event" value="Call"> Call
-                        </label>
-                        <label>
-                            <input type="radio" name="type-event" value="Follow Up"> Follow Up
-                        </label>
+                    <div class="select-group">
+                        <select id="type-event" name="type-event">
+                            <option value="Meeting" selected>Meeting</option>
+                            <option value="Call">Call</option>
+                            <option value="Follow Up">Follow Up</option>
+                        </select>
                     </div>
+
 
                     <div class="row">
                         <div class="custom-form">
@@ -1814,6 +2053,29 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="row">
+  <div>
+    <label for="start-time">Start Time:</label>
+    <input type="time" id="start-time" name="start-time" class="time-input">
+  </div>
+  <div>
+    <label for="end-time">End Time:</label>
+    <input type="time" id="end-time" name="end-time" class="time-input">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="location">Location:</label>
+  <input 
+    type="text" 
+    id="location" 
+    name="location" 
+    placeholder="Contoh: Ruang Rapat Lt.2" 
+    class="input-field">
+</div>
+
+
 
                     <label for="description">Description:</label>
                     <textarea id="description" placeholder="Isi keterangan..." class="input-field"></textarea>
@@ -1844,11 +2106,13 @@
                         </div>
                     </div>
                 </div>
-                <label>Send Brosure Via:</label>
-                <select>
-                    <option value="whatsapp">Share to WhatsApp</option>
-                    <option value="email">Share to Email</option>
-                </select>
+                <div class="send-row">
+                    <select>
+                        <option value="whatsapp">Share to WhatsApp</option>
+                        <option value="email">Share to Email</option>
+                    </select>
+                    <button class="send-btn">Send</button>
+                </div>
                 <hr>
                 <iframe src="../agent/riplay_smile.pdf" width="100%" height="400px" style="margin-top: 1rem;"></iframe>
             </div>
@@ -2186,7 +2450,7 @@
                         <h3>5. Pembayaran & Kesehatan</h3>
                         <label>Metode Pembayaran</label>
                         <select required>
-                            <option>Debet</option>
+                            <option>Debit</option>
                             <option>Kredit</option>
                         </select>
                         <label>Nama Pemilik Rekening</label>
@@ -2501,7 +2765,7 @@
 
             const sectionMap = {
                 "Thinking": "ThinkingSection",
-                "Send Brosure": "SendBrowserSection",
+                "Send Brosure": "SendBrosureSection",
                 "Simulation Policy": "SimulationPolicySection",
                 "Entry Policy": "EntryPolicySection",
                 "Not Interested": "NotInterestedSection"
@@ -2518,7 +2782,7 @@
                 document.getElementById(sectionMap[selectedValue]).style.display = "block";
                 const headerTitleMap = {
                     "Thinking": "Thinking Section",
-                    "Send Browser": "Send via Browser",
+                    "Send Brosure": "Send Brosure",
                     "Simulation Policy": "Simulation Policy",
                     "Entry Policy": "Entry Policy Form",
                     "Not Interested": "Not Interested Reason"
