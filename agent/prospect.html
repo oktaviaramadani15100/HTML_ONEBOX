@@ -424,7 +424,7 @@
         .name-link:hover {
             color: #2563eb;
             /* warna berubah pas di-hover */
-            text-decoration: underline;
+            text-decoration: none;
             /* underline muncul pas hover */
         }
 
@@ -458,7 +458,7 @@
         }
 
         .prospect-table td[onclick]:hover {
-            text-decoration: underline;
+            text-decoration: none;
             color: #1e40af;
             cursor: pointer;
             text-decoration: none;
@@ -1180,8 +1180,10 @@
             border-radius: 9999px;
             font-size: 0.95rem;
             font-weight: 600;
-            margin-top: 1.5rem;
-            float: right;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
@@ -1295,23 +1297,37 @@
         }
 
         .insuredlist-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
-        }
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: start;
+}
 
-        .insuredlist-table thead {
-            background: #0047ba;
-            color: white;
-        }
+/* Header */
+.insuredlist-table thead {
+    background: #0047ba;
+    color: white;
+}
 
-        .insuredlist-table th,
-        .insuredlist-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e5e7eb;
-            text-align: left;
-        }
+.insuredlist-table th {
+    padding: 10px;
+    text-align: left;
+    border-right: none;
+}
+
+.insuredlist-table th:last-child {
+    border-right: none; /* hapus garis kanan di kolom terakhir */
+}
+
+/* Body */
+.insuredlist-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb; /* garis bawah antar row */
+}
+
 
         .totalPremi-section {
             padding-top: 18px;
