@@ -41,7 +41,7 @@
             height: 70vh;
         }
 
-         .email-chat-header {
+        .email-chat-header {
             padding: 15px;
             background: #f9f9f9;
             border-bottom: 1px solid #ddd;
@@ -71,7 +71,8 @@
             padding: 15px;
             flex-grow: 1;
             background: #f5f5f5;
-            overflow-y: auto;   /* biar isi chat bisa scroll */
+            overflow-y: auto;
+            /* biar isi chat bisa scroll */
 
         }
 
@@ -150,54 +151,56 @@
         } */
 
         .email-reply-wrapper {
-    border-top: 1px solid #ddd;
-    padding: 10px;
-    background: #fff;
-    position: sticky;
-    bottom: 0; /* selalu nempel bawah */
-    z-index: 10;
-}
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: #fff;
+            position: sticky;
+            bottom: 0;
+            /* selalu nempel bawah */
+            z-index: 10;
+        }
 
-@supports (height: 100dvh) {
-  .chat-prospect {
-      height: 100dvh; /* dynamic viewport biar naik kalau keyboard muncul */
-  }
-}
+        @supports (height: 100dvh) {
+            .chat-prospect {
+                height: 100dvh;
+                /* dynamic viewport biar naik kalau keyboard muncul */
+            }
+        }
 
-.reply-input {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
+        .reply-input {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
 
-.reply-input textarea {
-    flex: 1;
-    min-height: 45px;
-    max-height: 120px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    resize: none;
-    outline: none;
-}
+        .reply-input textarea {
+            flex: 1;
+            min-height: 45px;
+            max-height: 120px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+        }
 
-/* tombol send */
-.reply-action-btn {
-    background: #1e3a8a;
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.2s ease;
-}
+        /* tombol send */
+        .reply-action-btn {
+            background: #1e3a8a;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s ease;
+        }
 
-.reply-action-btn:hover {
-    background: #2b4db3;
-}
+        .reply-action-btn:hover {
+            background: #2b4db3;
+        }
 
         .prospectDetail {
             width: 100%;
@@ -338,74 +341,69 @@
 
         /* General Table Wrapper */
         .table-wrapper {
-            overflow-x: auto;
-            flex: 1;
+    flex: 1;
+    width: 100%;
+    background: #ffffff;
+    margin-top: 12px;
+    border-radius: 12px;
+    overflow: hidden; /* biar rapi */
+    padding-bottom: 15px;
+}
+
+/* Prospect Table */
+.prospect-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 360px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fafc, #ffffff);
+    table-layout: fixed;
+}
+
+/* Thead tetap nempel di atas */
+.prospect-table thead {
+    background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+/* Scroll khusus isi tabel */
+.prospect-table tbody {
+    display: block;
+            max-height: 350px; 
+            overflow-y: auto;
             width: 100%;
-            background: #ffffff;
-            /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
-            margin-top: 12px;
-            border-radius: 12px;
-            /* transition: box-shadow 0.3s ease; */
-        }
-/* 
-        .table-wrapper:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        } */
+            scrollbar-width: thin; 
+            scrollbar-color: #cbd5e1 #f9fafb;
 
-        /* Prospect Table */
-        .prospect-table {
-            width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: linear-gradient(180deg, #f8fafc, #ffffff);
-            font-size: 0.9rem;
-        }
+}
 
-        .prospect-table thead {
-            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-            color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+/* Supaya kolom thead dan tbody tetap sejajar */
+.prospect-table thead,
+.prospect-table tbody tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
 
-        .prospect-table th,
-        .prospect-table td {
-            padding: 12px 16px;
-            text-align: center;
-            border-bottom: 1px solid #e5e7eb;
-            border-right: none;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            text-align: start;
-        }
+.prospect-table th,
+.prospect-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: start;
+}
 
-        .prospect-table th {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.85rem;
-        }
+/* Filter tetap di atas tabel, ngga ikut sticky */
+.th-with-filter {
+    text-align: right;
+    padding: 10px 20px;
+    color: #1e3a8a;
+}
 
-        /* .prospect-table tbody tr {
-                transition: all 0.3s ease;
-                cursor: pointer;
-            }
-
-            .prospect-table tbody tr:hover {
-                background-color: #e0f2fe !important;
-                transform: translateY(-2px);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            } */
-
-        .th-with-filter {
-            text-align: right;
-            padding-right: 20px;
-            color: #1e3a8a;
-            padding-bottom: 10px;
-        }
 
         /* .prospect-table tr:hover {
             background-color: #f9f9f9;
@@ -1005,7 +1003,7 @@
             font-size: 0.85rem;
         }
 
-       
+
 
 
         .chat-icon {
@@ -1297,36 +1295,38 @@
         }
 
         .insuredlist-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 14px;
-    border-radius: 6px;
-    overflow: hidden;
-    text-align: start;
-}
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+            border-radius: 6px;
+            overflow: hidden;
+            text-align: start;
+        }
 
-/* Header */
-.insuredlist-table thead {
-    background: #0047ba;
-    color: white;
-}
+        /* Header */
+        .insuredlist-table thead {
+            background: #0047ba;
+            color: white;
+        }
 
-.insuredlist-table th {
-    padding: 10px;
-    text-align: left;
-    border-right: none;
-}
+        .insuredlist-table th {
+            padding: 10px;
+            text-align: left;
+            border-right: none;
+        }
 
-.insuredlist-table th:last-child {
-    border-right: none; /* hapus garis kanan di kolom terakhir */
-}
+        .insuredlist-table th:last-child {
+            border-right: none;
+            /* hapus garis kanan di kolom terakhir */
+        }
 
-/* Body */
-.insuredlist-table td {
-    padding: 10px;
-    border-bottom: 1px solid #e5e7eb; /* garis bawah antar row */
-}
+        /* Body */
+        .insuredlist-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            /* garis bawah antar row */
+        }
 
 
         .totalPremi-section {
@@ -1794,7 +1794,6 @@
                         <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
                         <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
                         <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-
                     </tr>
                     <tr onclick="showDetail()">
                         <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
