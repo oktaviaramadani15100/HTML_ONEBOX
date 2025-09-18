@@ -200,29 +200,29 @@
         }
 
         .table-wrapper {
-        width: 100%;
-        overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        justify-content: end;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            justify-content: end;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
         }
 
         table {
-        border-collapse: collapse;
-        width: 100%;
-        border-radius: 8px;
-        table-layout: fixed;
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 8px;
+            table-layout: fixed;
         }
 
         thead {
-        background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-        color: white;
-        position: sticky;
-        top: 0;
-        border-radius: 12px 12px 0 0;
-        z-index: 5;
+            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+            color: white;
+            position: sticky;
+            top: 0;
+            border-radius: 12px 12px 0 0;
+            z-index: 5;
         }
 
         thead th {
@@ -238,28 +238,29 @@
 
         tbody {
             display: block;
-            max-height: 490px; 
+            max-height: 490px;
             overflow-y: auto;
             width: 100%;
-            
-            scrollbar-width: thin; 
+
+            scrollbar-width: thin;
             scrollbar-color: #cbd5e1 #f9fafb;
         }
 
         tbody::after {
             content: '';
             display: block;
-            height: 30px; 
+            height: 30px;
         }
 
         tbody tr:last-child td {
-        border-bottom: none;
+            border-bottom: none;
         }
 
-        thead, tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
+        thead,
+        tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
         }
 
         tbody td {
@@ -280,7 +281,7 @@
 
         thead th,
         tbody td {
-            padding: 14px 25px; 
+            padding: 14px 25px;
             text-align: start;
             word-wrap: break-word;
         }
@@ -655,7 +656,7 @@
             body {
                 background: #d1d5db;
             }
-        }       
+        }
 
         .filter-container {
             display: flex;
@@ -815,7 +816,7 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 8px 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .search-box input {
@@ -827,13 +828,12 @@
         }
 
         .card-form {
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),
-              0 2px 4px -2px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -2px rgba(0, 0, 0, 0.1);
             padding: 1rem;
             border-radius: 12px;
-            
-        }
 
+        }
     </style>
 </head>
 
@@ -888,20 +888,19 @@
         <div class="content">
             <div class="table-wrapper" id="campaignList">
 
-            <div class="filter-container">
-               
-                <div class="search-box">
-                    <input type="text" placeholder="Cari Sesuatu...">
-                    <i class="fas fa-search"></i>
+                <div class="filter-container">
+
+                    <div class="search-box">
+                        <input type="text" placeholder="Cari Sesuatu...">
+                        <i class="fas fa-search"></i>
+                    </div>
+
+
+                    <div>
+                        <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+                    </div>
                 </div>
-                
-                
-                <div>
-                    <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
-                </div>
-            </div>
-                
-               
+
                 <table>
                     <thead>
                         <tr>
@@ -963,7 +962,7 @@
                         </tr>
                     </tbody>
                 </table>
-            
+
 
             </div>
 
@@ -1018,41 +1017,41 @@
 
 
                 <div class="card-form">
-
-                <div class="form-group">
-                    <label for="product">Product Name</label>
-                    <input type="text" id="product" value="Orbeets" readonly>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group">
-                        <label for="productDescription">Product Description</label>
-                        <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami" readonly>
+                        <label for="product">Product Name</label>
+                        <input type="text" id="product" value="Orbeets" readonly>
                     </div>
 
-                    <div class="form-group">
-                        <label for="productAlternat">Alternative Product</label>
-                        <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productDescription">Product Description</label>
+                            <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami"
+                                readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productAlternat">Alternative Product</label>
+                            <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                        </div>
                     </div>
-                </div>
-            </div>
 
                     <div class="form-group">
                         <label for="benefit">Benefit</label>
                         <input type="text" id="benefit" value="Meningkatkan daya tahan tubuh" readonly>
                     </div>
+                    <div class="form-group">
+                        <label for="plan">Plan</label>
+                        <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly>
+                    </div>
+
                 </div>
 
-                <div class="form-group">
-                    <label for="plan">Plan</label>
-                    <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly>
-                </div>
-                </div>
 
             </div>
+
+
         </div>
 
-        <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
@@ -1084,6 +1083,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
