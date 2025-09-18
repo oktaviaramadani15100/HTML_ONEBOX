@@ -3,338 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Layout</title>
+  <title>{PAGE_TITLE}</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f3f4f6;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-      justify-content: center;
-    }
-
-    .wrapper {
-      width: 100%;
-      max-width: 400px;
-      background: #ffffff;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            background-color: #1e3a8a;
-            z-index: 100;
-            height: 3.5rem;
-            background: linear-gradient(50deg, #1E3A8A 20%, #2563EB 100%, #1E40AF 100%);
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #f9fafb;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .header img {
-            height: 53px;
-        }
-
-        .menu-icon {
-            cursor: pointer;
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .menu-icon i {
-            color: #f9fafb;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            width: 170px;
-            z-index: 100;
-            animation: fadeIn 0.2s ease-in-out;
-            padding: 10px 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .agent-role {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 13px;
-            color: #6b7280;
-            margin-top: 2px;
-        }
-
-        .dropdown a {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            padding: 8px 16px;
-            font-size: 13px;
-            color: #1e3a8a;
-            transition: background-color 0.25s, color 0.25s;
-            border-left: 4px solid transparent;
-            margin-left: 0;
-        }
-
-        a+a {
-            margin-top: 4px;
-        }
-
-        .dropdown a:hover {
-            background-color: #f0f4ff;
-            border-left: 4px solid #1e3a8a;
-        }
-
-        .dropdown i {
-            font-size: 16px;
-            color: #1e3a8a;
-            width: 18px;
-            text-align: center;
-        }
-
-        .dropdown span {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .dropdown hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
-        }
-
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-5px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 400px;
-            border-top: 1px solid #ccc;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 0;
-            font-size: 11px;
-            z-index: 100;
-            background: white;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-wrapper i {
-            color: #1e3a8a;
-        }
-
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-spacer {
-            flex: 0.5;
-        }
-
-        .nav-wrapper i {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
-        }
-
-        .nav-wrapper p {
-            margin-top: 2px;
-            font-weight: 600;
-            font-size: 0.60rem;
-        }
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-new {
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
-            position: absolute;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            top: -22px;
-            left: 51%;
-            transform: translateX(-50%);
-        }
-
-        .plus-btn {
-            background-color: #1e3a8a;
-            border-radius: 50%;
-            width: 53px;
-            height: 53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 30px;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        }
-
-        .nav-new p {
-            font-weight: 600;
-            margin: 8px 0 0;
-            font-size: 0.60rem;
-            color: #1e3a8a;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                background: #d1d5db;
-            }
-        }
-  </style>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <!-- Header -->
   <div class="wrapper">
-        <!-- Header -->
-        <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i>
-            <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-                <div class="dropdown" id="dropdownMenu">
-                    <a href="#">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </a>
-                    <a href="../agent/agent-rules.html">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </div>
-
-            </div>
+    <!-- Header -->
+    <div class="header">
+      <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;" id="page-title">{PAGE_TITLE}</span></a>
+      <div class="menu-icon-group">
+        <a href="../agent/inbox.html" class="menu-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="../agent/home.html" class="menu-icon" title="Notifications">
+          <i class="fas fa-bell"></i>
+        </a>
+        <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+        <div class="dropdown" id="dropdownMenu">
+          <a href="#">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="../agent/agent-rules.html">
+            <i class="fas fa-user-shield"></i>
+            <span>Agent Rules</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+          </a>
+          <hr>
+          <a href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
         </div>
+      </div>
+    </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
-                </div>
+    <div id="content">
+    </div>
 
-                <div class="nav-history">
-                <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                <p>History</p>
-                </div>
-
-                <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                <p>Agenda</p>
-                </div>
-            </div>
-
-            <div class="nav-new">
-                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-                <p>New</p>
-            </div>
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
         </div>
+        <div class="nav-history">
+          <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+        <div class="nav-spacer"></div>
+        <div class="nav-call">
+          <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+        <div class="nav-agen">
+          <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+      </div>
+      <div class="nav-new">
+        <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
   </div>
 
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById('dropdownMenu');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    window.addEventListener('click', function (e) {
-      const dropdown = document.getElementById('dropdownMenu');
-      if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-        dropdown.style.display = 'none';
-      }
-    });
-  </script>
+  <script src="./js/script.js"></script>
 </body>
 </html>

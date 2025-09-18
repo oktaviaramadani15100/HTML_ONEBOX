@@ -489,7 +489,7 @@
 
     .load-icon {
       font-size: 18px;
-      margin-right: 10px;
+      margin-right: 5px;
       color: #f9fafb;
       cursor: pointer;
       transition: transform 0.3s ease;
@@ -660,6 +660,22 @@
       width: 150px;
       height: 30px;
     }
+
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 270px;
+      color: #6b7280;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .notif-icon {
+      font-size: 18px;
+      margin-right: 5px;
+      color: #f9fafb;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -674,6 +690,7 @@
 
       <div class="header-right">
         <i class="fa-solid fa-sync-alt load-icon"></i>
+        <i class="fa-solid fa-bell notif-icon"></i>
         <i class="fa-solid fa-ellipsis-vertical menu-icon" onclick="toggleDropdown()"></i>
       </div>
 
@@ -853,6 +870,9 @@
         </div>
       </div>
     </div>
+    <div class="no-data" style="display:none; text-align:center; padding:20px; color:#6b7280;">
+      Tidak ada data
+    </div>
 
         <!-- Bottom Nav -->
         <div class="bottom-nav">
@@ -909,21 +929,27 @@
     filterItems(searchInput.value, activeTab);
   });
 
-  function filterItems(searchText, tabName) {
-    const text = searchText.toLowerCase();
+    function filterItems(searchText, tabName) {
+      const text = searchText.toLowerCase();
+      let visibleCount = 0;
 
-    items.forEach(item => {
-      const badge = item.querySelector(".badge");
-      const badgeClass = badge ? badge.classList[1].toLowerCase() : "";
-      const name = item.querySelector(".inbox-text b").textContent.toLowerCase();
-      const message = item.querySelector(".inbox-text small").textContent.toLowerCase();
+      items.forEach(item => {
+        const badge = item.querySelector(".badge");
+        const badgeClass = badge ? badge.classList[1].toLowerCase() : "";
+        const name = item.querySelector(".inbox-text b").textContent.toLowerCase();
+        const message = item.querySelector(".inbox-text small").textContent.toLowerCase();
 
-      const matchSearch = name.includes(text) || message.includes(text);
-      const matchTab = tabName === "all" || badgeClass === tabName;
+        const matchSearch = name.includes(text) || message.includes(text);
+        const matchTab = tabName === "all" || badgeClass === tabName;
 
-      item.style.display = (matchSearch && matchTab) ? "flex" : "none";
-    });
-  }
+        const show = matchSearch && matchTab;
+        item.style.display = show ? "flex" : "none";
+        if (show) visibleCount++;
+      });
+
+      const noDataDiv = document.querySelector(".no-data");
+      noDataDiv.style.display = visibleCount === 0 ? "block" : "none";
+    }
 
   document.querySelectorAll('.sort-dropdown .dropdown-item').forEach(item => {
     item.addEventListener('click', function () {
