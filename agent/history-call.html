@@ -7,6 +7,7 @@
     <title>Call History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -18,6 +19,8 @@
             font-family: 'Poppins', sans-serif;
             background: #f3f4f6;
             display: flex;
+            height: 100vh;
+            overflow: hidden;
             justify-content: center;
         }
 
@@ -25,7 +28,6 @@
             width: 100%;
             max-width: 400px;
             background: #ffffff;
-            min-height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -41,8 +43,8 @@
             top: 0;
             background-color: #1e3a8a;
             z-index: 100;
-            height: 4rem;
-            background: linear-gradient(70deg, #1E3A8A 0%, #2563EB 20%, #1E40AF 100%);
+            height: 3.5rem;
+            background: linear-gradient(50deg, #1E3A8A 20%, #2563EB 100%, #1E40AF 100%);
         }
 
         .header img {
@@ -74,18 +76,6 @@
             animation: fadeIn 0.2s ease-in-out;
             padding: 10px 0;
             font-family: 'Poppins', sans-serif;
-        }
-
-        .dropdown-header {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 7px 16px;
-        }
-
-        .dropdown-header p {
-            margin: 2px 0;
-            font-size: 13px;
-            color: #333;
         }
 
         .agent-role {
@@ -153,7 +143,7 @@
         .content {
             flex: 1;
             padding-bottom: 100px;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         .content h2 {
@@ -164,36 +154,35 @@
         }
 
         .table-wrapper {
-            width: 100%;
-            margin-top: 12px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        max-height: 400px; 
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         }
 
         table {
-            width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: linear-gradient(180deg, #f8fafc, #ffffff);
-            font-size: 0.9rem;
-            table-layout: fixed;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
         }
 
         thead {
-            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-            color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 5;
         }
 
         thead th {
+            font-family: 'DM Sans', sans-serif;
             padding: 14px 16px;
-            font-size: 0.80rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -201,7 +190,33 @@
             border-right: none;
         }
 
+        tbody {
+            display: block;
+            max-height: 350px; 
+            overflow-y: auto;
+            width: 100%;
+            scrollbar-width: thin; 
+            scrollbar-color: #cbd5e1 #f9fafb;
+        }
+
+        tbody::after {
+            content: '';
+            display: block;
+            height: 30px; 
+        }
+
+        tbody tr:last-child td {
+        border-bottom: none;
+        }
+
+        thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        }
+
         tbody td {
+            font-family: 'DM Sans', sans-serif;
             padding: 12px 16px;
             font-size: 12px;
             color: #111827;
@@ -356,43 +371,48 @@
             }
         }
 
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0 25px;
+        .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 20px 20px 15px;
         }
 
-        .search-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 16px;
-            margin-bottom: 25px;
+        .filter-container {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0 20px;
         }
 
         .search-box {
-            flex: 1;
-            max-width: 270px;
-            display: flex;
-            align-items: center;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            padding: 8px 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        flex: 1;
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 1.5px solid #ddd;
+        border-radius: 25px;
+        padding: 8px 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
 
         .search-box input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 12px;
-            font-family: 'Poppins', sans-serif;
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box .filter-icon {
+        font-size: 14px;
+        color: #1e3a8a;
+        cursor: pointer;
+        margin-left: 8px;
         }
 
         .search-box i {
-            font-size: 15px;
+            font-size: 13px;
             color: #1e3a8a;
             cursor: pointer;
         }
@@ -404,28 +424,26 @@
         }
 
         .filter-buttons {
-            margin-top: 10px;
-            display: flex;
-            gap: 13px;
+        display: flex;
+        gap: 10px;
         }
 
         .filter-btn {
-            background-color: #e0e7ff;
-            font-family: 'Poppins', sans-serif;
-            color: #1e3a8a;
-            border: 1px solid #1e3a8a;
-            border-radius: 5px;
-            padding: 10px 17px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s ease;
+        background-color: #e0e7ff;
+        font-family: 'Poppins', sans-serif;
+        color: #1e3a8a;
+        border: 1px solid #1e3a8a;
+        border-radius: 20px;
+        padding: 7px 15px;
+        font-size: 10px;
+        cursor: pointer;
+        transition: 0.2s ease;
         }
 
         .filter-btn.active {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            background-color: #1e3a8a;
-            color: white;
+        font-weight: 600;
+        background-color: #1e3a8a;
+        color: white;
         }
 
         .filter-overlay {
@@ -572,7 +590,7 @@
         <!-- Header -->
         <div class="header">
             <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">History Call</span></a>
+                    style="margin-left: 16px;">Call History</span></a>
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
@@ -601,22 +619,16 @@
             </div>
         </div>
 
-        <!-- Content -->
-        <div class="content">
-            <div class="filter-container">
+            <!-- Search & Filter -->
+            <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Cari Sesuatu...">
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+            </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
                 <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
             </div>
-            </div>
-
-            <!-- Search & Filter -->
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" placeholder="Cari Sesuatu...">
-                    <i class="fas fa-search"></i>
-                </div>
-                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
             </div>
 
             <div class="filter-overlay" id="filterOverlay">
@@ -827,7 +839,7 @@
             { tanggal: '07/07/25', prospect: 'Sari Widya', result: 'Follow Up' },
             { tanggal: '07/07/25', prospect: 'Hendra Gunawan', result: 'Call' },
             { tanggal: '07/07/25', prospect: 'Nina Oktaviani', result: 'Thinking' },
-            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' }
+            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' },
         ],
         sales: [
             { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win' },
