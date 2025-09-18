@@ -189,7 +189,7 @@
 
         .content {
             flex: 1;
-            padding-bottom: 90px;
+            /* padding-bottom: 90px; */
         }
 
         .content h2 {
@@ -200,41 +200,105 @@
         }
 
         .table-wrapper {
-            width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow-x: auto;
-            margin-top: 12px;
+        width: 100%;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        justify-content: end;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         }
 
         table {
-            width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 8px;
+        table-layout: fixed;
         }
 
         thead {
-            background: #1e3a8a;
-            color: white;
-            font-weight: bold;
+        background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+        color: white;
+        position: sticky;
+        top: 0;
+        border-radius: 12px 12px 0 0;
+        z-index: 5;
         }
 
-        th,
-        td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
+        thead th {
+            font-family: 'DM Sans', sans-serif;
+            padding: 14px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: start;
+            border-right: none;
+        }
+
+        tbody {
+            display: block;
+            max-height: 490px; 
+            overflow-y: auto;
+            width: 100%;
+            
+            scrollbar-width: thin; 
+            scrollbar-color: #cbd5e1 #f9fafb;
+        }
+
+        tbody::after {
+            content: '';
+            display: block;
+            height: 30px; 
+        }
+
+        tbody tr:last-child td {
+        border-bottom: none;
+        }
+
+        thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        }
+
+        tbody td {
+            font-family: 'DM Sans', sans-serif;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #111827;
+            border-top: 1px solid #e5e7eb;
+            text-align: start;
+        }
+
+        tbody td.no-data {
             text-align: center;
-            border-bottom: 1px solid #e5e7eb;
+            font-weight: 500;
+            color: #6b7280;
+            padding: 20px 0;
         }
 
-        /* thead th:first-child {
-            border-top-left-radius: 12px;
+        thead th,
+        tbody td {
+            padding: 14px 25px; 
+            text-align: start;
+            word-wrap: break-word;
         }
 
-        thead th:last-child {
-            border-top-right-radius: 12px;
-        } */
+        thead th:nth-child(1),
+        tbody td:nth-child(1) {
+            width: 30%;
+        }
+
+        thead th:nth-child(2),
+        tbody td:nth-child(2) {
+            width: 40%;
+        }
+
+        thead th:nth-child(3),
+        tbody td:nth-child(3) {
+            width: 30%;
+        }
 
         tbody tr:nth-child(odd) {
             background-color: #ffffff;
@@ -260,10 +324,16 @@
         }
 
         td[onclick]:hover {
-            text-decoration: underline;
             color: #1e40af;
             cursor: pointer;
             text-decoration: none;
+        }
+
+        .td:hover {
+            color: #0532c9;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
         }
 
         .detail-campaign {
@@ -585,6 +655,21 @@
             body {
                 background: #d1d5db;
             }
+        }       
+
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
         }
 
         .menu-icon-group {
@@ -632,19 +717,20 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
-            border-bottom: 1px solid #e5e7eb;
+            /* border-bottom: 1px solid #e5e7eb; */
         }
 
         .download-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 12px;
+            padding: 8px 16px;
             background-color: #1e3a8a;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s ease;
             margin-top: -1rem;
@@ -657,6 +743,97 @@
         .download-btn:hover {
             background-color: #0056b3;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 1rem 2rem 0;
+            flex-wrap: wrap;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .page-item {
+            list-style: none;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #1e3a8a;
+            font-weight: 600;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .page-link:hover:not(.active):not(.disabled) {
+            background-color: #e0e7ff;
+            border-color: #1e3a8a;
+            cursor: pointer;
+        }
+
+        .page-link.active {
+            background-color: #1e3a8a;
+            color: white;
+            border-color: #1e3a8a;
+            cursor: default;
+        }
+
+        .page-link.disabled {
+            color: #9ca3af;
+            border-color: #e5e7eb;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .dots {
+            padding: 0 8px;
+            color: #6b7280;
+            user-select: none;
+        }
+
+        .page-link.navigate {
+            width: auto;
+            padding: 0 12px;
+            font-weight: 500;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 270px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card-form {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),
+              0 2px 4px -2px rgba(0,0,0,0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            
+        }
+
     </style>
 </head>
 
@@ -710,6 +887,21 @@
         <!-- Content -->
         <div class="content">
             <div class="table-wrapper" id="campaignList">
+
+            <div class="filter-container">
+               
+                <div class="search-box">
+                    <input type="text" placeholder="Cari Sesuatu...">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                
+                <div>
+                    <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
+                </div>
+            </div>
+                
+               
                 <table>
                     <thead>
                         <tr>
@@ -721,37 +913,60 @@
                     <tbody>
                         <tr>
                             <td onclick="showCampaignDetail()" style="color: #0056b3;">julisehat</td>
-                            <td>7</td>
+                            <td class="td">7</td>
                             <td onclick="showProductDetail()" style="color: #0056b3;">mandiri sehat</td>
                         </tr>
                         <tr>
                             <td onclick="showCampaignDetail()" style="color: #0056b3;">julipintar</td>
-                            <td>5</td>
+                            <td class="td">5</td>
                             <td onclick="showProductDetail()">onebox</td>
                         </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">Riplay</td>
-                            <td>4</td>
+                            <td class="td">4</td>
                             <td onclick="showProductDetail()">onebox</td>
                         </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
-                            <td>8</td>
+                            <td class="td">8</td>
                             <td onclick="showProductDetail()">onebox</td>
                         </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">Riplay</td>
-                            <td>4</td>
+                            <td class="td">4</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">Riplay</td>
+                            <td class="td">4</td>
                             <td onclick="showProductDetail()">onebox</td>
                         </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
-                            <td>8</td>
+                            <td class="td">8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td class="td">8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td class="td">8</td>
+                            <td onclick="showProductDetail()">onebox</td>
+                        </tr>
+                        <tr>
+                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
+                            <td class="td">8</td>
                             <td onclick="showProductDetail()">onebox</td>
                         </tr>
                     </tbody>
                 </table>
+            
+
             </div>
+
 
             <!-- Detail Campaign -->
             <div class="detail-campaign" id="detailCampaign" style="display: none;">
@@ -801,6 +1016,9 @@
                     </div>
                 </div>
 
+
+                <div class="card-form">
+
                 <div class="form-group">
                     <label for="product">Product Name</label>
                     <input type="text" id="product" value="Orbeets" readonly>
@@ -819,6 +1037,19 @@
                 </div>
             </div>
 
+                    <div class="form-group">
+                        <label for="benefit">Benefit</label>
+                        <input type="text" id="benefit" value="Meningkatkan daya tahan tubuh" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="plan">Plan</label>
+                    <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly>
+                </div>
+                </div>
+
+            </div>
         </div>
 
         <!-- Bottom Navigation -->
