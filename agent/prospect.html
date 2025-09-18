@@ -429,68 +429,69 @@
 
         /* General Table Wrapper */
         .table-wrapper {
-    flex: 1;
-    width: 100%;
-    background: #ffffff;
-    margin-top: 12px;
-    border-radius: 12px;
-    overflow: hidden; /* biar rapi */
-    padding-bottom: 15px;
-}
+            flex: 1;
+            width: 100%;
+            background: #ffffff;
+            margin-top: 12px;
+            border-radius: 12px;
+            overflow: hidden;
+            /* biar rapi */
+            padding-bottom: 15px;
+        }
 
-/* Prospect Table */
-.prospect-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 360px;
-    font-size: 0.9rem;
-    border-radius: 12px;
-    overflow: hidden;
-    background: linear-gradient(180deg, #f8fafc, #ffffff);
-    table-layout: fixed;
-}
+        /* Prospect Table */
+        .prospect-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 360px;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fafc, #ffffff);
+            table-layout: fixed;
+        }
 
-/* Thead tetap nempel di atas */
-.prospect-table thead {
-    background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-    color: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-}
+        /* Thead tetap nempel di atas */
+        .prospect-table thead {
+            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
 
-/* Scroll khusus isi tabel */
-.prospect-table tbody {
-    display: block;
-            max-height: 350px; 
+        /* Scroll khusus isi tabel */
+        .prospect-table tbody {
+            display: block;
+            max-height: 350px;
             overflow-y: auto;
             width: 100%;
-            scrollbar-width: thin; 
+            scrollbar-width: thin;
             scrollbar-color: #cbd5e1 #f9fafb;
 
-}
+        }
 
-/* Supaya kolom thead dan tbody tetap sejajar */
-.prospect-table thead,
-.prospect-table tbody tr {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-}
+        /* Supaya kolom thead dan tbody tetap sejajar */
+        .prospect-table thead,
+        .prospect-table tbody tr {
+            display: table;
+            /* table-layout: fixed; */
+            width: 100%;
+        }
 
-.prospect-table th,
-.prospect-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #e5e7eb;
-    text-align: start;
-}
+        .prospect-table th,
+        .prospect-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: start;
+        }
 
-/* Filter tetap di atas tabel, ngga ikut sticky */
-.th-with-filter {
-    text-align: right;
-    padding: 10px 20px;
-    color: #1e3a8a;
-}
+        /* Filter tetap di atas tabel, ngga ikut sticky */
+        .th-with-filter {
+            text-align: right;
+            padding: 10px 20px;
+            color: #1e3a8a;
+        }
 
 
         /* .prospect-table tr:hover {
@@ -1887,7 +1888,7 @@
             <div class="th-with-filter">
                 <i class="fas fa-filter" onclick="toggleProspectFilter()"></i>
             </div>
-            <table class="prospect-table"id="prospectTable">
+            <table class="prospect-table" id="prospectTable">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -1900,14 +1901,14 @@
                     <tr>
                         <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
                         <td>Mandiri Sehat</td>
-                        <td>New</td>
+                        <td>New</td> 
                         <td>6 May,08:30 AM</td>
                     </tr>
-                    <tr onclick="showDetail()">
+                    <!-- <tr onclick="showDetail()">
                         <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
                         <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
                         <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
+                    </tr> -->
                     <tr onclick="showDetail()">
                         <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
                         <td>Riplay</td>
@@ -1930,7 +1931,7 @@
             </table>
         </div>
 
-        <div class="detail-campaign" id="detailCampaign" style="display: none;">
+        <!-- <div class="detail-campaign" id="detailCampaign" style="display: none;">
             <div class="form-group">
                 <label for="campaignName">Campaign Name</label>
                 <input type="text" id="campaignName" value="Juli Sehat" readonly>
@@ -1958,9 +1959,9 @@
                 <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="detail-product" id="detailProduct" style="display: none;">
+        <!-- <div class="detail-product" id="detailProduct" style="display: none;">
             <div class="section-header">
                 <h2 class="section-title-product">Product Specification</h2>
                 <button class="download-btn" onclick="handleDownload()">
@@ -2002,8 +2003,7 @@
             </div>
 
 
-        </div>
-
+        </div> -->
 
 
         <div class="prospectDetail" id="prospectDetail" style="display:none">
