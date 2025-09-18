@@ -273,71 +273,106 @@
             z-index: 2;
         }
 
-       .table-wrapper {
-            overflow-x: auto;
-            flex: 1;
-            width: 100%;
-            background: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-                        0 1px 2px rgba(0,0,0,0.06);
-            margin-top: 12px;
-            border-radius: 12px;
-            transition: box-shadow 0.3s ease;
+        .table-wrapper {
+        width: 100%;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        justify-content: end;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         }
 
-       .table-container {
-            max-height: 272px;  
-            overflow-y: auto;    
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 8px;
+        table-layout: fixed;
         }
 
-       .table-container::-webkit-scrollbar {
-            display: none;
+        thead {
+        background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+        color: white;
+        position: sticky;
+        top: 0;
+        border-radius: 12px 12px 0 0;
+        z-index: 5;
         }
 
-        /* Prospect Table */
-        .prospect-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            font-size: 0.9rem;
-        }
-
-        .prospect-table thead {
-            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-            color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .prospect-table th,
-        .prospect-table td {
-            padding: 12px 16px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            /* border-right: 1px solid #e5e7eb; */
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            text-align: start;
-        }
-
-        .prospect-table th {
+        thead th {
+            font-family: 'DM Sans', sans-serif;
+            padding: 14px 16px;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-size: 0.85rem;
+            text-align: start;
+            border-right: none;
         }
 
-        /* thead th:first-child {
-            border-top-left-radius: 12px;
+        tbody {
+            display: block;
+            max-height: 490px; 
+            overflow-y: auto;
+            width: 100%;
+            
+            scrollbar-width: thin; 
+            scrollbar-color: #cbd5e1 #f9fafb;
         }
 
-        thead th:last-child {
-            border-top-right-radius: 12px;
-        } */
+        tbody::after {
+            content: '';
+            display: block;
+            height: 30px; 
+        }
+
+        tbody tr:last-child td {
+        border-bottom: none;
+        }
+
+        thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        }
+
+        tbody td {
+            font-family: 'DM Sans', sans-serif;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #111827;
+            border-top: 1px solid #e5e7eb;
+            text-align: start;
+        }
+
+        tbody td.no-data {
+            text-align: center;
+            font-weight: 500;
+            color: #6b7280;
+            padding: 20px 0;
+        }
+
+        thead th,
+        tbody td {
+            padding: 14px 25px; 
+            text-align: start;
+            word-wrap: break-word;
+        }
+
+        thead th:nth-child(1),
+        tbody td:nth-child(1) {
+            width: 30%;
+        }
+
+        thead th:nth-child(2),
+        tbody td:nth-child(2) {
+            width: 40%;
+        }
+
+        thead th:nth-child(3),
+        tbody td:nth-child(3) {
+            width: 30%;
+        }
 
         tbody tr:nth-child(odd) {
             background-color: #ffffff;
@@ -727,9 +762,9 @@
                    </div>
                </div>
 
-               <div class="table-container">
+              
 
-                <table class="prospect-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Period</th>
@@ -757,7 +792,7 @@
 
                 </table>
 
-               </div>
+           
 
             </div>
 
