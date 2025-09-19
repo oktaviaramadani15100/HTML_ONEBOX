@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Prospect</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <style>
         * {
             box-sizing: border-box;
@@ -41,15 +43,184 @@
             height: 70vh;
         }
 
+        .email-chat-header {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .email-chat-header strong {
+            font-size: 16px;
+        }
+
+        .status-badge {
+            background: green;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .email-chat-header small {
+            display: block;
+            color: #555;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .email-chat-body {
+            padding: 15px;
+            flex-grow: 1;
+            background: #f5f5f5;
+            overflow-y: auto;
+            /* biar isi chat bisa scroll */
+
+        }
+
+        .message-box {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .message-box.left {
+            justify-content: flex-start;
+        }
+
+        .message-box.right {
+            justify-content: flex-end;
+        }
+
+        .message-meta {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message-box.right .message-meta {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .avatar.agent-avatar {
+            background: #3f0071;
+        }
+
+        .avatar.user-avatar {
+            background: #999;
+        }
+
+        .sender-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .message-content {
+            background: #e4ddf9;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .message-box.right .message-content {
+
+            background: #eef6ff;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            text-align: right;
+        }
+
+        /* .email-reply-wrapper {
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            background: #fff;
+        } */
+
+        .email-reply-wrapper {
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: #fff;
+            position: sticky;
+            bottom: 0;
+            /* selalu nempel bawah */
+            z-index: 10;
+        }
+
+        @supports (height: 100dvh) {
+            .chat-prospect {
+                height: 100dvh;
+                /* dynamic viewport biar naik kalau keyboard muncul */
+            }
+        }
+
+        .reply-input {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .reply-input textarea {
+            flex: 1;
+            min-height: 45px;
+            max-height: 120px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+        }
+
+        /* tombol send */
+        .reply-action-btn {
+            background: #1e3a8a;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s ease;
+        }
+
+        .reply-action-btn:hover {
+            background: #2b4db3;
+        }
+
         .prospectDetail {
             width: 100%;
             max-width: 430px;
             background: #ffffff;
-            height: 70vh;
+            max-height: 70vh;
+            /* bukan height fix, tapi max */
             position: relative;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            /* biar bisa scroll kalau penuh */
+            border-radius: 10px;
+            /* opsional, biar modern */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            /* opsional */
         }
+
 
         .header {
             display: flex;
@@ -93,6 +264,92 @@
             font-size: 1.3rem;
             color: #1e3a8a;
             cursor: pointer;
+        }
+
+        .prospect-filter-container {
+            display: flex;
+            justify-content: flex-end;
+            /* posisi kanan */
+            align-items: center;
+            padding: 10px 16px;
+        }
+
+        /* Icon Filter */
+        .prospect-filter-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        /* Drawer Filter */
+        .prospect-filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .prospect-filter-drawer.open {
+            right: 0;
+        }
+
+        /* Header */
+        .prospect-filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .prospect-filter-header h3 {
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .prospect-filter-header i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #ef4444;
+        }
+
+        /* Content */
+        .prospect-filter-content label {
+            font-size: 0.85rem;
+            margin: 10px 0 4px;
+            display: block;
+        }
+
+        .prospect-filter-content input,
+        .prospect-filter-content select,
+        .prospect-filter-content button {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .prospect-filter-content button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .prospect-filter-content button:hover {
+            background-color: #374ba1;
         }
 
         .filter-icon {
@@ -167,38 +424,125 @@
 
         .filter-content button:hover {
             background-color: #374ba1;
+            transform: translateY(-2px);
         }
 
+        /* General Table Wrapper */
         .table-wrapper {
-            overflow-x: auto;
-            /* margin: 1rem; */
             flex: 1;
             width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
             margin-top: 12px;
+            border-radius: 12px;
+            overflow: hidden;
+            /* biar rapi */
+            padding-bottom: 15px;
         }
 
+        /* Prospect Table */
         .prospect-table {
             width: 100%;
-            border-collapse: separate;
+            border-collapse: collapse;
             min-width: 360px;
-            border-spacing: 0;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fafc, #ffffff);
+            table-layout: fixed;
         }
 
+        /* Thead tetap nempel di atas */
         .prospect-table thead {
-            background: #1e3a8a;
-            color: white;
-            font-weight: bold;
+            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        /* Scroll khusus isi tabel */
+        .prospect-table tbody {
+            display: block;
+            max-height: 350px;
+            overflow-y: auto;
+            width: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f9fafb;
+
+        }
+
+        /* Supaya kolom thead dan tbody tetap sejajar */
+        .prospect-table thead,
+        .prospect-table tbody tr {
+            display: table;
+            /* table-layout: fixed; */
+            width: 100%;
         }
 
         .prospect-table th,
         .prospect-table td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
-            text-align: center;
+            padding: 12px 16px;
             border-bottom: 1px solid #e5e7eb;
+            text-align: start;
         }
+
+/* Bar atas: Search + Filter */
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+/* Search box */
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 250px;
+     font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #f9fafb;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 25px;
+}
+
+.search-box input:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+}
+
+/* Icon di dalam search */
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 205px;
+}
+
+/* Filter */
+.th-with-filter {
+    color: #1e3a8a;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+
 
         /* .prospect-table tr:hover {
             background-color: #f9f9f9;
@@ -209,6 +553,16 @@
             text-decoration: none;
             color: #1e3a8a;
             font-weight: bold;
+            cursor: pointer;
+            /* biar cursor jadi tangan saat di-hover */
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        .name-link:hover {
+            color: #2563eb;
+            /* warna berubah pas di-hover */
+            text-decoration: none;
+            /* underline muncul pas hover */
         }
 
 
@@ -241,7 +595,7 @@
         }
 
         .prospect-table td[onclick]:hover {
-            text-decoration: underline;
+            text-decoration: none;
             color: #1e40af;
             cursor: pointer;
             text-decoration: none;
@@ -535,7 +889,6 @@
             text-decoration: none;
             color: #f9fafb;
             font-size: 20px;
-            font-weight: bold;
         }
 
         .header-section {
@@ -546,34 +899,60 @@
         .section-title {
             display: block;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            /* kasih jarak ke bawah */
+            letter-spacing: 0.5px;
+            /* sedikit spasi antar huruf */
         }
 
         .ddlList-row {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            /* jarak antar elemen lebih lega */
             align-items: center;
             flex-wrap: wrap;
+            margin-bottom: 1rem;
+            /* jarak antar baris */
         }
 
         .ddlList-row select {
             flex: 1;
-            /* biar fleksibel */
-            min-width: 0;
-            padding: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            min-width: 180px;
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            border: 1px solid #d1d5db;
+            /* abu tipis */
+            border-radius: 8px;
             background-color: #fff;
-            color: #333;
-            height: 38px;
+            color: #374151;
+            /* abu gelap */
+            height: 40px;
+
+            /* efek modern */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        /* saat hover */
+        .ddlList-row select:hover {
+            border-color: #2563eb;
+            /* biru */
+        }
+
+        /* saat focus (klik) */
+        .ddlList-row select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            /* efek glow biru */
         }
 
         .go-btn {
             height: 38px;
             padding: 0 16px;
-            background-color: #1e3a8a;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
             border: none;
             border-radius: 6px;
@@ -584,7 +963,9 @@
         }
 
         .go-btn:hover {
-            background-color: #374ba1;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .profile {
@@ -608,6 +989,43 @@
             margin-top: -1rem;
         }
 
+        .send-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .send-row select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: #fff;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            margin-bottom: 7.5px;
+        }
+
+        .send-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+
         .profile-icon {
             font-size: 2.8rem;
             color: #1e3a8a;
@@ -626,7 +1044,7 @@
         }
 
         .name {
-            font-weight: bold;
+            /* font-weight: bold; */
             font-size: 1rem;
             color: #1e3a8a;
         }
@@ -668,7 +1086,7 @@
         .biodata {
             padding: 1rem;
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
+            border-top: none;
         }
 
         .biodata-row {
@@ -684,7 +1102,26 @@
             align-items: flex-start;
             gap: 0.6rem;
             min-width: 140px;
+
+            border: 1px solid #d1d5db;
+            /* garis abu-abu tipis */
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: #f9fafb;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            /* cursor jadi tangan */
         }
+
+        .biodata-item:hover {
+            background: #e0e7ff;
+            /* warna berubah saat hover */
+            transform: translateY(-3px);
+            /* sedikit naik */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* bayangan halus */
+        }
+
 
         .biodata-item .icon {
             font-size: 1rem;
@@ -693,7 +1130,7 @@
         }
 
         .biodata-item .label {
-            font-weight: bold;
+            /* font-weight: bold; */
             color: #1e3a8a;
             display: block;
             margin-bottom: 2px;
@@ -704,149 +1141,7 @@
             font-size: 0.85rem;
         }
 
-        .email-chat-header {
-            padding: 15px;
-            background: #f9f9f9;
-            border-bottom: 1px solid #ddd;
-        }
 
-        .email-chat-header strong {
-            font-size: 16px;
-        }
-
-        .status-badge {
-            background: green;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
-
-        .email-chat-header small {
-            display: block;
-            color: #555;
-            margin-top: 5px;
-            font-size: 13px;
-        }
-
-        .email-chat-body {
-            padding: 15px;
-            flex-grow: 1;
-            background: #f5f5f5;
-        }
-
-        .message-box {
-            margin-bottom: 15px;
-            display: flex;
-        }
-
-        .message-box.left {
-            justify-content: flex-start;
-        }
-
-        .message-box.right {
-            justify-content: flex-end;
-        }
-
-        .message-meta {
-            display: flex;
-            gap: 10px;
-            max-width: 80%;
-        }
-
-        .message-box.right .message-meta {
-            flex-direction: row-reverse;
-        }
-
-        .avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            font-weight: bold;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .avatar.agent-avatar {
-            background: #3f0071;
-        }
-
-        .avatar.user-avatar {
-            background: #999;
-        }
-
-        .sender-name {
-            font-weight: bold;
-            margin-bottom: 4px;
-            font-size: 13px;
-        }
-
-        .message-content {
-            background: #e4ddf9;
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 5px;
-            word-wrap: break-word;
-        }
-
-        .message-box.right .message-content {
-
-            background: #eef6ff;
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: #888;
-            text-align: right;
-        }
-
-        .email-reply-wrapper {
-            border-top: 1px solid #ddd;
-            padding: 10px 15px;
-            background: #fff;
-        }
-
-        .reply-input {
-            position: relative;
-        }
-
-        .reply-input textarea {
-            width: 100%;
-            height: 80px;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-        }
-
-        .reply-send-section {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 8px;
-            gap: 8px;
-        }
-
-        .attach-icon {
-            font-size: 18px;
-            color: #555;
-            cursor: pointer;
-        }
-
-        .reply-action-btn {
-            background: #1e3a8a;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-        }
 
 
         .chat-icon {
@@ -914,44 +1209,68 @@
 
 
         .interaction-form {
-            padding: 1rem;
+            padding: 1.5rem;
             background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             max-width: 600px;
-            margin: 0 auto;
+            margin: 1rem auto;
             box-sizing: border-box;
-            margin-top: 1rem;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.3s ease;
+            padding-bottom: 5px;
         }
 
+        .interaction-form:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Label */
         label {
             display: block;
-            font-size: 0.85rem;
-            margin: 0.5rem 0 0.2rem;
-            color: #1f2937;
-            font-weight: 500;
+            font-size: 0.9rem;
+            margin: 0.6rem 0 0.3rem;
+            color: #374151;
+            font-weight: 600;
         }
 
+        /* Input & Textarea */
         .input-field,
         textarea,
-        .form-input {
+        .form-input,
+        select {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 10px;
             border: 1px solid #d1d5db;
             font-size: 0.9rem;
-            background-color: #fff;
+            background-color: #fafafa;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+            padding-top: 5px;
         }
 
+        /* Saat focus */
+        .input-field:focus,
+        textarea:focus,
+        .form-input:focus,
+        select:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
+
+        /* Textarea khusus */
         textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 120px;
         }
 
+        /* Row untuk dua kolom */
         .row {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             margin-bottom: 1rem;
         }
 
@@ -959,10 +1278,11 @@
             flex: 1;
         }
 
+        /* Radio group */
         .radio-group {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            gap: 1rem;
+            margin: 1rem 0;
             flex-wrap: wrap;
         }
 
@@ -970,31 +1290,45 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            white-space: nowrap;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-group label:hover {
+            background-color: #f3f4f6;
         }
 
         input[type="radio"] {
             accent-color: #2563eb;
+            cursor: pointer;
         }
 
+        /* Button */
         .save-btn {
-            background-color: #1e3a8a;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
-            padding: 10px 24px;
+            padding: 12px 28px;
             border: none;
             border-radius: 9999px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            float: right;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-bottom: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
         }
 
         .save-btn:hover {
-            background-color: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
         }
 
         /* Responsive for Mobile */
@@ -1005,7 +1339,7 @@
 
             .radio-group {
                 gap: 1rem;
-               
+                /* flex-direction: column; */
             }
 
             .save-btn {
@@ -1013,6 +1347,34 @@
                 float: none;
             }
         }
+
+        .time-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            background-color: #fafafa;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Saat focus */
+        .time-input:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none;
+        }
+
+        /* Supaya ikon jam bawaan browser tetap ada */
+        .time-input::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            filter: invert(0.4);
+        }
+
 
 
         .insured-row {
@@ -1075,19 +1437,35 @@
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 14px;
+            border-radius: 6px;
+            overflow: hidden;
+            text-align: start;
         }
 
+        /* Header */
         .insuredlist-table thead {
             background: #0047ba;
             color: white;
         }
 
-        .insuredlist-table th,
+        .insuredlist-table th {
+            padding: 10px;
+            text-align: left;
+            border-right: none;
+        }
+
+        .insuredlist-table th:last-child {
+            border-right: none;
+            /* hapus garis kanan di kolom terakhir */
+        }
+
+        /* Body */
         .insuredlist-table td {
             padding: 10px;
             border-bottom: 1px solid #e5e7eb;
-            text-align: left;
+            /* garis bawah antar row */
         }
+
 
         .totalPremi-section {
             padding-top: 18px;
@@ -1274,13 +1652,16 @@
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
             min-width: 100px;
             white-space: nowrap;
+            padding-left: end;
         }
 
         .btn-small:hover {
             background-color: #003a9d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .btn-group-right {
@@ -1293,7 +1674,7 @@
             border-bottom: 2px solid #e5e7eb;
         }
 
-        .btn-group-right-ddl {
+        .btn-group-right-dll {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
@@ -1315,45 +1696,71 @@
 
         .detail-campaign {
             display: none;
-            padding: 16px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 12px;
             font-size: 0.9rem;
+            background: #f9fafb;
+            /* abu muda biar beda dengan background */
         }
 
+        /* Form layout */
         .form-row {
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
         }
 
+        /* Card look */
         .form-group {
             flex: 1 1 100%;
+            background: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        /* .form-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        } */
 
         .form-group.full {
             flex: 1 1 100%;
         }
 
+        /* Label */
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 0.85rem;
-            color: #374151;
+            color: #1e3a8a;
+            /* biru elegan */
         }
 
+        /* Input & Textarea */
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
-            font-size: 0.85rem;
+            padding: 12px;
+            font-size: 0.9rem;
             border: 1px solid #d1d5db;
-            border-radius: 6px;
+            border-radius: 8px;
             background-color: #fff;
-            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /* Remove focus outline for readonly */
+        /* Fokus effect */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            /* biru */
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            outline: none;
+        }
+
+        /* Readonly tanpa highlight */
         input[readonly]:focus,
         textarea[readonly]:focus {
             outline: none;
@@ -1501,37 +1908,78 @@
             </div>
         </div>
 
-        <div class="table-wrapper" id="prospectList">
-            <table class="prospect-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Campaign</th>
-                        <th>Product</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
-                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">Mandiri Sehat</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
-                    <tr onclick="showDetail()">
-                        <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
-                        <td><a href="" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
 
-                    </tr>
-                    <tr onclick="showDetail()">
-                        <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
-                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">Riplay</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
-                </tbody>
-            </table>
+
+
+
+        <!-- Filter Drawer -->
+        <div class="filter-drawer" id="prospectFilterDrawer">
+            <div class="filter-header">
+                <h3><i class="fas fa-filter"></i> Filter Prospect</h3>
+                <i class="fas fa-times" onclick="toggleProspectFilter()"></i>
+            </div>
+            <div class="filter-content">
+                <label for="prospect-date">Date</label>
+                <input type="date" id="prospect-date" />
+
+                <label for="prospect-name">Prospect</label>
+                <input type="text" id="prospect-name" placeholder="Enter name" />
+
+                <label for="prospect-status">Status</label>
+                <input type="text" id="prospect-status" placeholder="Enter status" />
+
+                <button onclick="applyProspectFilter()">Apply</button>
+                <button onclick="resetProspectFilter()" style="margin-top:5px;background-color:#6b7280;">Reset</button>
+            </div>
         </div>
 
-        <div class="detail-campaign" id="detailCampaign" style="display: none;">
+        <!-- Table -->
+        <div class="table-wrapper" id="prospectList">
+    <!-- Baris atas: Search + Filter -->
+    <div class="filter-bar">
+        <!-- Search bar -->
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Cari Sesuatu...">
+        </div>
+
+        <!-- Filter -->
+        <div class="th-with-filter">
+            <i class="fas fa-filter"></i>
+        </div>
+    </div>
+
+    <!-- Tabel -->
+    <table class="prospect-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Campaign</th>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">Mandiri Sehat</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+            <tr onclick="showDetail()">
+                <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+            <tr onclick="showDetail()">
+                <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">Riplay</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+        <!-- <div class="detail-campaign" id="detailCampaign" style="display: none;">
             <div class="form-group">
                 <label for="campaignName">Campaign Name</label>
                 <input type="text" id="campaignName" value="Juli Sehat" readonly>
@@ -1559,9 +2007,9 @@
                 <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="detail-product" id="detailProduct" style="display: none;">
+        <!-- <div class="detail-product" id="detailProduct" style="display: none;">
             <div class="section-header">
                 <h2 class="section-title-product">Product Specification</h2>
                 <button class="download-btn" onclick="handleDownload()">
@@ -1592,7 +2040,7 @@
             </div>
 
             <div class="form-row">
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="plan">Plan</label>
                     <input type="text" id="plan" value="Orbeets Basic / Orbeets Plus" readonly />
                 </div>
@@ -1603,8 +2051,7 @@
             </div>
 
 
-        </div>
-
+        </div> -->
 
 
         <div class="prospectDetail" id="prospectDetail" style="display:none">
@@ -1615,7 +2062,7 @@
                         <option value="">--Pilih--</option>
                         <option value="Thinking">Thinking</option>
                         <option value="Send Brosure">Send Brosure</option>
-                        <option value="Simulation Policy">Simulation Policy</option>
+                        <option value="Policy Simulation">Policy Simulation</option>
                         <option value="Entry Policy">Entry Policy</option>
                         <option value="Not Interested">Not Interested</option>
                     </select>
@@ -1626,21 +2073,22 @@
             <!-- Content -->
             <div class="content" id="profileContent">
                 <div class="profile">
-                    <i class="fas fa-mars gender-icon" title="Male"></i>
+
+                    <i class="bi bi-gender-male gender-icon" title="Male"></i>
                     <div class="profile-info">
                         <div class="top-row">
                             <span class="name">Layla</span>
                         </div>
                         <div class="meta">
                             <div>
-                                <span><i class="fas fa-phone-alt"></i> 0895xxxxxxx</span>
+                                <span><i class="bi bi-telephone"></i> 0895xxxxxxx</span>
                                 <span class="chat-icon" onclick="toggleChat()">
-                                    <i class="fas fa-comment"></i>
+                                    <i class="bi bi-chat"></i>
                                 </span>
                             </div>
 
                             <div>
-                                <i class="fas fa-envelope"></i> agent01@ciptadra.com
+                                <i class="bi bi-envelope"></i> agent01@ciptadra.com
                             </div>
                         </div>
                     </div>
@@ -1649,14 +2097,14 @@
                 <div class="biodata">
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-birthday-cake icon"></i>
+                            <i class="bi bi-cake icon"></i>
                             <div>
                                 <span class="label">Birthday</span>
                                 <span class="value">12 Jan 1995</span>
                             </div>
                         </div>
                         <div class="biodata-item">
-                            <i class="fas fa-heart icon"></i>
+                            <i class="bi bi-heart icon"></i>
                             <div>
                                 <span class="label">Marital Status</span>
                                 <span class="value">Single</span>
@@ -1666,7 +2114,7 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-wallet icon"></i>
+                            <i class="bi bi-wallet2 icon"></i>
                             <div>
                                 <span class="label">Income Range</span>
                                 <span class="value">5 - 10 juta</span>
@@ -1676,14 +2124,14 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-chart-line icon"></i>
+                            <i class="bi bi-graph-down icon"></i>
                             <div>
                                 <span class="label">Avg Transaction</span>
                                 <span class="value">Rp 1.250.000</span>
                             </div>
                         </div>
                         <div class="biodata-item">
-                            <i class="fas fa-id-badge icon"></i>
+                            <i class="bi bi-person-badge icon"></i>
                             <div>
                                 <span class="label">Account Type</span>
                                 <span class="value">Kredit</span>
@@ -1694,16 +2142,16 @@
 
                     <div class="biodata-row">
                         <div class="biodata-item">
-                            <i class="fas fa-calendar-plus icon"></i>
+                            <i class="bi bi-calendar-plus icon"></i>
                             <div>
                                 <span class="label">Join At</span>
                                 <span class="value">03 Juli 2020</span>
                             </div>
                         </div>
-                        <div class="biodata-item" style="margin-top: 21px;">
+                        <div class="biodata-item">
                             <i class="fas fa-clock icon"></i>
                             <div>
-                                <!-- <span class="label">Duration</span> -->
+                                <span class="label">Duration</span>
                                 <span class="value">5 years 2 months</span>
                             </div>
                         </div>
@@ -1784,17 +2232,14 @@
                 <!-- <div class="title">Appointment</div> -->
                 <form class="interaction-form">
                     <label for="type-event">Type event:</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="type-event" value="Meeting" checked> Meeting
-                        </label>
-                        <label>
-                            <input type="radio" name="type-event" value="Call"> Call
-                        </label>
-                        <label>
-                            <input type="radio" name="type-event" value="Follow Up"> Follow Up
-                        </label>
+                    <div class="select-group">
+                        <select id="type-event" name="type-event">
+                            <option value="Meeting" selected>Meeting</option>
+                            <option value="Call">Call</option>
+                            <option value="Follow Up">Follow Up</option>
+                        </select>
                     </div>
+
 
                     <div class="row">
                         <div class="custom-form">
@@ -1814,6 +2259,25 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div>
+                            <label for="start-time">Start Time:</label>
+                            <input type="time" id="start-time" name="start-time" class="time-input">
+                        </div>
+                        <div>
+                            <label for="end-time">End Time:</label>
+                            <input type="time" id="end-time" name="end-time" class="time-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" placeholder="Contoh: Ruang Rapat Lt.2"
+                            class="input-field">
+                    </div>
+
+
 
                     <label for="description">Description:</label>
                     <textarea id="description" placeholder="Isi keterangan..." class="input-field"></textarea>
@@ -1844,11 +2308,13 @@
                         </div>
                     </div>
                 </div>
-                <label>Send Brosure Via:</label>
-                <select>
-                    <option value="whatsapp">Share to WhatsApp</option>
-                    <option value="email">Share to Email</option>
-                </select>
+                <div class="send-row">
+                    <select>
+                        <option value="whatsapp">Share to WhatsApp</option>
+                        <option value="email">Share to Email</option>
+                    </select>
+                    <button class="send-btn">Send</button>
+                </div>
                 <hr>
                 <iframe src="../agent/riplay_smile.pdf" width="100%" height="400px" style="margin-top: 1rem;"></iframe>
             </div>
@@ -2186,7 +2652,7 @@
                         <h3>5. Pembayaran & Kesehatan</h3>
                         <label>Metode Pembayaran</label>
                         <select required>
-                            <option>Debet</option>
+                            <option>Debit</option>
                             <option>Kredit</option>
                         </select>
                         <label>Nama Pemilik Rekening</label>
@@ -2316,6 +2782,44 @@
     </div>
 
     <script>
+        function toggleProspectFilter() {
+            document.getElementById('prospectFilterDrawer').classList.toggle('open');
+        }
+
+        function applyProspectFilter() {
+            const dateVal = document.getElementById('prospect-date').value.trim();
+            const nameVal = document.getElementById('prospect-name').value.trim().toLowerCase();
+            const statusVal = document.getElementById('prospect-status').value.trim().toLowerCase();
+
+            const rows = document.querySelectorAll('#prospectTable tbody tr');
+
+            rows.forEach(row => {
+                const name = row.cells[0].innerText.toLowerCase();
+                const status = row.cells[2].innerText.toLowerCase();
+                const date = row.cells[3].innerText.trim(); // format YYYY-MM-DD
+
+                let match = true;
+
+                if (nameVal && !name.includes(nameVal)) match = false;
+                if (statusVal && !status.includes(statusVal)) match = false;
+                if (dateVal && date !== dateVal) match = false;
+
+                row.style.display = match ? '' : 'none';
+            });
+
+            toggleProspectFilter();
+        }
+
+        function resetProspectFilter() {
+            document.getElementById('prospect-date').value = '';
+            document.getElementById('prospect-name').value = '';
+            document.getElementById('prospect-status').value = '';
+
+            const rows = document.querySelectorAll('#prospectTable tbody tr');
+            rows.forEach(row => row.style.display = '');
+
+            toggleProspectFilter();
+        }
         function showScreen(id) {
             ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
                 document.getElementById(screen).style.display = "none";
@@ -2501,7 +3005,7 @@
 
             const sectionMap = {
                 "Thinking": "ThinkingSection",
-                "Send Brosure": "SendBrowserSection",
+                "Send Brosure": "SendBrosureSection",
                 "Simulation Policy": "SimulationPolicySection",
                 "Entry Policy": "EntryPolicySection",
                 "Not Interested": "NotInterestedSection"
@@ -2518,7 +3022,7 @@
                 document.getElementById(sectionMap[selectedValue]).style.display = "block";
                 const headerTitleMap = {
                     "Thinking": "Thinking Section",
-                    "Send Browser": "Send via Browser",
+                    "Send Brosure": "Send Brosure",
                     "Simulation Policy": "Simulation Policy",
                     "Entry Policy": "Entry Policy Form",
                     "Not Interested": "Not Interested Reason"

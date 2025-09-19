@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MSIG qc Dashboard</title>
+    <title>MSIG ATM Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -194,10 +194,9 @@
 
         .menu-grid {
             display: grid;
-             grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            gap: 12px;
-            padding: 12px 16px;
-            width: 100%;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 10px;
+            max-width: 100%;
             margin: auto;
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
@@ -207,48 +206,48 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: #1e3a8a;
             padding: 10px;
+            background-color: white;
             border-radius: 8px;
             transition: 0.3s ease;
-            max-width: 90px;
         }
 
         .menu-item:hover {
             background-color: #f3f0ff;
             transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
         .menu-item i {
-            font-size: 27px;
+            font-size: 20px;
             margin-bottom: 6px;
             color: #1e3a8a;
         }
 
         .menu-item p {
             margin: 0;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 500;
         }
 
-        .menu-grid a {
-            text-decoration: none;
-            color: inherit;
-        }
-
         @media screen and (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
             .menu-item {
-                padding: 10px 4px;
+                padding: 8px 4px;
             }
 
             .menu-item i {
-                font-size: 22px;
+                font-size: 18px;
             }
 
             .menu-item p {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
 
@@ -392,7 +391,7 @@
             margin-bottom: 4px;
         }
 
-        /* 
+        /*
         .bottom-nav div:hover {
             transform: scale(1.05);
         } */
@@ -414,7 +413,7 @@
             color: inherit;
         } */
 
-        /* .nav-new {
+        .nav-new {
             justify-content: center;
             align-items: center;
             border-radius: 50%;
@@ -432,7 +431,7 @@
             top: -22px;
             left: 50%;
             transform: translateX(-50%);
-        } */
+        }
 
         .plus-btn {
             background-color: #1e3a8a;
@@ -446,7 +445,7 @@
             text-decoration: none;
             font-size: 30px;
         }
-/* 
+
         .nav-new i {
             font-size: 30px;
             display: block;
@@ -458,52 +457,7 @@
             margin: 15px 0 0;
             font-size: 0.85rem;
             color: #1e3a8a;
-        } */
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
         }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
 
         @media screen and (min-width: 768px) {
             body {
@@ -533,11 +487,10 @@
 
 <body>
     <div class="wrapper">
-        <!-- Header -->
         <div class="header">
-            <img src="../img/my-image.png" alt="MSIG Logo" />
+            <img src="../my-image.png" alt="MSIG Logo" />
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../Atm/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -548,15 +501,15 @@
                         <h5 class="agent-role">Agent</h5>
                     </div>
                     <hr />
-                    <a href="#">
+                    <a href="../Atm/atmprofile.html">
                         <i class="fas fa-user"></i>
-                        <span>Profile</span>
+                        <span>ATM Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="../Atm/atm-rules.html">
                         <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
+                        <span>atm Rules</span>
                     </a>
-                    <a href="#">
+                    <a href="../Atm/faq.html">
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span>
                     </a>
@@ -570,18 +523,36 @@
             </div>
         </div>
 
-        <!-- Info Box -->
         <div class="info-box">
-            <img src="../img/information.jpg" alt="">
+            <img src="../information.jpg" alt="">
         </div>
 
-        <!-- Cards / Slider -->
+        <div class="menu-grid">
+            <a href="../Atm/manajemenCampaign.html" class="menu-item">
+                <i class="fas fa-bullhorn fa-2x"></i>
+                <p>Campaign</p>
+            </a>
+
+            <a href="../Atm/manajemenPengguna.html" class="menu-item">
+                <i class="fas fa-user-plus fa-2x"></i>
+                <p>user</p>
+            </a>
+            <a href="../Atm/manajemenproduct.html" class="menu-item">
+                <i class="fas fa-cubes fa-2x"></i>
+                <p>product</p>
+            </a>
+            <div class="menu-item empty"></div>
+            <div class="menu-item empty"></div>
+        </div>
+
+
+
+
         <div class="slider-container">
             <div class="slider-section" id="slider">
 
-                <!-- Card 1 -->
                 <div class="slider-card">
-                    <img src="../img/knowlage6.webp" alt="Slider 1" />
+                    <img src="../knowlage6.webp" alt="Slider 1" />
                     <div class="title">RIPLAY Smile Ultima Term Life</div>
                     <div class="price">Produk perlindungan jiwa berjangka yang membantu keluarga Anda tetap aman secara
                         finansial.</div>
@@ -590,9 +561,8 @@
                             Selengkapnya</a></div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="slider-card">
-                    <img src="../img/knowlage7.jpg" alt="Slider 2" />
+                    <img src="../knowlage7.jpg" alt="Slider 2" />
                     <div class="title">Kenali MSIG Life: Solusi Asuransi Jiwa</div>
                     <div class="price">Kenali manfaat perlindungan jiwa dan investasi yang diberikan oleh MSIG Life
                         Indonesia.</div>
@@ -600,9 +570,8 @@
                             Selengkapnya</a></div>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="slider-card">
-                    <img src="../img/knowlage8.jpg" alt="Slider 3" />
+                    <img src="../knowlage8.jpg" alt="Slider 3" />
                     <div class="title">Profil MSIG Life Indonesia</div>
                     <div class="price">Kenali sejarah, komitmen, dan layanan terbaik dari perusahaan MSIG Life.</div>
                     <div class="read-more"><a href="https://www.msiglife.co.id/tentang-kami/profil-perusahaan">Baca
@@ -616,31 +585,22 @@
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../qc/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-
-                <div class="nav-history">
-                    <a href="../qc/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
-                <div class="nav-call">
-                    <a href="../qc/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
+                <div class="nav-spacer"></div>
                 <div class="nav-agen">
-                    <a href="../qc/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
 
-            <!-- <div class="nav-new">
-                <a href="#" class="plus-btn"><i class="fas fa-plus"></i></a>
+            <div class="nav-new">
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
-            </div> -->
+            </div>
         </div>
+    </div>
 </body>
 
 </html>

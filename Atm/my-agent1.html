@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Agent</title>
+    <title>list Agent</title>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
 <style>
     * {
         box-sizing: border-box;
@@ -118,7 +116,6 @@
 
     a+a {
         margin-top: 4px;
-        /* jarak antar link */
     }
 
     .dropdown a:hover {
@@ -136,7 +133,6 @@
     .dropdown span {
         flex: 1;
         font-weight: 500;
-        /* margin-left: 1rem; */
     }
 
     .dropdown hr {
@@ -144,7 +140,6 @@
         border: 0;
         border-top: 1px solid #eee;
     }
-
 
     @keyframes fadeIn {
         from {
@@ -158,41 +153,45 @@
         }
     }
 
-    /* .header .header-name {
+    .header .header-name {
         text-decoration: none;
-        color: #1e3a8a;
+        color: #f9fafb;
         font-size: 20px;
         font-weight: bold;
-    } */
-
+        display: flex;
+        align-items: center;
+    }
+    
+    /* BOTTOM NAVIGATION - Modified to match home.html */
     .bottom-nav {
-        position: sticky;
-        /* position: relative; */
+        position: fixed;
         bottom: -1px;
-        left: 0;
-        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;
         border-top: 1px solid #ccc;
-        /* display: flex; */
         justify-content: space-around;
         align-items: flex-end;
         padding: 10px 0;
         font-size: 12px;
         z-index: 10;
-        margin-top: auto;
         background: white;
+        display: flex;
     }
-
+    
     .nav-wrapper {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        width: 100%;
     }
-
+    
     .nav-wrapper i {
         color: #1e3a8a;
     }
-
-    .nav-wrapper>div {
+    
+    .nav-wrapper > div {
         flex: 1;
         text-align: center;
         font-size: 0.85rem;
@@ -203,48 +202,33 @@
         gap: 4px;
     }
 
+    .nav-wrapper a {
+        color: #1e3a8a;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-wrapper a.active,
+    .nav-wrapper a.active i {
+        color: #3f51b5; /* Warna untuk navigasi yang aktif */
+    }
+
     .nav-spacer {
         flex: 0.5;
     }
-
-    /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
+    
     .nav-wrapper i {
         font-size: 1.5rem;
         margin-bottom: 4px;
     }
-
-    /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
-
+    
     .nav-wrapper p {
         margin-top: 4px;
         font-size: 0.85rem;
     }
-
-    /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        } */
-
+    
     .nav-new {
         justify-content: center;
         align-items: center;
@@ -264,7 +248,7 @@
         left: 50%;
         transform: translateX(-50%);
     }
-
+    
     .plus-btn {
         background-color: #1e3a8a;
         border-radius: 50%;
@@ -277,65 +261,19 @@
         text-decoration: none;
         font-size: 30px;
     }
-
+    
     .nav-new i {
         font-size: 30px;
         display: block;
         margin-bottom: -2px;
         color: white;
     }
-
+    
     .nav-new p {
         margin: 15px 0 0;
         font-size: 0.85rem;
         color: #1e3a8a;
     }
-
-    /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-    /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-    /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-    /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
 
     @media (min-width: 768px) {
         body {
@@ -352,42 +290,21 @@
         position: relative;
     }
 
-    .header .header-name {
-        text-decoration: none;
-        color: #f9fafb;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
     .agent-card {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         background-color: #ffffff;
         padding: 10px 12px;
         border-radius: 10px;
         box-shadow: 0 7px 11px rgba(0, 0, 0, 0.09);
         margin-bottom: 10px;
+        cursor: pointer;
     }
 
-    .agent-info {
-        flex: 1;
-        margin-left: 10px;
-    }
-
-    .agent-status {
-        font-size: 0.85rem;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-
-    .agent-status.active {
-        color: #16a34a;
-        /* hijau */
-    }
-
-    .agent-status.inactive {
-        color: #dc2626;
-        /* merah */
+    .agent-card-content {
+        display: flex;
+        align-items: center;
     }
 
     .avatar {
@@ -413,14 +330,11 @@
         font-size: 13px;
         color: #6b7280;
     }
-    .agent-info .location {
-        font-size: 13px;
-        color: #6b7280;
-    }
+
     .icon-btn {
         font-size: 24px;
         cursor: pointer;
-        color: #1d0c80;
+        color: #f9fafb;
         padding: 6px;
         border-radius: 6px;
         transition: background 0.2s;
@@ -608,6 +522,47 @@
         color: #333;
         font-size: 0.85rem;
     }
+
+    /* New/Filter button styles */
+    .agent-header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+        gap: 10px;
+        position: relative;
+    }
+
+    .new-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background-color: #1e3a8a;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+
+    .new-btn:hover {
+        background-color: #15295c;
+    }
+
+    /* New CSS for action icons */
+    .action-icons {
+        display: flex;
+        gap: 12px;
+    }
+
+    .action-icons i {
+        font-size: 1.2rem;
+        color: #6b7280;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -615,10 +570,10 @@
         <div class="header">
             <span class="header-name" id="headerTitle" onclick="handleBack()">
                 <i class="fas fa-arrow-left"></i>
-                <span style="margin-left: 16px;">My Agent</span>
+                <span style="margin-left: 16px;">list Agent</span>
             </span>
             <div class="menu-icon-group">
-                <a href="../spv/inbox.html" class="menu-icon">
+                <a href="../Atm/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -629,15 +584,15 @@
                         <h5 class="agent-role">SPV</h5>
                     </div>
                     <hr />
-                    <a href="#">
+                    <a href="../Atm/atmprofile.html">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../spv/agent-rules.html">
+                    <a href="../Atm/atm-rules.html">
                         <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
+                        <span>Atm Rules</span>
                     </a>
-                    <a href="#">
+                    <a href="../Atm/faq.html">
                         <i class="fas fa-question-circle"></i>
                         <span>FAQ</span>
                     </a>
@@ -651,7 +606,7 @@
         </div>
 
         <div class="agent-list" id="agentList" style="padding: 1rem;">
-            <div class="agent-header" style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <div class="agent-header">
                 <i class="fas fa-filter icon-btn" title="Filter" onclick="toggleFilter()"></i>
                 <div id="filterSidebar" class="filter-sidebar">
                     <div class="filter-header">
@@ -661,113 +616,27 @@
                         </div>
                         <span class="close-btn" onclick="toggleFilter()">&times;</span>
                     </div>
-
                     <div class="filter-content">
-                        <label for="penjualan">Penjualan Agent</label>
-                        <input type="number" id="penjualanAgent" name="penjualanAgent" placeholder="Contoh: 5" />
+                        <label for="filter-nama">nama agent</label>
+                        <input type="text" id="filter-nama" name="nama" placeholder="nama" oninput="filterAgents()" />
 
-                        <label for="jumlahPolicy">Jumlah Policy Terjual</label>
-                        <input type="number" id="jumlahPolicy" name="jumlahPolicy" placeholder="Contoh: 10" />
+                        <label for="filter-sales">Penjualan</label>
+                        <select id="filter-sales" onchange="filterAgents()">
+                            <option value="">None</option>
+                            <option value="asc">Terendah</option>
+                            <option value="desc">Tertinggi</option>
+                        </select>
 
-                        <label for="premiTertinggi">Premi Tertinggi</label>
-                        <input type="number" id="premiTertinggi" name="premiTertinggi" placeholder="Contoh: 1000000" />
+                        <label for="filter-successful-sales">Penjualan Berhasil</label>
+                        <select id="filter-successful-sales" onchange="filterAgents()">
+                            <option value="">None</option>
+                            <option value="asc">Terendah</option>
+                            <option value="desc">Tertinggi</option>
+                        </select>
                     </div>
                 </div>
-
             </div>
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Ahmad Yani 1" data-gender="male"
-                data-status="active">
-
-                <div class="avatar"><i class="fas fa-user"></i></div>
-                <div class="agent-info">
-                    <div class="name">Falah</div>
-                    <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    <div class="location">
-                        <i class="bi bi-geo-alt"></i>
-                        <span>Jl. Ahmad Yani 1</span>
-                    </div>
-                </div>
-
-                <!-- Label Status -->
-                <div class="agent-status">Active</div>
             </div>
-
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Merdeka 1" data-gender="male"
-                data-status="active">
-
-                <div class="avatar"><i class="fas fa-user"></i></div>
-                <div class="agent-info">
-                    <div class="name">Falah</div>
-                    <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    <div class="location">
-                        <i class="bi bi-geo-alt"></i>
-                        <span>Jl. Merdeka 1</span>
-                    </div>
-                </div>
-
-                <!-- Label Status -->
-                <div class="agent-status">Active</div>
-            </div>
-
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Mc Tavis" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. TB Simatupang" data-gender="male"
-                data-status="active">
-
-                <div class="avatar"><i class="fas fa-user"></i></div>
-                <div class="agent-info">
-                    <div class="name">Mc Tavis</div>
-                    <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    <div class="location">
-                        <i class="bi bi-geo-alt"></i>
-                        <span>Jl. TB Simatupang</span>
-                    </div>
-                </div>
-
-                <!-- Label Status -->
-                <div class="agent-status">Active</div>
-            </div>
-
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Imam Bonjol 1"
-                data-gender="male" data-status="active">
-
-                <div class="avatar"><i class="fas fa-user"></i></div>
-                <div class="agent-info">
-                    <div class="name">Rough</div>
-                    <div class="sales">3 of 5 Sales | Rp500.000</div>
-                    <div class="location">
-                        <i class="bi bi-geo-alt"></i>
-                        <span>Jl. Imam Bonjol 1</span>
-                    </div>
-                </div>
-
-                <!-- Label Status -->
-                <div class="agent-status">Active</div>
-            </div>
-
-            <div class="agent-card" onclick="showAgentProfile(this)" data-name="Falah" data-id="F123"
-                data-email="falah@example.com" data-phone="08123456789" data-address="Jl. Kuala Lumpur 1"
-                data-gender="male" data-status="inactive">
-
-                <div class="avatar"><i class="fas fa-user"></i></div>
-
-                <div class="agent-info">
-                    <div class="name">Trevor</div>
-                    <div class="sales">1 of 5 Sales | Rp500.000</div>
-
-                    <!-- Label Lokasi -->
-                    <div class="location">
-                        <i class="bi bi-geo-alt"></i>
-                        <span>Jl. Kuala Lumpur 1</span>
-                    </div>
-                </div>
-
-                <!-- Label Status -->
-                <div class="agent-status">Inactive</div>
-            </div>
-        </div>
 
         <div class="agent-profile" id="agentProfile" style="display: none;">
             <div class="profile">
@@ -778,80 +647,75 @@
                     </div>
                     <div class="meta">
                         <div class="contact-line">
-                            <i class="bi bi-telephone"></i>
+                            <i class="fas fa-phone-alt"></i>
                             <span id="profilePhone"></span>
                             <span class="chat-icon" onclick="toggleChat()">
-                                <i class="bi bi-chat"></i>
+                                <i class="fas fa-comment"></i>
                             </span>
                         </div>
                         <div>
-                            <i class="bi bi-envelope"></i>
+                            <i class="fas fa-envelope"></i>
                             <span id="profileEmail"></span>
                         </div>
                         <div>
-                            <i class="bi bi-geo-alt"></i>
+                            <i class="fas fa-map-marker-alt"></i>
                             <span id="profileAddress"></span>
                         </div>
-
                     </div>
                 </div>
             </div>
-
             <div class="biodata">
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="bi bi-cake icon"></i>
+                        <i class="fas fa-birthday-cake icon"></i>
                         <div>
                             <span class="label">Birthday</span>
                             <span class="value">12 Jan 1995</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="bi bi-heart icon"></i>
+                        <i class="fas fa-heart icon"></i>
                         <div>
                             <span class="label">Marital Status</span>
                             <span class="value">Single</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="bi bi-wallet2 icon"></i>
+                        <i class="fas fa-wallet icon"></i>
                         <div>
                             <span class="label">Income Range</span>
                             <span class="value">5 - 10 juta</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="bi bi-graph-down icon"></i>
+                        <i class="fas fa-chart-line icon"></i>
                         <div>
                             <span class="label">Avg Transaction</span>
                             <span class="value">Rp 1.250.000</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="bi bi-person-badge icon"></i>
+                        <i class="fas fa-id-badge icon"></i>
                         <div>
                             <span class="label">Account Type</span>
                             <span class="value">Kredit</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="biodata-row">
                     <div class="biodata-item">
-                        <i class="bi bi-calendar-plus icon"></i>
+                        <i class="fas fa-calendar-plus icon"></i>
                         <div>
                             <span class="label">Join At</span>
                             <span class="value">03 Juli 2020</span>
                         </div>
                     </div>
                     <div class="biodata-item">
-                        <i class="bi bi-clock icon"></i>
+                        <i class="fas fa-clock icon"></i>
                         <div>
                             <span class="label">Duration</span>
                             <span class="value">5 years 2 months</span>
@@ -861,37 +725,20 @@
             </div>
         </div>
 
-
-
-
         <div class="bottom-nav">
             <div class="nav-wrapper">
-                <div class="nav-home">
-                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+                <div>
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-
-                <div class="nav-history">
-                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
                 <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                <div>
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
-
             </div>
-
             <div class="nav-new">
-                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
@@ -899,6 +746,77 @@
 
 
     <script>
+        const agentsData = [
+            { name: 'Falah', id: 'F123', email: 'falah@example.com', phone: '08123456789', address: 'Jl. Merdeka 1', gender: 'male', totalSales: 500000, successfulSales: 3, totalTargets: 5 },
+            { name: 'Budi', id: 'B321', email: 'budi@mail.com', phone: '08198765432', address: 'Jl. Mawar 2', gender: 'male', totalSales: 500000, successfulSales: 2, totalTargets: 5 },
+            { name: 'Dewi', id: 'D567', email: 'dewi@mail.com', phone: '0822334455', address: 'Jl. Anggrek 3', gender: 'female', totalSales: 500000, successfulSales: 5, totalTargets: 5 },
+            { name: 'Sari', id: 'S777', email: 'sari@mail.com', phone: '0855556677', address: 'Jl. Melati 4', gender: 'female', totalSales: 500000, successfulSales: 1, totalTargets: 5 },
+            { name: 'Agus', id: 'A888', email: 'agus@mail.com', phone: '0812333444', address: 'Jl. Kenanga 5', gender: 'male', totalSales: 500000, successfulSales: 3, totalTargets: 5 }
+        ];
+
+        function renderAgents(agents) {
+            const agentListContainer = document.getElementById('agentList');
+            // Clear existing content except for the header
+            const agentHeader = agentListContainer.querySelector('.agent-header');
+            agentListContainer.innerHTML = '';
+            agentListContainer.appendChild(agentHeader);
+
+            agents.forEach(agent => {
+                const agentCard = document.createElement('div');
+                agentCard.className = 'agent-card';
+                agentCard.onclick = () => showAgentProfile(agent);
+                agentCard.setAttribute('data-name', agent.name);
+                agentCard.setAttribute('data-id', agent.id);
+                agentCard.setAttribute('data-email', agent.email);
+                agentCard.setAttribute('data-phone', agent.phone);
+                agentCard.setAttribute('data-address', agent.address);
+                agentCard.setAttribute('data-gender', agent.gender);
+                agentCard.innerHTML = `
+                    <div class="agent-card-content">
+                        <div class="avatar"><i class="fas fa-user"></i></div>
+                        <div class="agent-info">
+                            <div class="name">${agent.name}</div>
+                            <div class="sales">${agent.successfulSales} of ${agent.totalTargets} Sales | Rp${agent.totalSales.toLocaleString('id-ID')}</div>
+                        </div>
+                    </div>
+                    <div class="action-icons">
+                        <i class="fas fa-edit" title="Edit" onclick="event.stopPropagation(); editAgent('${agent.id}')"></i>
+                        <i class="fas fa-trash-alt" title="Delete" onclick="event.stopPropagation(); deleteAgent('${agent.id}')"></i>
+                    </div>
+                `;
+                agentListContainer.appendChild(agentCard);
+            });
+        }
+
+        function filterAgents() {
+            const nameFilter = document.getElementById('filter-nama').value.toLowerCase();
+            const salesSort = document.getElementById('filter-sales').value;
+            const successfulSalesSort = document.getElementById('filter-successful-sales').value;
+
+            let filteredAgents = [...agentsData];
+
+            // Filter by name
+            if (nameFilter) {
+                filteredAgents = filteredAgents.filter(agent => agent.name.toLowerCase().includes(nameFilter));
+            }
+
+            // Sort by total sales
+            if (salesSort === 'asc') {
+                filteredAgents.sort((a, b) => a.totalSales - b.totalSales);
+            } else if (salesSort === 'desc') {
+                filteredAgents.sort((a, b) => b.totalSales - a.totalSales);
+            }
+
+            // Sort by successful sales
+            if (successfulSalesSort === 'asc') {
+                filteredAgents.sort((a, b) => a.successfulSales - b.successfulSales);
+            } else if (successfulSalesSort === 'desc') {
+                filteredAgents.sort((a, b) => b.successfulSales - a.successfulSales);
+            }
+
+            renderAgents(filteredAgents);
+        }
+
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -915,7 +833,6 @@
 
         function toggleFilter() {
             const sidebar = document.getElementById('filterSidebar');
-            //  sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
             sidebar.classList.toggle('show');
         }
 
@@ -940,46 +857,35 @@
                 document.getElementById('agentList').style.display = 'block';
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My Agent</span>`;
+                renderAgents(agentsData);
             }
         });
 
-        function showAgentProfile(card) {
+        function showAgentProfile(agent) {
             sessionStorage.setItem('currentView', 'detail');
-
 
             document.getElementById('agentList').style.display = 'none';
             document.getElementById('agentProfile').style.display = 'block';
 
-
-            const name = card.getAttribute('data-name');
-            const id = card.getAttribute('data-id');
-            const email = card.getAttribute('data-email');
-            const phone = card.getAttribute('data-phone');
-            const address = card.getAttribute('data-address');
-            const gender = card.getAttribute('data-gender');
-
-            document.getElementById('profileName').innerText = name;
-            // document.getElementById('profileId').innerText = 'ID: ' + id;
-            document.getElementById('profileEmail').innerText = email;
-            document.getElementById('profilePhone').innerText = phone;
-            document.getElementById('profileAddress').innerText = address;
+            document.getElementById('profileName').innerText = agent.name;
+            document.getElementById('profileEmail').innerText = agent.email;
+            document.getElementById('profilePhone').innerText = agent.phone;
+            document.getElementById('profileAddress').innerText = agent.address;
 
             const genderIcon = document.getElementById('genderIcon');
-            if (gender === 'male') {
-                genderIcon.className = 'bi bi-gender-male gender-icon';
+            if (agent.gender === 'male') {
+                genderIcon.className = 'fas fa-mars gender-icon';
                 genderIcon.title = 'Male';
-            } else if (gender === 'female') {
-                genderIcon.className = 'bi bi-gender-female gender-icon';
+            } else if (agent.gender === 'female') {
+                genderIcon.className = 'fas fa-venus gender-icon';
                 genderIcon.title = 'Female';
             } else {
                 genderIcon.className = 'gender-icon';
                 genderIcon.title = '';
             }
 
-
             document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Agent Detail</span>`;
         }
-
 
         function handleBack() {
             const current = sessionStorage.getItem('currentView') || 'list';
@@ -989,21 +895,27 @@
                 document.getElementById('agentProfile').style.display = 'none';
                 document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">My Agent</span>`;
                 sessionStorage.setItem('currentView', 'list');
+                filterAgents(); // Re-render the list to apply any existing filters
             } else {
-                window.location.href = "../spv/home.html";
+                window.location.href = "../Atm/manajemenPengguna.html";
             }
         }
-        document.querySelectorAll('.agent-card').forEach(card => {
-            const status = card.getAttribute('data-status');
-            const statusLabel = card.querySelector('.agent-status');
 
-            if (status === 'active') {
-                statusLabel.textContent = 'Active';
-                statusLabel.classList.add('active');
-            } else {
-                statusLabel.textContent = 'Inactive';
-                statusLabel.classList.add('inactive');
+        function editAgent(agentId) {
+            alert('Mengedit agen dengan ID: ' + agentId);
+            // Tambahkan logika untuk mengedit agen di sini
+        }
+
+        function deleteAgent(agentId) {
+            if (confirm('Apakah Anda yakin ingin menghapus agen ini?')) {
+                alert('Menghapus agen dengan ID: ' + agentId);
+                // Tambahkan logika untuk menghapus agen di sini
             }
+        }
+
+        // Initial render of agents on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAgents(agentsData);
         });
 
     </script>

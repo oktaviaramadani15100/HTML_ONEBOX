@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Rules</title>
+    <title>Agent Rules ATM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * {
@@ -69,94 +69,12 @@
             margin-bottom: 1rem;
         }
 
-        .agent-rules {
-            font-family: 'Inter', sans-serif;
-            padding: 16px;
-        }
-
-
-        .title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .icon-tabs {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 12px;
-            /* border-bottom: 1px solid #9a9ea5; */
-            padding-bottom: 10px;
-        }
-
-        .icon-tabs i {
-            font-size: 20px;
-            color: #1e3a8a;
-            padding: 8px;
-            /* border-radius: 50%;
-            background-color: #f2f2f2;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out; */
-        }
-
-
-        .rules-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .rule-item {
-            border-radius: 8px;
-
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-                        0 1px 2px rgba(0,0,0,0.06);
-            margin-bottom: 10px;
-            padding: 1rem;
-
-        }
-
-        .rule-title {
-            font-size: 1rem;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        .rule-date {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin: 4px 0 0 0;
-            display: flex;
-            gap: 6px;
-        }
-
-        .rule-wrapper {
-            margin-top: 12px;
-        }
-
-        .rule-paragraph {
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-                        0 1px 2px rgba(0,0,0,0.06);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            text-align: justify;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            border-left: rgba(8, 103, 227, 0.842) solid 3px;
-        }
-
         .bottom-nav {
             position: sticky;
-            /* position: relative; */
             bottom: -1px;
             left: 0;
             right: 0;
             border-top: 1px solid #ccc;
-            /* display: flex; */
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
@@ -191,44 +109,15 @@
             flex: 0.5;
         }
 
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
         .nav-wrapper i {
             font-size: 1.5rem;
             margin-bottom: 4px;
         }
 
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
-
         .nav-wrapper p {
             margin-top: 4px;
             font-size: 0.85rem;
         }
-
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        } */
 
         .nav-new {
             justify-content: center;
@@ -275,53 +164,6 @@
             font-size: 0.85rem;
             color: #1e3a8a;
         }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
-
 
         .dropdown {
             display: none;
@@ -378,7 +220,6 @@
 
         a+a {
             margin-top: 4px;
-            /* jarak antar link */
         }
 
         .dropdown a:hover {
@@ -396,7 +237,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            /* margin-left: 1rem; */
         }
 
         .dropdown hr {
@@ -432,45 +272,110 @@
             color: #f9fafb;
             font-size: 20px;
             font-weight: bold;
+            display: flex;
+            align-items: center;
         }
 
-        /* .menu-icon-group i {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        } */
+        .header .header-name i {
+            margin-right: 16px;
+        }
+
+        .spv-rules {
+            font-family: 'Inter', sans-serif;
+            padding: 16px;
+        }
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .icon-tabs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            border-bottom: 1px solid #9a9ea5;
+            padding-bottom: 10px;
+        }
+
+        .icon-tabs i {
+            font-size: 20px;
+            color: #1e3a8a;
+            padding: 8px;
+        }
+
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .rule-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .rule-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .rule-date {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin: 4px 0 0 0;
+        }
+
+        .rule-wrapper {
+            margin-top: 12px;
+        }
+
+        .rule-paragraph {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
     </style>
 </head>
 
 <body>
-    
     <div class="wrapper">
-        <!-- Header -->
         <div class="header">
-            <div class="header-name" style="cursor: pointer;" onclick="resetRules()">
+            <a href="../Atm/homeeeee.html" class="header-name">
                 <i class="fas fa-arrow-left"></i>
-                <span style="margin-left: 16px;">Agent Rules</span>
-            </div>
+                <span>ATM Rules</span>
+            </a>
 
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
+                <a href="../Atm/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
                     <div class="dropdown-header">
                         <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
+                        <h4 class="welcome-text">ATM Agent</h4>
+                        <h5 class="agent-role">ATM</h5>
                     </div>
                     <hr />
-                    <a href="#">
+                    <a href="../Atm/atmprofile.html">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-                    <a href="../agent/agent-rules.html">
+                    <a href="../Atm/atm-rules.html">
                         <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
+                        <span>Atm Rules</span>
                     </a>
                     <a href="#">
                         <i class="fas fa-question-circle"></i>
@@ -486,9 +391,8 @@
             </div>
         </div>
 
-        <!-- Content -->
         <div class="content">
-            <div class="agent-rules">
+            <div class="spv-rules">
                 <div class="icon-tabs">
                     <i class="fas fa-file-alt active"></i>
                     <i class="fas fa-phone"></i>
@@ -498,94 +402,60 @@
                 </div>
 
                 <div class="rules-list" id="rulesList">
-                    <div class="rule-item" onclick="showDetails('Kode Etik Agent', '22 Jul 2025', 
-                        `Sebagai Agent, Anda wajib menjaga integritas, bersikap profesional, dan menjaga kerahasiaan seluruh data nasabah. Hindari penyalahgunaan informasi, serta jaga reputasi perusahaan dalam setiap interaksi.`)
-                        ">
-                        <p class="rule-title">Kode Etik Agent</p>
-                        <p class="rule-date">
-                           <i class="fa-solid fa-calendar-days"></i>
-                            22 Jul 2025
-                        </p>    
+                    <div class="rule-item"
+                        onclick="showDetails('Prosedur Penarikan Tunai', '22 Jul 2025', 
+                        `Pastikan semua penarikan tunai diverifikasi dengan benar, mencakup identitas pelanggan, ketersediaan dana, dan batas penarikan. Setiap transaksi harus dicatat secara akurat, termasuk nomor referensi dan jumlah. Jangan pernah memproses penarikan tanpa identifikasi yang valid.`)">
+                        <p class="rule-title">Prosedur Penarikan Tunai</p>
+                        <p class="rule-date">22 Jul 2025</p>
                     </div>
 
-                    <div class="rule-item" onclick="showDetails('Aturan Penanganan Nasabah', '20 Jul 2025', 
-                        `Jika menghadapi kendala dengan nasabah atau terjadi kasus khusus, segera hubungi tim pendukung melalui aplikasi resmi. Jangan mengambil keputusan sendiri yang berpotensi menyalahi prosedur.`)
-                        ">
-                        <p class="rule-title">Aturan Penanganan Nasabah</p>
-                        <p class="rule-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            20 Jul 2025
-                        </p>
+                    <div class="rule-item" onclick="showDetails('Aturan Penyetoran Dana', '20 Jul 2025', 
+                        `Setiap setoran tunai atau cek harus dihitung ulang di depan nasabah. Pastikan formulir setoran diisi lengkap dan tanda tangan diverifikasi. Simpan salinan bukti setoran dan serahkan salinan asli kepada nasabah. Laporkan setiap ketidaksesuaian jumlah dana segera kepada supervisor.`)">
+                        <p class="rule-title">Aturan Penyetoran Dana</p>
+                        <p class="rule-date">20 Jul 2025</p>
                     </div>
 
-                    <div class="rule-item" onclick="showDetails('Panduan Komunikasi Tim', '18 Jul 2025', 
-                        `Hanya tawarkan produk yang terdaftar dan aktif. Sampaikan informasi secara akurat dan transparan. Ikuti alur komunikasi sesuai SOP, dan pastikan nasabah memberikan persetujuan dengan jelas sebelum melanjutkan proses.`)
-                        ">
-                        <p class="rule-title">Panduan Komunikasi Tim</p>
-                        <p class="rule-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            18 Jul 2025
-                        </p>
+                    <div class="rule-item" onclick="showDetails('Panduan Verifikasi Identitas', '18 Jul 2025', 
+                        `Untuk transaksi sensitif seperti penarikan besar atau pembukaan rekening, verifikasi identitas nasabah secara ketat. Minta KTP asli atau dokumen identifikasi lain yang sah. Gunakan alat verifikasi identitas yang disediakan dan laporkan segera jika ada dokumen yang mencurigakan.`)">
+                        <p class="rule-title">Panduan Verifikasi Identitas</p>
+                        <p class="rule-date">18 Jul 2025</p>
                     </div>
 
-                    <div class="rule-item" onclick="showDetails('Kebijakan Laporan Harian Agen', '17 Jul 2025', 
-                        `Setiap agent wajib mengisi laporan harian yang mencakup aktivitas kerja, jumlah prospek, hasil closing, dan hambatan yang ditemui. Laporan harus dikirim tepat waktu setiap hari. Supervisor akan melakukan pengecekan dan menyusun evaluasi mingguan berdasarkan data tersebut.`)
-                        ">
-                        <p class="rule-title">Kebijakan Laporan Harian Agen</p>
-                        <p class="rule-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            17 Jul 2025
-                        </p>    
+                    <div class="rule-item" onclick="showDetails('Protokol Keamanan ATM', '17 Jul 2025', 
+                        `Jaga kerahasiaan PIN dan informasi pribadi nasabah. Jangan pernah membagikan password atau akses sistem kepada orang lain. Pastikan area kerja Anda aman dan terlindungi dari orang yang tidak berkepentingan. Ikuti protokol keamanan untuk penanganan uang tunai, termasuk saat mengisi ulang mesin.`)">
+                        <p class="rule-title">Protokol Keamanan ATM</p>
+                        <p class="rule-date">17 Jul 2025</p>
                     </div>
 
-                    <div class="rule-item" onclick="showDetails('Standar Training Agen Baru', '15 Jul 2025', 
-                        `Sebelum mulai bekerja, agent baru wajib mengikuti pelatihan dasar yang mencakup pemahaman produk, teknik komunikasi, penggunaan sistem, dan etika kerja. Setelah pelatihan, dilakukan evaluasi untuk memastikan kesiapan kerja, serta pendampingan minimal selama 1 minggu pertama.`)
-                        ">
-                        <p class="rule-title">Standar Training Agen Baru</p>
-                        <p class="rule-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            15 Jul 2025
-                        </p>
+                    <div class="rule-item" onclick="showDetails('Penanganan Keluhan Nasabah', '15 Jul 2025',
+                        `Tangani setiap keluhan nasabah dengan sabar dan profesional. Dengarkan keluhan mereka dengan seksama, catat semua detail, dan berikan solusi yang jelas. Jika masalah tidak dapat diselesaikan secara langsung, eskalasikan ke petugas yang berwenang dan pastikan nasabah mendapatkan tindak lanjut.`)">
+                        <p class="rule-title">Penanganan Keluhan Nasabah</p>
+                        <p class="rule-date">15 Jul 2025</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+                    <a href="../Atm/homeeeee.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-
-                <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
                 <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
                 <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                    <a href="../Atm/appoitment.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
 
             <div class="nav-new">
-                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <a href="../Atm/newagent.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>
             </div>
         </div>
     </div>
 </body>
-
-</html>
 
 <script>
     function toggleDropdown() {
@@ -630,9 +500,6 @@
 
         container.appendChild(wrapper);
     }
-
-
-    function resetRules() {
-        document.getElementById('rulesList').innerHTML = rulesBackup;
-    }
 </script>
+
+</html>
