@@ -21,20 +21,28 @@
         }
 
         .wrapper {
-            width: 100%;
-            max-width: 400px;
-            background-color: white;
-            min-height: 100vh;
-            position: relative;
+        width: 100%;
+        max-width: 400px;
+        background-color: white;
+        min-height: 130vh;
+        position: relative;
+        padding-top: 4rem; 
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.7rem 1rem;
-            height: 4rem;
-            background: linear-gradient(70deg, #1E3A8A 0%, #2563EB 20%, #1E40AF 100%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.7rem 1rem;
+        height: 4rem;
+        background: linear-gradient(70deg, #1E3A8A 0%, #2563EB 20%, #1E40AF 100%);
+        position: fixed;         
+        top: 0;                  
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;        
+        z-index: 200;            
         }
 
         .header-left {
@@ -48,7 +56,7 @@
             align-items: center;
             gap: 6px;
             background: white;
-            padding: 5px 12px;
+            padding: 5px 10px;
             border-radius: 20px;
             font-size: 10px;
             font-weight: 700;
@@ -98,7 +106,7 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 12px;
+            gap: 7px;
             padding: 10px 16px;
             position: relative;
 
@@ -107,9 +115,8 @@
         .menu-icon-group i {
             color: #f9fafb;
             margin-left: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
-
 
         .dropdown {
             display: none;
@@ -389,112 +396,113 @@
         }
 
         .bottom-nav {
-            position: sticky;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #ccc;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 0;
-            font-size: 11px;
-            z-index: 10;
-            margin-top: 3rem;
-            background: white;
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;
+        border-top: 1px solid #ccc;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 10px 0;
+        font-size: 11px;
+        z-index: 100;
+        background: white;
         }
 
         .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         }
 
         .nav-wrapper i {
-            color: #1e3a8a;
+        color: #1e3a8a;
         }
 
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+        .nav-wrapper > div {
+        flex: 1;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #1e3a8a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
         }
 
         .nav-spacer {
-            flex: 0.5;
+        flex: 0.5;
         }
 
         .nav-wrapper i {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
+        font-size: 1.2rem;
+        margin-bottom: 2px;
         }
 
         .nav-wrapper p {
-            margin-top: 2px;
-            font-weight: 600;
-            font-size: 0.60rem;
+        margin-top: 2px;
+        font-weight: 600;
+        font-size: 0.60rem;
         }
 
         .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
+        text-decoration: none;
+        color: inherit;
         }
 
         .nav-new {
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
-            position: absolute;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            top: -22px;
-            left: 51%;
-            transform: translateX(-50%);
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        text-decoration: none;
+        box-sizing: border-box;
+        border: none;
+        padding: 0;
+        transition: none;
+        touch-action: manipulation;
+        position: absolute;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        top: -22px;
+        left: 51%;
+        transform: translateX(-50%);
         }
 
         .plus-btn {
-            background-color: #1e3a8a;
-            border-radius: 50%;
-            width: 53px;
-            height: 53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 30px;
+        background-color: #1e3a8a;
+        border-radius: 50%;
+        width: 53px;
+        height: 53px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        font-size: 30px;
         }
 
         .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
+        font-size: 30px;
+        display: block;
+        margin-bottom: -2px;
+        color: white;
         }
 
         .nav-new p {
-            font-weight: 600;
-            margin: 8px 0 0;
-            font-size: 0.60rem;
-            color: #1e3a8a;
+        font-weight: 600;
+        margin: 8px 0 0;
+        font-size: 0.60rem;
+        color: #1e3a8a;
         }
 
-        @media screen and (min-width: 768px) {
-            body {
-                background-color: #e5e5e5;
-            }
+        @media (min-width: 768px) {
+        body {
+            background: #d1d5db;
+        }
         }
 
         .read-more {
@@ -533,6 +541,10 @@
             <div class="menu-icon-group">
                 <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
+                </a>
+
+                <a href="../agent/home.html" class="menu-icon" title="Notifications">
+                    <i class="fas fa-bell"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
