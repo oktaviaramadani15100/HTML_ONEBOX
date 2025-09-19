@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campaign</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background-color: #1e3a8a;
+            z-index: 100;
+            height: 4rem;
+        }
+
+        .header img {
+            height: 53px;
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            width: 170px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease-in-out;
+            padding: 10px 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        .dropdown-header p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .dropdown-header .welcome-text {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .agent-role {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #1e3a8a;
+            transition: background-color 0.25s, color 0.25s;
+            border-left: 4px solid transparent;
+            margin-left: 1rem;
+        }
+
+        a+a {
+            margin-top: 4px;
+            /* jarak antar link */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f4ff;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .dropdown i {
+            font-size: 16px;
+            color: #1e3a8a;
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown span {
+            flex: 1;
+            font-weight: 500;
+            /* margin-left: 1rem; */
+        }
+
+        .dropdown hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-download {
+            position: relative;
+            display: inline-block;
+        }
+
+        .download-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 140px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Class untuk menampilkan dropdown */
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 90px;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            margin-top: 12px;
+            /* border-radius: 8px; */
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            min-width: 360px;
+            border-spacing: 0;
+        }
+
+        thead {
+            position: sticky;
+            z-index: 2;
+            background: #1e3a8a;
+            color: white;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* thead th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        thead th:last-child {
+            border-top-right-radius: 12px;
+        } */
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f2fe;
+            transition: background-color 0.3s ease;
+        }
+
+        td[onclick] {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        td[onclick]:hover {
+            text-decoration: underline;
+            color: #1e40af;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .detail-campaign {
+            display: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #1e3a8a;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group.full {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Remove focus outline for readonly */
+        input[readonly]:focus,
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #d1d5db;
+        }
+
+        /* Two column layout on medium+ screens */
+        @media (min-width: 480px) {
+            .form-group {
+                flex: 1 1 48%;
+            }
+
+            .form-group.full {
+                flex: 1 1 100%;
+            }
+        }
+
+        .detail-product {
+            padding: 16px;
+
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .section-title-campaign {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .section-header h2 {
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fdfdfd;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        /* Responsive: 2 columns jika layar cukup lebar */
+        @media (min-width: 480px) {
+            .form-row .form-group {
+                flex: 1 1 48%;
+            }
+        }
+
+
+        .bottom-nav {
+            position: sticky;
+            /* position: relative; */
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        } */
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        /* 
+        .bottom-nav div:hover {
+            transform: scale(1.05);
+        } */
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* .bottom-nav i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: inherit;
+        } */
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        /* .nav-call {
+            margin-left: 7rem;
+        } */
+
+        /* .nav-home {
+            margin-left: 3rem;
+        } */
+
+        /* .bottom-nav div {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: -2px;
+            color: white;
+        } */
+
+
+        /* .nav-new p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        .nav-home,
+        .nav-call,
+        .nav-agen {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav div {
+                font-size: 1rem;
+            }
+
+            .bottom-nav i {
+                font-size: 1.7rem;
+            }
+        } */
+
+
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 1rem;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            text-align: center;
+            margin-left: 1rem;
+        }
+
+        .add-btn:hover {
+            background-color: #3b4cc0;
+        }
+
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            position: relative;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* .menu-icon-group i {
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        } */
+
+        input[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        textarea[readonly] {
+            resize: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        textarea[readonly]:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background-color: #1e3a8a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: -1rem;
+        }
+
+        .download-btn i {
+            font-size: 1rem;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .add-btn {
+            background-color: #1e3a8a;
+            color: #fff;
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: background 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background-color: #3749bb;
+        }
+
+        .add-campaign {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .form-section-campaign h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .form-grid-campaign {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: span 1;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-size: 0.9rem;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            /* full lebar parent */
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .required-star {
+            color: red;
+        }
+
+        .button-group-sales {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .save-button-sales {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .save-button-sales:hover {
+            background-color: #3749bb;
+        }
+
+        .close-button-sales {
+            background-color: #e5e5e5;
+            color: #333;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-group select {
+            font-size: 0.9rem;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #fff;
+            appearance: none;
+            background-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Hover & focus effect */
+        .form-group select:hover {
+            border-color: #888;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="header">
+            <span class="header-name" id="headerTitle" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campagin</span>
+            </span>
+
+            <div class="menu-icon-group">
+                <a href="{{ url('Bancassurance/inbox') }}" class="menu-icon" style=" color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" style=" color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.2rem;" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-header">
+                        <h3 class="welcome-text">Welcome</h3>
+                        <h4 class="welcome-text">{{ user ? user.Name : 'Guest' }}</h4>
+                        <h5 class="agent-role">{{ role ? role.Name : 'Guest' }}</h5>
+                    </div>
+                    <hr />
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="{{ url('Bancassurance/agentRules') }}">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Agent Rules</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <hr>
+                    <a href="{{ url('Bancassurance/logout') }}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            
+            <div class="table-wrapper" id="campaignList">
+            </div>
+
+            {% if user and user.Name == 'Spv' %}
+            <div class="add-campaign" id="add-campaign" style="display: none;">
+                <form>
+                    <div class="form-section-campaign">
+                        <div class="form-grid-campaign">
+                            <div class="form-group">
+                                <label for="campaign-name">Campaign Name <span class="required-star">*</span></label>
+                                <input type="text" id="campaignName" name="campaign-name" placeholder="Fill Name">
+                            </div>
+                            <div class="form-group full">
+                                <label for="description">Description</label>
+                                <textarea id="description" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="typeCampaign">Type <span class="required-star">*</span></label>
+                                <select id="campaignType" name="typeCampaign" class="form-control">
+                                    <option value="">-- Pilih Type --</option>
+                                    {% for type in typeCampaign %}
+                                    <option value="{{ type.Id }}">{{ type.Description }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="periodeCampaign">Periode <span class="required-star">*</span></label>
+                                <input type="text" id="periodeCampaign" name="periodeCampaign" class="form-control" />
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="uploadTarget">Upload Target <span class="required-star">*</span></label>
+                                <input type="text" id="uploadTarget" name="uploadTarget">
+                            </div> -->
+                            <div class="form-group">
+                                <label for="productCampaign">Product <span class="required-star">*</span></label>
+                                <select id="productId" name="productCampaign" class="form-control">
+                                    <option value="">-- Pilih Product --</option>
+                                    {% for pro in listProductsales %}
+                                    <option value="{{ pro.Id }}">{{ pro.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alternatifProduct">Alternatif Product</label>
+                                <select id="alternatifProduct" name="alternatifProduct" class="form-control">
+                                    <option value="">-- Pilih Alternatif --</option>
+                                    <!-- <option value="ALT1">Alternatif 1</option>
+                                    <option value="ALT2">Alternatif 2</option> -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mediaCampaign">Media <span class="required-star">*</span></label>
+                                <select id="mediaId" name="mediaCampaign" class="form-control">
+                                    <option value="">-- Pilih Media --</option>
+                                    {% for med in mediaCampaign %}
+                                    <option value="{{ med.Id }}">{{ med.Description }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="callGuide">Call Guide</label>
+                                <textarea id="callGuide" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-group-sales">
+                        <button type="button" onclick="addCampaign()" class="save-button-sales">Save Campaign</button>
+                        <button type="button" onclick="toggleCampaignForm()" class="close-button-sales">Close</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- Detail Campaign -->
+            <div class="detail-campaign" id="detailCampaign" style="display: none;">
+                <!-- <div class="form-group">
+                    <label for="campaignName">Campaign Name</label>
+                    <input type="text" id="campaignName" value="Juli Sehat" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="mediaCampaign">Media</label>
+                    <input type="text" id="mediaCampaign" value="Call" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="product">Product</label>
+                    <input type="text" id="product" value="Orbeets" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="campaignType">Type</label>
+                    <input type="text" id="campaignType" value="Health" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="periode">Periode</label>
+                    <input type="text" id="periode" value="31 Juni - 31 Juli 2025" readonly>
+                </div>
+                <div class="form-group full">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
+                </div> -->
+
+            </div>
+
+
+            <div class="detail-product" id="detailProduct" style="display: none;">
+                <!-- <div class="section-header">
+                    <h2 class="section-title">Product Specification</h2>
+
+                    <div class="dropdown-download">
+                        <button class="download-btn" id="downloadToggle">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <div class="dropdown-content" id="downloadMenu">
+                            <a href="#" onclick="handleDownload('excel')">Excel</a>
+                            <a href="#" onclick="handleDownload('pdf')">PDF</a>
+                            <a href="#" onclick="handleShare()">Share</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="product">Product Name</label>
+                    <input type="text" id="product" value="Orbeets" readonly>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productDescription">Product Description</label>
+                        <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productAlternat">Alternative Product</label>
+                        <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="{{ url('Bancassurance') }}"><i class="fas fa-home"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="{{ url('Bancassurance/history') }}"><i class="fas fa-file-alt"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="{{ url('Bancassurance/call') }}"><i class="fas fa-phone-alt"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="{{ url('Bancassurance/agenda') }}"><i class="fas fa-calendar-alt"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+
+            <div class="nav-new">
+                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const campaignListUrl = "{{ url('campaign/campaignListBanca', {'module':'bancassurance'}) }}";
+
+        fetch(campaignListUrl, {
+            method: "GET",
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+            .then(r => r.text())
+            .then(html => { 
+                var statusEl = document.getElementById("campaignList"); 
+                campaign_insertPartial(statusEl, html);
+            })
+            .catch(err => console.error(err));
+    });
+
+
+    function initDropdown() {
+        const toggleBtn = document.getElementById("downloadToggle");
+        const menu = document.getElementById("downloadMenu");
+
+        if (!toggleBtn || !menu) return;
+
+        toggleBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            menu.classList.toggle("show");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+                menu.classList.remove("show");
+            }
+        });
+    }
+
+
+    async function handleDownload(type) {
+        const productName = document.getElementById('product').value;
+        const productDesc = document.getElementById('productDescription').value;
+        const productAlt = document.getElementById('productAlternat').value;
+        const createDate = document.getElementById('createDate').value;
+
+        const formattedDate = new Date(createDate).toLocaleDateString("id-ID");
+
+        if (type === 'excel') {
+            const wb = new ExcelJS.Workbook();
+            const ws = wb.addWorksheet("Product Info");
+
+            ws.mergeCells("A1:B1");
+            ws.getCell("A1").value = "Product Information Sheet";
+            ws.getCell("A1").font = { bold: true, size: 14 };
+
+            ws.getCell("A2").value = "Generated on:";
+            ws.getCell("B2").value = formattedDate;
+
+            ws.mergeCells("A4:B4");
+            ws.getCell("A4").value = "Detail Product";
+            ws.getCell("A4").font = { bold: true };
+
+            ws.getRow(6).values = ["Field", "Value"];
+            ws.getRow(6).eachCell(cell => {
+                cell.fill = {
+                    type: "pattern",
+                    pattern: "solid",
+                    fgColor: { argb: "4F81BD" }
+                };
+                cell.font = { bold: true, color: { argb: "FFFFFF" } };
+                cell.alignment = { horizontal: "center" };
+                cell.border = {
+                    top: { style: "thin" },
+                    left: { style: "thin" },
+                    bottom: { style: "thin" },
+                    right: { style: "thin" }
+                };
+            });
+
+            const data = [
+                ["Product Name", productName],
+                ["Product Description", productDesc],
+                ["Alternative Product", productAlt],
+            ];
+            data.forEach((row, i) => {
+                ws.addRow(row).eachCell(cell => {
+                    cell.border = {
+                        top: { style: "thin" },
+                        left: { style: "thin" },
+                        bottom: { style: "thin" },
+                        right: { style: "thin" }
+                    };
+                });
+            });
+
+
+            ws.columns.forEach(col => {
+                let max = 0;
+                col.eachCell({ includeEmpty: true }, c => {
+                    max = Math.max(max, (c.value ? c.value.toString().length : 0));
+                });
+                col.width = max + 2;
+            });
+
+            const buf = await wb.xlsx.writeBuffer();
+            saveAs(new Blob([buf]), `${productName}.xlsx`);
+
+        } else if (type === 'pdf') {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF("p", "mm", "a4");
+
+            const img = new Image();
+            img.src = "{{ url('img/banca/my-image.png') }}";
+
+            img.onload = function () {
+                doc.setFillColor(0, 102, 204);
+                doc.rect(0, 0, 210, 30, "F");
+
+                doc.addImage(img, "PNG", 15, 6, 40, 20);
+
+                doc.setFontSize(14);
+                doc.setTextColor(255, 255, 255);
+                doc.text("Formerly Sinarmas MSIG Life", 200, 20, { align: "right" });
+
+                doc.setFontSize(16);
+                doc.setFont("helvetica", "bold");
+                doc.setTextColor(0, 0, 0);
+                doc.text("Product Information", 105, 50, { align: "center" });
+
+                const tableData = [
+                    ["Product Name", productName],
+                    ["Product Description", productDesc],
+                    ["Alternative Product", productAlt]
+                ];
+
+                doc.autoTable({
+                    startY: 65,
+                    head: [["Field", "Value"]],
+                    body: tableData,
+                    styles: {
+                        fontSize: 12,
+                        cellPadding: 6,
+                        valign: "middle"
+                    },
+                    headStyles: {
+                        fillColor: [0, 102, 204],
+                        textColor: 255,
+                        halign: "center",
+                        fontStyle: "bold"
+                    },
+                    columnStyles: {
+                        0: { fontStyle: "bold", halign: "left" }
+                    },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    tableWidth: "auto",
+                    margin: { left: 25, right: 25 }
+                });
+
+                // Save PDF
+                doc.save(`${productName}.pdf`);
+            };
+        }
+
+    }
+
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.fa-ellipsis-v');
+
+        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    window.currentView = 'list';
+
+    function showCampaignDetail(id) {
+        document.getElementById('campaignList').style.display = 'none';
+        document.getElementById('detailCampaign').style.display = 'block';
+        window.currentView = 'detailCampaign';
+
+        document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
+    `;
+
+        const url = "{{ url('campaign/campaignDetailBanca') }}?id=" + id + "&module=bancassurance";
+
+        fetch(url, {
+            method: "GET",
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById("detailCampaign").innerHTML = html;
+            })
+            .catch(err => console.error(err));
+    }
+    function campaign_insertPartial(el, html) {
+        // Masukkan HTML ke elemen target
+        el.innerHTML = html;
+        // Ambil semua <script> di dalam partial
+        el.querySelectorAll("script").forEach(oldScript => {
+            const newScript = document.createElement("script");
+            if (oldScript.src) {
+                // script eksternal
+                newScript.src = oldScript.src;
+            } else {
+                // inline script
+                newScript.textContent = oldScript.textContent;
+            }
+            // copy attribute lain (misalnya type="module")
+            [...oldScript.attributes].forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+            });
+            // inject ke DOM agar dijalankan
+            document.body.appendChild(newScript);
+            // hapus script lama (opsional, biar bersih)
+            oldScript.remove();
+        });
+    }
+    
+    function showProductDetail(id) {
+        document.getElementById('campaignList').style.display = 'none';
+        document.getElementById('detailProduct').style.display = 'block';
+        window.currentView = 'detailProduct';
+
+        document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
+        `;
+
+        const url = "{{ url('campaign/campaignProductDetailBanca') }}?id=" + id + "&module=bancassurance";
+        fetch(url, {
+            method: "GET",
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+            .then(r => r.text())
+            .then(html => {
+                // console.log(html);
+
+                document.getElementById("detailProduct").innerHTML = html;
+                initDropdown();
+
+            })
+            .catch(err => console.error(err));
+    }
+
+    function handleBack() {
+        if (window.currentView === 'detailCampaign') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('detailCampaign').style.display = 'none';
+            window.currentView = 'list';
+
+            document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+        } else if (window.currentView === 'detailProduct') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('detailProduct').style.display = 'none';
+            window.currentView = 'list';
+
+            document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+        `;
+        } else if (window.currentView === 'add-campaign') {
+            document.getElementById('campaignList').style.display = 'block';
+            document.getElementById('add-campaign').style.display = 'none';
+            window.currentView = 'list';
+            document.getElementById('headerTitle').innerHTML = `
+            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
+            `;
+        }
+
+        else {
+            window.location.href = "<?= $this->url->get('Bancassurance') ?>";
+        }
+    }
+
+    function toggleCampaignForm() {
+        document.getElementById("campaignList").style.display = "none";
+        document.getElementById("add-campaign").style.display = "block";
+        window.currentView = 'add-campaign';
+        document.getElementById('headerTitle').innerHTML = `
+        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Add New Campaign</span>
+        `;
+    }
+
+    $(function () {
+        $('#periodeCampaign').daterangepicker({
+            autoUpdateInput: true,
+            locale: {
+                format: 'D MMM YYYY'
+            },
+            ranges: {
+                'Today': [moment(), moment()],
+                'This Week': [moment().startOf('week'), moment().endOf('week')],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Next 3 Months': [moment(), moment().add(3, 'month').endOf('month')],
+                'Custom Range': []
+            }
+        });
+    });
+
+    function addCampaign() {
+        let data = {
+            "campaignName": document.getElementById("campaignName").value,
+            "description": document.getElementById("description").value,
+            "campaignType": document.getElementById("campaignType").value,
+            "periodeCampaign": document.getElementById("periodeCampaign").value,
+            "productId": document.getElementById("productId").value,
+            "alternatifProduct": document.getElementById("alternatifProduct").value,
+            "mediaId": document.getElementById("mediaId").value,
+            "callGuide": document.getElementById("callGuide").value
+        };
+
+        fetch("{{ url('campaign/uploadCampaign') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === "success") {
+                    alert(res.message);
+                    toggleCampaignForm(); // tutup form
+                    location.reload(); // reload halaman biar campaign baru muncul
+                } else {
+                    alert(res.message);
+                    console.log(res.errors);
+                }
+            })
+            .catch(err => console.error("Error:", err));
+    }
+
+</script>
