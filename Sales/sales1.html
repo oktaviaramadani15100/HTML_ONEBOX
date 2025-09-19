@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f8f7f4;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .left-panel {
+            flex: 2;
+            background: #fff;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .left-panel h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .left-panel .subtitle {
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            margin-top: 0;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .header-buttons button {
+            background: #3c165c;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .header-buttons button:hover {
+            background: #4e1d77;
+        }
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .calendar-box,
+        .message-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+<body>
+    <div class="container">
+         <div class="left-panel">
+            <div>
+                <h1>Sales: All</h1>
+                <p class="subtitle">Prospect Management Tool</p>
+            </div>
+            <div class="header-buttons">
+                <button>New</button>
+                <button>Kualifikasi</button>
+                <button>Proposal</button>
+                <button>Negro</button>
+                <button>Close</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" /></th>
+                        <th>Name</th>
+                        <th>Campaign</th>
+                        <th>Product</th>
+                        <th>Potential</th>
+                        <th>Media</th>
+                        <th>Last Contact</th>
+                        <th>Handler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>Siti</td>
+                        <td>Kemerdekaan</td>
+                        <td>Amana Jiwa</td>
+                        <td>20,000,000</td>
+                        <td>Call</td>
+                        <td>Fri, 18 July 2025</td>
+                        <td>Agent01</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>Hamidah</td>
+                        <td>Kemerdekaan</td>
+                        <td>Amana Jiwa</td>
+                        <td>35,000,000</td>
+                        <td>Call</td>
+                        <td>Thu, 17 July 2025</td>
+                        <td>Agent01</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="calendar-box">
+                <h2>July 2025</h2>
+                <div class="mini-calendar">
+                    <div class="day">S</div>
+                    <div class="day">M</div>
+                    <div class="day">T</div>
+                    <div class="day">W</div>
+                    <div class="day">T</div>
+                    <div class="day">F</div>
+                    <div class="day">S</div>
+                    <!-- Contoh tanggal -->
+                    <div class="date">29</div>
+                    <div class="date">30</div>
+                    <div class="date">1</div>
+                    <div class="date">2</div>
+                    <div class="date">3</div>
+                    <div class="date">4</div>
+                    <div class="date">5</div>
+                    <div class="date">6</div>
+                    <div class="date">7</div>
+                    <div class="date">8</div>
+                    <div class="date">9</div>
+                    <div class="date">10</div>
+                    <div class="date">11</div>
+                    <div class="date">12</div>
+                    <div class="date">13</div>
+                    <div class="date">14</div>
+                    <div class="date">15</div>
+                    <div class="date">16</div>
+                    <div class="date">17</div>
+                    <div class="date">18</div>
+                    <div class="date">19</div>
+                    <div class="date">20</div>
+                    <div class="date">21</div>
+                    <div class="date">22</div>
+                    <div class="date today">23</div>
+                    <div class="date">24</div>
+                    <div class="date">25</div>
+                    <div class="date">26</div>
+                    <div class="date">27</div>
+                </div>
+                <div class="agenda-card">
+                    <p class="agenda-title">Sharing Produk Banca</p>
+                    <p class="agenda-location"><i class="fas fa-user-tie"></i> Dengan Pak Anto</p>
+                </div>
+
+                <div class="agenda-card">
+                    <p class="agenda-title">Follow-Up Proposal Polis</p>
+                    <p class="agenda-location"><i class="fas fa-file-signature"></i> Pak Iwan</p>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>
