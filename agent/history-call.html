@@ -7,6 +7,7 @@
     <title>Call History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -18,6 +19,8 @@
             font-family: 'Poppins', sans-serif;
             background: #f3f4f6;
             display: flex;
+            height: 100vh;
+            overflow: hidden;
             justify-content: center;
         }
 
@@ -25,135 +28,15 @@
             width: 100%;
             max-width: 400px;
             background: #ffffff;
-            min-height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            background-color: #1e3a8a;
-            z-index: 100;
-            height: 4rem;
-            background: linear-gradient(70deg, #1E3A8A 0%, #2563EB 20%, #1E40AF 100%);
-        }
-
-        .header img {
-            height: 53px;
-        }
-
-        .menu-icon {
-            cursor: pointer;
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .menu-icon i {
-            color: #f9fafb;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            width: 170px;
-            z-index: 100;
-            animation: fadeIn 0.2s ease-in-out;
-            padding: 10px 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .dropdown-header {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 7px 16px;
-        }
-
-        .dropdown-header p {
-            margin: 2px 0;
-            font-size: 13px;
-            color: #333;
-        }
-
-        .agent-role {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 13px;
-            color: #6b7280;
-            margin-top: 2px;
-        }
-
-        .dropdown a {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            padding: 8px 16px;
-            font-size: 13px;
-            color: #1e3a8a;
-            transition: background-color 0.25s, color 0.25s;
-            border-left: 4px solid transparent;
-            margin-left: 0;
-        }
-
-        a+a {
-            margin-top: 4px;
-        }
-
-        .dropdown a:hover {
-            background-color: #f0f4ff;
-            border-left: 4px solid #1e3a8a;
-        }
-
-        .dropdown i {
-            font-size: 16px;
-            color: #1e3a8a;
-            width: 18px;
-            text-align: center;
-        }
-
-        .dropdown span {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .dropdown hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
-        }
-
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-5px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .content {
             flex: 1;
             padding-bottom: 100px;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         .content h2 {
@@ -164,36 +47,35 @@
         }
 
         .table-wrapper {
-            width: 100%;
-            margin-top: 12px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        max-height: 400px; 
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         }
 
         table {
-            width: 100%;
-            border-collapse: separate;
-            min-width: 360px;
-            border-spacing: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: linear-gradient(180deg, #f8fafc, #ffffff);
-            font-size: 0.9rem;
-            table-layout: fixed;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
         }
 
         thead {
-            background: linear-gradient(90deg, #1e3a8a, #2b4db3);
-            color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        background: linear-gradient(90deg, #1e3a8a, #2b4db3);
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 5;
         }
 
         thead th {
+            font-family: 'DM Sans', sans-serif;
             padding: 14px 16px;
-            font-size: 0.80rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -201,7 +83,33 @@
             border-right: none;
         }
 
+        tbody {
+            display: block;
+            max-height: 350px; 
+            overflow-y: auto;
+            width: 100%;
+            scrollbar-width: thin; 
+            scrollbar-color: #cbd5e1 #f9fafb;
+        }
+
+        tbody::after {
+            content: '';
+            display: block;
+            height: 30px; 
+        }
+
+        tbody tr:last-child td {
+        border-bottom: none;
+        }
+
+        thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        }
+
         tbody td {
+            font-family: 'DM Sans', sans-serif;
             padding: 12px 16px;
             font-size: 12px;
             color: #111827;
@@ -246,153 +154,48 @@
             background-color: #f9fafb;
         }
 
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 400px;
-            border-top: 1px solid #ccc;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 0;
-            font-size: 11px;
-            z-index: 100;
-            background: white;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-wrapper i {
-            color: #1e3a8a;
-        }
-
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-spacer {
-            flex: 0.5;
-        }
-
-        .nav-wrapper i {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
-        }
-
-        .nav-wrapper p {
-            margin-top: 2px;
-            font-weight: 600;
-            font-size: 0.60rem;
-        }
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-new {
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
-            position: absolute;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            top: -22px;
-            left: 51%;
-            transform: translateX(-50%);
-        }
-
-        .plus-btn {
-            background-color: #1e3a8a;
-            border-radius: 50%;
-            width: 53px;
-            height: 53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 30px;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        }
-
-        .nav-new p {
-            font-weight: 600;
-            margin: 8px 0 0;
-            font-size: 0.60rem;
-            color: #1e3a8a;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                background: #d1d5db;
-            }
+        .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 20px 20px 15px;
         }
 
         .filter-container {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0 25px;
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 16px;
-            margin-bottom: 25px;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0 20px;
         }
 
         .search-box {
-            flex: 1;
-            max-width: 270px;
-            display: flex;
-            align-items: center;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            padding: 8px 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        flex: 1;
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 1.5px solid #ddd;
+        border-radius: 25px;
+        padding: 8px 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
 
         .search-box input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 12px;
-            font-family: 'Poppins', sans-serif;
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box .filter-icon {
+        font-size: 14px;
+        color: #1e3a8a;
+        cursor: pointer;
+        margin-left: 8px;
         }
 
         .search-box i {
-            font-size: 15px;
+            font-size: 13px;
             color: #1e3a8a;
             cursor: pointer;
         }
@@ -404,28 +207,26 @@
         }
 
         .filter-buttons {
-            margin-top: 10px;
-            display: flex;
-            gap: 13px;
+        display: flex;
+        gap: 10px;
         }
 
         .filter-btn {
-            background-color: #e0e7ff;
-            font-family: 'Poppins', sans-serif;
-            color: #1e3a8a;
-            border: 1px solid #1e3a8a;
-            border-radius: 5px;
-            padding: 10px 17px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s ease;
+        background-color: #e0e7ff;
+        font-family: 'Poppins', sans-serif;
+        color: #1e3a8a;
+        border: 1px solid #1e3a8a;
+        border-radius: 20px;
+        padding: 7px 15px;
+        font-size: 10px;
+        cursor: pointer;
+        transition: 0.2s ease;
         }
 
         .filter-btn.active {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            background-color: #1e3a8a;
-            color: white;
+        font-weight: 600;
+        background-color: #1e3a8a;
+        color: white;
         }
 
         .filter-overlay {
@@ -548,154 +349,74 @@
             background-color: #1e3a8a;
             color: white;
         }
-
-        .menu-icon-group {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            position: relative;
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #f9fafb;
-            font-size: 15px;
-            font-weight: bold;
-        }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <!-- Header -->
-        <div class="header">
-            <a href="../agent/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span
-                    style="margin-left: 16px;">History Call</span></a>
-            <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-                <div class="dropdown" id="dropdownMenu">
-                    <a href="#">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </a>
-                    <a href="../agent/agent-rules.html">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </div>
-
+        <div id="layout-container"></div>
+        <!-- Search & Filter -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Cari Sesuatu...">
+                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
             </div>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-            <div class="filter-container">
             <div class="filter-buttons">
                 <button class="filter-btn active" onclick="filterCategory('activity')">Activity</button>
                 <button class="filter-btn" onclick="filterCategory('sales')">Sales</button>
             </div>
-            </div>
+        </div>
 
-            <!-- Search & Filter -->
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" placeholder="Cari Sesuatu...">
-                    <i class="fas fa-search"></i>
-                </div>
-                <i class="fas fa-filter filter-icon" onclick="toggleFilter()"></i>
-            </div>
-
-            <div class="filter-overlay" id="filterOverlay">
+        <div class="filter-overlay" id="filterOverlay">
             <div class="filter-drawer" id="filterDrawer">
                 <div class="filter-header">
-                <h3>Filter</h3>
-                <i class="fas fa-times" id="closeFilter"></i>
+                    <h3>Filter</h3>
+                    <i class="fas fa-times" id="closeFilter"></i>
                 </div>
                 <div class="filter-content">
-                <label for="date">Date</label>
-                <input type="date" id="date" />
-
-                <label for="prospect">Prospect</label>
-                <input type="text" id="prospect" placeholder="Enter value" />
-
-                <label id="resultLabel" for="result">Result</label>
-                <select id="result">
-                    <option value="">-- Pilih Result --</option>
-                </select>
-
-                <div class="filter-actions">
-                    <button onclick="resetFilter()" class="reset-btn">Reset</button>
-                    <button onclick="applyFilter()">Apply</button>
+                    <label for="date">Date</label>
+                    <input type="date" id="date" />
+                    <label for="prospect">Prospect</label>
+                    <input type="text" id="prospect" placeholder="Enter value" />
+                    <label id="resultLabel" for="result">Result</label>
+                    <select id="result">
+                        <option value="">-- Pilih Result --</option>
+                    </select>
+                    <div class="filter-actions">
+                        <button onclick="resetFilter()" class="reset-btn">Reset</button>
+                        <button onclick="applyFilter()">Apply</button>
+                    </div>
                 </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="table-wrapper">
-            <table>
-                <thead>
-                <tr>
-                    <th>Tanggal</th>
-                    <th>Prospect</th>
-                    <th>Result</th>
-                </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-            </div>
-
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                <p>Home</p>
-                </div>
-
-                <div class="nav-history">
-                <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                <p>History</p>
-                </div>
-
-                <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                <p>Agenda</p>
-                </div>
-            </div>
-
-            <div class="nav-new">
-                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-                <p>New</p>
             </div>
         </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Prospect</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
     </div>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>
 
 <script>
+    fetch('layout.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('layout-container').innerHTML = data;
+
+        document.getElementById('page-title').textContent = 'Call History';
+      });
+
     function updateResultOptions() {
       const resultSelect = document.getElementById("result");
       const resultLabel = document.getElementById("resultLabel");
@@ -717,20 +438,6 @@
         resultSelect.appendChild(optionEl);
       });
     }
-
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    window.addEventListener('click', function (e) {
-        const dropdown = document.getElementById('dropdownMenu');
-        const icon = document.querySelector('.fa-ellipsis-v');
-
-        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-            dropdown.style.display = 'none';
-        }
-    });
 
     document.addEventListener("DOMContentLoaded", function () {
         function toggleFilter(forceClose = false) {
@@ -827,7 +534,7 @@
             { tanggal: '07/07/25', prospect: 'Sari Widya', result: 'Follow Up' },
             { tanggal: '07/07/25', prospect: 'Hendra Gunawan', result: 'Call' },
             { tanggal: '07/07/25', prospect: 'Nina Oktaviani', result: 'Thinking' },
-            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' }
+            { tanggal: '07/07/25', prospect: 'Tono Hartono', result: 'Meeting' },
         ],
         sales: [
             { tanggal: '07/07/25', prospect: 'Ahmad Yusuf', result: 'Win' },
