@@ -1449,6 +1449,33 @@
             flex: 1 1 100%;
         }
 
+        .form-not-interest-card {
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2),
+                        0 1px 2px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            margin-top: 10px;
+
+        }
+
+        .btn-save {
+            padding: 7px 15px;
+            border-radius: 6.5px;
+            background-color: #0047ba;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2),
+                        0 1px 1px rgba(0,0,0,0.08);
+            transition: all ease-in-out .3s;
+            font-weight: 500;
+            
+        }
+
+        .btn-save:hover {
+            background-color: #003366;
+        }
+
         /* 2 kolom jika cukup lebar */
         @media (min-width: 480px) {
             .form-row .form-group {
@@ -2272,12 +2299,68 @@
                         </div>
                     </div>
                 </div>
-                <label>Reason:</label>
+
+                <div class="form-not-interest-card">
+
+                <div>
+                    <h4>Analysis Details</h4>
+                </div>
+
+                <div style="display: flex;justify-content: space-between; gap: 10px; margin-top: 25px;">
+                    
+                <div>
+                <label>Stage at Which Lost</label>
+                <select>
+                    <option value="too-many">Negotiation</option>
+                    <option value="no-need">No need insured</option>
+                    <option value="financial">Financial</option>
+                </select>
+                </div>
+
+                <div>
+                <label>Reason</label>
                 <select>
                     <option value="too-many">Too many insurance</option>
                     <option value="no-need">No need insured</option>
                     <option value="financial">Financial</option>
                 </select>
+                </div>
+
+                </div>
+
+                <div>
+                <label>Reason for Loss</label>
+                <select>
+                    <option value="too-many">Price</option>
+                    <option value="no-need">No need insured</option>
+                    <option value="financial">Financial</option>
+                </select>
+                </div>
+
+                <div>
+                    <Label>Remarks</Label>
+                    <textarea name="" id=""></textarea>
+                </div>
+
+                
+
+                <div>
+                    <Label>Lost to Compotitor Features</Label>
+                    <textarea name="" id="" placeholder="Feature"></textarea>
+                </div>
+
+                <div>
+                    <Label>Feedback from Prospect</Label>
+                    <textarea name="" id="" placeholder="Feedback"></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: end; margin-top: 10px;">
+                    <button class="btn-save">Save</button>
+                </div>
+
+                </div>
+                
+
             </div>
         </div>
 
