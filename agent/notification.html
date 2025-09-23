@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: #f3f4f6;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: center;
+    }
+
+    .wrapper {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: thin; 
+      scrollbar-color: #cbd5e1 #f9fafb;
+      max-height: calc(100vh - 200px);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      background-color: #1e3a8a;
+      z-index: 100;
+      background: linear-gradient(50deg, #1E3A8A 20%, #2563EB 100%, #1E40AF 100%);
+    }
+
+    .header-right {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header a {
+      text-decoration: none;
+      color: #1e3a8a;
+    }
+
+    .header .header-name {
+      text-decoration: none;
+      color: #f9fafb;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .menu-icon {
+    cursor: pointer;
+    color: #f9fafb;
+    font-size: 1.1rem;
+    }
+
+    .menu-icon i {
+    color: #f9fafb;
+    }
+
+    .header-right i {
+      font-size: 18px;
+      margin-right: 5px;
+      color: #f9fafb;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .load-icon {
+      font-size: 18px;
+      margin-right: 5px;
+      color: #f9fafb;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .load-icon:hover {
+      transform: rotate(90deg);
+    }
+
+    .dropdown {
+    display: none;
+    position: absolute;
+    right: 25px;
+    top: 50px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    width: 170px;
+    z-index: 100;
+    animation: fadeIn 0.2s ease-in-out;
+    padding: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    }
+
+    .agent-role {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 2px;
+    }
+
+    .dropdown a {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #1e3a8a;
+    transition: background-color 0.25s, color 0.25s;
+    border-left: 4px solid transparent;
+    margin-left: 0;
+    }
+
+    a+a {
+    margin-top: 4px;
+    }
+
+    .dropdown a:hover {
+    background-color: #f0f4ff;
+    border-left: 4px solid #1e3a8a;
+    }
+
+    .dropdown i {
+    font-size: 16px;
+    color: #1e3a8a;
+    width: 18px;
+    text-align: center;
+    }
+
+    .dropdown span {
+    flex: 1;
+    font-weight: 500;
+    }
+
+    .dropdown hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+    }
+
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
+
+    .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    border-top: 1px solid #ccc;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 10px 0;
+    font-size: 11px;
+    z-index: 100;
+    background: white;
+    }
+
+    .nav-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    }
+
+    .nav-wrapper i {
+    color: #1e3a8a;
+    }
+
+    .nav-wrapper > div {
+    flex: 1;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #1e3a8a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    }
+
+    .nav-spacer {
+    flex: 0.5;
+    }
+
+    .nav-wrapper i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+    }
+
+    .nav-wrapper p {
+    margin-top: 2px;
+    font-weight: 600;
+    font-size: 0.60rem;
+    }
+
+    .bottom-nav a {
+    text-decoration: none;
+    color: inherit;
+    }
+
+    .nav-new {
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    transition: none;
+    touch-action: manipulation;
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    top: -22px;
+    left: 51%;
+    transform: translateX(-50%);
+    }
+
+    .plus-btn {
+    background-color: #1e3a8a;
+    border-radius: 50%;
+    width: 53px;
+    height: 53px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-size: 30px;
+    }
+
+    .nav-new i {
+    font-size: 30px;
+    display: block;
+    margin-bottom: -2px;
+    color: white;
+    }
+
+    .nav-new p {
+    font-weight: 600;
+    margin: 8px 0 0;
+    font-size: 0.60rem;
+    color: #1e3a8a;
+    }
+
+    @media (min-width: 768px) {
+    body {
+        background: #d1d5db;
+    }
+    }
+
+    .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .notif-top {
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      padding: 17px 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #6b7280;
+      font-size: 10px;
+    }
+
+    .notif-top span {
+      font-weight: 800;
+      color: #1E3A8A;
+    }
+
+    .notif-top .btns {
+    display: flex;
+    }
+
+    .notif-top button {
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-weight: 500;
+    font-size: 10px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 0;
+    }
+
+    .notif-top button:first-child {
+    border-radius: 6px 0 0 6px; 
+    border-right: none;
+    }
+
+    .notif-top button:last-child {
+    border-radius: 0 6px 6px 0;
+    }
+
+    .notif-top .mark-btn {
+    background: #1E3A8A;
+    color: #fff;
+    border: 1px solid #1E3A8A;
+    }
+
+    .notif-top button:first-child:hover {
+    background: red;
+    color: #fff;
+    border-color: red;
+    }
+
+    .notif-top button:first-child:active {
+      background: #F08787;
+      border-color: #F08787;
+      transform: scale(0.97);
+    }
+
+    .notif-top .mark-btn:active {
+      background: #3B82F6;
+      border-color: #3B82F6;
+      transform: scale(0.97);
+    }
+
+    .notif-top .mark-btn:hover {
+      background: #2563EB;
+      border-color: #2563EB;
+    }
+
+    .notif-item {
+      display: flex;
+      align-items: center;
+      margin-right: 2px;
+      padding: 16px 14px 17px;
+      border-bottom: 1px solid #e5e7eb;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .notif-item:hover {
+      background-color: #CBDCEB;
+    }
+
+    .notif-item:last-child {
+        border-bottom: none;
+        margin-bottom: 15px;
+    }
+
+    .notif-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+      object-fit: cover;
+    }
+
+    .notif-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .notif-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #111827;
+    }
+
+    .notif-desc {
+      font-size: 11px;
+      color: #6b7280;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notif-time {
+      font-size: 10px;
+      font-weight: 600;
+      color: #1e3a8a;
+      margin-left: 10px;
+      align-self: flex-start;
+    }
+
+    .notif-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #1E3A8A;
+      margin-right: 7px;
+      flex-shrink: 0;
+    }
+
+    .notif-dot.hidden {
+      background: transparent;
+    }
+</style>
+<body>
+    <div class="wrapper">
+    <div class="header">
+      <a href="../agent/home.html" class="header-name"> 
+        <i class="fa-solid fa-arrow-left"></i> 
+        <span style="margin-left: 16px;">Notifications</span>
+      </a>
+
+      <div class="header-right">
+        <i class="fa-solid fa-sync-alt load-icon"></i>
+        <i class="fa-solid fa-envelope" onclick="window.location.href='inbox.html'"></i>
+        <i class="fa-solid fa-ellipsis-vertical menu-icon" onclick="toggleDropdown()"></i>
+      </div>
+
+      <div class="dropdown" id="dropdownMenu">
+        <a href="../agent/profile.html"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+        <a href="../agent/agent-rules.html"><i class="fa-solid fa-user-shield"></i><span>Agent Rules</span></a>
+        <a href="#"><i class="fa-solid fa-circle-question"></i><span>FAQ</span></a>
+        <hr>
+        <a href="#"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
+    </div>
+
+    <div class="notif-top">
+      <div>You have <span>5 Notifications</span> today</div>
+      <div class="btns">
+        <button>Clear All</button>
+        <button class="mark-btn">Mark All as Read</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Tagihan Premi</div>
+          <div class="notif-desc">Polis #12345 atas nama Budi telah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Pembayaran Berhasil</div>
+          <div class="notif-desc">Pembayaran premi dari Ibu Sari...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Proses Klaim</div>
+          <div class="notif-desc">Klaim kesehatan nasabah Andi...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Nasabah Baru</div>
+          <div class="notif-desc">Ada calon nasabah baru yang...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Nasabah Baru</div>
+          <div class="notif-desc">Ada calon nasabah baru yang...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Tagihan Premi</div>
+          <div class="notif-desc">Polis #12345 atas nama Budi telah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Tagihan Premi</div>
+          <div class="notif-desc">Polis #12345 atas nama Budi telah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Pembayaran Berhasil</div>
+          <div class="notif-desc">Pembayaran premi dari Ibu Sari...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Proses Klaim</div>
+          <div class="notif-desc">Klaim kesehatan nasabah Andi...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Nasabah Baru</div>
+          <div class="notif-desc">Ada calon nasabah baru yang...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Nasabah Baru</div>
+          <div class="notif-desc">Ada calon nasabah baru yang...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Tagihan Premi</div>
+          <div class="notif-desc">Polis #12345 atas nama Budi telah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot hidden"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Tagihan Premi</div>
+          <div class="notif-desc">Polis #12345 atas nama Budi telah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+
+      <div class="notif-item">
+        <span class="notif-dot"></span>
+        <img src="../img/msig.jpg" class="notif-icon" />
+        <div class="notif-text">
+          <div class="notif-title">Progress Target</div>
+          <div class="notif-desc">Target penjualan bulan ini sudah...</div>
+        </div>
+        <div class="notif-time">22:48</div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../agent/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
+        </div>
+        <div class="nav-history">
+          <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+        <div class="nav-spacer"></div>
+        <div class="nav-call">
+          <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+        <div class="nav-agen">
+          <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+      </div>
+      <div class="nav-new">
+        <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
+
+    </div>
+<script>
+      document.querySelector('.load-icon').addEventListener('click', function() {
+        this.style.transition = "transform 0.6s linear";
+        this.style.transform = "rotate(360deg)";
+
+        setTimeout(() => {
+            this.style.transform = "rotate(0deg)";
+            location.reload();
+        }, 600);
+    });
+
+    document.querySelector('.notif-top button:first-child').addEventListener('click', function () {
+      const content = document.querySelector('.content');
+      content.innerHTML = `
+        <div style="text-align:center; padding:40px 20px; color:#111827;">
+          <img src="../img/notif.jpg" alt="No Notification" style="width:150px; margin-bottom:10px;" />
+          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px;">No notification yet</h3>
+          <p style="font-size:11px; color:#6b7280;">
+            Your notification will <span style="color:#1e3a8a; font-weight:600;">appear here</span><br/>
+            once you’ve received them.
+          </p>
+        </div>
+      `;
+      
+      document.querySelector('.notif-top div').innerHTML = "You have <span>0 Notifications</span> today";
+    });
+
+    document.querySelector('.mark-btn').addEventListener('click', function () {
+      const dots = document.querySelectorAll('.notif-dot');
+      dots.forEach(dot => {
+        dot.classList.add('hidden'); 
+      });
+    });
+
+    document.querySelector('.load-icon').addEventListener('click', function() {
+        this.style.transition = "transform 0.6s linear";
+        this.style.transform = "rotate(360deg)";
+        setTimeout(() => {
+        this.style.transform = "rotate(0deg)";
+        }, 600);
+    });
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const icon = document.querySelector('.menu-icon');
+        if (!dropdown.contains(e.target) && !icon.contains(e.target)) {
+        dropdown.style.display = 'none';
+        }
+    });
+
+    function handleBack() {
+        window.location.href = '../agent/home.html';
+    }
+</script>
+</body>
+</html>
