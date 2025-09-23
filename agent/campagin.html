@@ -30,6 +30,7 @@
         }
 
         .header {
+            position: fixed;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,20 +40,37 @@
             top: 0;
             background-color: #1e3a8a;
             z-index: 100;
-            height: 4rem;
+            height: 3.5rem;
+            background: linear-gradient(50deg, #1E3A8A 20%, #2563EB 100%, #1E40AF 100%);
         }
 
         .header img {
-            height: 53px;
+            height: 35px;
+            margin-left: 10px;
+        }
+
+        .header .header-name {
+            text-decoration: none;
+            color: #f9fafb;
+            font-size: 15px;
+            font-weight: bold;
         }
 
         .menu-icon {
-            font-size: 20px;
-            color: #e5e7eb;
             cursor: pointer;
-            transition: color 0.3s;
+            color: #f9fafb;
+            margin-left: 1rem;
+            font-size: 1.1rem;
         }
 
+        .menu-icon-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 16px;
+            position: relative;
+        }
         .dropdown {
             display: none;
             position: absolute;
@@ -189,7 +207,6 @@
 
         .content {
             flex: 1;
-            padding-bottom: 90px;
         }
 
         .content h2 {
@@ -462,20 +479,19 @@
         }
 
 
-        .bottom-nav {
-            position: sticky;
-            /* position: relative; */
-            bottom: -1px;
-            left: 0;
-            right: 0;
+       .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
             border-top: 1px solid #ccc;
-            /* display: flex; */
             justify-content: space-around;
             align-items: flex-end;
             padding: 10px 0;
-            font-size: 12px;
-            z-index: 10;
-            margin-top: 3rem;
+            font-size: 11px;
+            z-index: 100;
             background: white;
         }
 
@@ -504,44 +520,21 @@
             flex: 0.5;
         }
 
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
         .nav-wrapper i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
         }
-
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
 
         .nav-wrapper p {
-            margin-top: 4px;
-            font-size: 0.85rem;
+            margin-top: 2px;
+            font-weight: 600;
+            font-size: 0.60rem;
         }
-
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
 
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        } */
+        }
 
         .nav-new {
             justify-content: center;
@@ -559,7 +552,7 @@
             flex-direction: column;
             text-align: center;
             top: -22px;
-            left: 50%;
+            left: 51%;
             transform: translateX(-50%);
         }
 
@@ -584,55 +577,11 @@
         }
 
         .nav-new p {
-            margin: 15px 0 0;
-            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0 0;
+            font-size: 0.60rem;
             color: #1e3a8a;
         }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
 
 
         .add-btn {
@@ -671,15 +620,6 @@
             font-size: 1.3rem;
             cursor: pointer;
             color: #1e3a8a;
-        }
-
-        .menu-icon-group {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            position: relative;
         }
 
         .header .header-name {
@@ -837,7 +777,6 @@
                 0 2px 4px -2px rgba(0, 0, 0, 0.1);
             padding: 1rem;
             border-radius: 12px;
-
         }
     </style>
 </head>
@@ -851,14 +790,13 @@
             </span>
 
             <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon" style=" color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;">
+                <a href="../agent/inbox.html" class="menu-icon">
                     <i class="fas fa-envelope"></i>
                 </a>
-                <i class="fas fa-ellipsis-v menu-icon" style=" color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;" onclick="toggleDropdown()"></i>
+                <a href="../agent/home.html" class="menu-icon" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
                 <div class="dropdown" id="dropdownMenu">
                     <div class="dropdown-header">
                         <h3 class="welcome-text">Welcome</h3>
@@ -1057,31 +995,26 @@
 
         </div>
 
-        <div class="bottom-nav">
+       <div class="bottom-nav">
             <div class="nav-wrapper">
                 <div class="nav-home">
                     <a href="../agent/home.html"><i class="fas fa-home"></i></a>
                     <p>Home</p>
                 </div>
-
                 <div class="nav-history">
                     <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
                     <p>History</p>
                 </div>
-
                 <div class="nav-spacer"></div>
-
                 <div class="nav-call">
                     <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
                     <p>Call</p>
                 </div>
-
                 <div class="nav-agen">
                     <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
                     <p>Agenda</p>
                 </div>
             </div>
-
             <div class="nav-new">
                 <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
                 <p>New</p>

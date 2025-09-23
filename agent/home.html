@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MSIG Agent Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -543,7 +545,7 @@
                     <i class="fas fa-envelope"></i>
                 </a>
 
-                <a href="../agent/home.html" class="menu-icon" title="Notifications">
+                <a href="../agent/notification.html" class="menu-icon" title="Notifications">
                     <i class="fas fa-bell"></i>
                 </a>
                 <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
@@ -574,20 +576,20 @@
 
         <!-- Info Box -->
         <div class="info-box">
-        <div class="info-slider" id="infoSlider">
-            <div class="slide active">
-            <img src="../img/information.png"/>
+            <div class="info-slider" id="infoSlider">
+                <div class="slide active">
+                    <img src="../img/information.png" />
+                </div>
+                <div class="slide">
+                    <img src="../img/information.png" />
+                </div>
+                <div class="slide">
+                    <img src="../img/information.png" />
+                </div>
             </div>
-            <div class="slide">
-            <img src="../img/information.png"/>
-            </div>
-            <div class="slide">
-            <img src="../img/information.png"/>
-            </div>
-        </div>
 
-        <!-- Dots -->
-        <div class="dots" id="dots"></div>
+            <!-- Dots -->
+            <div class="dots" id="dots"></div>
         </div>
 
         <!-- Menu -->
@@ -608,7 +610,7 @@
 
         <!-- Section Judul -->
         <div class="section-title">
-        • Artikel Informasi
+            • Artikel Informasi
         </div>
 
         <!-- Cards / Slider -->
@@ -689,27 +691,27 @@
     const dotsContainer = document.getElementById('dots');
 
     slides.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.addEventListener('click', () => showSlide(i));
-    dotsContainer.appendChild(dot);
+        const dot = document.createElement('span');
+        dot.addEventListener('click', () => showSlide(i));
+        dotsContainer.appendChild(dot);
     });
 
     const dots = dotsContainer.querySelectorAll('span');
 
     function showSlide(index) {
-    if (index < 0) currentIndex = slides.length - 1;
-    else if (index >= slides.length) currentIndex = 0;
-    else currentIndex = index;
+        if (index < 0) currentIndex = slides.length - 1;
+        else if (index >= slides.length) currentIndex = 0;
+        else currentIndex = index;
 
-    const offset = -currentIndex * 100;
-    document.querySelector('.info-slider').style.transform = `translateX(${offset}%)`;
+        const offset = -currentIndex * 100;
+        document.querySelector('.info-slider').style.transform = `translateX(${offset}%)`;
 
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[currentIndex].classList.add('active');
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
     }
 
     function nextSlide() {
-    showSlide(currentIndex + 1);
+        showSlide(currentIndex + 1);
     }
 
     setInterval(() => nextSlide(), 5000);
