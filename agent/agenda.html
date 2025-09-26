@@ -166,7 +166,7 @@
         z-index: 10;
         margin-top: 15rem;
         background: white;
-        
+
     }
 
     .nav-wrapper {
@@ -352,12 +352,31 @@
         font-weight: bold;
     }
 
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        /* penuh 1 layar */
+    }
+
+
     .calendar-box {
-        padding: 20px;
+        flex-shrink: 0;
+        /* jangan mengecil */
+        margin-bottom: 10px;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 10;
+        padding: 16px;
         background-color: #fff;
-        border-radius: 16px;
+        border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         font-family: "Segoe UI", Arial, sans-serif;
+        max-width: 360px;
+        /* biar ukurannya tidak melebar */
+        margin: 0 auto;
+        /* center */
     }
 
     .calendar-header {
@@ -365,13 +384,13 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     .calendar-header h3 {
         margin: 0;
         color: #1d0c80;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
         text-align: center;
     }
@@ -380,12 +399,12 @@
     .calendar-header button {
         background: none;
         border: none;
-        font-size: 20px;
+        font-size: 18px;
         cursor: pointer;
         color: #1d0c80;
         transition: color 0.2s, background 0.2s;
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -402,13 +421,12 @@
 
     /* Posisi panah */
     #prev {
-        left: 10px;
+        left: 5px;
     }
 
     #next {
-        right: 10px;
+        right: 5px;
     }
-
 
     .calendar-table {
         width: 100%;
@@ -418,25 +436,26 @@
     }
 
     .calendar-table th {
-        padding: 8px 0;
-        font-size: 0.85rem;
+        padding: 6px 0;
+        font-size: 0.75rem;
         font-weight: 600;
         color: #555;
     }
 
     .calendar-table td {
-        width: 48px;
+        width: 44px;
         /* pastikan sama dengan height */
-        height: 48px;
+        height: 44px;
         padding: 0;
         margin: 0;
-        line-height: 48px;
+        line-height: 44px;
         border-radius: 50%;
         vertical-align: middle;
         text-align: center;
         cursor: pointer;
         transition: all 0.2s;
     }
+
 
     .calendar-table td:hover {
         background: #e6e9f7;
@@ -451,13 +470,48 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
+    /* Highlight hari dengan agenda */
+    .calendar-table .has-event {
+        background: #fde68a;
+        color: #000;
+        font-weight: 500;
+    }
+
+
 
     .agenda-box {
-        margin-top: 13px;
-        text-align: center;
-        color: #888;
-        font-size: 1rem;
+        margin-top: 16px;
+        text-align: left;
+        color: #333;
+        font-size: 0.95rem;
+        font-family: "Segoe UI", sans-serif;
+        max-width: 360px;
+        /* samakan dengan calendar-box */
+        width: 100%;
+        /* biar fleksibel */
+        margin: 0 auto;
+        /* center */
+        max-height: 280px;
+        overflow-y: auto;
+        flex: 1;
+        padding: 12px 6px;
+        /* kasih padding biar mirip dengan calendar */
+        background: #fff;
+        border-radius: 12px;
+        /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
     }
+
+
+    .agenda-header {
+        /* background: #f7f7fb; */
+        padding: 8px 12px;
+        /* border-bottom: 1px solid #eee; */
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #1e3a8a;
+        text-align: left;
+    }
+
 
     .agenda-item {
         background: #f3efff;
@@ -467,28 +521,194 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        cursor: pointer;
     }
 
-    .agenda-location {
-        font-size: 0.85em;
-        color: #666;
-        margin-top: 2px;
+    .agenda-item:hover {
+        background: #f3f0ff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .agenda-left {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
     }
 
     .agenda-title {
         font-weight: 600;
         color: #1d0c80;
+        font-size: 1rem;
     }
 
     .agenda-note {
-        font-size: 13px;
-        color: #555;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .agenda-location {
+        font-size: 0.85rem;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 
     .agenda-time {
-        font-weight: 500;
-        font-size: 13px;
+        background: #ece9ff;
+        color: #5c4ee5;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+
+    /* Modal background */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Modal content */
+    .modal-content {
+        background: #fff;
+        padding: 24px;
+        border-radius: 16px;
+        width: 330px;
+        max-width: 420px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        animation: fadeIn 0.3s ease-in-out;
+        font-family: "Segoe UI", sans-serif;
+        color: #333;
+    }
+
+    .modal-title {
+        margin-bottom: 10px;
+        /* padding-bottom: 50px; */
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #4a3aff;
+        text-align: center;
+    }
+
+    .modal-section {
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9ff;
         color: #222;
+        font-weight: 500;
+    }
+
+    .modal-section p {
+        margin: 4px 0;
+        font-size: 0.9rem;
+        color: #444;
+        margin-bottom: 5px;
+    }
+
+    .modal-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .modal-details div {
+        background: #f3efff;
+        padding: 8px;
+        border-radius: 8px;
+        text-align: left;
+    }
+
+    .modal-details strong {
+        display: block;
+        font-size: 0.8rem;
+        color: #4a3aff;
+        margin-bottom: 4px;
+    }
+
+    .modal-details span {
+        font-size: 0.95rem;
+        color: #222;
+        font-weight: 500;
+    }
+
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #4a3aff;
+
+    }
+
+    .close-btn {
+        margin-left: auto;
+        font-size: 26px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #888;
+        transition: 0.2s;
+    }
+
+    .close-btn:hover {
+        color: #000;
+    }
+
+    .modal-body {
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .modal-body p {
+        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+
+    .modal-body i {
+        color: #4a3aff;
+        min-width: 20px;
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 8px;
+        min-height: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a0a0a0;
     }
 </style>
 
@@ -532,30 +752,47 @@
             </div>
         </div>
 
-        <div class="calendar-box">
-            <div class="calendar-header">
-                <button id="prev">&#10094;</button>
-                <h3><span id="month">January</span> <span id="year">2025</span></h3>
-                <button id="next">&#10095;</button>
+        <div class="agenda-container">
+            <div class="calendar-box">
+                <div class="calendar-header">
+                    <button id="prev">&#10094;</button>
+                    <h3><span id="month">January</span> <span id="year">2025</span></h3>
+                    <button id="next">&#10095;</button>
+                </div>
+
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body"></tbody>
+                </table>
             </div>
-
-            <table class="calendar-table">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody id="calendar-body"></tbody>
-            </table>
-
         </div>
         <div class="agenda-box" id="agenda-box"></div>
+
+        <!-- Popup Modal -->
+        <div id="agendaModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <span class="close-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p><i class="fas fa-sticky-note"></i> <span id="modalNote"></span></p>
+                    <p><i class="fas fa-clock"></i> <span id="modalTime"></span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="modalLocation"></span></p>
+                </div>
+            </div>
+        </div>
+
 
 
 
@@ -625,12 +862,16 @@
         "July", "August", "September", "October", "November", "December"];
 
     const agendas = {
-        '2025-07-23': [
+        '2025-09-23': [
             {
                 title: "Sharing Produk Banca",
                 note: "Dengan Pak Anto",
                 time: "09:00–11:00",
-                location: "Ruang Rapat Lt.2"
+                location: "Ruang Rapat Lt.2",
+                type: "Meeting",
+                prospect: "Pak Anto",
+                status: "Confirmed",
+                date: "2025-07-23"
             },
             {
                 title: "Follow-Up Proposal Polis",
@@ -645,7 +886,7 @@
                 location: "Kafe Bintaro"
             }
         ],
-        '2025-07-25': [
+        '2025-09-25': [
             {
                 title: "Meeting Internal",
                 note: "Divisi Marketing",
@@ -700,7 +941,6 @@
             agendaBox.innerHTML = `<p style="color:#999;">No agenda on this month.</p>`;
         }
     }
-
     function selectDate(dateStr, cell) {
         document.querySelectorAll(".calendar-table td").forEach(td => td.classList.remove("active"));
         cell.classList.add("active");
@@ -710,24 +950,68 @@
     function showAgenda(dateStr) {
         agendaBox.innerHTML = "";
         const items = agendas[dateStr];
+
+        // bikin header tanggal
+        const selectedDate = new Date(dateStr);
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        const header = document.createElement("div");
+        header.className = "agenda-header";
+        header.textContent = `Agenda - ${selectedDate.toLocaleDateString("id-ID", options)}`;
+        agendaBox.appendChild(header);
+
         if (items) {
             items.forEach(item => {
                 const div = document.createElement("div");
                 div.className = "agenda-item";
                 div.innerHTML = `
-            <div>
-              <div class="agenda-title">${item.title}</div>
-              <div class="agenda-note">${item.note}</div>
-                  <div class="agenda-location"><i class="fas fa-map-marker-alt"></i> ${item.location || '-'}</div>
-            </div>
-            <div class="agenda-time">${item.time}</div>
-          `;
+              <div>
+                <div class="agenda-title">${item.title}</div>
+                <div class="agenda-note">${item.note}</div>
+                <div class="agenda-location"><i class="fas fa-map-marker-alt"></i> ${item.location || '-'}</div>
+              </div>
+              <div class="agenda-time">${item.time}</div>
+            `;
+                div.addEventListener("click", () => openAgendaModal(item));
+
                 agendaBox.appendChild(div);
             });
         } else {
-            agendaBox.innerHTML = `<p style="color:#999;">No agenda on this date.</p>`;
+            agendaBox.innerHTML += `<p style="color:#999; padding:12px;">No agenda on this date.</p>`;
         }
     }
+
+
+    // Modal logic
+    function openAgendaModal(item) {
+        const modal = document.getElementById("agendaModal");
+        const modalContent = modal.querySelector(".modal-content");
+
+        modalContent.innerHTML = `
+    <div class="modal-header">
+      <h2 class="modal-title">${item.title}</h2>
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="modal-section">
+      <p class="modal-note">${item.note}</p>
+      <p class="modal-location"><i class="fas fa-map-marker-alt"></i> ${item.location}</p>
+      <p class="modal-time"><i class="fas fa-clock"></i> ${item.time}</p>
+    </div>
+    <div class="modal-details">
+      <div><strong>Type</strong><span>${item.type || '-'}</span></div>
+      <div><strong>Prospect</strong><span>${item.prospect || '-'}</span></div>
+      <div><strong>Status</strong><span>${item.status || '-'}</span></div>
+      <div><strong>Date</strong><span>${item.date || '-'}</span></div>
+    </div>
+  `;
+
+        modal.style.display = "flex";
+
+        modal.querySelector(".close-btn").onclick = () => {
+            modal.style.display = "none";
+        };
+    }
+
+
 
     document.getElementById("prev").onclick = () => {
         currentMonth--;
