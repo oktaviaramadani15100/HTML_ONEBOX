@@ -486,61 +486,61 @@
             text-align: start;
         }
 
-        /* Bar atas: Search + Filter */
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            gap: 12px;
-            padding-top: 10px;
-        }
+/* Bar atas: Search + Filter */
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 12px;
+    padding-top: 10px;
+}
 
-        /* Search box */
-        .search-box {
-            position: relative;
-            flex: 1;
-            max-width: 250px;
-            font-size: 12px;
+/* Search box */
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 250px;
+     font-size: 12px;
             font-family: 'Poppins', sans-serif;
 
-        }
+}
 
-        .search-box input {
-            width: 100%;
-            padding: 8px 12px 8px 36px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
-            background: #f9fafb;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            border-radius: 25px;
-        }
+.search-box input {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #f9fafb;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 25px;
+}
 
-        .search-box input:focus {
-            border-color: #1e3a8a;
-            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
-        }
+.search-box input:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+}
 
-        /* Icon di dalam search */
-        .search-box i {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-            font-size: 14px;
-            margin-top: 2.5px;
-            margin-left: 205px;
-        }
+/* Icon di dalam search */
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 205px;
+}
 
-        /* Filter */
-        .th-with-filter {
-            color: #1e3a8a;
-            font-size: 1rem;
-            cursor: pointer;
-        }
+/* Filter */
+.th-with-filter {
+    color: #1e3a8a;
+    font-size: 1rem;
+    cursor: pointer;
+}
 
 
 
@@ -1963,48 +1963,49 @@
 
         <!-- Table -->
         <div class="table-wrapper" id="prospectList">
-            <!-- Baris atas: Search + Filter -->
-            <div class="filter-bar">
-                <!-- Search bar -->
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Cari Sesuatu...">
-                </div>
-
-                <!-- Filter -->
-                <div class="th-with-filter">
-                    <i class="fas fa-filter"></i>
-                </div>
-            </div>
-
-            <!-- Tabel -->
-            <table class="prospect-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Campaign</th>
-                        <th>Product</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
-                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">Mandiri Sehat</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
-                    <tr onclick="showDetail()">
-                        <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
-                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
-                    <tr onclick="showDetail()">
-                        <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
-                        <td><a href="#" class="name-link" onclick="showCampaignDetail()">Riplay</a></td>
-                        <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Baris atas: Search + Filter -->
+    <div class="filter-bar">
+        <!-- Search bar -->
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Cari Sesuatu...">
         </div>
+
+        <!-- Filter -->
+        <div class="th-with-filter">
+            <i class="fas fa-filter"></i>
+        </div>
+    </div>
+
+    <!-- Tabel -->
+    <table class="prospect-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Campaign</th>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#" class="name-link" onclick="showDetail()">Layla</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">Mandiri Sehat</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+            <tr onclick="showDetail()">
+                <td><a href="#" class="name-link" onclick="showDetail()">Jhon</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">MSIG Life Campaign</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+            <tr onclick="showDetail()">
+                <td><a href="#" class="name-link" onclick="showDetail()">Schmidt</a></td>
+                <td><a href="#" class="name-link" onclick="showCampaignDetail()">Riplay</a></td>
+                <td><a href="#" class="name-link" onclick="showProductDetail()">Mandiri</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 
         <!-- <div class="detail-campaign" id="detailCampaign" style="display: none;">
