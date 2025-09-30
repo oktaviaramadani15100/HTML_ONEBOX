@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Campaign</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 400px;
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER BIKIN STICKY */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: #1e3a8a;
+      height: 4rem;
+    }
+
+    .header-name {
+      color: #f9fafb;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .header-name i { margin-right: 16px; }
+
+    /* CONTENT SCROLL KE BAWAH */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1rem;
+    }
+
+    .form-group {
+  margin-bottom: 1rem; /* lebih rapat antar field */
+}
+
+.form-group label {
+  font-size: 0.9rem; /* lebih kecil */
+  margin-bottom: 6px; 
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px; /* lebih kecil */
+  font-size: 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px; /* lebih kecil */
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+    .btn-primary {
+      background-color: #1e3a8a;
+      color: white;
+    }
+
+    .bottom-nav {
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 12px;
+            z-index: 10;
+            margin-top: 3rem;
+            background: white;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-wrapper i {
+            color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+        .nav-wrapper i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-wrapper p {
+            margin-top: 4px;
+            font-size: 0.85rem;
+        }
+
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .nav-new i {
+            font-size: 30px;
+            color: white;
+        }
+
+        .nav-new p {
+            margin: 15px 0 0;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background: #d1d5db;
+            }
+        }
+
+        /* Title */
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+/* Checkbox rapih */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #374151;
+  margin: 8px 0 4px;
+}
+
+/* Deskripsi (hint) */
+.hint {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 2px 0 10px 24px; /* agak ke dalam */
+  line-height: 1.3;
+}
+
+/* Dropdown */
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+/* Radio group */
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #374151;
+  margin: 10px 0 4px;
+}
+
+.radio-group input[type="radio"] {
+  transform: scale(1.1);
+}
+
+.form-section {
+  background: #fff;
+  border-top: #ddd 1px solid;
+  /* border: 1px solid #e5e7eb; */
+  /* border-radius: 8px; */
+  padding: 16px;
+  margin-bottom: 20px;
+  margin: 0 -16px 20px;
+}
+
+.form-section > *:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <a href="./campagin.html" class="header-name">
+        <i class="fas fa-arrow-left"></i> Add Campaign
+      </a>
+    </div>
+    <div class="content">
+        <h3 class="section-title">info campaign</h3>
+      <div class="form-group">
+        <label for="campaignName">Campaign Name</label>
+        <input type="text" id="campaignName" placeholder="e.g., Juli Sehat">
+      </div>
+      <div class="form-group">
+        <label for="mediaCampaign">Media</label>
+        <input type="text" id="mediaCampaign" placeholder="e.g., Call">
+      </div>
+      <div class="form-group">
+        <label for="product">Product</label>
+        <input type="text" id="product" placeholder="e.g., Orbeets">
+      </div>
+      <div class="form-group">
+        <label for="altProduct">Alternative Product</label>
+        <input type="text" id="altProduct" placeholder="e.g., Orbeets">
+      </div>
+      <div class="form-group">
+        <label for="campaignType">Type</label>
+        <input type="text" id="campaignType" placeholder="e.g., Health">
+      </div>
+      <div class="form-group">
+        <label for="periode">Periode</label>
+        <input type="text" id="periode" placeholder="e.g., 31 Juni - 31 Juli 2025">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="3" placeholder="Campaign untuk..."></textarea>
+      </div>
+
+<div class="form-section">
+  <h3 class="section-title">Assignment</h3>
+
+ <!-- Assign Now -->
+<label class="checkbox-label">
+  <input type="checkbox" id="assignNow" checked />
+  Assign Now
+</label>
+<p class="hint">If checked, then leads are distributed now. If not, then leads will be distributed later on the assignment page.</p>
+
+<!-- Choose Agent -->
+<label class="checkbox-label">
+  <input type="checkbox" id="chooseAgent" checked />
+  Auto Choose Agent
+</label>
+<p class="hint">If checked, then leads are distributed automatically based on registered sales agents.</p>
+
+  <!-- Scope Assign -->
+  <label for="scopeAssign">Scope Assign</label>
+  <p></p>
+  <select id="scopeAssign">
+    <option>All Campaign</option>
+    <option>Current Campaign</option>
+  </select>
+
+<!-- Assign Mode -->
+<div class="radio-group">
+  <label><input type="radio" name="assignMode" checked /> Round-Robin</label>
+  <p class="hint">Leads are distributed evenly and in rotation to sales agents.</p>
+
+  <label><input type="radio" name="assignMode" /> Relationship-Based</label>
+  <p class="hint">Leads are distributed to sales agents with whom they have previously interacted (last 2 months).</p>
+
+  <label><input type="radio" name="assignMode" /> Balance-Based</label>
+  <p class="hint">Leads are distributed based on the balance of workload among agents.</p>
+</div>
+</div>
+
+      
+      <button class="btn btn-primary" onclick="alert('Campaign baru berhasil disimpan!')">Save Campaign</button>
+    </div>
+    
+
+    <div class="bottom-nav">
+             <div class="nav-wrapper">
+                <div class="nav-home">
+                    <a href="../spv/home.html"><i class="fas fa-home"></i></a><p>Home</p>
+                </div>
+                <div class="nav-history">
+                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a><p>History</p>
+                </div>
+                <div class="nav-spacer"></div>
+                <div class="nav-call">
+                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a><p>Call</p>
+                </div>
+                <div class="nav-agen">
+                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a><p>Agenda</p>
+                </div>
+            </div>
+            <div class="nav-new">
+                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a><p>New</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

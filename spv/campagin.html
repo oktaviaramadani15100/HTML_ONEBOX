@@ -25,6 +25,7 @@
             max-width: 400px;
             min-height: 100vh;
             background: white;
+            /* position: relative; */
             display: flex;
             flex-direction: column;
         }
@@ -170,10 +171,17 @@
         table {
             width: 100%;
             border-collapse: separate;
-            min-width: 360px;
             border-spacing: 0;
+            min-width: 360px;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 0.85rem;
+            color: #333;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
+        /* Header */
         thead {
             background: #1e3a8a;
             color: white;
@@ -182,20 +190,12 @@
 
         th,
         td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
-            text-align: center;
+            padding: 12px 16px;
+            text-align: start;
             border-bottom: 1px solid #e5e7eb;
         }
 
-        /* thead th:first-child {
-            border-top-left-radius: 12px;
-        }
-
-        thead th:last-child {
-            border-top-right-radius: 12px;
-        } */
-
+        /* Striping */
         tbody tr:nth-child(odd) {
             background-color: #ffffff;
         }
@@ -204,27 +204,29 @@
             background-color: #f9fafb;
         }
 
-        td:first-child,
-        td:last-child {
-            text-align: left;
-        }
-
+        /* Hover */
         tbody tr:hover {
             background-color: #e0f2fe;
             transition: background-color 0.3s ease;
         }
 
+        /* Kolom pertama & terakhir rata kiri */
+        td:first-child,
+        td:last-child {
+            text-align: left;
+        }
+
         td[onclick] {
             color: #1d4ed8;
-            font-weight: 500;
+            font-weight: 700;
         }
 
         td[onclick]:hover {
-            text-decoration: underline;
+            /* text-decoration: underline; */
             color: #1e40af;
             cursor: pointer;
-            text-decoration: none;
         }
+
 
         .detail-campaign {
             display: none;
@@ -274,7 +276,6 @@
             box-sizing: border-box;
         }
 
-        /* Remove focus outline for readonly */
         input[readonly]:focus,
         textarea[readonly]:focus {
             outline: none;
@@ -282,7 +283,6 @@
             border-color: #d1d5db;
         }
 
-        /* Two column layout on medium+ screens */
         @media (min-width: 480px) {
             .form-group {
                 flex: 1 1 48%;
@@ -295,83 +295,51 @@
 
         .detail-product {
             padding: 16px;
-
             border-radius: 8px;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .section-title-campaign {
+        .download-btn {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
             font-weight: 600;
-            margin-bottom: 16px;
-            color: #333;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 8px;
         }
 
         .section-header h2 {
             font-size: 1rem;
         }
 
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #555;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px 10px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            background-color: #fdfdfd;
-            color: #333;
-            box-sizing: border-box;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .form-row .form-group {
-            flex: 1 1 100%;
-        }
-
-        /* Responsive: 2 columns jika layar cukup lebar */
-        @media (min-width: 480px) {
-            .form-row .form-group {
-                flex: 1 1 48%;
-            }
-        }
-
-
         .bottom-nav {
-            position: sticky;
-            /* position: relative; */
-            bottom: -1px;
-            left: 0;
-            right: 0;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            /* samain sama container utama */
+            background: white;
             border-top: 1px solid #ccc;
-            /* display: flex; */
+            display: flex;
             justify-content: space-around;
-            align-items: flex-end;
+            align-items: center;
             padding: 10px 0;
             font-size: 12px;
-            z-index: 10;
-            margin-top: 3rem;
-            background: white;
+            z-index: 999;
+            /* HAPUS jarak ke atas */
         }
 
         .nav-wrapper {
             display: flex;
             justify-content: space-around;
             align-items: center;
+            width: 100%;
+            /* penting biar isi rata full */
         }
 
         .nav-wrapper i {
@@ -393,55 +361,21 @@
             flex: 0.5;
         }
 
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
         .nav-wrapper i {
             font-size: 1.5rem;
             margin-bottom: 4px;
         }
-
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
 
         .nav-wrapper p {
             margin-top: 4px;
             font-size: 0.85rem;
         }
 
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        } */
-
         .nav-new {
             justify-content: center;
             align-items: center;
             border-radius: 50%;
             text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
             position: absolute;
             z-index: 20;
             display: flex;
@@ -462,13 +396,10 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-decoration: none;
-            font-size: 30px;
         }
 
         .nav-new i {
             font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
             color: white;
         }
 
@@ -478,72 +409,10 @@
             color: #1e3a8a;
         }
 
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
-
-        .add-btn {
-            display: inline-block;
-            margin-bottom: 1rem;
-            background-color: #1e3a8a;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .add-btn:hover {
-            background-color: #3b4cc0;
-        }
-
-
         @media (min-width: 768px) {
             body {
                 background: #d1d5db;
+                padding-bottom: 80px;
             }
         }
 
@@ -552,7 +421,6 @@
             justify-content: flex-end;
             align-items: center;
             gap: 12px;
-            padding: 10px 16px;
             position: relative;
         }
 
@@ -563,60 +431,689 @@
             font-weight: bold;
         }
 
-        /* .menu-icon-group i {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
+        /* --- KODE BARU YANG SAYA TAMBAHKAN --- */
+        .header-actions {
+            margin-bottom: 10px;
+            margin-left: 12rem;
+            /* Mendorong tombol ke kanan */
+            margin-right: 1rem;
+        }
+
+        .btn-add {
+            background-color: #2563eb;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-add:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* .detail-actions {
+            margin-top: 1.5rem;
+            text-align: right;
+        }
+
+        .btn-edit {
+            background-color: #3b82f6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.8rem;
         } */
 
-        input[readonly]:focus {
-            outline: none;
-            box-shadow: none;
-            border-color: #ccc;
+        .form-group {
+            margin-bottom: 10px;
         }
 
-        textarea[readonly] {
-            resize: none;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
+        .btn-primary {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            width: 100%;
         }
 
-        textarea[readonly]:focus {
-            outline: none;
-            box-shadow: none;
-            border-color: #ccc;
+        /* STYLE UNTUK TAB SYSTEM */
+        .tab-container {
+            margin-top: 16px;
+            width: 100%;
         }
 
-        .section-header {
+        .tab-header {
+            display: flex;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+
+        
+     .tab-btn {
+      flex: 1;
+      /* min-width: 120px; */
+      padding: 15px 10px;
+      border: none;
+      background: transparent;
+      color: #666;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      white-space: nowrap;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .tab-btn.active {
+      color: #1e3a8a;
+      /* border-bottom-color: #00d4ff; */
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s;
+    }
+
+
+        /* STYLE UNTUK TAB ASSIGNMENT */
+        .stats-container {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: #374151;
+            margin: 0;
+        }
+
+        /* FIX TABEL UNTUK MOBILE */
+        /* FIX SINGKAT */
+        .agent-table {
+            table-layout: fixed !important;
+            width: 100% !important;
+        }
+
+        .agent-table th:nth-child(1) {
+            width: 18% !important;
+        }
+
+        .agent-table th:nth-child(2) {
+            width: 24% !important;
+            white-space: pre-line !important;
+        }
+
+        .agent-table th:nth-child(3) {
+            width: 17% !important;
+            padding: 0 8px !important;
+        }
+
+        .agent-table th:nth-child(4) {
+            width: 12% !important;
+            padding: 0 8px !important;
+        }
+
+        .agent-table th:nth-child(5) {
+            width: 12% !important;
+            padding: 0 8px !important;
+        }
+
+        .agent-table th:nth-child(6) {
+            width: 21% !important;
+            padding: 0 8px !important;
+        }
+
+        .agent-table td:nth-child(3) {
+            padding: 6px 8px !important;
+        }
+
+        .agent-table td:nth-child(4) {
+            padding: 6px 8px !important;
+        }
+
+        .agent-table td:nth-child(5) {
+            padding: 6px 8px !important;
+        }
+
+        .agent-table td:nth-child(6) {
+            padding: 6px 8px !important;
+        }
+
+        .agent-table td {
+            padding: 6px 3px !important;
+            font-size: 0.7rem !important;
+            white-space: pre-line !important;
+            line-height: 1.2 !important;
+        }
+
+        /* Fix tombol Assign */
+        .assign-btn {
+            background: white;
+            color: gray;
+            border: 2px solid #d1d5db;
+            padding: 6px 12px !important;
+            border-radius: 4px;
+            font-size: 0.7rem !important;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 0;
+            min-width: 60px !important;
+            width: 100% !important;
+        }
+
+        .assign-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+            color: #374151;
+        }
+
+        .assign-btn {
+            background: white;
+            color: gray;
+            border: 2px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 0;
+            min-width: 80px;
+            padding-right: 80px;
+        }
+
+        .assign-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+            color: #374151;
+        }
+
+        .pagination {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .pagination-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* STYLE UNTUK TAB PULL & ROTATION YANG DIPERBAIKI */
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-header .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 0;
+        }
+
+        /* Target Section */
+        .target-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .target-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .target-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .target-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* Search Prospect Section */
+        .search-prospect-section {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.search-prospect-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+.search-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Search row (input + filter dropdown) */
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background-color: white;
+    outline: none;
+}
+
+.filter-btn {
+    background: #f8fafc;
+    border: 1px solid #d1d5db;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #374151;
+}
+
+/* .filter-dropdown {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background-color: white;
+    cursor: pointer;
+} */
+
+/* Show entries row */
+.show-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #374151;
+}
+
+.show-row select {
+    padding: 4px 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background: white;
+}
+
+
+        /* Table Controls */
+        /* .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .show-entries {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .entries-dropdown {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border: none;
+            outline: none;
+            font-size: 0.85rem;
+            min-width: 120px;
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-icon-btn {
+            padding: 8px 12px;
+            background: #f8fafc;
+            border: none;
+            border-left: 1px solid #d1d5db;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .search-icon-btn:hover {
+            background: #e5e7eb;
+        } */
+
+        /* Table Container */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin-bottom: 16px;
+            /* table-layout: fixed; */
+            /* min-width: 360px; */
+            overflow-x: auto;
+        }
+
+        .agent-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .agent-table th {
+            background: #f1f5f9;
+            padding: 12px 8px;
+            font-weight: 600;
+            color: #374151;
+            text-align: left;
             border-bottom: 1px solid #e5e7eb;
         }
 
-        .download-btn {
-            display: inline-flex;
+        .agent-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #4b5563;
+        }
+
+        .agent-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .agent-name {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .pagination-info {
+            font-weight: 500;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .pagination-btn {
+            background: white;
+            border: 1px solid #d1d5db;
             padding: 6px 12px;
-            background-color: #1e3a8a;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: -1rem;
+            color: #374151;
+            min-width: 60px;
         }
 
-        .download-btn i {
-            font-size: 1rem;
+        .pagination-btn:hover {
+            background: #f8fafc;
+            border-color: #9ca3af;
         }
 
-        .download-btn:hover {
-            background-color: #0056b3;
+        .pagination-btn.active {
+            background: #1e3a8a;
+            color: white;
+            border-color: #1e3a8a;
         }
+
+        /* Filter Modal */
+        .filter-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #64748b;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .close-modal:hover {
+            color: #374151;
+        }
+
+        .modal-body {
+            padding: 16px;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .filter-option {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-option label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .filter-option select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+            justify-content: flex-end;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* FIX MENTOK TAB 2 & TAB 3 */
+        #tab-assignment,
+        #tab-pull {
+            margin-left: -16px !important;
+            margin-right: -16px !important;
+            width: calc(100% + 32px) !important;
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+        }
+
+        #tab-assignment .table-container,
+        #tab-pull .table-container {
+            margin-left: -16px !important;
+            margin-right: -16px !important;
+            width: calc(100% + 32px) !important;
+            border-radius: 0 !important;
+        }
+
+        #tab-assignment .agent-table,
+        #tab-pull .agent-table {
+            border-radius: 0 !important;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        /* --- AKHIR DARI KODE BARU --- */
     </style>
 </head>
 
@@ -625,7 +1122,7 @@
         <!-- Header -->
         <div class="header">
             <span class="header-name" id="headerTitle" onclick="handleBack()">
-                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campagin</span>
+                <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
             </span>
 
             <div class="menu-icon-group">
@@ -667,9 +1164,15 @@
 
         </div>
 
-        <!-- Content -->
         <div class="content">
+
+
             <div class="table-wrapper" id="campaignList">
+                <div class="header-actions">
+                    <a href="./add-campaign.html" class="btn-add">
+                        <i class="fas fa-plus"></i> Add new campaign
+                    </a>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -680,193 +1183,468 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td onclick="showCampaignDetail()">julisehat</td>
+                            <td onclick="showCampaignDetail()">juli sehat</td>
                             <td>7</td>
                             <td onclick="showProductDetail()">mandiri sehat</td>
-                        </tr>
                         <tr>
-                            <td onclick="showCampaignDetail()">julipintar</td>
+                            <td onclick="showCampaignDetail()">juli pintar</td>
                             <td>5</td>
                             <td onclick="showProductDetail()">onebox</td>
-                        </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">Riplay</td>
                             <td>4</td>
                             <td onclick="showProductDetail()">onebox</td>
-                        </tr>
                         <tr>
                             <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
                             <td>8</td>
                             <td onclick="showProductDetail()">onebox</td>
-                        </tr>
-                        <tr>
-                            <td onclick="showCampaignDetail()">Riplay</td>
-                            <td>4</td>
-                            <td onclick="showProductDetail()">onebox</td>
-                        </tr>
-                        <tr>
-                            <td onclick="showCampaignDetail()">MSIG Life Campaign</td>
-                            <td>8</td>
-                            <td onclick="showProductDetail()">onebox</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- Detail Campaign -->
-            <div class="detail-campaign" id="detailCampaign" style="display: none;">
-                <div class="form-group">
-                    <label for="campaignName">Campaign Name</label>
-                    <input type="text" id="campaignName" value="Juli Sehat" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="mediaCampaign">Media</label>
-                    <input type="text" id="mediaCampaign" value="Call" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label for="product">Product</label>
-                    <input type="text" id="product" value="Orbeets" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="campaignType">Type</label>
-                    <input type="text" id="campaignType" value="Health" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label for="periode">Periode</label>
-                    <input type="text" id="periode" value="31 Juni - 31 Juli 2025" readonly>
-                </div>
-                <div class="form-group full">
-                    <label for="description">Description</label>
-                    <textarea id="description" rows="3" readonly>Campaign untuk bulan Juli</textarea>
-                </div>
-
-            </div>
-
-
-            <div class="detail-product" id="detailProduct" style="display: none;">
-                <div class="section-header">
-                    <h2 class="section-title">Produt Specification</h2>
-                    <button class="download-btn" onclick="handleDownload()">
-                        <i class="fas fa-download"></i> Download
-                    </button>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="product">Product Name</label>
-                    <input type="text" id="product" value="Orbeets" readonly>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productDescription">Product Description</label>
-                        <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami" readonly>
+            <div class="detail-campaign" id="detailCampaign">
+                <div class="tab-container">
+                    <div class="tab-header">
+                        <button class="tab-btn active" onclick="switchTab('edit')"><i class="fas fa-pencil-alt"></i> Edit Campaign</button>
+                        <button class="tab-btn" onclick="switchTab('assignment')"><i class="fas fa-clipboard"></i> Assignment</button>
+                        <button class="tab-btn" onclick="switchTab('pull')"> <i class="fas fa-sync-alt"></i> Pull & Rotation</button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="productAlternat">Alternative Product</label>
-                        <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                    <!-- Tab 1: Edit Campaign -->
+                    <div class="tab-content active" id="tab-edit">
+                        <div class="form-group">
+                            <label for="campaignName">Campaign Name</label>
+                            <input type="text" id="campaignName" value="Juli Sehat">
+                        </div>
+                        <div class="form-group">
+                            <label for="mediaCampaign">Media</label>
+                            <input type="text" id="mediaCampaign" value="Call">
+                        </div>
+                        <div class="form-group">
+                            <label for="product">Product</label>
+                            <input type="text" id="product" value="Orbeets">
+                        </div>
+                        <div class="form-group">
+                            <label for="alternativeProduct">Alternative Product</label>
+                            <input type="text" id="alternativeProduct" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="campaignType">Type</label>
+                            <input type="text" id="campaignType" value="Health">
+                        </div>
+                        <div class="form-group">
+                            <label for="periode">Periode</label>
+                            <input type="text" id="periode" value="31 Juni - 31 Juli 2025">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" rows="3">Campaign untuk bulan Juli</textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="alert('Perubahan berhasil disimpan!')">Update
+                            Campaign</button>
                     </div>
-                </div>
-            </div>
+
+                    <!-- Tab 2: Assignment -->
+                    <div class="tab-content" id="tab-assignment">
+                        <div class="stats-container">
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Total</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">0</div>
+                                    <div class="stat-label">Assigned</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Remain</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="autoAssign">
+                            <label for="autoAssign">Auto - If checked, then leads are distributed automatically based
+                                registered sales agents on the system.</label>
+                        </div>
+                        <div class="table-container">
+                            <table class="agent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Last Assign</th>
+                                        <th>Assigned</th>
+                                        <th>Open</th>
+                                        <th>Closed</th>
+                                        <th>Assign</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sales 03</td>
+                                        <td>16 Sep 2025, 11:39</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td><input type="text" class="assign-btn" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td>prospect_01</td>
+                                        <td>17 Sep 2025, 14:44</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td><input type="text" class="assign-btn" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>TOTAL</strong></td>
+                                        <td></td>
+                                        <td><strong>0</strong></td>
+                                        <td><strong>0</strong></td>
+                                        <td><strong>0</strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <div>Showing 1 to 2 of 2 entries</div>
+                            <div>
+                                <button class="pagination-btn">Previous</button>
+                                <button class="pagination-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Pull & Rotation -->
+                    <div class="tab-content" id="tab-pull">
+                        <!-- Header -->
+                        <div class="section-header">
+                            <h2 class="section-title">Pull & Rotation Prospect</h2>
+                        </div>
+
+                        <!-- Target Section -->
+                        <div class="target-section">
+                            <h3>Target</h3>
+                            <div class="target-stats">
+                                <div class="target-stat">
+                                    <span class="stat-label">Total:</span>
+                                    <span class="stat-value">4</span>
+                                </div>
+                                <div class="target-stat">
+                                    <span class="stat-label">Assigned:</span>
+                                    <span class="stat-value">0</span>
+                                </div>
+                                <div class="target-stat">
+                                    <span class="stat-label">Remain:</span>
+                                    <span class="stat-value">4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search Prospect Section -->
+                        <div class="search-prospect-section">
+    <!-- <h3>Search Prospect</h3> -->
+
+    <div class="search-controls">
+        <!-- Search input + filter dropdown sejajar -->
+        <div class="search-row">
+            <input type="text" class="search-input" placeholder="Search prospect or agent...">
+             <button class="filter-btn">
+    <i class="fas fa-filter"></i>
+  </button>
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                    <a href="../spv/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
+        <!-- Show entries di bawah -->
+        <div class="show-row">
+            <label for="entries">Show</label>
+            <select id="entries">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+            <span>entries</span>
+        </div>
+    </div>
+</div>
 
-                <div class="nav-history">
-                    <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
 
-                <div class="nav-spacer"></div>
+                        <!-- Table Controls -->
+                        <!-- <div class="table-controls">
+                            <div class="show-entries">
+                                <label>Show</label>
+                                <select class="entries-dropdown">
+                                    <option>10 entries</option>
+                                    <option>25 entries</option>
+                                    <option>50 entries</option>
+                                    <option>100 entries</option>
+                                </select>
+                            </div>
+                            <div class="search-bar">
+                                <input type="text" placeholder="Search:" class="search-input">
+                                <button class="search-icon-btn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div> -->
 
-                <div class="nav-call">
-                    <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
+                        <!-- Agent Table -->
+                        <div class="table-container">
+                            <table class="agent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Agent Name</th>
+                                        <th>Last Assign</th>
+                                        <th>Assigned</th>
+                                        <th>Open</th>
+                                        <th>Closed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="agent-name">prospect_01</td>
+                                        <td>17 Sep 2025, 14:44</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="agent-name">Sales 03</td>
+                                        <td>16 Sep 2025, 11:39</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                <div class="nav-agen">
-                    <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <div class="pagination-info">
+                                Showing 1 to 2 of 2 entries
+                            </div>
+                            <div class="pagination-controls">
+                                <button class="pagination-btn">Previous</button>
+                                <!-- <button class="pagination-btn active">1</button> -->
+                                <button class="pagination-btn">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Filter Agent Modal (akan muncul saat tombol Filter Agent diklik) -->
+                        <div class="filter-modal" id="filterAgentModal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3>Filter Agent</h3>
+                                    <button class="close-modal" onclick="closeFilterModal()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="filter-options">
+                                        <div class="filter-option">
+                                            <label>Agent Status</label>
+                                            <select>
+                                                <option>All Agents</option>
+                                                <option>Active Only</option>
+                                                <option>Inactive Only</option>
+                                            </select>
+                                        </div>
+                                        <div class="filter-option">
+                                            <label>Assignment Type</label>
+                                            <select>
+                                                <option>All Types</option>
+                                                <option>Auto Assignment</option>
+                                                <option>Manual Assignment</option>
+                                            </select>
+                                        </div>
+                                        <div class="filter-option">
+                                            <label>Date Range</label>
+                                            <select>
+                                                <option>All Time</option>
+                                                <option>Last 7 Days</option>
+                                                <option>Last 30 Days</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn-secondary" onclick="closeFilterModal()">Cancel</button>
+                                    <button class="btn-primary" onclick="applyFilter()">Apply Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
 
-            <div class="nav-new">
-                <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-                <p>New</p>
+            <div class="detail-product" id="detailProduct" style="display: none;">
+                        <div class="section-header">
+                            <h2 class="section-title">Product Specification</h2>
+                            <button class="download-btn" onclick="handleDownload()">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="product">Product Name</label>
+                            <input type="text" id="product" value="Orbeets" readonly>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productDescription">Product Description</label>
+                                <input type="text" id="productDescription" value="Suplemen kesehatan berbahan alami"
+                                    readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productAlternat">Alternative Product</label>
+                                <input type="text" id="productAlternat" value="Orbeets Plus" readonly>
+                            </div>
+                        </div>
+                    </div>
+            <div class="bottom-nav">
+                <div class="nav-wrapper">
+                    <div class="nav-home">
+                        <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+                        <p>Home</p>
+                    </div>
+                    <div class="nav-history">
+                        <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+                        <p>History</p>
+                    </div>
+                    <div class="nav-spacer"></div>
+                    <div class="nav-call">
+                        <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+                        <p>Call</p>
+                    </div>
+                    <div class="nav-agen">
+                        <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+                        <p>Agenda</p>
+                    </div>
+                </div>
+                <div class="nav-new">
+                    <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+                    <p>New</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Semua JavaScript asli Anda tetap di sini, tidak ada yang dihapus.
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdownMenu');
+            if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
+                dropdown.style.display = 'none';
+            }
+        });
+        let currentView = 'list';
+        function showCampaignDetail() {
+            document.getElementById('campaignList').style.display = 'none';
+            document.getElementById('detailCampaign').style.display = 'block';
+            currentView = 'detailCampaign';
+            document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>`;
+        }
+        function showProductDetail() {
+            document.getElementById('campaignList').style.display = 'none';
+            document.getElementById('detailProduct').style.display = 'block';
+            currentView = 'detailProduct';
+            document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>`;
+        }
+        function handleBack() {
+            if (currentView === 'detailCampaign' || currentView === 'detailProduct') {
+                document.getElementById('campaignList').style.display = 'block';
+                document.getElementById('detailCampaign').style.display = 'none';
+                document.getElementById('detailProduct').style.display = 'none';
+                currentView = 'list';
+                document.getElementById('headerTitle').innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>`;
+            } else {
+                window.location.href = '../spv/home.html';
+            }
+        }
+
+        // Fungsi untuk switch tab
+        function switchTab(tabName) {
+            // Sembunyikan semua tab content
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Nonaktifkan semua tab button
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Tampilkan tab yang dipilih
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+
+            // Aktifkan tombol tab yang dipilih
+            event.target.classList.add('active');
+        }
+
+        // Fungsi untuk toggle filter button depressed effect
+        function toggleFilter(buttonId) {
+            // Remove depressed class from all filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('depressed');
+            });
+
+            // Add depressed class to clicked button
+            const clickedBtn = document.getElementById(buttonId);
+            clickedBtn.classList.add('depressed');
+
+            // Show modal for Filter Agent
+            // if (buttonId === 'filterAgentBtn') {
+            //     document.getElementById('filterAgentModal').style.display = 'flex';
+            // }
+        }
+
+        // Fungsi untuk close modal
+        function closeFilterModal() {
+            document.getElementById('filterAgentModal').style.display = 'none';
+        }
+
+        // Fungsi untuk apply filter
+        function applyFilter() {
+            // Implementasi logika filter di sini
+            console.log('Filter diterapkan');
+            closeFilterModal();
+        }
+
+        // Event listeners untuk filter buttons
+        document.getElementById('filterAgentBtn').addEventListener('click', function () {
+            toggleFilter('filterAgentBtn');
+        });
+
+        document.getElementById('filterProspectBtn').addEventListener('click', function () {
+            toggleFilter('filterProspectBtn');
+            // Bisa tambahkan modal untuk Filter Prospect Stage di sini
+        });
+
+        // Close modal ketika klik di luar modal
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('filterAgentModal');
+            if (event.target === modal) {
+                closeFilterModal();
+            }
+        });
+
+        function handleDownload() {
+            alert('Download product specification');
+        }
+    </script>
 </body>
 
 </html>
-
-<script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    window.addEventListener('click', function (e) {
-        const dropdown = document.getElementById('dropdownMenu');
-        const icon = document.querySelector('.fa-ellipsis-v');
-
-        if (!e.target.closest('#dropdownMenu') && !e.target.closest('.fa-ellipsis-v')) {
-            dropdown.style.display = 'none';
-        }
-    });
-
-    let currentView = 'list';
-
-    function showCampaignDetail() {
-        document.getElementById('campaignList').style.display = 'none';
-        document.getElementById('detailCampaign').style.display = 'block';
-        currentView = 'detailCampaign';
-
-        document.getElementById('headerTitle').innerHTML = `
-        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Campaign</span>
-    `;
-    }
-
-    function showProductDetail() {
-        document.getElementById('campaignList').style.display = 'none';
-        document.getElementById('detailProduct').style.display = 'block';
-        currentView = 'detailProduct';
-
-        document.getElementById('headerTitle').innerHTML = `
-        <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Detail Product</span>
-    `;
-    }
-
-    function handleBack() {
-        if (currentView === 'detailCampaign') {
-            document.getElementById('campaignList').style.display = 'block';
-            document.getElementById('detailCampaign').style.display = 'none';
-            currentView = 'list';
-
-            document.getElementById('headerTitle').innerHTML = `
-            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
-        `;
-        } else if (currentView === 'detailProduct') {
-            document.getElementById('campaignList').style.display = 'block';
-            document.getElementById('detailProduct').style.display = 'none';
-            currentView = 'list';
-
-            document.getElementById('headerTitle').innerHTML = `
-            <i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Campaign</span>
-        `;
-        } else {
-            window.location.href = '../spv/home.html';
-        }
-    }
-
-
-</script>
