@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REPORT SALES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+
+    body::-webkit-scrollbar {
+      width: 0px;
+    }
+
+    html {
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    html::-webkit-scrollbar {
+      width: 0px;
+    }
+     /* Sales Report Styles */
+    .sales-report-container {
+      padding: 16px;
+      padding-bottom: 100px;
+    }
+
+    .report-tabs {
+      display: flex;
+      background: white;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-bottom: 2px solid #e0e0e0;
+      scrollbar-width: none;
+      margin: -16px -16px 16px -16px;
+      padding: 0 16px;
+    }
+
+    .report-tab {
+      padding: 16px 20px;
+      white-space: nowrap;
+      color: #999;
+      font-size: 15px;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .report-tab.active {
+      color: #333;
+      font-weight: 600;
+      border-bottom-color: #1e3a8a;
+    }
+
+    .report-header {
+      margin-bottom: 20px;
+    }
+
+    .report-title {
+      font-size: 24px;
+      color: #666;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .entries-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .entries-control select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-btn {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .filter-btn {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .prospect-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .prospect-tab {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 20px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .prospect-tab.active {
+      background: #1e3a8a;
+      color: white;
+      border-color: #1e3a8a;
+    }
+
+    .prospect-tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .prospect-tabs::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .prospect-tabs::-webkit-scrollbar-thumb {
+      background: #1e3a8a;
+      border-radius: 10px;
+    }
+
+    .prospect-tabs::-webkit-scrollbar-thumb:hover {
+      background: #00acc1;
+    }
+
+    .data-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .prospect-content {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-label {
+      color: #666;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .card-value {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-value.highlight {
+      color: #1e3a8a;
+      font-size: 18px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      /* padding: 16px; */
+      background: white;
+      border-radius: 8px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pagination-info {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .page-btn {
+      padding: 4px 10px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .page-btn.active {
+      background: #1e3a8a;
+      color: white;
+      border-color: #1e3a8a;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;" id="page-title">REPORT SALES</span></a>
+      <div class="menu-icon-group">
+        <a href="../spv/inbox.html" class="menu-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="#" class="menu-icon" title="Notifications" style="position: relative;">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">5</span>
+        </a>
+        <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+        <div class="dropdown" id="dropdownMenu">
+          <a href="#">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="../spv/agent-rules.html">
+            <i class="fas fa-user-shield"></i>
+            <span>Agent Rules</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+          </a>
+          <hr>
+          <a href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="overflow: auto; scrollbar-width: none;" id="content">
+        <!-- Sales Report Content -->
+      <div class="sales-report-container">
+        <!-- Tabs -->
+        <div class="report-tabs">
+          <a href="#" class="report-tab active">Sales All</a>
+          <a href="#" class="report-tab">Product</a>
+          <a href="#" class="report-tab">Agent</a>
+          <a href="#" class="report-tab">Media</a>
+          <a href="#" class="report-tab">Region</a>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+          <div class="entries-control">
+            <!-- <span>Show</span> -->
+            <select>
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+            <!--   -->
+          </div>
+          <div class="action-buttons">
+            <button class="search-btn">
+              <i class="fas fa-search"></i> Search
+            </button>
+            <button class="filter-btn">
+              <i class="fas fa-filter"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Prospect Type Tabs -->
+        <div class="prospect-tabs">
+          <button class="prospect-tab active" onclick="showProspectTab('cold')">Cold</button>
+          <button class="prospect-tab" onclick="showProspectTab('warm')">Warm</button>
+          <button class="prospect-tab" onclick="showProspectTab('hot')">Hot</button>
+          <button class="prospect-tab" onclick="showProspectTab('closing')">Closing Sales</button>
+        </div>
+
+        <!-- Data Cards -->
+        <div class="data-cards">
+          <!-- Cold Tab Content -->
+          <div class="card prospect-content" id="cold-content">
+            <div class="card-header">Cold</div>
+            <div class="card-row">
+              <span class="card-label">Win</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Lose</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total Close Sales</span>
+              <span class="card-value highlight">0.00</span>
+            </div>
+          </div>
+
+          <!-- Warm Tab Content -->
+          <div class="card prospect-content" id="warm-content" style="display: none;">
+            <div class="card-header">Warm</div>
+            <div class="card-row">
+              <span class="card-label">Win</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Lose</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total Close Sales</span>
+              <span class="card-value highlight">0.00</span>
+            </div>
+          </div>
+
+          <!-- Hot Tab Content -->
+          <div class="card prospect-content" id="hot-content" style="display: none;">
+            <div class="card-header">Hot</div>
+            <div class="card-row">
+              <span class="card-label">Win</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Lose</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total Close Sales</span>
+              <span class="card-value highlight">0.00</span>
+            </div>
+          </div>
+
+          <!-- Closing Sales Tab Content -->
+          <div class="card prospect-content" id="closing-content" style="display: none;">
+            <div class="card-header">Closing Sales</div>
+            <div class="card-row">
+              <span class="card-label">Win</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Lose</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total</span>
+              <span class="card-value">0</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Total Close Sales</span>
+              <span class="card-value highlight">0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <div class="pagination-info">Showing 1 to 4 of 4 entries</div>
+          <div class="pagination-controls">
+            <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn" disabled><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
+        </div>
+        <div class="nav-history">
+          <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+        <div class="nav-spacer"></div>
+        <div class="nav-call">
+          <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+        <div class="nav-agen">
+          <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+      </div>
+      <div class="nav-new">
+        <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/script.js"></script>
+  <script>
+    function showProspectTab(tabName) {
+      
+      const contents = document.querySelectorAll('.prospect-content');
+      contents.forEach(content => {
+        content.style.display = 'none';
+      });
+
+      
+      const tabs = document.querySelectorAll('.prospect-tab');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      
+      document.getElementById(tabName + '-content').style.display = 'block';
+
+     
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
