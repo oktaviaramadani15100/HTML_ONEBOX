@@ -489,39 +489,41 @@
 
         /* STYLE UNTUK TAB SYSTEM */
         .tab-container {
-            margin-top: 16px;
-            width: 100%;
+            /* margin-top: 16px; */
+            /* width: 100%; */
         }
 
         .tab-header {
-            display: flex;
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 4px;
-            margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        height: 4rem;
+      background: white;
+      overflow-x: auto;  
+      overflow-y: hidden;
+      border-bottom: 2px solid #e0e0e0;
+      scrollbar-width: none;
+      margin: -16px -16px 16px -16px;
+      padding: 0 16px ;
         }
 
         
      .tab-btn {
-      flex: 1;
-      /* min-width: 120px; */
-      padding: 15px 10px;
-      border: none;
-      background: transparent;
-      color: #666;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s;
       white-space: nowrap;
-      font-family: 'Poppins', sans-serif;
+      color: #999;
+      font-size: 12px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+       font-family: 'Poppins', sans-serif;
+      text-decoration: none;
     }
 
     .tab-btn.active {
-      color: #1e3a8a;
-      /* border-bottom-color: #00d4ff; */
+      color: #333;
       font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      border-bottom-color: #1e3a8a;
     }
 
     .tab-content {
@@ -531,6 +533,24 @@
     .tab-content.active {
       display: block;
       animation: fadeIn 0.3s;
+    }
+
+    .tab-header::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .tab-header::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .tab-header::-webkit-scrollbar-thumb {
+      background: #1e3a8a;
+      border-radius: 10px;
+    }
+
+    .tab-header::-webkit-scrollbar-thumb:hover {
+      background: #00acc1;
     }
 
 
