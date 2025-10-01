@@ -919,6 +919,8 @@
             /* table-layout: fixed; */
             /* min-width: 360px; */
             overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #ddd transparent;
         }
 
         .agent-table {
@@ -1289,7 +1291,7 @@
                                 registered sales agents on the system.</label>
                         </div>
                         <div class="table-container">
-                            <table class="agent-table">
+                            <table class="agent-table" style="min-width: 600px;">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
