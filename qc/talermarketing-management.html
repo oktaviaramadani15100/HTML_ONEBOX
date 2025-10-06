@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telemarketing Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+
+    #content::-webkit-scrollbar {
+      height: 4px;
+      width: 6px;
+    }
+
+    #content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 2px;
+    }
+
+    #content::-webkit-scrollbar-thumb {
+      background: #b7b7b7;
+      border-radius: 2px;
+    }
+
+     /* Bancassurance QC Styles */
+    .qc-container {
+      padding: 16px;
+      padding-bottom: 100px;
+    }
+
+    .qc-header {
+      margin-bottom: 20px;
+    }
+
+    .qc-title {
+      font-size: 24px;
+      color: #666;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .qc-subtitle {
+      font-size: 16px;
+      color: #999;
+      font-weight: 400;
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+      
+    }
+
+    .approved-btn {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .action-icons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pagination-text {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+      padding: 0 4px;
+    }
+
+    .icon-btn {
+      background: #f5f5f5;
+      border: none;
+      color: #666;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+    }
+
+    .icon-btn:active {
+      background: #e0e0e0;
+      transform: scale(0.95);
+    }
+
+    .primary-btn {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      transition: all 0.2s ease;
+    }
+
+    .download-btn:active {
+      background: #00acc1;
+      transform: scale(0.95);
+    }
+
+    .data-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .qc-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .qc-card.expanded {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .card-checkbox {
+      z-index: 10;
+      padding-top: 4px;
+    }
+
+    .card-checkbox input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #1e3a8a;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 50px;
+    }
+
+    .card-header-content {
+     display: flex;
+     flex-direction: column;
+    }
+
+    .ref-number {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      /* margin-bottom: 4px; */
+    }
+
+    .card-preview {
+      font-size: 13px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+   .dropdown-icon {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 16px;
+      color: #666;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .qc-card.expanded .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .qc-card.expanded .card-details {
+      max-height: 1000px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .status-accepted {
+      background: #e8f5e9;
+      color: #4caf50;
+    }
+
+    .status-pending {
+      background: #ffebee;
+      color: #f44336;
+    }
+
+    .status-not-exported {
+      background: #f5f5f5;
+      color: #757575;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-label {
+      color: #666;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .card-value {
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: right;
+      max-width: 60%;
+    }
+
+    .card-value.null {
+      color: #999;
+      font-style: italic;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 2px solid #f0f0f0;
+      gap: 8px;
+    }
+
+    .footer-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .footer-label {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .footer-value {
+      font-size: 12px;
+      color: #333;
+      font-weight: 600;
+    }
+
+     .btn-view-detail {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-detail:active {
+      background: #00acc1;
+      transform: scale(0.98);
+    }
+
+    @media (min-width: 768px) {
+      .qc-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;" id="page-title">Telemarketing</span></a>
+      <div class="menu-icon-group">
+        <a href="../spv/inbox.html" class="menu-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="#" class="menu-icon" title="Notifications" style="position: relative;">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">5</span>
+        </a>
+        <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+        <div class="dropdown" id="dropdownMenu">
+          <a href="#">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="../spv/agent-rules.html">
+            <i class="fas fa-user-shield"></i>
+            <span>Agent Rules</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+          </a>
+          <hr>
+          <a href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+        <div style="overflow: auto;"  id="content">
+      <!-- Bancassurance QC Content -->
+      <div class="qc-container">
+        <!-- Header -->
+        <!-- <div class="qc-header">
+          <h1 class="qc-title">Bancassurance : Qc</h1>
+          <p class="qc-subtitle">Telemarketing Management</p>
+        </div> -->
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+          <button class="approved-btn">
+            <i class="fas fa-check"></i> Approved
+          </button>
+          <div class="action-icons">
+            <span class="pagination-text">1 - 4</span>
+            <button class="icon-btn">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="primary-btn">
+              <i class="fas fa-download"></i>
+            </button>
+            <button class="primary-btn">
+              <i class="fas fa-filter"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Data Cards -->
+        <div class="data-cards">
+          <!-- Card 1 -->
+          <div class="qc-card" onclick="toggleCard(this)">
+
+            <div style="display: flex; gap: 10px;">
+                <div class="card-checkbox" onclick="event.stopPropagation()">
+                    <input type="checkbox" />
+                </div>
+
+                <div class="card-header-content">
+                    <div class="ref-number">1757671717828</div>
+                    <div class="card-preview">Asuransi Kesehatan Jiwa Smartcity</div>
+                </div>
+            </div>
+            <div>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details">
+              <div class="card-row">
+                <span class="card-label">Effective Date</span>
+                <span class="card-value">2025-09-12 03:08</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Premium</span>
+                <span class="card-value">200.000,00</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Agent</span>
+                <span class="card-value">Agent</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Product</span>
+                <span class="card-value">Asuransi Kesehatan Jiwa Smartcity</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Campaign</span>
+                <span class="card-value null">null</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Input Date</span>
+                <span class="card-value">2025-09-12 03:08</span>
+              </div>
+              <div class="card-footer">
+                <div class="footer-item">
+                  <div class="footer-label">Status Export</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-not-exported">Not Exported</span>
+                  </div>
+                </div>
+                <div class="footer-item">
+                  <div class="footer-label">Status QC</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-accepted">Accepted Without</span>
+                  </div>
+                </div>
+              </div>
+               <button class="btn-view-detail" onclick="event.stopPropagation(); viewDetail('1757671717828')">
+                <i class="fas fa-eye"></i> View Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="qc-card" onclick="toggleCard(this)">
+            <div style="display: flex; gap: 10px;">
+                <div class="card-checkbox" onclick="event.stopPropagation()">
+                    <input type="checkbox" />
+                </div>
+
+                <div class="card-header-content">
+                    <div class="ref-number">1756969908125</div>
+                    <div class="card-preview">Asuransi Proteksi Jiwa Onebox</div>
+                </div>
+            </div>
+            <div>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details">
+              <div class="card-row">
+                <span class="card-label">Effective Date</span>
+                <span class="card-value">2025-09-04 00:11</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Premium</span>
+                <span class="card-value">200.000,00</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Agent</span>
+                <span class="card-value">Agent</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Product</span>
+                <span class="card-value">Asuransi Proteksi Jiwa Onebox</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Campaign</span>
+                <span class="card-value null">null</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Input Date</span>
+                <span class="card-value">2025-09-04 00:11</span>
+              </div>
+              <div class="card-footer">
+                <div class="footer-item">
+                  <div class="footer-label">Status Export</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-not-exported">Not Exported</span>
+                  </div>
+                </div>
+                <div class="footer-item">
+                  <div class="footer-label">Status QC</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-pending">Pending</span>
+                  </div>
+                </div>
+              </div>
+               <button class="btn-view-detail" onclick="event.stopPropagation(); viewDetail('1756969908125')">
+                <i class="fas fa-eye"></i> View Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="qc-card" onclick="toggleCard(this)">
+            <div style="display: flex; gap: 10px;">
+                <div class="card-checkbox" onclick="event.stopPropagation()">
+                    <input type="checkbox" />
+                </div>
+
+                <div class="card-header-content">
+                    <div class="ref-number">1756963421474</div>
+                    <div class="card-preview">Asuransi Kesehatan Jiwa Smartcity</div>
+                </div>
+            </div>
+            <div>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details">
+              <div class="card-row">
+                <span class="card-label">Effective Date</span>
+                <span class="card-value">2025-09-03 22:23</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Premium</span>
+                <span class="card-value">150.000,00</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Agent</span>
+                <span class="card-value">Agent</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Product</span>
+                <span class="card-value">Asuransi Kesehatan Jiwa Smartcity</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Campaign</span>
+                <span class="card-value null">null</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Input Date</span>
+                <span class="card-value">2025-09-03 22:23</span>
+              </div>
+              <div class="card-footer">
+                <div class="footer-item">
+                  <div class="footer-label">Status Export</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-not-exported">Not Exported</span>
+                  </div>
+                </div>
+                <div class="footer-item">
+                  <div class="footer-label">Status QC</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-pending">Pending</span>
+                  </div>
+                </div>
+              </div>
+               <button class="btn-view-detail" onclick="event.stopPropagation(); viewDetail('1756963421474')">
+                <i class="fas fa-eye"></i> View Detail
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="qc-card" onclick="toggleCard(this)">
+            <div style="display: flex; gap: 10px;">
+                <div class="card-checkbox" onclick="event.stopPropagation()">
+                    <input type="checkbox" />
+                </div>
+
+                <div class="card-header-content">
+                    <div class="ref-number">1756900252379</div>
+                    <div class="card-preview">Asuransi Proteksi Jiwa Onebox</div>
+                </div>
+            </div>
+            <div>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details">
+              <div class="card-row">
+                <span class="card-label">Effective Date</span>
+                <span class="card-value">2025-09-03 04:50</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Premium</span>
+                <span class="card-value">200.000,00</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Agent</span>
+                <span class="card-value">Agent</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Product</span>
+                <span class="card-value">Asuransi Proteksi Jiwa Onebox</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Campaign</span>
+                <span class="card-value null">null</span>
+              </div>
+              <div class="card-row">
+                <span class="card-label">Input Date</span>
+                <span class="card-value">2025-09-03 04:50</span>
+              </div>
+              <div class="card-footer">
+                <div class="footer-item">
+                  <div class="footer-label">Status Export</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-not-exported">Not Exported</span>
+                  </div>
+                </div>
+                <div class="footer-item">
+                  <div class="footer-label">Status QC</div>
+                  <div class="footer-value">
+                    <span class="status-badge status-pending">Pending</span>
+                  </div>
+                </div>
+              </div>
+                <button class="btn-view-detail" onclick="event.stopPropagation(); viewDetail('1756900252379')">
+                <i class="fas fa-eye"></i> View Detail
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
+        </div>
+        <div class="nav-history">
+          <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+        <div class="nav-spacer"></div>
+        <div class="nav-call">
+          <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+        <div class="nav-agen">
+          <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+      </div>
+      <div class="nav-new">
+        <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/script.js"></script>
+   <script>
+    function toggleCard(card) {
+      card.classList.toggle('expanded');
+    }
+
+    function viewDetail(policyId) {
+      window.location.href = '../qc/policy-detail.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIELD MAPPING</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+
+     #content::-webkit-scrollbar {
+      height: 4px;
+      width: 6px;
+    }
+
+    #content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 2px;
+    }
+
+    #content::-webkit-scrollbar-thumb {
+      background: #b7b7b7;
+      border-radius: 2px;
+    }
+   /* Field Mapping Styles */
+    .mapping-container {
+      padding: 16px;
+      padding-bottom: 140px;
+    }
+
+    .search-box {
+      margin-bottom: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      background: white;
+    }
+
+    .search-box input::placeholder {
+      color: #999;
+    }
+
+    /* Info Banner */
+    .info-banner {
+      background: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-banner i {
+      color: #1976d2;
+      font-size: 18px;
+      margin-top: 2px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* Mapping Cards */
+    .mapping-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mapping-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .mapping-card.expanded {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .card-number {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: #e3f2fd;
+      color: #1976d2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-right: 50px;
+      position: relative;
+      min-height: 50px;
+      cursor: pointer;
+    }
+
+    .card-header-content {
+      flex: 1;
+    }
+
+    .field-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .field-name {
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .field-preview {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .field-preview .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #e3f2fd;
+      color: #1976d2;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .field-preview .badge.unmapped {
+      background: #fff3e0;
+      color: #ff9800;
+    }
+
+    .dropdown-icon {
+       position: absolute;
+      top: 8px;
+      right: 42px;
+      font-size: 16px;
+      color: #666;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .mapping-card.expanded .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .mapping-card.expanded .card-details {
+      max-height: 500px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .field-row {
+      margin-bottom: 12px;
+    }
+
+    .field-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .row-label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .field-value-display {
+      font-size: 14px;
+      color: #333;
+      font-weight: 600;
+      padding: 10px 12px;
+      background: #f5f5f5;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .field-value-display i {
+      color: #999;
+    }
+
+    .field-row select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      background: white;
+      color: #666;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      margin-top: 25px;
+      display: flex;
+      gap: 8px;
+      z-index: 50;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .btn-template {
+      background: #e0e0e0;
+      color: #666;
+    }
+
+    .btn-save {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .result-count {
+      font-size: 13px;
+      color: #999;
+    }
+
+    @media (min-width: 768px) {
+      .mapping-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <a href="../spv/home.html" class="header-name"><i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;" id="page-title">FIELD MAPPING</span></a>
+      <div class="menu-icon-group">
+        <a href="../spv/inbox.html" class="menu-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="#" class="menu-icon" title="Notifications" style="position: relative;">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">5</span>
+        </a>
+        <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+        <div class="dropdown" id="dropdownMenu">
+          <a href="#">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="../spv/agent-rules.html">
+            <i class="fas fa-user-shield"></i>
+            <span>Agent Rules</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+          </a>
+          <hr>
+          <a href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+     <div style="overflow: auto;" id="content">
+      <!-- Field Mapping Container -->
+      <div class="mapping-container">
+        <!-- Search Box -->
+        <div class="search-box">
+          <input type="text" placeholder="Search...">
+        </div>
+
+        
+
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-title">Database Fields</div>
+          <div class="result-count">6 fields</div>
+        </div>
+
+        <!-- Mapping Cards -->
+        <div class="mapping-cards">
+          <!-- Card 1 - Mapped -->
+          <div class="mapping-card">
+            <div class="card-number">1</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">ReferenceId</div>
+                <!-- <div class="field-preview">
+                  <span class="badge">ReferenceId</span>
+                  <span>Mask: No</span>
+                </div> -->
+              </div>
+              
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  ReferenceId
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option>Select Field</option>
+                  <option>FirstName</option>
+                  <option>Phone</option>
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option selected>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 - Mapped -->
+          <div class="mapping-card">
+            <div class="card-number">2</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">FirstName</div>
+                <!-- <div class="field-preview">
+                  <span class="badge">FirstName</span>
+                  <span>Mask: No</span>
+                </div> -->
+              </div>
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  FirstName
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option>Select Field</option>
+                  <option selected>FirstName</option>
+                  <option>Phone</option>
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 - Unmapped -->
+          <div class="mapping-card">
+            <div class="card-number">3</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">LastName</div>
+                <!-- <div class="field-preview">
+                  <span class="badge unmapped">Not Mapped</span>
+                </div> -->
+              </div>
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  LastName
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option selected>Select Field</option>
+                  <option>FirstName</option>
+                  <option>Phone</option>
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 - Unmapped -->
+          <div class="mapping-card">
+            <div class="card-number">4</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">PicName</div>
+                <!-- <div class="field-preview">
+                  <span class="badge unmapped">Not Mapped</span>
+                </div> -->
+              </div>
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  PicName
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option selected>Select Field</option>
+                  <option>FirstName</option>
+                  <option>Phone</option>
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 - Mapped -->
+          <div class="mapping-card">
+            <div class="card-number">5</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">Phone</div>
+                <!-- <div class="field-preview">
+                  <span class="badge">Phone</span>
+                  <span>Mask: No</span>
+                </div> -->
+              </div>
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  Phone
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option>Select Field</option>
+                  <option>FirstName</option>
+                  <option selected>Phone</option>
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 - Mapped -->
+          <div class="mapping-card">
+            <div class="card-number">6</div>
+            <div class="card-header" onclick="toggleCard(this.parentElement)">
+              <div class="card-header-content">
+                <div class="field-label">Database Field</div>
+                <div class="field-name">Mobile</div>
+                <!-- <div class="field-preview">
+                  <span class="badge">Mobile</span>
+                  <span>Mask: No</span>
+                </div> -->
+              </div>
+              <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="card-details" onclick="event.stopPropagation()">
+              <div class="field-row">
+                <div class="row-label">Database Field (Read-only)</div>
+                <div class="field-value-display">
+                  <i class="fas fa-database"></i>
+                  Mobile
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="row-label">File Fields</div>
+                <select>
+                  <option>Select Field</option>
+                  <option>FirstName</option>
+                  <option>Phone</option>
+                  <option selected>Mobile</option>
+                  <option>Email</option>
+                  <option>WhatsAppId</option>
+                  <option>ReferenceId</option>
+                  <option>Remarks</option>
+                  <option>MediaId</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="row-label">Mask</div>
+                <select>
+                  <option selected>No</option>
+                  <option>Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-template">
+          <i class="fas fa-save"></i> Save as template
+        </button>
+        <button class="btn btn-save">
+          <i class="fas fa-check"></i> Save
+        </button>
+      </div>
+    </div>
+      </div>
+
+      
+
+
+  <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-wrapper">
+        <div class="nav-home">
+          <a href="../spv/home.html"><i class="fas fa-home"></i></a>
+          <p>Home</p>
+        </div>
+        <div class="nav-history">
+          <a href="../spv/history-call.html"><i class="fas fa-file-alt"></i></a>
+          <p>History</p>
+        </div>
+        <div class="nav-spacer"></div>
+        <div class="nav-call">
+          <a href="../spv/call.html"><i class="fas fa-phone-alt"></i></a>
+          <p>Call</p>
+        </div>
+        <div class="nav-agen">
+          <a href="../spv/agenda.html"><i class="fas fa-calendar-alt"></i></a>
+          <p>Agenda</p>
+        </div>
+      </div>
+      <div class="nav-new">
+        <a href="../spv/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
+        <p>New</p>
+      </div>
+    </div>
+
+  <script src="./js/script.js"></script>
+   <script>
+    function toggleCard(card) {
+      card.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>
