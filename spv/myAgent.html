@@ -54,17 +54,22 @@
     .agent-list {
         flex: 1;
         overflow-y: auto; 
+        margin-top: -5px;
         margin-bottom: 5rem;
         padding: 1rem;
-        scrollbar-width: thin; 
-        scrollbar-color: #cbd5e1 #f9fafb;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+    }
+
+    .agent-list::-webkit-scrollbar {
+        display: none; 
     }
 
     .agent-card {
     background: #fff;
     border: 1px solid #1e3a8a;
     border-radius: 8px;
-    padding: 16px;
+    padding: 15px 10px;
     cursor: pointer;
     margin-bottom: 15px;
     display: flex;
@@ -72,24 +77,28 @@
     position: relative;
     }
 
-    .agent-card .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    }
-
     .avatar {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: #e5e7eb;
+        overflow: hidden;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: rgba(37, 99, 235, 0.15);
+        color: #1e3a8a;
         font-size: 16px;
-        color: #6b7280;
-        margin-right: 4px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;   
+        object-position: center;
+        display: block;
     }
 
     .agent-info {
@@ -105,7 +114,7 @@
 
     .agent-info .sales {
         font-size: 13px;
-        margin-top: 5px;
+        margin-top: 2px;
         font-weight: 500;
         color: #333;
     }
@@ -275,7 +284,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        margin-top: 5px;
+        margin-top: 2px;
     }
 
     .search-box {
@@ -327,8 +336,8 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    background: #f1f5f9;
-    color: #1e3a8a;
+    background: #f3e8ff;
+    color: #6b21a8;
     font-size: 11px;
     font-weight: 600;
     padding: 4px 10px;
@@ -346,7 +355,7 @@
     background: #e5e7eb;
     border-radius: 4px;
     overflow: hidden;
-    margin: 10px 56px 5px;
+    margin: 7px 52px 5px;
     }
 
     .progress-bar-fill {
@@ -363,7 +372,7 @@
 
     .agent-footer .status {
     font-size: 10px;
-    margin-left: 57px;
+    margin-left: 53px;
     color: #6b7280;
     }
 
@@ -462,7 +471,9 @@
             <div class="agent-card">
                 <div class="agent-header-row">
                 <div class="agent-header-left">
-                    <img src="../img/profile3.jpg" alt="avatar" class="avatar">
+                <div class="avatar">
+                    <img src="../img/profile5.jpg">
+                </div>
                     <div class="agent-info">
                     <div class="name-account">
                         <span class="name">Falah</span>
@@ -471,14 +482,14 @@
                         <i class="fa-solid fa-toolbox"></i> Kredit
                         </span>
                     </div>
-                    <div class="sales">Rp. 500.000</div>
+                    <div class="sales">Rp. 300.000</div>
                     </div>
                 </div>
                 <div class="badge">3/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:20%"></div>
+                <div class="progress-bar-fill" style="width:50%"></div>
                 </div>
 
                 <div class="agent-footer">
@@ -498,7 +509,7 @@
             <div class="agent-card">
                 <div class="agent-header-row">
                 <div class="agent-header-left">
-                    <img src="../img/profile3.jpg" alt="avatar" class="avatar">
+                <div class="avatar">B</div>
                     <div class="agent-info">
                     <div class="name-account">
                         <span class="name">Budi</span>
@@ -514,7 +525,7 @@
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:40%"></div>
+                <div class="progress-bar-fill" style="width:30%"></div>
                 </div>
 
                 <div class="agent-footer">
@@ -534,10 +545,12 @@
             <div class="agent-card">
                 <div class="agent-header-row">
                 <div class="agent-header-left">
-                    <img src="../img/profile3.jpg" alt="avatar" class="avatar">
+                <div class="avatar">
+                    <img src="../img/profile4.jpg">
+                </div>
                     <div class="agent-info">
                     <div class="name-account">
-                        <span class="name">Dohwan</span>
+                        <span class="name">Harry</span>
                         <span class="dot"></span>
                         <span class="account">
                         <i class="fa-solid fa-toolbox"></i> Kredit
@@ -546,7 +559,7 @@
                     <div class="sales">Rp. 500.000</div>
                     </div>
                 </div>
-                <div class="badge">5/5</div>
+                <div class="badge reached">5/5</div>
                 </div>
 
                 <div class="progress-bar">
@@ -570,23 +583,25 @@
             <div class="agent-card">
                 <div class="agent-header-row">
                 <div class="agent-header-left">
-                    <img src="../img/profile3.jpg" alt="avatar" class="avatar">
+                <div class="avatar">
+                    <img src="../img/profile2.jpg">
+                </div>
                     <div class="agent-info">
                     <div class="name-account">
-                        <span class="name">Dohwan</span>
+                        <span class="name">Sari</span>
                         <span class="dot"></span>
                         <span class="account">
                         <i class="fa-solid fa-toolbox"></i> Kredit
                         </span>
                     </div>
-                    <div class="sales">Rp. 200.000</div>
+                    <div class="sales">Rp. 100.000</div>
                     </div>
                 </div>
-                <div class="badge">3/5</div>
+                <div class="badge">1/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:60%"></div>
+                <div class="progress-bar-fill" style="width:20%"></div>
                 </div>
 
                 <div class="agent-footer">
@@ -606,30 +621,30 @@
             <div class="agent-card">
                 <div class="agent-header-row">
                 <div class="agent-header-left">
-                    <img src="../img/profile3.jpg" alt="avatar" class="avatar">
+                <div class="avatar">S</div>
                     <div class="agent-info">
                     <div class="name-account">
-                        <span class="name">Rudi</span>
+                        <span class="name">Syadza</span>
                         <span class="dot"></span>
                         <span class="account">
                         <i class="fa-solid fa-toolbox"></i> Kredit
                         </span>
                     </div>
-                    <div class="sales">Rp. 200.000</div>
+                    <div class="sales">Rp. 400.000</div>
                     </div>
                 </div>
-                <div class="badge reached">5/5</div>
+                <div class="badge">4/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:100%"></div>
+                <div class="progress-bar-fill" style="width:70%"></div>
                 </div>
 
                 <div class="agent-footer">
                 <div class="status">
-                <span class="sales-progress">1 of 5 sales</span>
+                <span class="sales-progress">4 of 5 sales</span>
                 <span class="divider"></span>
-                <span class="level">Low</span>
+                <span class="level">On Track</span>
                 </div>
                 <div class="agent-actions">
                     <button><i class="fas fa-phone"></i></button>
@@ -637,98 +652,6 @@
                 </div>
                 </div>
             </div>
-
-        <div class="agent-profile" id="agentProfile" style="display: none;">
-            <div class="profile">
-                <i id="genderIcon" class="gender-icon"></i>
-                <div class="profile-info">
-                    <div class="top-row">
-                        <span class="name" id="profileName"></span>
-                    </div>
-                    <div class="meta">
-                        <div class="contact-line">
-                            <i class="fas fa-phone-alt"></i>
-                            <span id="profilePhone"></span>
-                            <span class="chat-icon" onclick="toggleChat()">
-                                <i class="fas fa-comment"></i>
-                            </span>
-                        </div>
-                        <div>
-                            <i class="fas fa-envelope"></i>
-                            <span id="profileEmail"></span>
-                        </div>
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span id="profileAddress"></span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="biodata">
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-birthday-cake icon"></i>
-                        <div>
-                            <span class="label">Birthday</span>
-                            <span class="value">12 Jan 1995</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-heart icon"></i>
-                        <div>
-                            <span class="label">Marital Status</span>
-                            <span class="value">Single</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-wallet icon"></i>
-                        <div>
-                            <span class="label">Income Range</span>
-                            <span class="value">5 - 10 juta</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-chart-line icon"></i>
-                        <div>
-                            <span class="label">Avg Transaction</span>
-                            <span class="value">Rp 1.250.000</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-id-badge icon"></i>
-                        <div>
-                            <span class="label">Account Type</span>
-                            <span class="value">Kredit</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="biodata-row">
-                    <div class="biodata-item">
-                        <i class="fas fa-calendar-plus icon"></i>
-                        <div>
-                            <span class="label">Join At</span>
-                            <span class="value">03 Juli 2020</span>
-                        </div>
-                    </div>
-                    <div class="biodata-item">
-                        <i class="fas fa-clock icon"></i>
-                        <div>
-                            <span class="label">Duration</span>
-                            <span class="value">5 years 2 months</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div id="bottom-container"></div>
 
