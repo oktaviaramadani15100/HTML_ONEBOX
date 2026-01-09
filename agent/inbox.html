@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inbox</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -14,7 +15,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: #f3f4f6;
       display: flex;
       justify-content: center;
@@ -23,8 +24,9 @@
     .wrapper {
       width: 100%;
       max-width: 400px;
-      min-height: 100vh;
+      height: 100vh;
       background: white;
+      display: flex;
       flex-direction: column;
     }
 
@@ -38,6 +40,7 @@
       top: 0;
       background-color: #1e3a8a;
       z-index: 100;
+      background: linear-gradient(50deg, #1E3A8A 20%, #2563EB 100%, #1E40AF 100%);
     }
 
     .header img {
@@ -52,14 +55,10 @@
       margin-right: 1rem;
     }
 
-    /* .menu-icon:hover {
-      color: #000;
-    } */
-
     .dropdown {
       display: none;
       position: absolute;
-      right: 35px;
+      right: 30px;
       top: 40px;
       background-color: #fff;
       border-radius: 12px;
@@ -69,23 +68,7 @@
       z-index: 100;
       animation: fadeIn 0.2s ease-in-out;
       padding: 10px 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .dropdown-header {
-      text-align: center;
-      padding: 12px 16px;
-    }
-
-    .dropdown-header p {
-      margin: 2px 0;
-      font-size: 13px;
-      color: #333;
-    }
-
-    .dropdown-header .welcome-text {
-      font-weight: bold;
-      color: #1e3a8a;
+      font-family: 'Poppins', sans-serif;
     }
 
     .agent-role {
@@ -102,7 +85,7 @@
       gap: 10px;
       text-decoration: none;
       padding: 6px 8px;
-      font-size: 14px;
+      font-size: 13px;
       color: #1e3a8a;
       transition: background-color 0.25s, color 0.25s;
       border-left: 4px solid transparent;
@@ -127,7 +110,6 @@
     .dropdown span {
       flex: 1;
       font-weight: 500;
-      /* margin-left: 1rem; */
     }
 
     .dropdown hr {
@@ -158,22 +140,98 @@
     }
 
     .inbox-list {
-      padding: 0 1rem;
-      flex: 1;
+      flex: 1;           
+      padding-left: 1rem; 
+      padding-right: 0;
+      overflow-y: auto;  
+      scrollbar-width: thin; 
+      scrollbar-color: #cbd5e1 #f9fafb;
+    }
+
+    .inbox-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .inbox-list::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
     }
 
     .inbox-item {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
+      padding: 16px 10px 16px 0;
       border-bottom: 1px solid #e5e7eb;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .inbox-actions {
+      position: absolute;
+      top: 0;
+      right: 0;       
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .inbox-actions .action {
+      width: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid #e5e7eb;
+      cursor: pointer;
+    }
+
+    .inbox-actions .view {
+      background: #2563eb;
+      color: white;
+    }
+
+    .inbox-actions .delete {
+      background: #ef4444;
+      color: white;
+    }
+
+    .inbox-item:hover .inbox-actions {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .inbox-actions .action:hover {
+      filter: brightness(1.1);
+    }
+
+    .inbox-time {
+      font-size: 0.6rem;
+      color: #1e3a8a;
+      font-weight: 600;
+    }
+    
+    .inbox-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      min-height: 40px; 
+      justify-content: space-between;
+    }
+
+    .inbox-item:last-child {
+      border-bottom: none;
     }
 
     .inbox-left {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 12px;
     }
 
     .inbox-left i {
@@ -183,194 +241,189 @@
     }
 
     .inbox-text {
-      line-height: 1.2;
+      line-height: 1.3;
     }
 
     .inbox-text b {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: #111827;
-      display: block;
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: #6b7280;
+      border-radius: 50%;
+      margin: 0 5px;
+      vertical-align: middle;
+    }
+
+    .inbox-text .badge {
+      vertical-align: middle;
+      position: relative;
+      top: -1px; 
     }
 
     .inbox-text small {
-      font-size: 0.75rem;
+      display: block;
+      font-weight: 500;
+      font-size: 0.72rem;
       color: #6b7280;
+      margin-top: 7px;
     }
 
-    .badge {
-      font-size: 0.65rem;
-      background: #e0e7ff;
-      color: #1e3a8a;
-      border-radius: 4px;
-      padding: 2px 6px;
-      margin-top: 4px;
-      display: inline-block;
-    }
+      .profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
 
-    .badge.open {
-      background: #fef9c3;
-      /* kuning lembut */
-      color: #92400e;
-    }
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e0e7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
 
-    .badge.new {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
+      .badge {
+        font-size: 0.55rem;
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 3px 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
 
-    .badge.solved {
-      background: #f3f4f6;
-      /* abu-abu muda */
-      color: #4b5563;
-    }
+      .badge.system {
+        background: #e0e7ff;
+        color: #1e3a8a;
+      }
 
-    .notif-count {
-      font-size: 0.75rem;
-      color: #dc2626;
-      font-weight: bold;
-      padding-right: 5px;
-    }
+      .badge.team {
+        background: #fef3c7;
+        color: #92400e;
+      }
 
-    .bottom-nav {
-      position: sticky;
-      /* position: relative; */
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      border-top: 1px solid #ccc;
-      /* display: flex; */
-      justify-content: space-around;
-      align-items: flex-end;
-      padding: 10px 0;
-      font-size: 12px;
-      z-index: 10;
-      margin-top: 3rem;
-      background: white;
-    }
+      .badge.customer {
+        background: #f3e8ff;
+        color: #6b21a8;
+      }
 
-    .nav-wrapper {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
+      .notif-count {
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
 
-    .nav-wrapper i {
-      color: #1e3a8a;
-    }
+      .inbox-right.no-notif .notif-count {
+        visibility: hidden;
+      }
 
-    .nav-wrapper>div {
-      flex: 1;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #1e3a8a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
+        .bottom-nav {
+            position: sticky;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ccc;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+            font-size: 11px;
+            z-index: 10;
+            margin-top: 1.5rem;
+            background: white;
+        }
 
-    .nav-spacer {
-      flex: 0.5;
-    }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
 
-
-    /* .bottom-nav div {
-            text-align: center;
+        .nav-wrapper i {
             color: #1e3a8a;
+        }
+
+        .nav-wrapper>div {
+            flex: 1;
+            text-align: center;
             font-size: 0.85rem;
-            transition: transform 0.2s;
+            color: #1e3a8a;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
-        } */
-
-    .nav-wrapper i {
-      font-size: 1.5rem;
-      margin-bottom: 4px;
-    }
-
-    /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
-
-    .nav-wrapper p {
-      margin-top: 4px;
-      font-size: 0.85rem;
-    }
-
-    /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
         }
 
+        .nav-spacer {
+            flex: 0.5;
+        }
+
+        .nav-wrapper i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .nav-wrapper p {
+            margin-top: 2px;
+            font-weight: 600;
+            font-size: 0.60rem;
+        }
 
         .bottom-nav a {
             text-decoration: none;
             color: inherit;
-        } */
+        }
 
-    .nav-new {
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      text-decoration: none;
-      box-sizing: border-box;
-      border: none;
-      padding: 0;
-      transition: none;
-      touch-action: manipulation;
-      position: absolute;
-      z-index: 20;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      top: -22px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .plus-btn {
-      background-color: #1e3a8a;
-      border-radius: 50%;
-      width: 53px;
-      height: 53px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-decoration: none;
-      font-size: 30px;
-    }
-
-    .nav-new i {
-      font-size: 30px;
-      display: block;
-      margin-bottom: -2px;
-      color: white;
-    }
-
-    .nav-new p {
-      margin: 15px 0 0;
-      font-size: 0.85rem;
-      color: #1e3a8a;
-    }
-
-    /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-    /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-    /* .bottom-nav div {
+        .nav-new {
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-sizing: border-box;
+            border: none;
+            padding: 0;
+            transition: none;
+            touch-action: manipulation;
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
             text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
+            top: -22px;
+            left: 51%;
+            transform: translateX(-50%);
+        }
+
+        .plus-btn {
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            width: 53px;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 30px;
         }
 
         .nav-new i {
@@ -378,41 +431,25 @@
             display: block;
             margin-bottom: -2px;
             color: white;
-        } */
+        }
 
-
-    /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
+        .nav-new p {
+            font-weight: 600;
+            margin: 8px 0 0;
+            font-size: 0.60rem;
             color: #1e3a8a;
         }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
 
 
     .header a {
       text-decoration: none;
-      color: inherit;
+      color: #1e3a8a;
     }
 
     .header .header-name {
       text-decoration: none;
       color: #f9fafb;
-      font-size: 20px;
+      font-size: 15px;
       font-weight: bold;
     }
 
@@ -420,16 +457,6 @@
       body {
         background: #d1d5db;
       }
-    }
-
-    .inbox-header {
-      display: flex;
-      gap: 10px;
-      padding: 10px 16px;
-      border-bottom: 1px solid #e5e7eb;
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
 
     .inbox-tab {
@@ -453,6 +480,202 @@
       color: white;
       border-color: #1e3a8a;
     }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .load-icon {
+      font-size: 18px;
+      margin-right: 5px;
+      color: #f9fafb;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .load-icon:hover {
+      transform: rotate(90deg);
+    }
+
+    .inbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      gap: 10px;
+      background: #fff;
+      position: sticky;
+      top: 56px;
+      z-index: 9;
+    }
+
+    .search-box {
+      margin-right: 5px;
+      margin-top: 7px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 25px;
+      padding: 6px 12px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 11px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-box i {
+      color: #111;
+      font-size: 14px;
+    }
+
+    .sort-btn {
+      margin-right: 5px;
+      margin-top: 7px;
+      display: flex;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      gap: 6px;
+      border-radius: 8px;
+      background: #1e3a8a;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+    }
+
+    .sort-btn i {
+      font-size: 11px;
+      color: white;
+    }
+
+    .inbox-tabs {
+      padding-top: 0.6rem;
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+      position: sticky;
+      top: 112px;
+      z-index: 20;
+    }
+
+    .tab {
+      font-family: 'Poppins', sans-serif;
+      flex: 1;
+      background: none;
+      border: none;
+      font-size: 11px;
+      font-weight: 500;
+      color: #9ca3af; 
+      padding: 8px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding-right: 20px;
+      gap: 6px; 
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .tab i {
+      font-size: 11px;
+    }
+
+    .tab.active {
+      color: #1e3a8a;
+      font-weight: 600;
+      border-bottom: 2px solid #1e3a8a;
+    }
+
+    .sort-dropdown {
+      display: none;
+      position: absolute;
+      right: 1px;
+      top: 100px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      width: 200px;
+      z-index: 200;
+      padding: 10px;
+      font-family: 'Poppins', sans-serif;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .sort-dropdown .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      font-weight: 500;
+      font-size: 12px;
+      color: #1e3a8a;
+      cursor: pointer;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .sort-dropdown .dropdown-item:hover,
+    .sort-dropdown .dropdown-item.active {
+      background: #f0f4ff;
+    }
+
+    .sort-dropdown i {
+      font-size: 14px;
+      color: #1e3a8a;
+    }
+
+    .sort-dropdown hr {
+      margin: 8px 0;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+
+    .date-picker {
+      margin: 6px 0 10px 28px;
+      font-size: 12px;
+      padding: 4px 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      width: 140px;
+    }
+
+    #hiddenDate {
+      position: absolute;
+      top: 120px; 
+      right: 80px;
+      opacity: 0;
+      width: 150px;
+      height: 30px;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 270px;
+      color: #6b7280;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .notif-icon {
+      font-size: 18px;
+      margin-right: 5px;
+      color: #f9fafb;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -460,152 +683,307 @@
   <div class="wrapper">
     <!-- Header -->
     <div class="header">
-      <a href="../agent/home.html" class="header-name"> <i class="fas fa-arrow-left"></i> <span
-          style="margin-left: 16px;">Inbox</span></a>
-      <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
+      <a href="../agent/home.html" class="header-name"> 
+        <i class="fa-solid fa-arrow-left"></i> 
+        <span style="margin-left: 16px;">Inbox</span>
+      </a>
+
+      <div class="header-right">
+        <i class="fa-solid fa-sync-alt load-icon"></i>
+        <i class="fa-solid fa-bell notif-icon" onclick="window.location.href='notification.html'"></i>
+        <i class="fa-solid fa-ellipsis-vertical menu-icon" onclick="toggleDropdown()"></i>
+      </div>
 
       <div class="dropdown" id="dropdownMenu">
-        <div class="dropdown-header">
-          <h3 class="welcome-text">Welcome</h3>
-          <h4 class="welcome-text">Agent 01</h4>
-          <h5 class="agent-role">Agent</h5>
-        </div>
-        <hr />
-        <a href="#">
-          <i class="fas fa-user"></i>
-          <span>Profile</span>
-        </a>
-        <a href="../agent/agent-rules.html">
-          <i class="fas fa-user-shield"></i>
-          <span>Agent Rules</span>
-        </a>
-        <a href="#">
-          <i class="fas fa-question-circle"></i>
-          <span>FAQ</span>
-        </a>
+        <a href="../agent/profile.html"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+        <a href="../agent/agent-rules.html"><i class="fa-solid fa-user-shield"></i><span>Agent Rules</span></a>
+        <a href="#"><i class="fa-solid fa-circle-question"></i><span>FAQ</span></a>
         <hr>
-        <a href="#">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Logout</span>
-        </a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
       </div>
     </div>
 
-    <!-- Inbox List -->
-    <div class="inbox-header">
-      <button class="inbox-tab active">All</button>
-      <button class="inbox-tab">System</button>
-      <button class="inbox-tab">Team</button>
-      <button class="inbox-tab">Customer</button>
+    <div class="inbox-top">
+      <div class="search-box">
+        <input type="text" placeholder="Cari Sesuatu..." />
+        <i class="fa-solid fa-search"></i>
+      </div>
+        <button class="sort-btn" onclick="toggleSortDropdown()">
+          <i class="fa-solid fa-filter"></i> Sort by
+        </button>
+
+      <div class="sort-dropdown" id="sortDropdown">
+        <div class="dropdown-item" onclick="openDatePicker()">
+          <i class="fa-solid fa-calendar-days"></i> 
+          <span>Sort by Date</span>
+        </div>
+        <input type="date" class="date-picker" id="datePicker" style="display:none;" />
+
+        <hr>
+
+        <a href="#" class="dropdown-item"><i class="fa-solid fa-arrow-down"></i> <span>Newest to Oldest</span></a>
+        <a href="#" class="dropdown-item"><i class="fa-solid fa-arrow-up"></i> <span>Latest to Earliest</span></a>
+        <a href="#" class="dropdown-item"><i class="fa-solid fa-sort-amount-down"></i> <span>Descending</span></a>
+      </div>
+      <input type="date" id="hiddenDate" style="position:absolute; opacity:0; pointer-events:none;" />
     </div>
 
+    <!-- Tabs -->
+    <div class="inbox-tabs">
+      <button class="tab active"><i class="fa-solid fa-table-cells-large"></i> All</button>
+      <button class="tab"><i class="fa-solid fa-square-check"></i> System</button>
+      <button class="tab"><i class="fa-solid fa-users"></i> Team</button>
+      <button class="tab"><i class="fa-solid fa-user-group"></i> Customer</button>
+    </div>
 
     <div class="inbox-list">
       <div class="inbox-item">
         <div class="inbox-left">
-          <i class="fas fa-envelope"></i>
+          <img src="/img/msig.jpg" class="profile-img" />
           <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge new">Team</span>
+            <b>MSIG</b> <span class="dot"></span> <span class="badge system">System</span>
+            <small>Selamat Pagi, bagaimana kelanjutan...</small>
           </div>
         </div>
-        <span class="notif-count">1</span>
-      </div>
+        <div class="inbox-right">
+          <span class="inbox-time">22:48</span>
+          <span class="notif-count">2</span>
+        </div>
 
-      <div class="inbox-item">
-        <div class="inbox-left">
-          <i class="fas fa-reply"></i>
-          <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge open">Customer</span>
-          </div>
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
         </div>
       </div>
 
       <div class="inbox-item">
         <div class="inbox-left">
-          <i class="fas fa-camera"></i>
+          <div class="profile-icon"><i class="fa-solid fa-user"></i></div>
           <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge new">Team</span>
+            <b>Syadza</b> <span class="dot"></span> <span class="badge team">Team</span>
+            <small>Ada denda kalau telat bayar premi...</small>
           </div>
+        </div>
+        <div class="inbox-right">
+          <span class="inbox-time">Just Now</span>
+          <span class="notif-count">2</span>
+        </div>
+
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
         </div>
       </div>
 
       <div class="inbox-item">
         <div class="inbox-left">
-          <i class="fas fa-image"></i>
+          <img src="/img/profile2.jpg" class="profile-img" />
           <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge open">Customer</span>
+            <b>Angel</b> <span class="dot"></span> <span class="badge customer">Customer</span>
+            <small>Kapan klaim saya bisa cair kira-kira?</small>
           </div>
         </div>
-        <span class="notif-count">1</span>
-      </div>
+        <div class="inbox-right no-notif">
+          <span class="inbox-time">16 Sep</span>
+          <span class="notif-count">0</span>
+        </div>
 
-      <div class="inbox-item">
-        <div class="inbox-left">
-          <i class="fas fa-comment-dots"></i>
-          <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge solved">System</span>
-          </div>
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
         </div>
       </div>
 
       <div class="inbox-item">
         <div class="inbox-left">
-          <i class="fas fa-check-circle"></i>
+          <img src="/img/profile3.jpg" class="profile-img" />
           <div class="inbox-text">
-            <b>Hamidah</b>
-            <small>Selamat pagi</small><br />
-            <span class="badge solved">System</span>
+            <b>Dohwan</b> <span class="dot"></span> <span class="badge team">Team</span>
+            <small>Din nanti sholat duha ajak aku ya...</small>
           </div>
+        </div>
+        <div class="inbox-right">
+          <span class="inbox-time">22:48</span>
+          <span class="notif-count">2</span>
+        </div>
+        
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <img src="/img/profile5.jpg" class="profile-img" />
+          <div class="inbox-text">
+            <b>Chris</b> <span class="dot"></span> <span class="badge customer">Customer</span>
+            <small>Din nanti sholat duha ajak aku ya...</small>
+          </div>
+        </div>
+        <div class="inbox-right">
+          <span class="inbox-time">Just Now</span>
+          <span class="notif-count">2</span>
+        </div>
+        
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <img src="/img/msig.jpg" class="profile-img" />
+          <div class="inbox-text">
+            <b>MSIG</b> <span class="dot"></span> <span class="badge system">System</span>
+            <small>Din nanti sholat duha ajak aku ya...</small>
+          </div>
+        </div>
+        <div class="inbox-right no-notif">
+          <span class="inbox-time">22:48</span>
+          <span class="notif-count">0</span>
+        </div>
+        
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+      </div>
+
+      <div class="inbox-item">
+        <div class="inbox-left">
+          <img src="/img/profile4.jpg" class="profile-img" />
+          <div class="inbox-text">
+            <b>Harry</b> <span class="dot"></span> <span class="badge team">Team</span>
+            <small>Din nanti sholat duha ajak aku ya...</small>
+          </div>
+        </div>
+        <div class="inbox-right">
+          <span class="inbox-time">16 Sep</span>
+          <span class="notif-count">2</span>
+        </div>
+        
+        <div class="inbox-actions">
+          <div class="action view"><i class="fa-solid fa-eye"></i></div>
+          <div class="action delete"><i class="fa-solid fa-xmark"></i></div>
         </div>
       </div>
     </div>
-
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-      <div class="nav-wrapper">
-        <div class="nav-home">
-          <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-          <p>Home</p>
-        </div>
-
-        <div class="nav-history">
-          <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-          <p>History</p>
-        </div>
-
-        <div class="nav-spacer"></div>
-
-        <div class="nav-call">
-          <a href="#"><i class="fas fa-phone-alt"></i></a>
-          <p>Call</p>
-        </div>
-
-        <div class="nav-agen">
-          <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-          <p>Agenda</p>
-        </div>
-      </div>
-
-      <div class="nav-new">
-        <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-        <p>New</p>
-      </div>
+    <div class="no-data" style="display:none; text-align:center; padding:20px; color:#6b7280;">
+      Tidak ada data
     </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <div class="nav-wrapper">
+                <div class="nav-home active">
+                    <a href="../agent/home.html"><i class="fa-solid fa-house"></i></a>
+                    <p>Home</p>
+                </div>
+
+                <div class="nav-history">
+                    <a href="../agent/history-call.html"><i class="fa-solid fa-file-lines"></i></a>
+                    <p>History</p>
+                </div>
+
+                <div class="nav-spacer"></div>
+
+                <div class="nav-call">
+                    <a href="../agent/call.html"><i class="fa-solid fa-phone"></i></a>
+                    <p>Call</p>
+                </div>
+
+                <div class="nav-agen">
+                    <a href="../agent/agenda.html"><i class="fa-solid fa-calendar-days"></i></a>
+                    <p>Agenda</p>
+                </div>
+            </div>
+
+            <div class="nav-new">
+                <a href="../agent/New-sales.html" class="plus-btn"><i class="fa-solid fa-plus"></i></a>
+                <p>New</p>
+            </div>
+        </div>
   </div>
 </body>
 
 </html>
 <script>
+  const tabs = document.querySelectorAll(".tab");
+  const items = document.querySelectorAll(".inbox-item");
+  const searchInput = document.querySelector(".search-box input");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const tabName = tab.textContent.trim().toLowerCase();
+      filterItems(searchInput.value, tabName);
+    });
+  });
+
+  searchInput.addEventListener("input", () => {
+    const activeTab = document.querySelector(".tab.active").textContent.trim().toLowerCase();
+    filterItems(searchInput.value, activeTab);
+  });
+
+    function filterItems(searchText, tabName) {
+      const text = searchText.toLowerCase();
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const badge = item.querySelector(".badge");
+        const badgeClass = badge ? badge.classList[1].toLowerCase() : "";
+        const name = item.querySelector(".inbox-text b").textContent.toLowerCase();
+        const message = item.querySelector(".inbox-text small").textContent.toLowerCase();
+
+        const matchSearch = name.includes(text) || message.includes(text);
+        const matchTab = tabName === "all" || badgeClass === tabName;
+
+        const show = matchSearch && matchTab;
+        item.style.display = show ? "flex" : "none";
+        if (show) visibleCount++;
+      });
+
+      const noDataDiv = document.querySelector(".no-data");
+      noDataDiv.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+  document.querySelectorAll('.sort-dropdown .dropdown-item').forEach(item => {
+    item.addEventListener('click', function () {
+      document.querySelectorAll('.sort-dropdown .dropdown-item')
+              .forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  function openDatePicker() {
+    document.getElementById('hiddenDate').showPicker();
+  }
+
+  function toggleSortDropdown() {
+    const dropdown = document.getElementById('sortDropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+
+  window.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('sortDropdown');
+    const btn = document.querySelector('.sort-btn');
+    if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+
+  document.querySelector('.load-icon').addEventListener('click', function() {
+    this.style.transition = "transform 0.6s linear";
+    this.style.transform = "rotate(360deg)";
+    setTimeout(() => {
+      this.style.transform = "rotate(0deg)";
+    }, 600);
+  });
+
   function toggleDropdown() {
     const dropdown = document.getElementById('dropdownMenu');
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';

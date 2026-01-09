@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Assignment</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 16px;
+        gap: 10px;
+        background: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        }
+
+        .sort-btn {
+            margin-right: 5px;
+            margin-top: 7px;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            gap: 6px;
+            border-radius: 8px;
+            background: #1e3a8a;
+            padding: 5px 15px;
+            font-size: 11px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+        }
+
+        .sort-btn i {
+            font-size: 11px;
+            color: white;
+        }
+
+        .search-box {
+            margin-right: 5px;
+            margin-top: 7px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 25px;
+            padding: 6px 12px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 11px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box i {
+            color: #1e3a8a;
+            font-size: 14px;
+            margin-right: 8px;
+            padding-right: 10px;
+            border-right: 1px solid #cbd5e1;
+        }
+
+        #hiddenDate {
+            position: absolute;
+            top: 30px; 
+            right: 230px;
+            opacity: 0;
+            width: 150px;
+            height: 30px;
+        }
+
+        .content {
+        flex: 1;           
+        overflow-y: auto;
+        max-height: 70vh;
+        padding: 16px;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card {
+        background: #fff;
+        border: 1px solid #1e3a8a;
+        border-radius: 5px;
+        padding: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .card-header h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e3a8a;
+        }
+
+        .card-date {
+        background: #e0e7ff;
+        color: #1e3a8a;
+        font-weight: 600;
+        font-size: 10px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        }
+
+        .card-info {
+        display: flex;
+        gap: 12px;
+        margin: 10px 0;
+        font-size: 10px;
+        color: #6b7280;
+        }
+
+        .card-info div {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-right: 12px;
+        border-right: 1px solid #d1d5db;
+        }
+
+        .card-info div:last-child {
+        border-right: none;
+        padding-right: 0;  
+        }
+
+        .card-info i {
+        font-size: 10px;
+        color: #6b7280;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-card select {
+            font-size: 12px;
+            font-family: 'Poppins' sans-serif;
+        }
+
+        .modal-card input {
+            font-size: 12px;
+        }
+
+        .modal-card option {
+            font-family: 'Poppins' sans-serif;
+        }
+
+        .modal-card label {
+            font-size: 12px;
+            display: block;
+            margin-bottom: 10px;
+            margin-left: 2px;
+        }
+
+        .modal-card h2 {
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-cancel, .btn-save {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;      
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-save {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #2563eb;     
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .required {
+            color: red;
+        }
+
+        .target-table {
+        border-top: 1px solid #ddd;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        margin-top: 10px;
+        }
+
+        .target-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .target-table tbody tr:nth-child(even) {
+            background-color: #e0e7ff; 
+        }
+
+        .target-table th {
+        text-align: left;
+        padding: 8px 17px;
+        font-weight: 600;
+        border-bottom: 1.2px solid #ddd;
+        }
+
+        .target-table td {
+            font-size: 11px;
+            padding: 10px 10px;
+            padding-left: 17px;
+            border-bottom: 1.2px solid #eee;
+        }
+
+        .input-target {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        text-align: center;
+        }
+
+        .input-total {
+        width: 85%;
+        padding: 6px;
+        border: none;
+        border-radius: 6px;
+        background: #e5e7eb;
+        text-align: center;
+        font-weight: 600;
+        }
+
+        .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 500;
+        }
+
+        .badge.agen {
+            font-size: 11px;
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="layout-container"></div>
+
+    <div class="top">
+      <div class="search-box">
+        <i class="fa-solid fa-calendar-days" onclick="openDatePicker()"></i>
+        <input type="text" placeholder="Cari Sesuatu..." />
+      </div>
+
+    <button class="sort-btn">
+        <i class="fa-solid fa-plus"></i> New
+    </button>
+
+    <input type="date" id="hiddenDate" style="position:absolute; opacity:0; pointer-events:none;" />
+    </div>
+
+    <div class="content">
+        <div id="noData" style="display:none; text-align:center; color:#6b7280; font-size:12px; margin-top:20px;">
+            Tidak ada data
+        </div>
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Sehat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Sehat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Sehat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Sehat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Kuat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Kuat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+
+        <div class="card">
+        <div class="card-header">
+            <h3>Juni Kuat</h3>
+            <span class="card-date">09/2025</span>
+        </div>
+
+        <div class="card-info">
+            <div><i class="fa-solid fa-bullseye"></i> Target : 400</div>
+            <div><i class="fa-solid fa-stopwatch"></i> Achievement : 0</div>
+            <div><i class="fa-solid fa-briefcase"></i> Case : 0</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+        <h2 style="margin-bottom:15px;">New Target</h2>
+        <div style="margin-bottom:15px;">
+        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+        <div style="flex: 1;">
+            <label>Campaign <span class="required">*</span></label>
+            <select style="width:100%;padding:7px;border:1px solid #ccc;border-radius:6px;">
+            <option value="">Select</option>
+            <option value="">Juni Sehat</option>
+            <option value="">Juni Kuat</option>
+            </select>
+        </div>
+        <div style="flex: 1;">
+            <label>Period <span class="required">*</span></label>
+            <input type="date" class="modal-date" style="width:100%;padding:7px;border:1px solid #ccc;border-radius:6px;">
+        </div>
+        </div>
+        <div style="margin-bottom:25px;">
+        <label>Total Target <span class="required">*</span></label>
+        <input type="number" min="0" placeholder="Total Target (Rp)" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+        </div>
+
+        <table class="target-table">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Level</th>
+            <th>Target</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>
+                Agent
+            </td>
+            <td>Agent</td>
+            <td><span class="badge agen">Agent</span></td>
+            <td><input type="number" value="0" class="input-target"></td>
+            </tr>
+            <tr>
+            <td>
+                Agent
+            </td>
+            <td>Agent</td>
+            <td><span class="badge agen">Agent</span></td>
+            <td><input type="number" value="0" class="input-target"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+            <td colspan="3" style="font-weight:600;">Total</td>
+            <td><input type="number" value="0" class="input-total"></td>
+            </tr>
+        </tfoot>
+        </table>
+
+        <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-save">Save</button>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+<script>
+    const overlay = document.getElementById("modalOverlay");
+
+    document.querySelector(".sort-btn").addEventListener("click", () => {
+        overlay.style.display = "flex";
+    });
+
+    function closeModal() {
+        overlay.style.display = "none";
+    }
+
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+        closeModal();
+        }
+    });
+
+    fetch('layout.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('layout-container').innerHTML = data;
+        document.getElementById('page-title').textContent = 'Target Assignment';
+    });
+
+    function openDatePicker() {
+        document.getElementById("hiddenDate").showPicker();
+    }
+
+    const searchInput = document.querySelector(".search-box input");
+    const cards = document.querySelectorAll(".card");
+    const noData = document.getElementById("noData");
+
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const title = card.querySelector(".card-header h3").textContent.toLowerCase();
+            if (title.includes(query)) {
+                card.style.display = "block";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        if (visibleCount === 0) {
+            noData.style.display = "block";
+        } else {
+            noData.style.display = "none";
+        }
+    });
+</script>
+</html>

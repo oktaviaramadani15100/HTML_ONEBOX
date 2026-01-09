@@ -51,33 +51,6 @@
             flex-direction: column;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            background-color: #1e3a8a;
-            z-index: 100;
-            height: 4rem;
-        }
-
-        .header img {
-            width: 100px;
-        }
-
-        .menu-icon {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .menu-icon i {
-            color: #f9fafb;
-        }
-
         .content {
             flex: 1;
         }
@@ -171,7 +144,6 @@
 
         .table-wrapper {
             overflow-x: auto;
-            /* margin: 1rem; */
             flex: 1;
             width: 100%;
             background: white;
@@ -200,15 +172,10 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
-        /* .prospect-table tr:hover {
-            background-color: #f9f9f9;
-            cursor: pointer;
-        } */
-
         .name-link {
             text-decoration: none;
             color: #1e3a8a;
-            font-weight: bold;
+            font-weight: 500;
         }
 
 
@@ -245,186 +212,6 @@
             color: #1e40af;
             cursor: pointer;
             text-decoration: none;
-        }
-
-
-        .bottom-nav {
-            position: sticky;
-            /* position: relative; */
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #ccc;
-            /* display: flex; */
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 0;
-            font-size: 12px;
-            z-index: 10;
-            margin-top: 3rem;
-            background: white;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-wrapper i {
-            color: #1e3a8a;
-        }
-
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-spacer {
-            flex: 0.5;
-        }
-
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
-        .nav-wrapper i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
-
-        .nav-wrapper p {
-            margin-top: 4px;
-            font-size: 0.85rem;
-        }
-
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        } */
-
-        .nav-new {
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
-            position: absolute;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            top: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .plus-btn {
-            background-color: #1e3a8a;
-            border-radius: 50%;
-            width: 53px;
-            height: 53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 30px;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        }
-
-        .nav-new p {
-            margin: 15px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
-
-        @media (min-width: 768px) {
-            body {
-                background: #d1d5db;
-            }
         }
 
         .dropdown {
@@ -483,7 +270,6 @@
 
         a+a {
             margin-top: 4px;
-            /* jarak antar link */
         }
 
         .dropdown a:hover {
@@ -501,7 +287,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            /* margin-left: 1rem; */
         }
 
         .dropdown hr {
@@ -522,27 +307,6 @@
             }
         }
 
-        .menu-icon-group {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            position: relative;
-        }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #f9fafb;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .header-section {
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-        }
-
         .section-title {
             display: block;
             font-weight: bold;
@@ -559,7 +323,6 @@
 
         .ddlList-row select {
             flex: 1;
-            /* biar fleksibel */
             min-width: 0;
             padding: 8px;
             font-size: 0.9rem;
@@ -649,21 +412,6 @@
             color: #1e3a8a;
             margin-right: 4px;
         }
-
-        /* @media (max-width: 480px) {
-            .profile {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .profile-icon {
-                font-size: 2.4rem;
-            }
-
-            .top-row {
-                flex-direction: row;
-            }
-        } */
 
         .biodata {
             padding: 1rem;
@@ -860,16 +608,6 @@
             box-sizing: border-box;
         }
 
-        /* ===== Card Box Style ===== */
-        /* .section-box {
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        } */
-
         .section-box h2 {
             font-size: 18px;
             margin-top: 10px;
@@ -878,7 +616,6 @@
             padding-bottom: 6px;
         }
 
-        /* ===== Info Fields ===== */
         .info-field {
             display: flex;
             justify-content: space-between;
@@ -997,7 +734,6 @@
             background-color: #2563eb;
         }
 
-        /* Responsive for Mobile */
         @media screen and (max-width: 600px) {
             .row {
                 flex-direction: column;
@@ -1353,7 +1089,6 @@
             box-sizing: border-box;
         }
 
-        /* Remove focus outline for readonly */
         input[readonly]:focus,
         textarea[readonly]:focus {
             outline: none;
@@ -1449,7 +1184,6 @@
             flex: 1 1 100%;
         }
 
-        /* 2 kolom jika cukup lebar */
         @media (min-width: 480px) {
             .form-row .form-group {
                 flex: 1 1 48%;
@@ -1460,46 +1194,7 @@
 
 <body>
     <div class="wrapper">
-        <!-- Header -->
-        <div class="header">
-            <span class="header-name" id="headerTitle" onclick="handleBack()">
-                <i class="fas fa-arrow-left"></i>
-                <span style="margin-left: 16px;">Interaction</span>
-            </span>
-
-            <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-                <div class="dropdown" id="dropdownMenu">
-                    <div class="dropdown-header">
-                        <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
-                    </div>
-                    <hr />
-                    <a href="#">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </a>
-                    <a href="../agent/agent-rules.html">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </div>
-
-            </div>
-        </div>
+        <div id="header-container"></div>
 
         <div class="table-wrapper" id="prospectList">
             <table class="prospect-table">
@@ -1855,11 +1550,6 @@
 
 
             <div id="SimulationPolicySection" class="section-box" style="display:none">
-                <!-- <label>Action:</label>
-                <select disabled>
-                    <option value="form-policy" selected>Form Policy</option>
-                </select>
-                <div id="formPolicyContainer" style="margin-top:10px;"></div> -->
 
                 <div style="min-height:65vh">
                     <div id="screen1">
@@ -2087,11 +1777,6 @@
             </div>
 
             <div id="EntryPolicySection" class="section-box" style="display:none">
-                <!-- <label>Action:</label>
-                    <select disabled>
-                        <option value="form-policy" selected>Form Policy</option>
-                    </select>
-                    <div id="formPolicyContainer" style="margin-top:10px;"></div> -->
                 <form id="spajForm">
                     <!-- Step 1 -->
                     <div class="section active" id="step-1">
@@ -2281,41 +1966,59 @@
             </div>
         </div>
 
-
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
-
-                <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
-                <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
-                </div>
-            </div>
-
-            <div class="nav-new">
-                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-                <p>New</p>
-            </div>
-        </div>
+        <div id="bottom-nav-container"></div>
     </div>
 
     <script>
+        fetch('../agent/layout.html')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+
+                const layoutStyles = doc.querySelectorAll('style');
+                layoutStyles.forEach(style => {
+                    const newStyle = document.createElement('style');
+                    newStyle.textContent = style.textContent;
+                    document.head.appendChild(newStyle);
+                });
+
+                const layoutLinks = doc.querySelectorAll('link');
+                layoutLinks.forEach(link => {
+                    if (link.href.includes('style.css')) {
+                        const newLink = document.createElement('link');
+                        newLink.rel = 'stylesheet';
+                        newLink.href = '../agent/css/style.css';
+                        document.head.appendChild(newLink);
+                    }
+                });
+
+                const header = doc.querySelector('.header').cloneNode(true);
+                document.getElementById('header-container').appendChild(header);
+
+                const headerTitle = document.querySelector('#header-container .header-name');
+                headerTitle.innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Interaction</span>`;
+                headerTitle.onclick = handleBack;
+
+                const bottomNav = doc.querySelector('.bottom-nav').cloneNode(true);
+                document.getElementById('bottom-nav-container').appendChild(bottomNav);
+
+                const layoutScripts = doc.querySelectorAll('script');
+                layoutScripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    if (script.src) {
+                        newScript.src = '../agent/js/script.js';
+                    } else {
+                        newScript.textContent = script.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                const navCall = document.querySelector('.nav-call');
+                if (navCall) navCall.classList.add('active');
+            })
+            .catch(error => console.error('Error fetching layout.html:', error));
+
         function showScreen(id) {
             ["screen1", "screen2", "screen3", "screen4"].forEach(screen => {
                 document.getElementById(screen).style.display = "none";
@@ -2328,7 +2031,6 @@
             const plan = document.getElementById("planSelect").value;
 
             if (product && plan) {
-                // Simpan data ke session
                 sessionStorage.setItem("product", product);
                 sessionStorage.setItem("plan", plan);
 
@@ -2341,7 +2043,6 @@
         function calculateAndGoToScreen3() {
             showScreen("screen3");
 
-            // Isi kembali dropdown existing di screen3
             document.getElementById("existingProduct").value = sessionStorage.getItem("product");
             document.getElementById("existingPlan").value = sessionStorage.getItem("plan");
         }
@@ -2349,7 +2050,6 @@
         function toScreen4() {
             showScreen("screen4");
 
-            // Tampilkan product dan plan
             document.getElementById("finalProduct").innerText = "Product : " + sessionStorage.getItem("product");
             document.getElementById("finalPlan").value = sessionStorage.getItem("plan");
         }
@@ -2553,7 +2253,6 @@
             });
             document.getElementById(`step-${step}`).classList.add('active');
 
-            // Ubah tombol jika di akhir
             const nextBtn = document.querySelector('.wizard-buttons button:last-child');
             if (step === totalSteps) {
                 nextBtn.textContent = 'Kirim';
@@ -2581,5 +2280,4 @@
         showStep(currentStep);
     </script>
 </body>
-
 </html>
