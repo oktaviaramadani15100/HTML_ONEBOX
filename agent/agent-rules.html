@@ -30,23 +30,6 @@
             flex-direction: column;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            background-color: #1e3a8a;
-            z-index: 100;
-            height: 4rem;
-        }
-
-        .header img {
-            height: 53px;
-        }
-
         .menu-icon {
             color: #f9fafb;
             margin-left: 1rem;
@@ -95,10 +78,6 @@
             font-size: 20px;
             color: #1e3a8a;
             padding: 8px;
-            /* border-radius: 50%;
-            background-color: #f2f2f2;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out; */
         }
 
 
@@ -141,180 +120,6 @@
             line-height: 1.6;
             color: #333;
         }
-
-        .bottom-nav {
-            position: sticky;
-            /* position: relative; */
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #ccc;
-            /* display: flex; */
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 0;
-            font-size: 12px;
-            z-index: 10;
-            margin-top: 3rem;
-            background: white;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-wrapper i {
-            color: #1e3a8a;
-        }
-
-        .nav-wrapper>div {
-            flex: 1;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-spacer {
-            flex: 0.5;
-        }
-
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        } */
-
-        .nav-wrapper i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        /* 
-        .bottom-nav div:hover {
-            transform: scale(1.05);
-        } */
-
-        .nav-wrapper p {
-            margin-top: 4px;
-            font-size: 0.85rem;
-        }
-
-        /* .bottom-nav i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: inherit;
-        } */
-
-        .nav-new {
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            text-decoration: none;
-            box-sizing: border-box;
-            border: none;
-            padding: 0;
-            transition: none;
-            touch-action: manipulation;
-            position: absolute;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            top: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .plus-btn {
-            background-color: #1e3a8a;
-            border-radius: 50%;
-            width: 53px;
-            height: 53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 30px;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        }
-
-        .nav-new p {
-            margin: 15px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        /* .nav-call {
-            margin-left: 7rem;
-        } */
-
-        /* .nav-home {
-            margin-left: 3rem;
-        } */
-
-        /* .bottom-nav div {
-            text-align: center;
-            color: #1e3a8a;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-new i {
-            font-size: 30px;
-            display: block;
-            margin-bottom: -2px;
-            color: white;
-        } */
-
-
-        /* .nav-new p {
-            margin: 6px 0 0;
-            font-size: 0.85rem;
-            color: #1e3a8a;
-        }
-
-        .nav-home,
-        .nav-call,
-        .nav-agen {
-            flex: 1;
-        }
-
-        @media (min-width: 768px) {
-            .bottom-nav div {
-                font-size: 1rem;
-            }
-
-            .bottom-nav i {
-                font-size: 1.7rem;
-            }
-        } */
-
-
 
         .dropdown {
             display: none;
@@ -371,7 +176,6 @@
 
         a+a {
             margin-top: 4px;
-            /* jarak antar link */
         }
 
         .dropdown a:hover {
@@ -389,7 +193,6 @@
         .dropdown span {
             flex: 1;
             font-weight: 500;
-            /* margin-left: 1rem; */
         }
 
         .dropdown hr {
@@ -419,64 +222,12 @@
             padding: 10px 16px;
             position: relative;
         }
-
-        .header .header-name {
-            text-decoration: none;
-            color: #f9fafb;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        /* .menu-icon-group i {
-            color: #f9fafb;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        } */
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-name" style="cursor: pointer;" onclick="resetRules()">
-                <i class="fas fa-arrow-left"></i>
-                <span style="margin-left: 16px;">Agent Rules</span>
-            </div>
-
-            <div class="menu-icon-group">
-                <a href="../agent/inbox.html" class="menu-icon">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <i class="fas fa-ellipsis-v menu-icon" onclick="toggleDropdown()"></i>
-                <div class="dropdown" id="dropdownMenu">
-                    <div class="dropdown-header">
-                        <h3 class="welcome-text">Welcome</h3>
-                        <h4 class="welcome-text">Agent 01</h4>
-                        <h5 class="agent-role">Agent</h5>
-                    </div>
-                    <hr />
-                    <a href="#">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </a>
-                    <a href="../agent/agent-rules.html">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Agent Rules</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>FAQ</span>
-                    </a>
-                    <hr>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </div>
-
-            </div>
-        </div>
+        <div id="header-container"></div>
 
         <!-- Content -->
         <div class="content">
@@ -528,43 +279,62 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-wrapper">
-                <div class="nav-home">
-                    <a href="../agent/home.html"><i class="fas fa-home"></i></a>
-                    <p>Home</p>
-                </div>
-
-                <div class="nav-history">
-                    <a href="../agent/history-call.html"><i class="fas fa-file-alt"></i></a>
-                    <p>History</p>
-                </div>
-
-                <div class="nav-spacer"></div>
-
-                <div class="nav-call">
-                    <a href="../agent/call.html"><i class="fas fa-phone-alt"></i></a>
-                    <p>Call</p>
-                </div>
-
-                <div class="nav-agen">
-                    <a href="../agent/agenda.html"><i class="fas fa-calendar-alt"></i></a>
-                    <p>Agenda</p>
-                </div>
-            </div>
-
-            <div class="nav-new">
-                <a href="../agent/New-sales.html" class="plus-btn"><i class="fas fa-plus"></i></a>
-                <p>New</p>
-            </div>
-        </div>
+        <div id="bottom-nav-container"></div>
     </div>
 </body>
 
 </html>
 
 <script>
+        fetch('../agent/layout.html')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+
+                const layoutStyles = doc.querySelectorAll('style');
+                layoutStyles.forEach(style => {
+                    const newStyle = document.createElement('style');
+                    newStyle.textContent = style.textContent;
+                    document.head.appendChild(newStyle);
+                });
+
+                const layoutLinks = doc.querySelectorAll('link');
+                layoutLinks.forEach(link => {
+                    if (link.href.includes('style.css')) {
+                        const newLink = document.createElement('link');
+                        newLink.rel = 'stylesheet';
+                        newLink.href = '../agent/css/style.css';
+                        document.head.appendChild(newLink);
+                    }
+                });
+
+                const header = doc.querySelector('.header').cloneNode(true);
+                document.getElementById('header-container').appendChild(header);
+                const headerTitle = document.querySelector('#header-container .header-name');
+                headerTitle.innerHTML = `<i class="fas fa-arrow-left"></i> <span style="margin-left: 16px;">Agent Rules</span>`;
+                headerTitle.onclick = () => window.location.href = '../agent/home.html';
+
+                const bottomNav = doc.querySelector('.bottom-nav').cloneNode(true);
+                if (bottomNav) {
+                    document.getElementById('bottom-nav-container').appendChild(bottomNav);
+                } else {
+                    console.error('Bottom navigation not found in layout.html');
+                }
+
+                const layoutScripts = doc.querySelectorAll('script');
+                layoutScripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    if (script.src) {
+                        newScript.src = '../agent/js/script.js';
+                    } else {
+                        newScript.textContent = script.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+            })
+            .catch(error => console.error('Error fetching layout.html:', error));
+
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
