@@ -22,59 +22,59 @@
     }
 
     .wrapper {
-    width: 100%;
-    max-width: 400px;
-    background: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+        width: 100%;
+        max-width: 400px;
+        background: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
     .agent-header {
-    position: sticky;
-    top: 0;
-    background: #fff;
-    z-index: 50; 
-    padding: 1rem;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 50;
+        padding: 1rem;
     }
 
     .agent-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .agent-header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
     .agent-list {
         flex: 1;
-        overflow-y: auto; 
+        overflow-y: auto;
         margin-top: -5px;
         margin-bottom: 5rem;
         padding: 1rem;
-        scrollbar-width: none; 
+        scrollbar-width: none;
         -ms-overflow-style: none;
     }
 
     .agent-list::-webkit-scrollbar {
-        display: none; 
+        display: none;
     }
 
     .agent-card {
-    background: #fff;
-    border: 1px solid #1e3a8a;
-    border-radius: 8px;
-    padding: 15px 10px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+        background: #fff;
+        border: 1px solid #1e3a8a;
+        border-radius: 8px;
+        padding: 15px 10px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
     .avatar {
@@ -96,20 +96,20 @@
     .avatar img {
         width: 100%;
         height: 100%;
-        object-fit: cover;   
+        object-fit: cover;
         object-position: center;
         display: block;
     }
 
     .agent-info {
-    display: flex;
-    flex-direction: column;
+        display: flex;
+        flex-direction: column;
     }
 
     .agent-info .name {
-    font-weight: 700;
-    font-size: 14px;
-    color: #111827;
+        font-weight: 700;
+        font-size: 14px;
+        color: #111827;
     }
 
     .agent-info .sales {
@@ -120,8 +120,8 @@
     }
 
     .agent-info .account {
-    font-size: 11px;
-    color: #6b7280;
+        font-size: 11px;
+        color: #6b7280;
     }
 
     .icon-btn {
@@ -156,6 +156,7 @@
         cursor: pointer;
         transition: background 0.2s, border-color 0.2s;
     }
+
     .filter-btn-reset:hover {
         background: #f3f4f6;
         border-color: #9ca3af;
@@ -173,6 +174,7 @@
         cursor: pointer;
         transition: background 0.2s;
     }
+
     .filter-btn-apply:hover {
         background: #162d65;
     }
@@ -207,16 +209,16 @@
     }
 
     .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; 
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 200;     
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
     }
 
     .filter-modal {
@@ -225,13 +227,20 @@
         padding: 20px;
         width: 90%;
         max-width: 300px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         animation: scaleIn 0.25s ease;
     }
 
     @keyframes scaleIn {
-        from { transform: scale(0.9); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
+        from {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 
     .filter-header {
@@ -295,7 +304,7 @@
         border: 1.5px solid #cbd5e1;
         border-radius: 999px;
         padding: 8px 14px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
     .search-box input {
@@ -333,29 +342,29 @@
     }
 
     .badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #f3e8ff;
-    color: #6b21a8;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #f3e8ff;
+        color: #6b21a8;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 20px;
     }
 
     .badge.reached {
-    background: #e0fce0;
-    color: #16a34a;
+        background: #e0fce0;
+        color: #16a34a;
     }
 
     .progress-bar {
-    width: 50%;
-    height: 5px;
-    background: #e5e7eb;
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 7px 52px 5px;
+        width: 50%;
+        height: 5px;
+        background: #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 7px 52px 5px;
     }
 
     .progress-bar-fill {
@@ -364,90 +373,95 @@
     }
 
     .agent-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 4px;
     }
 
     .agent-footer .status {
-    font-size: 10px;
-    margin-left: 53px;
-    color: #6b7280;
+        font-size: 10px;
+        margin-left: 53px;
+        color: #6b7280;
     }
 
     .status {
-    font-size: 10px;
-    margin-left: 64px;
-    color: #6b7280;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+        font-size: 10px;
+        margin-left: 64px;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
 
     .status .divider {
-    width: 1px;
-    height: 12px;
-    background: #d1d5db;
-    margin: 0 4px;
+        width: 1px;
+        height: 12px;
+        background: #d1d5db;
+        margin: 0 4px;
     }
 
     .agent-actions {
         margin-top: -30px;
-    display: flex;
-    gap: 10px;
+        display: flex;
+        gap: 10px;
     }
 
     .agent-actions button:hover {
-        background: #162d65; 
+        background: #162d65;
         transform: scale(1.1);
     }
 
     .agent-actions button {
-    background: #1e3a8a;
-    border: none;
-    color: #fff;
-    font-size: 12px;
-    padding: 7px;
-    border-radius: 50%;
-    cursor: pointer;
+        background: #1e3a8a;
+        border: none;
+        color: #fff;
+        font-size: 12px;
+        padding: 7px;
+        border-radius: 50%;
+        cursor: pointer;
     }
 
     .name-account {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .name-account .dot {
-    width: 4px;
-    height: 4px;
-    background: #6b7280;
-    border-radius: 50%;
-    display: inline-block;
+        width: 4px;
+        height: 4px;
+        background: #6b7280;
+        border-radius: 50%;
+        display: inline-block;
     }
 
     .name-account .account {
-    font-size: 10px;
-    color: #6b7280;
-    display: flex;
-    align-items: center;
-    gap: 7px;
+        font-size: 10px;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        gap: 7px;
     }
 
     .fade-out {
-    opacity: 0;
-    transition: opacity 0.4s ease;
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
 
     .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.4s ease forwards;
+        opacity: 0;
+        animation: fadeIn 0.4s ease forwards;
     }
 
     @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 </style>
 
@@ -457,343 +471,343 @@
 
         <div class="agent-header">
             <div class="search-filter-bar">
-            <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Cari Sesuatu..." />
-            <i class="fas fa-search"></i>
-            </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari Sesuatu..." />
+                    <i class="fas fa-search"></i>
+                </div>
                 <button class="filter-btn" onclick="toggleFilter()">
                     <i class="fas fa-filter"></i> Filter
                 </button>
-            </div>       
+            </div>
         </div>
 
-            <div class="agent-list" id="agentList" style="padding: 1rem;">
+        <div class="agent-list" id="agentList" style="padding: 1rem;">
             <div class="agent-card">
                 <div class="agent-header-row">
-                <div class="agent-header-left">
-                <div class="avatar">
-                    <img src="../img/profile5.jpg">
-                </div>
-                    <div class="agent-info">
-                    <div class="name-account">
-                        <span class="name">Falah</span>
-                        <span class="dot"></span>
-                        <span class="account">
-                        <i class="fa-solid fa-toolbox"></i> Kredit
-                        </span>
+                    <div class="agent-header-left">
+                        <div class="avatar">
+                            <img src="../img/profile5.jpg">
+                        </div>
+                        <div class="agent-info">
+                            <div class="name-account">
+                                <span class="name">Falah</span>
+                                <span class="dot"></span>
+                                <span class="account">
+                                    <i class="fa-solid fa-toolbox"></i> Kredit
+                                </span>
+                            </div>
+                            <div class="sales">Rp. 300.000</div>
+                        </div>
                     </div>
-                    <div class="sales">Rp. 300.000</div>
-                    </div>
-                </div>
-                <div class="badge">3/5</div>
+                    <div class="badge">3/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:50%"></div>
+                    <div class="progress-bar-fill" style="width:50%"></div>
                 </div>
 
                 <div class="agent-footer">
-                <div class="status">
-                <span class="sales-progress">3 of 5 sales</span>
-                <span class="divider"></span>
-                <span class="level">Moderate</span>
-                </div>
-                <div class="agent-actions">
-                    <button><i class="fas fa-phone"></i></button>
-                    <button><i class="fa-solid fa-inbox"></i></button>
-                </div>
+                    <div class="status">
+                        <span class="sales-progress">3 of 5 sales</span>
+                        <span class="divider"></span>
+                        <span class="level">Moderate</span>
+                    </div>
+                    <div class="agent-actions">
+                        <button><i class="fas fa-phone"></i></button>
+                        <button><i class="fa-solid fa-inbox"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 2 -->
             <div class="agent-card">
                 <div class="agent-header-row">
-                <div class="agent-header-left">
-                <div class="avatar">B</div>
-                    <div class="agent-info">
-                    <div class="name-account">
-                        <span class="name">Budi</span>
-                        <span class="dot"></span>
-                        <span class="account">
-                        <i class="fa-solid fa-toolbox"></i> Kredit
-                        </span>
+                    <div class="agent-header-left">
+                        <div class="avatar">B</div>
+                        <div class="agent-info">
+                            <div class="name-account">
+                                <span class="name">Budi</span>
+                                <span class="dot"></span>
+                                <span class="account">
+                                    <i class="fa-solid fa-toolbox"></i> Kredit
+                                </span>
+                            </div>
+                            <div class="sales">Rp. 200.000</div>
+                        </div>
                     </div>
-                    <div class="sales">Rp. 200.000</div>
-                    </div>
-                </div>
-                <div class="badge">2/5</div>
+                    <div class="badge">2/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:30%"></div>
+                    <div class="progress-bar-fill" style="width:30%"></div>
                 </div>
 
                 <div class="agent-footer">
-                <div class="status">
-                <span class="sales-progress">2 of 5 sales</span>
-                <span class="divider"></span>
-                <span class="level">Needs Attention</span>
-                </div>
-                <div class="agent-actions">
-                    <button><i class="fas fa-phone"></i></button>
-                    <button><i class="fas fa-inbox"></i></button>
-                </div>
+                    <div class="status">
+                        <span class="sales-progress">2 of 5 sales</span>
+                        <span class="divider"></span>
+                        <span class="level">Needs Attention</span>
+                    </div>
+                    <div class="agent-actions">
+                        <button><i class="fas fa-phone"></i></button>
+                        <button><i class="fas fa-inbox"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 3 -->
             <div class="agent-card">
                 <div class="agent-header-row">
-                <div class="agent-header-left">
-                <div class="avatar">
-                    <img src="../img/profile4.jpg">
-                </div>
-                    <div class="agent-info">
-                    <div class="name-account">
-                        <span class="name">Harry</span>
-                        <span class="dot"></span>
-                        <span class="account">
-                        <i class="fa-solid fa-toolbox"></i> Kredit
-                        </span>
+                    <div class="agent-header-left">
+                        <div class="avatar">
+                            <img src="../img/profile4.jpg">
+                        </div>
+                        <div class="agent-info">
+                            <div class="name-account">
+                                <span class="name">Harry</span>
+                                <span class="dot"></span>
+                                <span class="account">
+                                    <i class="fa-solid fa-toolbox"></i> Kredit
+                                </span>
+                            </div>
+                            <div class="sales">Rp. 500.000</div>
+                        </div>
                     </div>
-                    <div class="sales">Rp. 500.000</div>
-                    </div>
-                </div>
-                <div class="badge reached">5/5</div>
+                    <div class="badge reached">5/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:100%"></div>
+                    <div class="progress-bar-fill" style="width:100%"></div>
                 </div>
 
                 <div class="agent-footer">
-                <div class="status">
-                <span class="sales-progress">5 of 5 sales</span>
-                <span class="divider"></span>
-                <span class="level">Give Reward</span>
-                </div>
-                <div class="agent-actions">
-                    <button><i class="fas fa-phone"></i></button>
-                    <button><i class="fas fa-inbox"></i></button>
-                </div>
+                    <div class="status">
+                        <span class="sales-progress">5 of 5 sales</span>
+                        <span class="divider"></span>
+                        <span class="level">Give Reward</span>
+                    </div>
+                    <div class="agent-actions">
+                        <button><i class="fas fa-phone"></i></button>
+                        <button><i class="fas fa-inbox"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 4 -->
             <div class="agent-card">
                 <div class="agent-header-row">
-                <div class="agent-header-left">
-                <div class="avatar">
-                    <img src="../img/profile2.jpg">
-                </div>
-                    <div class="agent-info">
-                    <div class="name-account">
-                        <span class="name">Sari</span>
-                        <span class="dot"></span>
-                        <span class="account">
-                        <i class="fa-solid fa-toolbox"></i> Kredit
-                        </span>
+                    <div class="agent-header-left">
+                        <div class="avatar">
+                            <img src="../img/profile2.jpg">
+                        </div>
+                        <div class="agent-info">
+                            <div class="name-account">
+                                <span class="name">Sari</span>
+                                <span class="dot"></span>
+                                <span class="account">
+                                    <i class="fa-solid fa-toolbox"></i> Kredit
+                                </span>
+                            </div>
+                            <div class="sales">Rp. 100.000</div>
+                        </div>
                     </div>
-                    <div class="sales">Rp. 100.000</div>
-                    </div>
-                </div>
-                <div class="badge">1/5</div>
+                    <div class="badge">1/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:20%"></div>
+                    <div class="progress-bar-fill" style="width:20%"></div>
                 </div>
 
                 <div class="agent-footer">
-                <div class="status">
-                <span class="sales-progress">1 of 5 sales</span>
-                <span class="divider"></span>
-                <span class="level">Low</span>
-                </div>
-                <div class="agent-actions">
-                    <button><i class="fas fa-phone"></i></button>
-                    <button><i class="fas fa-inbox"></i></button>
-                </div>
+                    <div class="status">
+                        <span class="sales-progress">1 of 5 sales</span>
+                        <span class="divider"></span>
+                        <span class="level">Low</span>
+                    </div>
+                    <div class="agent-actions">
+                        <button><i class="fas fa-phone"></i></button>
+                        <button><i class="fas fa-inbox"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Card 5 -->
             <div class="agent-card">
                 <div class="agent-header-row">
-                <div class="agent-header-left">
-                <div class="avatar">S</div>
-                    <div class="agent-info">
-                    <div class="name-account">
-                        <span class="name">Syadza</span>
-                        <span class="dot"></span>
-                        <span class="account">
-                        <i class="fa-solid fa-toolbox"></i> Kredit
-                        </span>
+                    <div class="agent-header-left">
+                        <div class="avatar">S</div>
+                        <div class="agent-info">
+                            <div class="name-account">
+                                <span class="name">Syadza</span>
+                                <span class="dot"></span>
+                                <span class="account">
+                                    <i class="fa-solid fa-toolbox"></i> Kredit
+                                </span>
+                            </div>
+                            <div class="sales">Rp. 400.000</div>
+                        </div>
                     </div>
-                    <div class="sales">Rp. 400.000</div>
-                    </div>
-                </div>
-                <div class="badge">4/5</div>
+                    <div class="badge">4/5</div>
                 </div>
 
                 <div class="progress-bar">
-                <div class="progress-bar-fill" style="width:70%"></div>
+                    <div class="progress-bar-fill" style="width:70%"></div>
                 </div>
 
                 <div class="agent-footer">
-                <div class="status">
-                <span class="sales-progress">4 of 5 sales</span>
-                <span class="divider"></span>
-                <span class="level">On Track</span>
-                </div>
-                <div class="agent-actions">
-                    <button><i class="fas fa-phone"></i></button>
-                    <button><i class="fas fa-inbox"></i></button>
-                </div>
+                    <div class="status">
+                        <span class="sales-progress">4 of 5 sales</span>
+                        <span class="divider"></span>
+                        <span class="level">On Track</span>
+                    </div>
+                    <div class="agent-actions">
+                        <button><i class="fas fa-phone"></i></button>
+                        <button><i class="fas fa-inbox"></i></button>
+                    </div>
                 </div>
             </div>
 
-        <div id="bottom-container"></div>
+            <div id="bottom-container"></div>
 
-        <div id="noDataMessage" style="
+            <div id="noDataMessage" style="
             display:none;
             text-align:center;
             font-size:12px;
             color:#555;
             margin-top:20px;
         ">
-            tidak ada data
+                tidak ada data
+            </div>
         </div>
-    </div>
 
-                <div id="filterOverlay" class="overlay">
-                <div class="filter-modal">
-                    <div class="filter-header">
-                        <div class="filter-label">Filter</div>
-                        <span class="close-btn" onclick="toggleFilter()">&times;</span>
-                    </div>
-                    <div class="filter-content">
-                        <label for="penjualan">Penjualan Agent</label>
-                        <input type="number" id="penjualanAgent" name="penjualanAgent" placeholder="Contoh: 5" />
-
-                        <label for="jumlahPolicy">Jumlah Policy Terjual</label>
-                        <input type="number" id="jumlahPolicy" name="jumlahPolicy" placeholder="Contoh: 10" />
-
-                        <label for="premiTertinggi">Premi Tertinggi</label>
-                        <input type="number" id="premiTertinggi" name="premiTertinggi" placeholder="Contoh: 1000000" />
-                    </div>
-
-                    <div class="filter-actions">
-                        <button class="filter-btn-reset" onclick="resetFilter()">Reset</button>
-                        <button class="filter-btn-apply" onclick="applyFilter()">Apply</button>
-                    </div>
+        <div id="filterOverlay" class="overlay">
+            <div class="filter-modal">
+                <div class="filter-header">
+                    <div class="filter-label">Filter</div>
+                    <span class="close-btn" onclick="toggleFilter()">&times;</span>
                 </div>
-            </div> 
+                <div class="filter-content">
+                    <label for="penjualan">Penjualan Agent</label>
+                    <input type="number" id="penjualanAgent" name="penjualanAgent" placeholder="Contoh: 5" />
+
+                    <label for="jumlahPolicy">Jumlah Policy Terjual</label>
+                    <input type="number" id="jumlahPolicy" name="jumlahPolicy" placeholder="Contoh: 10" />
+
+                    <label for="premiTertinggi">Premi Tertinggi</label>
+                    <input type="number" id="premiTertinggi" name="premiTertinggi" placeholder="Contoh: 1000000" />
+                </div>
+
+                <div class="filter-actions">
+                    <button class="filter-btn-reset" onclick="resetFilter()">Reset</button>
+                    <button class="filter-btn-apply" onclick="applyFilter()">Apply</button>
+                </div>
+            </div>
+        </div>
 
 
-    <script>
-        function resetFilter() {
-            document.getElementById("penjualanAgent").value = "";
-            document.getElementById("jumlahPolicy").value = "";
-            document.getElementById("premiTertinggi").value = "";
-        }
-
-        function applyFilter() {
-            document.getElementById("filterOverlay").style.display = "none";
-        }
-
-    async function loadLayout() {
-    const res = await fetch("../spv/layout.html");
-    const html = await res.text();
-
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-
-    document.getElementById("header-container").appendChild(temp.querySelector(".header"));
-    document.getElementById("bottom-container").appendChild(temp.querySelector(".bottom-nav"));
-    document.getElementById('page-title').textContent = 'My Agent';
-
-    temp.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-        if (!document.querySelector(`link[href="${link.href}"]`)) {
-        document.head.appendChild(link.cloneNode());
-        }
-    });
-
-    temp.querySelectorAll("script[src]").forEach(script => {
-        if (!document.querySelector(`script[src="${script.src}"]`)) {
-        const newScript = document.createElement("script");
-        newScript.src = script.src;
-        document.body.appendChild(newScript);
-        }
-    });
-    }
-
-    loadLayout();
-
-        function toggleFilter() {
-            const overlay = document.getElementById('filterOverlay');
-            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        document.getElementById("filterOverlay").addEventListener("click", function(e) {
-            if (e.target === this) {
-                this.style.display = "none";
+        <script>
+            function resetFilter() {
+                document.getElementById("penjualanAgent").value = "";
+                document.getElementById("jumlahPolicy").value = "";
+                document.getElementById("premiTertinggi").value = "";
             }
-        });
 
-        document.addEventListener("click", function (e) {
-            const sidebar = document.getElementById("filterSidebar");
-            const isClickInside = sidebar.contains(e.target);
-            const isFilterButton = e.target.closest(".filter-btn");
-
-            if (!isClickInside && !isFilterButton) {
-                sidebar.classList.remove("show");
+            function applyFilter() {
+                document.getElementById("filterOverlay").style.display = "none";
             }
-        });
 
-        document.getElementById("searchInput").addEventListener("input", filterAgents);
+            async function loadLayout() {
+                const res = await fetch("../spv/layout.html");
+                const html = await res.text();
 
-        function filterAgents() {
-        const query = document.getElementById("searchInput").value.toLowerCase();
-        const cards = document.querySelectorAll(".agent-card");
-        const noDataMessage = document.getElementById("noDataMessage");
+                const temp = document.createElement("div");
+                temp.innerHTML = html;
 
-        let visibleCount = 0;
+                document.getElementById("header-container").appendChild(temp.querySelector(".header"));
+                document.getElementById("bottom-container").appendChild(temp.querySelector(".bottom-nav"));
+                document.getElementById('page-title').textContent = 'My Agent';
 
-        cards.forEach(card => {
-            const name = card.querySelector(".name").textContent.toLowerCase();
-            const account = card.querySelector(".account").textContent.toLowerCase();
-            const sales = card.querySelector(".sales").textContent.toLowerCase();
+                temp.querySelectorAll("link[rel='stylesheet']").forEach(link => {
+                    if (!document.querySelector(`link[href="${link.href}"]`)) {
+                        document.head.appendChild(link.cloneNode());
+                    }
+                });
 
-            if (name.includes(query) || account.includes(query) || sales.includes(query)) {
-            card.style.display = "flex"; 
-            visibleCount++;
-            } else {
-            card.style.display = "none"; 
+                temp.querySelectorAll("script[src]").forEach(script => {
+                    if (!document.querySelector(`script[src="${script.src}"]`)) {
+                        const newScript = document.createElement("script");
+                        newScript.src = script.src;
+                        document.body.appendChild(newScript);
+                    }
+                });
             }
-        });
 
-        if (visibleCount === 0) {
-            noDataMessage.style.display = "block";
-        } else {
-            noDataMessage.style.display = "none";
-        }
-        }
+            loadLayout();
 
-        document.addEventListener("DOMContentLoaded", () => {
-        document.body.classList.add("fade-in");
+            function toggleFilter() {
+                const overlay = document.getElementById('filterOverlay');
+                overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+            }
 
-        document.querySelectorAll(".agent-card").forEach(card => {
-            card.addEventListener("click", (e) => {
-            e.preventDefault();
-            document.body.classList.add("fade-out");
-            setTimeout(() => {
-                window.location.href = "myAgent-detail.html";
-            }, 400);
+            document.getElementById("filterOverlay").addEventListener("click", function (e) {
+                if (e.target === this) {
+                    this.style.display = "none";
+                }
             });
-        });
-        });
-    </script>
+
+            document.addEventListener("click", function (e) {
+                const sidebar = document.getElementById("filterSidebar");
+                const isClickInside = sidebar.contains(e.target);
+                const isFilterButton = e.target.closest(".filter-btn");
+
+                if (!isClickInside && !isFilterButton) {
+                    sidebar.classList.remove("show");
+                }
+            });
+
+            document.getElementById("searchInput").addEventListener("input", filterAgents);
+
+            function filterAgents() {
+                const query = document.getElementById("searchInput").value.toLowerCase();
+                const cards = document.querySelectorAll(".agent-card");
+                const noDataMessage = document.getElementById("noDataMessage");
+
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const name = card.querySelector(".name").textContent.toLowerCase();
+                    const account = card.querySelector(".account").textContent.toLowerCase();
+                    const sales = card.querySelector(".sales").textContent.toLowerCase();
+
+                    if (name.includes(query) || account.includes(query) || sales.includes(query)) {
+                        card.style.display = "flex";
+                        visibleCount++;
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noDataMessage.style.display = "block";
+                } else {
+                    noDataMessage.style.display = "none";
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.classList.add("fade-in");
+
+                document.querySelectorAll(".agent-card").forEach(card => {
+                    card.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        document.body.classList.add("fade-out");
+                        setTimeout(() => {
+                            window.location.href = "myAgent-detail.html";
+                        }, 400);
+                    });
+                });
+            });
+        </script>
 </body>
 
 </html>
